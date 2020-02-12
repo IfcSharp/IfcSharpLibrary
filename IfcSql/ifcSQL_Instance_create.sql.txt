@@ -1,0 +1,782 @@
+USE [master]
+GO
+CREATE DATABASE [ifcSQL_Instance]
+GO
+
+
+
+USE [ifcSQL_Instance]
+GO
+
+EXEC [ifcSQL_Instance].sys.sp_addextendedproperty @name=N'Licence', @value=N'Part of the schema of ifcSQL, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)' 
+GO
+
+CREATE SCHEMA [cp]
+GO
+CREATE SCHEMA [ifcInstance]
+GO
+CREATE SCHEMA [ifcSchema]
+GO
+CREATE SCHEMA [ifcProject]
+GO
+CREATE SCHEMA [ifcOrder]
+GO
+CREATE SCHEMA [ifcType]
+GO
+CREATE SCHEMA [ifcEnum]
+GO
+CREATE SCHEMA [Text]
+GO
+CREATE SCHEMA [IO]
+GO
+CREATE SCHEMA [ifcSpecification]
+GO
+
+
+CREATE TYPE [ifcSchema].[Id] FROM [int] NULL
+GO
+CREATE TYPE [ifcInstance].[Id] FROM [bigint] NULL
+GO
+CREATE TYPE [ifcOrder].[Position] FROM [int] NULL
+GO
+CREATE TYPE [ifcType].[ifcBINARY] FROM [varbinary](max) NULL
+GO
+CREATE TYPE [ifcType].[ifcREAL] FROM [float] NULL
+GO
+CREATE TYPE [ifcType].[ifcINTEGER] FROM [int] NULL
+GO
+CREATE TYPE [ifcType].[ifcSTRING] FROM [nvarchar](max) NULL
+GO
+CREATE TYPE [ifcType].[ifcBOOLEAN] FROM [bit] NULL
+GO
+CREATE TYPE [ifcEnum].[Id] FROM [int] NULL
+GO
+CREATE TYPE [ifcProject].[Id] FROM [int] NULL
+GO
+CREATE TYPE [Text].[ToString] FROM [nvarchar](max) NULL
+GO
+CREATE TYPE [Text].[Description] FROM [nvarchar](max) NULL
+GO
+CREATE TYPE [ifcSchema].[GroupId] FROM [int] NULL
+GO
+CREATE TYPE [ifcSchema].[IndexableName] FROM [nvarchar](80) NULL
+GO
+CREATE TYPE [IO].[URL] FROM [nvarchar](250) NULL
+GO
+
+CREATE TABLE [ifcInstance].[Entity](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[EntityTypeId] [ifcSchema].[Id] NOT NULL,
+ CONSTRAINT [PK_Entity] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC
+)
+) 
+GO
+
+CREATE TABLE [ifcProject].[LastGlobalEntityInstanceId](
+	[ProjectId] [ifcProject].[Id] NOT NULL,
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+ CONSTRAINT [PK_ifcLastGlobalEntityInstanceId] PRIMARY KEY CLUSTERED 
+(
+	[ProjectId] ASC
+)
+)
+GO
+CREATE PROCEDURE [ifcProject].[NewLastGlobalId](@ProjectId as int, @IdCount as [ifcInstance].[Id])
+AS
+BEGIN
+-- from here should be locked
+DECLARE @LastMaxGlobalId int =(SELECT max([GlobalEntityInstanceId])  FROM [ifcProject].[LastGlobalEntityInstanceId])
+DELETE FROM [ifcProject].[LastGlobalEntityInstanceId] WHERE [ProjectId]=@ProjectId
+INSERT [ifcProject].[LastGlobalEntityInstanceId]([GlobalEntityInstanceId],[ProjectId]) VALUES  (@LastMaxGlobalId+@IdCount,@ProjectId)
+-- up to here should be locked
+END
+go
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfBinary](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcBINARY] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfBinary] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+)
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfEntityRef](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcInstance].[Id] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfEntityRef] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+) 
+
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfFloat](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcREAL] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfFloat] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfInteger](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcINTEGER] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfInteger] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfList](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfList] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[ListDim2Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcInstance].[Id] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfListElementOfEntityRef] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC,
+	[ListDim2Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfFloat](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[ListDim2Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcREAL] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfListElementOfFloat] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC,
+	[ListDim2Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfInteger](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[ListDim2Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcINTEGER] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfListElementOfInteger] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC,
+	[ListDim2Position] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeListElementOfString](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[ListDim1Position] [ifcOrder].[Position] NOT NULL,
+	[Value] [ifcType].[ifcSTRING] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeListElementOfString] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC,
+	[ListDim1Position] ASC
+)
+)
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfBinary](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcType].[ifcBINARY] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfBinary] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+)
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfBoolean](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcType].[ifcBOOLEAN] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfBoolean] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfEntityRef](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcInstance].[Id] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfEntityRef] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfEnum](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcEnum].[Id] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfEnum] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfFloat](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcType].[ifcREAL] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfFloat] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfInteger](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcType].[ifcINTEGER] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfInteger] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfList](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfList] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfString](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[Value] [ifcType].[ifcSTRING] NOT NULL,
+ CONSTRAINT [PK_EntityAttributeOfString] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+)
+GO
+CREATE TABLE [ifcInstance].[EntityAttributeOfVector](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[OrdinalPosition] [ifcOrder].[Position] NOT NULL,
+	[TypeId] [ifcSchema].[Id] NOT NULL,
+	[X] [ifcType].[ifcREAL] NOT NULL,
+	[Y] [ifcType].[ifcREAL] NOT NULL,
+	[Z] [ifcType].[ifcREAL] NULL,
+ CONSTRAINT [PK_EntityAttributeOfVector] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC,
+	[OrdinalPosition] ASC
+)
+) 
+GO
+CREATE TABLE [ifcInstance].[EntityVariableName](
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[VarableName] [ifcType].[ifcSTRING] NOT NULL,
+ CONSTRAINT [PK_EntityVariableName] PRIMARY KEY CLUSTERED 
+(
+	[GlobalEntityInstanceId] ASC
+)
+)
+GO
+CREATE TABLE [ifcProject].[EntityInstanceIdAssignment](
+	[ProjectId] [ifcProject].[Id] NOT NULL,
+	[ProjectEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+	[GlobalEntityInstanceId] [ifcInstance].[Id] NOT NULL,
+ CONSTRAINT [PK_ifcEntityInstanceIdAssignment] PRIMARY KEY CLUSTERED 
+(
+	[ProjectId] ASC,
+	[ProjectEntityInstanceId] ASC
+)
+) 
+GO
+CREATE TABLE [ifcProject].[Project](
+	[ProjectId] [ifcProject].[Id] NOT NULL,
+	[ProjectName] [Text].[ToString] NULL,
+	[ProjectDescription] [Text].[Description] NULL,
+	[ProjectGroupId] [ifcProject].[Id] NOT NULL,
+	[SpecificationId] [ifcSchema].[GroupId] NOT NULL,
+ CONSTRAINT [PK_ifcProject] PRIMARY KEY CLUSTERED 
+(
+	[ProjectId] ASC
+)
+)
+GO
+CREATE TABLE [ifcProject].[ProjectGroup](
+	[ProjectGroupId] [ifcProject].[Id] NOT NULL,
+	[ProjectGroupName] [Text].[ToString] NULL,
+	[ProjectGroupDescription] [Text].[Description] NULL,
+	[ParentProjectGroupId] [ifcProject].[Id] NULL,
+	[ProjectGroupTypeId] [ifcProject].[Id] NOT NULL,
+ CONSTRAINT [PK_ifcProjectGroup] PRIMARY KEY CLUSTERED 
+(
+	[ProjectGroupId] ASC
+)
+)
+GO
+CREATE TABLE [ifcProject].[ProjectGroupType](
+	[ProjectGroupTypeId] [ifcProject].[Id] NOT NULL,
+	[ProjectGroupTypeName] [Text].[ToString] NULL,
+	[ProjectGroupTypeDescription] [Text].[Description] NULL,
+ CONSTRAINT [PK_ifcProjectType] PRIMARY KEY CLUSTERED 
+(
+	[ProjectGroupTypeId] ASC
+)
+)
+GO
+CREATE TABLE [ifcSpecification].[Specification](
+	[SpecificationId] [ifcSchema].[GroupId] NOT NULL,
+	[SpecificationName] [Text].[ToString] NOT NULL,
+	[SpecificationGroupId] [ifcSchema].[GroupId] NOT NULL,
+	[SpecificationBaseUrl] [IO].[URL] NULL,
+	[SchemaName] [ifcSchema].[IndexableName] NOT NULL,
+	[EpressFileName] [ifcSchema].[IndexableName] NULL,
+ CONSTRAINT [PK_Version] PRIMARY KEY CLUSTERED 
+(
+	[SpecificationId] ASC
+)
+)
+GO
+CREATE TABLE [ifcSpecification].[SpecificationGroup](
+	[SpecificationGroupId] [ifcSchema].[GroupId] NOT NULL,
+	[SpecificationGroupName] [Text].[ToString] NOT NULL,
+ CONSTRAINT [PK_SpecificationGroup] PRIMARY KEY CLUSTERED 
+(
+	[SpecificationGroupId] ASC
+)
+)
+GO
+CREATE TABLE [ifcProject].[ProjectId](
+	[ProjectId] [ifcProject].[Id] NOT NULL
+) 
+GO
+ALTER TABLE [ifcProject].[ProjectId]  WITH CHECK ADD  CONSTRAINT [FK_ProjectId_Project] FOREIGN KEY([ProjectId]) REFERENCES [ifcProject].[Project] ([ProjectId]) 
+GO
+ALTER TABLE [ifcProject].[ProjectId] CHECK CONSTRAINT [FK_ProjectId_Project] 
+GO
+
+
+CREATE FUNCTION [cp].[ProjectId]()
+RETURNS int AS
+BEGIN
+return (SELECT Min([ProjectId]) from  [ifcProject].[ProjectId]) 
+END
+GO
+
+CREATE VIEW [cp].[EntityInstanceIdAssignment] AS SELECT *  FROM [ifcProject].[EntityInstanceIdAssignment]  where (ProjectId = cp.ProjectId())
+GO
+CREATE VIEW [cp].[EntityAttributeOfBinary] AS SELECT EntityAttributeOfBinary.*  FROM [ifcInstance].[EntityAttributeOfBinary] EntityAttributeOfBinary inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfBinary.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfBoolean] AS SELECT EntityAttributeOfBoolean.*  FROM [ifcInstance].[EntityAttributeOfBoolean] EntityAttributeOfBoolean inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfBoolean.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE VIEW [cp].[EntityAttributeOfEntityRef] AS SELECT EntityAttributeOfEntityRef.*  FROM [ifcInstance].[EntityAttributeOfEntityRef] EntityAttributeOfEntityRef inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfEntityRef.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfEnum] AS SELECT EntityAttributeOfEnum.*  FROM [ifcInstance].[EntityAttributeOfEnum] EntityAttributeOfEnum inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfEnum.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfFloat] AS SELECT EntityAttributeOfFloat.*  FROM [ifcInstance].[EntityAttributeOfFloat] EntityAttributeOfFloat inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfFloat.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfInteger] AS SELECT EntityAttributeOfInteger.*  FROM [ifcInstance].[EntityAttributeOfInteger] EntityAttributeOfInteger inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfInteger.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfList] AS SELECT EntityAttributeOfList.*  FROM [ifcInstance].[EntityAttributeOfList] EntityAttributeOfList inner join [cp].[EntityInstanceIdAssignment] ea on ([EntityAttributeOfList].[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeOfString] AS SELECT EntityAttributeOfString.*  FROM [ifcInstance].[EntityAttributeOfString] EntityAttributeOfString inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfString.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeFormatted] AS
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],null as [ValueStr] FROM [cp].[EntityAttributeOfList] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBinary] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],'.T. or .F.'+CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBoolean] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],'#'+CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfEntityRef] union
+SELECT a.GlobalEntityInstanceId,a.OrdinalPosition,a.TypeId,'.'+e.[EnumItemName]+'.' as [ValueStr] FROM [cp].[EntityAttributeOfEnum] a inner join [ifcSQL].[ifcSchema].[EnumItem] e on (a.TypeId=e.TypeId and a.Value=e.EnumItemId) union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfFloat] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfInteger] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],''''+CONVERT(nvarchar(max),[Value]+'''') as [ValueStr] FROM [cp].[EntityAttributeOfString]
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfListElementOfEntityRef] AS SELECT EntityAttributeListElementOfListElementOfEntityRef.*  FROM [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef] EntityAttributeListElementOfListElementOfEntityRef inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfListElementOfEntityRef.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfListElementOfFloat] AS SELECT EntityAttributeListElementOfListElementOfFloat.*  FROM [ifcInstance].[EntityAttributeListElementOfListElementOfFloat] EntityAttributeListElementOfListElementOfFloat inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfListElementOfFloat.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfListElementOfInteger] AS SELECT EntityAttributeListElementOfListElementOfInteger.*  FROM [ifcInstance].[EntityAttributeListElementOfListElementOfInteger] EntityAttributeListElementOfListElementOfInteger inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfListElementOfInteger.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfListElement] AS
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],[ListDim2Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfListElementOfEntityRef] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],[ListDim2Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfListElementOfFloat] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],[ListDim2Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfListElementOfInteger]
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfBinary] AS SELECT EntityAttributeListElementOfBinary.*  FROM [ifcInstance].[EntityAttributeListElementOfBinary] EntityAttributeListElementOfBinary inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfBinary.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfEntityRef] AS SELECT EntityAttributeListElementOfEntityRef.*  FROM [ifcInstance].[EntityAttributeListElementOfEntityRef] EntityAttributeListElementOfEntityRef inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfEntityRef.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfFloat] AS SELECT EntityAttributeListElementOfFloat.*  FROM [ifcInstance].[EntityAttributeListElementOfFloat] EntityAttributeListElementOfFloat inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfFloat.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfInteger] AS SELECT EntityAttributeListElementOfInteger.*  FROM [ifcInstance].[EntityAttributeListElementOfInteger] EntityAttributeListElementOfInteger inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfInteger.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfList] AS SELECT EntityAttributeListElementOfList.*  FROM [ifcInstance].[EntityAttributeListElementOfList] EntityAttributeListElementOfList inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfList.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElementOfString] AS SELECT EntityAttributeListElementOfString.*  FROM [ifcInstance].[EntityAttributeListElementOfString] EntityAttributeListElementOfString inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeListElementOfString.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[EntityAttributeListElement] AS
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],null as [ValueStr] FROM [cp].[EntityAttributeListElementOfList] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfBinary] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfEntityRef] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfFloat] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfInteger] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[ListDim1Position],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeListElementOfString]
+GO
+CREATE VIEW [cp].[EntityAttribute] AS
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],null as [ValueStr] FROM [cp].[EntityAttributeOfList] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBinary] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBoolean] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfEntityRef] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfEnum] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfFloat] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfInteger] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfString]
+GO
+CREATE VIEW [cp].[EntityAttributeOfEntityRef_WithProjectEntityRef] AS 
+SELECT ear.[GlobalEntityInstanceId],ear.[OrdinalPosition],ear.[TypeId],ea.[ProjectEntityInstanceId] as [Value] 
+FROM [cp].[EntityAttributeOfEntityRef] ear inner join [cp].[EntityInstanceIdAssignment] ea  on (ear.Value=ea.GlobalEntityInstanceId)
+GO
+CREATE VIEW [cp].[EntityAttribute_WithProjectEntityRef] AS
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],null as [ValueStr] FROM [cp].[EntityAttributeOfList] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBinary] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfBoolean] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfEntityRef_WithProjectEntityRef] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfEnum] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfFloat] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfInteger] union
+SELECT [GlobalEntityInstanceId],[OrdinalPosition],[TypeId],CONVERT(nvarchar(max),[Value]) as [ValueStr] FROM [cp].[EntityAttributeOfString]
+GO
+CREATE VIEW [cp].[Entity]
+AS
+SELECT        Entity.*
+FROM            ifcInstance.Entity AS Entity INNER JOIN cp.EntityInstanceIdAssignment AS ea ON Entity.GlobalEntityInstanceId = ea.GlobalEntityInstanceId
+GO
+CREATE VIEW [cp].[EntityAttributeOfVector] AS SELECT EntityAttributeOfVector.*  FROM [ifcInstance].[EntityAttributeOfVector] EntityAttributeOfVector inner join [cp].[EntityInstanceIdAssignment] ea on (EntityAttributeOfVector.[GlobalEntityInstanceId]=ea.[GlobalEntityInstanceId])
+GO
+CREATE VIEW [cp].[Project] AS SELECT * FROM ifcProject.Project where (ProjectId = cp.ProjectId())
+GO
+CREATE VIEW [cp].[EntityVariableName]
+AS
+SELECT        EntityVariableName.*
+FROM            ifcInstance.EntityVariableName AS EntityVariableName INNER JOIN cp.EntityInstanceIdAssignment AS ea ON EntityVariableName.GlobalEntityInstanceId = ea.GlobalEntityInstanceId
+GO
+
+
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfBinary]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfBinary_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfBinary] CHECK CONSTRAINT [FK_EntityAttributeListElementOfBinary_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfEntityRef_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeListElementOfEntityRef_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfEntityRef_Entity1] FOREIGN KEY([Value])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeListElementOfEntityRef_Entity1]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfFloat]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfFloat_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfFloat] CHECK CONSTRAINT [FK_EntityAttributeListElementOfFloat_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfInteger]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfInteger_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfInteger] CHECK CONSTRAINT [FK_EntityAttributeListElementOfInteger_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfList]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfList_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfList] CHECK CONSTRAINT [FK_EntityAttributeListElementOfList_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfListElementOfEntityRef_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeListElementOfListElementOfEntityRef_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfListElementOfEntityRef_Entity1] FOREIGN KEY([Value])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeListElementOfListElementOfEntityRef_Entity1]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfFloat]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfListElementOfFloat_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfFloat] CHECK CONSTRAINT [FK_EntityAttributeListElementOfListElementOfFloat_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfInteger]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfListElementOfInteger_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfListElementOfInteger] CHECK CONSTRAINT [FK_EntityAttributeListElementOfListElementOfInteger_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfString]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeListElementOfString_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeListElementOfString] CHECK CONSTRAINT [FK_EntityAttributeListElementOfString_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfBinary]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfBinary_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfBinary] CHECK CONSTRAINT [FK_EntityAttributeOfBinary_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfBoolean]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfBoolean_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfBoolean] CHECK CONSTRAINT [FK_EntityAttributeOfBoolean_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfEntityRef_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeOfEntityRef_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEntityRef]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfEntityRef_Entity1] FOREIGN KEY([Value])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEntityRef] CHECK CONSTRAINT [FK_EntityAttributeOfEntityRef_Entity1]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEnum]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfEnum_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfEnum] CHECK CONSTRAINT [FK_EntityAttributeOfEnum_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfFloat]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfFloat_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfFloat] CHECK CONSTRAINT [FK_EntityAttributeOfFloat_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfInteger]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfInteger_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfInteger] CHECK CONSTRAINT [FK_EntityAttributeOfInteger_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfList]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfList_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfList] CHECK CONSTRAINT [FK_EntityAttributeOfList_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfString]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfString_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfString] CHECK CONSTRAINT [FK_EntityAttributeOfString_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfVector]  WITH CHECK ADD  CONSTRAINT [FK_EntityAttributeOfVector_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityAttributeOfVector] CHECK CONSTRAINT [FK_EntityAttributeOfVector_Entity]
+GO
+ALTER TABLE [ifcInstance].[EntityVariableName]  WITH CHECK ADD  CONSTRAINT [FK_EntityVariableName_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcInstance].[EntityVariableName] CHECK CONSTRAINT [FK_EntityVariableName_Entity]
+GO
+ALTER TABLE [ifcProject].[EntityInstanceIdAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ifcEntityInstanceIdAssignment_Entity] FOREIGN KEY([GlobalEntityInstanceId])
+REFERENCES [ifcInstance].[Entity] ([GlobalEntityInstanceId])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE [ifcProject].[EntityInstanceIdAssignment] CHECK CONSTRAINT [FK_ifcEntityInstanceIdAssignment_Entity]
+GO
+ALTER TABLE [ifcProject].[EntityInstanceIdAssignment]  WITH CHECK ADD  CONSTRAINT [FK_ifcEntityInstanceIdAssignment_Project] FOREIGN KEY([ProjectId])
+REFERENCES [ifcProject].[Project] ([ProjectId])
+GO
+ALTER TABLE [ifcProject].[EntityInstanceIdAssignment] CHECK CONSTRAINT [FK_ifcEntityInstanceIdAssignment_Project]
+GO
+ALTER TABLE [ifcProject].[Project]  WITH CHECK ADD  CONSTRAINT [FK_ifcProject_ProjectGroup] FOREIGN KEY([ProjectGroupId])
+REFERENCES [ifcProject].[ProjectGroup] ([ProjectGroupId])
+GO
+ALTER TABLE [ifcProject].[Project] CHECK CONSTRAINT [FK_ifcProject_ProjectGroup]
+GO
+ALTER TABLE [ifcProject].[Project]  WITH CHECK ADD  CONSTRAINT [FK_Project_Specification] FOREIGN KEY([SpecificationId])
+REFERENCES [ifcSpecification].[Specification] ([SpecificationId])
+GO
+ALTER TABLE [ifcProject].[Project] CHECK CONSTRAINT [FK_Project_Specification]
+GO
+ALTER TABLE [ifcProject].[ProjectGroup]  WITH CHECK ADD  CONSTRAINT [FK_ifcProjectGroup_ProjectGroup] FOREIGN KEY([ParentProjectGroupId])
+REFERENCES [ifcProject].[ProjectGroup] ([ProjectGroupId])
+GO
+ALTER TABLE [ifcProject].[ProjectGroup] CHECK CONSTRAINT [FK_ifcProjectGroup_ProjectGroup]
+GO
+ALTER TABLE [ifcProject].[ProjectGroup]  WITH CHECK ADD  CONSTRAINT [FK_ifcProjectGroup_ProjectGroupType] FOREIGN KEY([ProjectGroupTypeId])
+REFERENCES [ifcProject].[ProjectGroupType] ([ProjectGroupTypeId])
+GO
+ALTER TABLE [ifcProject].[ProjectGroup] CHECK CONSTRAINT [FK_ifcProjectGroup_ProjectGroupType]
+GO
+ALTER TABLE [ifcSpecification].[Specification]  WITH CHECK ADD  CONSTRAINT [FK_Specification_SpecificationGroup] FOREIGN KEY([SpecificationGroupId])
+REFERENCES [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId])
+GO
+ALTER TABLE [ifcSpecification].[Specification] CHECK CONSTRAINT [FK_Specification_SpecificationGroup]
+GO
+
+
+INSERT [ifcProject].[ProjectGroupType] ([ProjectGroupTypeId], [ProjectGroupTypeName], [ProjectGroupTypeDescription]) VALUES (0, N'-', N'-')
+GO
+INSERT [ifcProject].[ProjectGroup] ([ProjectGroupId], [ProjectGroupName], [ProjectGroupDescription], [ParentProjectGroupId], [ProjectGroupTypeId]) VALUES (0, N'-', N'-', NULL, 0)
+GO
+INSERT [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId], [SpecificationGroupName]) VALUES (1, N'release')
+GO
+INSERT [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId], [SpecificationGroupName]) VALUES (2, N'draft')
+GO
+INSERT [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId], [SpecificationGroupName]) VALUES (3, N'MVD')
+GO
+INSERT [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId], [SpecificationGroupName]) VALUES (4, N'Candidate Standard')
+GO
+INSERT [ifcSpecification].[SpecificationGroup] ([SpecificationGroupId], [SpecificationGroupName]) VALUES (5, N'Official')
+GO
+INSERT [ifcSpecification].[Specification] ([SpecificationId], [SpecificationName], [SpecificationGroupId], [SpecificationBaseUrl], [SchemaName], [EpressFileName]) VALUES (2, N'2.3.0.1 IFC2x3 TC1 2007-07', 5, N'https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1', N'IFC2X3', N'IFC2X3_TC1.exp')
+GO
+INSERT [ifcSpecification].[Specification] ([SpecificationId], [SpecificationName], [SpecificationGroupId], [SpecificationBaseUrl], [SchemaName], [EpressFileName]) VALUES (4, N'4.0.2.1 IFC4 ADD2 TC1 2017-10', 5, N'https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1', N'IFC4', N'IFC4.exp')
+GO
+INSERT [ifcSpecification].[Specification] ([SpecificationId], [SpecificationName], [SpecificationGroupId], [SpecificationBaseUrl], [SchemaName], [EpressFileName]) VALUES (5, N'4.1.0.0 IFC4.1 2018-06', 5, N'https://standards.buildingsmart.org/IFC/RELEASE/IFC4_1/FINAL', N'IFC4X1', N'IFC4x1.exp')
+GO
+INSERT [ifcSpecification].[Specification] ([SpecificationId], [SpecificationName], [SpecificationGroupId], [SpecificationBaseUrl], [SchemaName], [EpressFileName]) VALUES (6, N'4.2.0.0 IFC4.2 2019-04', 4, N'https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL', N'IFC4X2', N'IFC4x2.exp')
+GO
+INSERT [ifcProject].[Project] ([ProjectId], [ProjectName], [ProjectDescription], [ProjectGroupId], [SpecificationId]) VALUES (0, N'my first project', N'-', 0, 6)
+GO
+INSERT [ifcProject].[ProjectId] ([ProjectId]) VALUES (0)
+GO
+
+
+CREATE SCHEMA [app]
+GO
+CREATE PROCEDURE [app].[DeleteProjectEntities]
+@ProjectId as int
+AS
+BEGIN
+SET NOCOUNT ON;
+select ea.* into #ea from [ifcProject].[EntityInstanceIdAssignment] ea where ea.ProjectId=@ProjectId
+delete ea from [ifcProject].[EntityInstanceIdAssignment] ea where ea.ProjectId=@ProjectId
+delete e from #ea ea inner join [ifcInstance].[Entity] e on (ea.GlobalEntityInstanceId=e.GlobalEntityInstanceId) where ea.ProjectId=@ProjectId
+END
+GO
+CREATE PROCEDURE [app].[SelectProject] -- simplyfied
+@SelectProjectId as int
+AS
+BEGIN
+SET NOCOUNT ON;
+UPDATE [ifcSQL_Instance].[ifcProject].[ProjectId] SET [ProjectId]=@SelectProjectId
+END
+GO
+CREATE PROCEDURE [app].[NewProject]
+@NewName as nvarchar(max)
+AS
+BEGIN
+SET NOCOUNT ON;
+DECLARE @NewProjectId int =(SELECT Max([ProjectId]) FROM [ifcProject].[Project])
+SET @NewProjectId =@NewProjectId +1;
+SELECT * into #prj  FROM [cp].[Project]
+update #prj set [ProjectId]=@NewProjectId
+update #prj set  [ProjectName]=@NewName
+update #prj set  [ProjectDescription]=@NewName
+insert into [ifcProject].[Project] select * from  #prj
+EXECUTE [app].[SelectProject] @NewProjectId
+END
+GO
+
+CREATE FUNCTION [ifcProject].[LastGlobalId](@ProjectId as int)
+RETURNS [ifcInstance].[Id] AS
+BEGIN
+return (SELECT max([GlobalEntityInstanceId])  FROM [ifcProject].[LastGlobalEntityInstanceId] where [ProjectId]=@ProjectId  )
+END
+GO
+
+

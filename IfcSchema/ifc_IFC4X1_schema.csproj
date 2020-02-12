@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <ItemGroup>
+
+    <Compile Include="..\..\..\ifcSharpLibrary\ifcSchema\ifc_IFC4X1_schema_entity.cs">
+      <Link>ifc_IFC4X1_schema\ifc_IFC4X1_schema_entity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ifcSharpLibrary\ifcSchema\ifc_IFC4X1_schema_enum.cs">
+      <Link>ifc_IFC4X1_schema\ifc_IFC4X1_schema_enum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ifcSharpLibrary\ifcSchema\ifc_IFC4X1_schema_select.cs">
+      <Link>ifc_IFC4X1_schema\ifc_IFC4X1_schema_select.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\ifcSharpLibrary\ifcSchema\ifc_IFC4X1_schema_type.cs">
+      <Link>ifc_IFC4X1_schema\ifc_IFC4X1_schema_type.cs</Link>
+    </Compile>
+
+  </ItemGroup>
+
+
+</Project>

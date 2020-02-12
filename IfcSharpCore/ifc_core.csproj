@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <ItemGroup>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base.cs">
+      <Link>ifc_core\ifc_base.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_sql.cs">
+      <Link>ifc_core\ifc_base_sql.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_header.cs">
+      <Link>ifc_core\ifc_header.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_model.cs">
+      <Link>ifc_core\ifc_model.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_schema.cs">
+      <Link>ifc_core\ifc_schema.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_encoding.cs">
+      <Link>ifc_core\ifc_encoding.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_sort.cs">
+      <Link>ifc_core\ifc_sort.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_list.cs">
+      <Link>ifc_core\ifc_base_list.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_type.cs">
+      <Link>ifc_core\ifc_base_type.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_entity.cs">
+      <Link>ifc_core\ifc_base_entity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_select.cs">
+      <Link>ifc_core\ifc_base_select.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\Ifc_guid.cs">
+      <Link>ifc_core\Ifc_guid.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_units.cs">
+      <Link>ifc_core\ifc_base_units.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_base_geometry.cs">
+      <Link>ifc_core\ifc_base_geometry.cs</Link>
+    </Compile>
+
+
+  </ItemGroup>
+
+</Project>

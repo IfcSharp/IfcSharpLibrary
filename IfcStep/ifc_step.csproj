@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+  <ItemGroup>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcStep\ifc_in_step.cs">
+      <Link>ifc_io\ifc_in_step.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcStep\ifc_out_step.cs">
+      <Link>ifc_io\ifc_out_step.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_out_html.cs">
+      <Link>ifc_io\ifc_out_html.cs</Link>
+    </Compile>
+
+    <Compile Include="..\..\..\IfcSharpLibrary\IfcSharpCore\ifc_out_cs.cs">
+      <Link>ifc_io\ifc_out_cs.cs</Link>
+    </Compile>
+
+  </ItemGroup>
+
+
+</Project>
