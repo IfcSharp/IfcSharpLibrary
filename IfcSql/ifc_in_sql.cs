@@ -33,12 +33,12 @@ if (CurrentEntity is EntityComment) ((EntityComment)CurrentEntity).CommentLine=(
 else if (e.AttributeValueDict.ContainsKey(-1))  CurrentEntity.EndOfLineComment=((ifcSQL.ifcInstance.EntityAttributeOfString_Row)e.AttributeValueDict[-1]).Value;
 
 object[] TypeCtorArgs=new object[1];
-Dictionary<int,FieldInfo> VarDict=new Dictionary<int,FieldInfo>();
-int VarCount=0;foreach (FieldInfo field in CurrentEntity.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)) foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {VarDict.Add(((ifcAttribute)attr).OrdinalPosition,field);VarCount++;} //  if (attr is ifcAttribute) //Console.WriteLine(VarCount+": "+attr.OrdinalPosition+": "+field.Name); 
-for (int i=1;i<=VarCount;i++) //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    {FieldInfo field=VarDict[i]; //Console.Write(field.Name+", ");
-     if (e.AttributeValueDict.ContainsKey(i))//----------------------------------------------------------------------------------------------------------
-        {RowBase rb=e.AttributeValueDict[i];
+int OrdinalPosition=0;
+ENTITY.AttribListType AttribList=ENTITY.TypeDictionary.GetComponents(CurrentEntity.GetType()).AttribList;
+foreach (FieldInfo field in AttribList)
+        {++OrdinalPosition;  
+         if (e.AttributeValueDict.ContainsKey(OrdinalPosition))//----------------------------------------------------------------------------------------------------------
+            {RowBase rb=e.AttributeValueDict[OrdinalPosition];
          if (rb is ifcSQL.ifcInstance.EntityAttributeOfVector_Row)  {ifcSQL.ifcInstance.EntityAttributeOfVector_Row a=(ifcSQL.ifcInstance.EntityAttributeOfVector_Row)rb;
                                                                      if (a.TypeId==25) {if (a.Z!=null)  ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y,(LengthMeasure)(double)a.Z);
                                                                                         else            ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y); 
@@ -54,17 +54,19 @@ for (int i=1;i<=VarCount;i++) //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEnum_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)rb;
                                                                         field.SetValue(CurrentEntity,a.Value);
                                                                        }
-         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)  {ifcSQL.ifcInstance.EntityAttributeOfInteger_Row a=(ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)rb;
-                                                                          TypeCtorArgs[0]=a.Value;
-                                                                          field.SetValue(CurrentEntity,Activator.CreateInstance(field.FieldType,TypeCtorArgs));
-                                                                       }
-         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfFloat_Row)  {ifcSQL.ifcInstance.EntityAttributeOfFloat_Row a=(ifcSQL.ifcInstance.EntityAttributeOfFloat_Row)rb;
-                                                                          TypeCtorArgs[0]=a.Value;
-                                                                          field.SetValue(CurrentEntity,Activator.CreateInstance(field.FieldType,TypeCtorArgs));
-                                                                       }
+         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)   {ifcSQL.ifcInstance.EntityAttributeOfInteger_Row a=(ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)rb;
+                                                                             object o=Activator.CreateInstance(ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],a.Value);
+                                                                             if (field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(field.FieldType,TypeCtorArgs);}
+                                                                             field.SetValue(CurrentEntity,o);
+                                                                           }
+         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfFloat_Row)      {ifcSQL.ifcInstance.EntityAttributeOfFloat_Row a=(ifcSQL.ifcInstance.EntityAttributeOfFloat_Row)rb;
+                                                                             object o=Activator.CreateInstance(ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],a.Value);
+                                                                             if (field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(field.FieldType,TypeCtorArgs);}
+                                                                             field.SetValue(CurrentEntity,o);
+                                                                           }
 
-         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)rb; // Console.WriteLine("Attrib TypeName="+field.FieldType.Name+" db_type="+Type_RowDict[a.TypeId].TypeName); 
-                                                                             Type AttributeInstanceType=Type.GetType("ifc."+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityTypeId],true,true);// 2. true: ignoreCase
+         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)rb;  
+                                                                             Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
                                                                              object o=Activator.CreateInstance(AttributeInstanceType);((ENTITY)o).Id=LocalIdFromGlobalIdDict[a.Value];
                                                                              if (field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(field.FieldType,TypeCtorArgs);}
                                                                              field.SetValue(CurrentEntity,o);
@@ -74,7 +76,7 @@ for (int i=1;i<=VarCount;i++) //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                                                           Type GenericType=null;
                                                                           if (field.FieldType.BaseType.GetGenericArguments().Length>0) GenericType=field.FieldType.BaseType.GetGenericArguments()[0]; //LengthMeasure or CartesianPoint
                                                                           else                                                   GenericType=field.FieldType.BaseType.BaseType.GetGenericArguments()[0]; //CompoundPlaneAngleMeasure
-                                                                          Type AttributeInstanceType=Type.GetType("ifc."+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityTypeId],true,true);// 2. true: ignoreCase
+                                                                          Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
                                                                           int ListDim1Count=a.AttributeValueDict.Count; 
                                                                           object[] FieldCtorArgs=new object[ListDim1Count];
                                                                           if (ListDim1Count>0)   

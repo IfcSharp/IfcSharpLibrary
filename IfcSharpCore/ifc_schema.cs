@@ -51,17 +51,21 @@ foreach (NetSystem.Type t in NetSystem.Reflection.Assembly.GetAssembly(typeof(if
   if (t.IsClass) if (!t.IsAbstract) if (t.IsSubclassOf(typeof(ifc.ENTITY))) EntityTypeComponentsList.Add(new ComponentsType(t));
 foreach (ComponentsType ct in EntityTypeComponentsList) EntityTypeComponentsDict.Add(ct.EntityType,ct);
 
-
 foreach ( NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.GetAssemblies())  foreach (NetSystem.Type t in a.GetTypes()) 
         {if (   (t.IsEnum)      
              || (t.IsSubclassOf(typeof(ifc.ENTITY)))
              || (t.IsSubclassOf(typeof(ifc.SELECT))) 
              || (t.IsSubclassOf(typeof(ifc.TypeBase)))
-            ) foreach (NetSystem.Attribute attr in t.GetCustomAttributes(true)) if (attr is ifcSqlAttribute) TypeIdNameDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t.Name);
+             || (typeof(ifcListInterface).IsAssignableFrom(t)) 
+            ) foreach (NetSystem.Attribute attr in t.GetCustomAttributes(true)) if (attr is ifcSqlAttribute) 
+                      {TypeIdNameDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t.Name);
+                       TypeIdTypeDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t);
+                       }                                                                          
         }
 }//................................................................................................
 
 public static Dictionary<int,string> TypeIdNameDict=new Dictionary<int, string>();
+public static Dictionary<int,NetSystem.Type> TypeIdTypeDict=new Dictionary<int,NetSystem.Type >();
 
 }//------------------------------------------------------------------------------------------------
 

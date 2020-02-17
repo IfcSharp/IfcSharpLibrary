@@ -133,7 +133,7 @@ ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
 long LastGlobalId=0;
 
 ifcSQL.conn.Open(); 
-if (WriteMode==eWriteMode.CreateNewProject) {ifcSQL.ExecuteNonQuery("app.NewProject 'new Project from ToSql'");ProjectId=0;}
+if (WriteMode==eWriteMode.CreateNewProject) {ifcSQL.ExecuteNonQuery("app.NewProject '"+Header.name+"'");ProjectId=0;}
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()");
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
