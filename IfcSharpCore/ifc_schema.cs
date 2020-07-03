@@ -18,7 +18,7 @@ foreach (FieldInfo field in EntityType.GetFields(BindingFlags.Public|BindingFlag
    foreach (NetSystem.Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {TemporaryAttribDict.Add(((ifcAttribute)attr).OrdinalPosition,field);VarCount++;}
 for (int i=1;i<=VarCount;i++) this.Add(TemporaryAttribDict[i]);
  }
-private static Dictionary<int,FieldInfo> TemporaryAttribDict=new Dictionary<int,FieldInfo>();
+public static Dictionary<int,FieldInfo> TemporaryAttribDict=new Dictionary<int,FieldInfo>();
 };//------------------------------------------------------------------------------------------------
 
 public class InversListType:List<FieldInfo>{//-----------------------------------------------------
@@ -50,6 +50,7 @@ public static void FillEntityTypeComponentsDict(){//............................
 foreach (NetSystem.Type t in NetSystem.Reflection.Assembly.GetAssembly(typeof(ifc.ENTITY)).GetTypes()) 
   if (t.IsClass) if (!t.IsAbstract) if (t.IsSubclassOf(typeof(ifc.ENTITY))) EntityTypeComponentsList.Add(new ComponentsType(t));
 foreach (ComponentsType ct in EntityTypeComponentsList) EntityTypeComponentsDict.Add(ct.EntityType,ct);
+
 
 foreach ( NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.GetAssemblies())  foreach (NetSystem.Type t in a.GetTypes()) 
         {if (   (t.IsEnum)      

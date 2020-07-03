@@ -59,7 +59,7 @@ sw.WriteLine("ISO-10303-21;");
 sw.WriteLine("HEADER;");
 sw.WriteLine("FILE_DESCRIPTION (('"+Header.description+"'), '2;1');");
 sw.WriteLine("FILE_NAME ('"+Header.name+"', '"+NetSystem.String.Format("{0:s}",NetSystem.DateTime.Now)+"', ('"+Header.author+"'), ('"+Header.organization+"'), '"+ Header.preprocessor_version+"', '"+Header.originating_system+"', '"+Header.authorization+"');");
-sw.WriteLine("FILE_SCHEMA (('IFC4'));");
+sw.WriteLine("FILE_SCHEMA (('"+Specification.SchemaName+"'));");
 sw.WriteLine("ENDSEC;");
 sw.WriteLine("DATA;");
 foreach (ENTITY e in EntityList) sw.WriteLine(e.ToStepLine());

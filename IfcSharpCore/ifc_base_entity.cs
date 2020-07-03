@@ -1,5 +1,6 @@
 // ifc_base_entity.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
+using NetSystem=System;
 
 public class ifcAttribute:System.Attribute{public ifcAttribute(int OrdinalPosition,bool optional=false,bool derived=false){this.OrdinalPosition=OrdinalPosition;this.optional=optional;this.derived=derived;}
                                            public int OrdinalPosition=0;
@@ -32,7 +33,9 @@ public virtual void AssignInverseElements(){}
 // static:
 public partial class ENTITY:ifcSqlType{//==========================================================================================
 static public int NextGlobalId=1;
-protected void AddNext(){Id=NextGlobalId++;Repository.CurrentModel.EntityList.Add(this);}
+protected void AddNext(){Id=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/  Repository.CurrentModel.EntityList.Add(this);}
+protected virtual void CheckValues(){}
+protected virtual void SetDefaultValues(){}
 static public int NextGlobalCommentId=0;
 protected void AddNextCommentLine(){Id=NextGlobalCommentId--;Repository.CurrentModel.EntityList.Add(this);}
 }//=====================================================================================================================
@@ -53,7 +56,20 @@ public override string ToString(){return CommentLine;}
 public static int HtmlCnt=0;
 }//=====================================================================================================================
 
+ #if !IFC2X3
+public partial class CartesianTransformationOperator3DnonUniform:CartesianTransformationOperator3D{//===================
+protected override void CheckValues(){} // Check >0
+protected override void SetDefaultValues(){
 
+if (Scale==null) Scale=new ifc.Real(1);
+if (Scale2==null) Scale2=Scale;
+if (Scale3==null) Scale3=Scale;
+if (Axis1==null) Axis1=new ifc.Direction(x:1,y:0,z:0);
+if (Axis2==null) Axis2=new ifc.Direction(x:0,y:1,z:0);
+if (Axis3==null) Axis3=new ifc.Direction(x:0,y:0,z:1);
 
+}
+}//=====================================================================================================================
+#endif
 
 }// ifc=======================================

@@ -71,3 +71,4 @@ public partial class GloballyUniqueId          :TYPE<string>    {public  static 
 
 
 }//ifc==============================
+

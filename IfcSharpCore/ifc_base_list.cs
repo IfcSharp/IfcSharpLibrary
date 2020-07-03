@@ -38,6 +38,7 @@ public class List3toUnbounded<T>:LIST<T>{public List3toUnbounded(List3toUnbounde
 public class Set0toUnbounded <T>:LIST<T>{public Set0toUnbounded(Set0toUnbounded<T> cc):base(0,0){foreach(T c in cc) this.Add(c);}public Set0toUnbounded():base(0,0){} public Set0toUnbounded(params T[] items):base(0,0){foreach (T e in items)  this.Add(e);} }
 public class Set1to2         <T>:LIST<T>{public Set1to2(Set1to2<T> cc):base(1,2){foreach(T c in cc) this.Add(c);}public Set1to2():base(1,2){} public Set1to2(T t1,T t2):base(){this.Add(t1);this.Add(t2);} }
 public class Set1to5         <T>:LIST<T>{public Set1to5(Set1to5<T> cc):base(1,5){foreach(T c in cc) this.Add(c);}public Set1to5():base(1,5){} public Set1to5(params T[] items):base(1,5){foreach (T e in items)  this.Add(e);} }
+public class List1to8        <T>:LIST<T>{public List1to8(List1to8<T> cc):base(1,8){foreach(T c in cc) this.Add(c);} public List1to8():base(1,8){} public List1to8(T t1,T t2):base(1,8){this.Add(t1);this.Add(t2);}  public List1to8(T t1,T t2,T t8):base(1,8){this.Add(t1);this.Add(t2);this.Add(t8);} }
 
 public class Set1toUnbounded <T>:LIST<T>{public Set1toUnbounded(Set1toUnbounded<T> cc):base(1,0){foreach(T c in cc) this.Add(c);}public Set1toUnbounded():base(1,0){} public Set1toUnbounded(params T[] items):base(1,0){foreach (T e in items)  this.Add(e);} }
 

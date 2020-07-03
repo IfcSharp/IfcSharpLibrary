@@ -43,9 +43,17 @@ foreach (FieldInfo field in AttribList)
                                                                      if (a.TypeId==25) {if (a.Z!=null)  ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y,(LengthMeasure)(double)a.Z);
                                                                                         else            ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y); 
                                                                                        }
+#if IFC2X3
+                                                                     if (a.TypeId==42) {if (a.Z!=null)  ((ifc.Direction)CurrentEntity).DirectionRatios=new List2to3_double(a.X,a.Y,(double)a.Z);
+                                                                                        else            ((ifc.Direction)CurrentEntity).DirectionRatios=new List2to3_double(a.X,a.Y); 
+                                                                                       }
+
+#else
                                                                      if (a.TypeId==42) {if (a.Z!=null)  ((ifc.Direction)CurrentEntity).DirectionRatios=new List2to3_Real((Real)a.X,(Real)a.Y,(Real)(double)a.Z);
                                                                                         else            ((ifc.Direction)CurrentEntity).DirectionRatios=new List2to3_Real((Real)a.X,(Real)a.Y); 
                                                                                        }
+#endif   
+
                                                                     }
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfString_Row)  {ifcSQL.ifcInstance.EntityAttributeOfString_Row a=(ifcSQL.ifcInstance.EntityAttributeOfString_Row)rb;
                                                                           TypeCtorArgs[0]=ifc.IfcString.Decode(a.Value);

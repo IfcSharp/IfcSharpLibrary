@@ -355,8 +355,14 @@ if (xml.Attributes["id"]!=null) {CurrentEntity.XmlId=xml.Attributes["id"].Value;
 
 if (CurrentEntity is Direction)     {if (      ((XmlElement)xml).HasAttribute("DirectionRatios") ) 
                                         {string[] ListElements=xml.Attributes["DirectionRatios"].Value.Split(' ');
+
+#if IFC2X3
+                                                    ((Direction)CurrentEntity).DirectionRatios=new List2to3_double(); foreach (string Element in ListElements) 
+                                                    ((Direction)CurrentEntity).DirectionRatios.Add(double.Parse(Element));
+#else
                                                     ((Direction)CurrentEntity).DirectionRatios=new List2to3_Real(); foreach (string Element in ListElements) 
                                                     ((Direction)CurrentEntity).DirectionRatios.Add(new Real(double.Parse(Element)));
+#endif
                                          return CurrentEntity;
                                         }
                                     } // andernfalls Ref-Element unter Entity auswerten

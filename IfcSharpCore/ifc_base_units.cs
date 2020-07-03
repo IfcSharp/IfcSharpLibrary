@@ -27,7 +27,8 @@ public       DimensionalExponents(SIUnitName n, int LengthExponent,int MassExpon
 
 
 public partial class SIUnit:NamedUnit{
-/* DERIVED */ public       SIUnit(UnitEnum UnitType,SIPrefix Prefix,SIUnitName Name):base(){AddNext();this.Dimensions=DimensionsForSiUnit(Name);this.UnitType=UnitType;this.Prefix=Prefix;this.Name=Name;}
+/* DERIVED */ public       SIUnit(UnitEnum UnitType,SIUnitName Name,SIPrefix? Prefix=null,string EndOfLineComment=null):base(){AddNext();this.Dimensions=DimensionsForSiUnit(Name);this.UnitType=UnitType;this.Prefix=Prefix;this.Name=Name;this.EndOfLineComment=EndOfLineComment;}
+
 
 
 

@@ -175,7 +175,7 @@ sw.WriteLine(FormattedHeaderLine("ISO-10303-21;"));
 sw.WriteLine(FormattedHeaderLine("HEADER;"));
 sw.WriteLine(FormattedHeaderLine("FILE_DESCRIPTION (('"+Header.description+"'), '2;1');"));
 sw.WriteLine(FormattedHeaderLine("FILE_NAME ('"+Header.name+"', '"+NetSystem.String.Format("{0:s}",NetSystem.DateTime.Now)+"', ('"+Header.author+"'), ('"+Header.organization+"'), '"+ Header.preprocessor_version+"', '"+Header.originating_system+"', '"+Header.authorization+"');"));
-sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('IFC4'));"));
+sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"));
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("DATA;"));
 
