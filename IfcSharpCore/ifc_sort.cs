@@ -30,7 +30,7 @@ foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttri
                  {if (field.FieldType.IsSubclassOf(typeof(ENTITY))) 
                           {ENTITY E=(ENTITY)field.GetValue(e);
                           // if (E!=null) if (E.Id>0) Console.WriteLine(field.Name+"="+E.Id+" "+E.IsAssigned+" "+AssignedEntityDict.ContainsKey(E.Id));
-                           if (E!=null) if (E.Id>0) if (!AssignedEntityDict.ContainsKey(E.Id)) e.IsAssigned=false; 
+                           if (E!=null) if (E.LocalId>0) if (!AssignedEntityDict.ContainsKey(E.LocalId)) e.IsAssigned=false; 
                          //  if (e.Id==1) Console.WriteLine(field.Name+" "+e.IsAssigned);
                           }
                   else if (field.FieldType.IsSubclassOf(typeof(SELECT))) 
@@ -40,12 +40,12 @@ foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttri
                   else if( typeof(IEnumerable).IsAssignableFrom(field.FieldType)) if (field.GetValue(e)!=null) 
                             foreach (object item in (IEnumerable)field.GetValue(e)) if (item!=null)
                              { if (item is SELECT) if (((SELECT)item).Id>0) if (!AssignedEntityDict.ContainsKey(((SELECT)item).Id)) e.IsAssigned=false; 
-                               if (item is ENTITY) if (((ENTITY)item).Id>0) if (!AssignedEntityDict.ContainsKey(((ENTITY)item).Id)) e.IsAssigned=false; 
+                               if (item is ENTITY) if (((ENTITY)item).LocalId>0) if (!AssignedEntityDict.ContainsKey(((ENTITY)item).LocalId)) e.IsAssigned=false; 
                              }
                  }// of foreach field
        //   if (e.Id==1) 
       //   Console.WriteLine(e.Id+" IsAssigned="+e.IsAssigned);
-          if (e.IsAssigned) {e.SortPos=++GlobalSortPos; AssignedEntityDict.Add(e.Id,e);cnt++;}//Console.WriteLine(cnt+": "+e.Id);}
+          if (e.IsAssigned) {e.SortPos=++GlobalSortPos; AssignedEntityDict.Add(e.LocalId,e);cnt++;}//Console.WriteLine(cnt+": "+e.Id);}
         }//of foreach Entity
 //Console.WriteLine("----------------------");
 return cnt;

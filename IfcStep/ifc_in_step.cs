@@ -85,7 +85,7 @@ public static object[] GetFieldCtorArgs(Type GenericType,string[] ListElements)
                                                                    FieldCtorArgs[ListPos]=Activator.CreateInstance(GenericType,GenericCtorArgs);
                                                                   }
                    else if (GenericType.IsSubclassOf(typeof(ENTITY)))   {object o=Activator.CreateInstance(GenericType);
-                                                                         ((ENTITY)o).Id=int.Parse(ListElement.Trim(' ').Substring(1));
+                                                                         ((ENTITY)o).LocalId=int.Parse(ListElement.Trim(' ').Substring(1));
                                                                          FieldCtorArgs[ListPos]=o;
                                                                         }
                    else if (GenericType.IsSubclassOf(typeof(SELECT)))   {object o=Activator.CreateInstance(GenericType);
@@ -179,7 +179,7 @@ string[] args=body.Split(',');
 for (int i=0;i<args.Length;i++) args[i]=args[i].Replace((char)9,',');
 try{Type t=Type.GetType("ifc."+ElementName,true,true);// 2. true: ignoreCase
 object CurrentEntity=Activator.CreateInstance(t); if (CommentOpenPos>0) ((ENTITY)CurrentEntity).EndOfLineComment=CurrentEntityComment;
-((ENTITY)CurrentEntity).Id=int.Parse(line.Substring(1,posA-1));
+((ENTITY)CurrentEntity).LocalId=int.Parse(line.Substring(1,posA-1));
 Dictionary<int,FieldInfo> VarDict=new Dictionary<int,FieldInfo>();
 int VarCount=0;
 
@@ -207,7 +207,7 @@ for (int i=1;i<=VarCount;i++)
                                                              }
      else if (field.FieldType.IsSubclassOf(typeof(ENTITY)))  {try{object o=null; //falls $
                                                                   if (value.Length>0) if (value[0]=='*') o=Activator.CreateInstance(field.FieldType);
-                                                                  if (value.Length>0) if (value[0]=='#'){o=Activator.CreateInstance(field.FieldType);((ENTITY)o).Id=int.Parse(value.Substring(1));}
+                                                                  if (value.Length>0) if (value[0]=='#'){o=Activator.CreateInstance(field.FieldType);((ENTITY)o).LocalId=int.Parse(value.Substring(1));}
                                                                   field.SetValue(CurrentEntity,o);
                                                                  }catch(Exception e){throw new Exception("Parse.ENTITY: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
                                                              }

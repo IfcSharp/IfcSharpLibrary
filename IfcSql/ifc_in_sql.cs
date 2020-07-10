@@ -25,7 +25,7 @@ public void EvalIfcRow(ifcSQL.ifcInstance.Entity_Row e)
 {try{
 Type t=Type.GetType("ifc."+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityTypeId],true,true);// 2. true: ignoreCase
 ENTITY CurrentEntity=(ENTITY)Activator.CreateInstance(t);
-CurrentEntity.Id=LocalIdFromGlobalIdDict[e.GlobalEntityInstanceId];// e.LocalId;
+CurrentEntity.LocalId=LocalIdFromGlobalIdDict[e.GlobalEntityInstanceId];// e.LocalId;
 CurrentEntity.ifcSqlGlobalId=e.GlobalEntityInstanceId;
 
 // commment-handling:
@@ -75,7 +75,7 @@ foreach (FieldInfo field in AttribList)
 
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)rb;  
                                                                              Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
-                                                                             object o=Activator.CreateInstance(AttributeInstanceType);((ENTITY)o).Id=LocalIdFromGlobalIdDict[a.Value];
+                                                                             object o=Activator.CreateInstance(AttributeInstanceType);((ENTITY)o).LocalId=LocalIdFromGlobalIdDict[a.Value];
                                                                              if (field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(field.FieldType,TypeCtorArgs);}
                                                                              field.SetValue(CurrentEntity,o);
                                                                             }
@@ -94,7 +94,7 @@ foreach (FieldInfo field in AttribList)
                                                                                      object[] GenericCtorArgs=new object[1]; 
                                                                                      FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType);  // Console.WriteLine("GenericType= "+GenericType.ToString());
                                                                                           if (GenericType.IsSubclassOf(typeof(SELECT))) ((SELECT)FieldCtorArgs[ListDim1Position]).Id=Id;
-                                                                                     else if (GenericType.IsSubclassOf(typeof(ENTITY))) ((ENTITY)FieldCtorArgs[ListDim1Position]).Id=Id;
+                                                                                     else if (GenericType.IsSubclassOf(typeof(ENTITY))) ((ENTITY)FieldCtorArgs[ListDim1Position]).LocalId=Id;
                                                                                      else Console.WriteLine("unkown type"); 
                                                                                      } 
                                                                           field.SetValue(CurrentEntity,Activator.CreateInstance(field.FieldType,FieldCtorArgs));

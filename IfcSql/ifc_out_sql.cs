@@ -75,7 +75,7 @@ public virtual void ToSql(int ProjectId)//......................................
 {
  new ifcSQL.ifcInstance.Entity_Row(GlobalEntityInstanceId:this.ifcSqlGlobalId,EntityTypeId:this.SqlTypeId());
  ifcSqlInstance.cp.Entity.Add(new ifcSQL.ifcInstance.Entity_Row(GlobalEntityInstanceId:this.ifcSqlGlobalId,EntityTypeId:this.SqlTypeId()));
- ifcSqlInstance.cp.EntityInstanceIdAssignment.Add(new ifcSQL.ifcProject.EntityInstanceIdAssignment_Row(ProjectId:ProjectId,ProjectEntityInstanceId:this.Id,GlobalEntityInstanceId:this.ifcSqlGlobalId));
+ ifcSqlInstance.cp.EntityInstanceIdAssignment.Add(new ifcSQL.ifcProject.EntityInstanceIdAssignment_Row(ProjectId:ProjectId,ProjectEntityInstanceId:this.LocalId,GlobalEntityInstanceId:this.ifcSqlGlobalId));
 
  
       if (this is EntityComment)        ifcSqlInstance.cp.EntityAttributeOfString.Add(new ifcSQL.ifcInstance.EntityAttributeOfString_Row(GlobalEntityInstanceId:this.ifcSqlGlobalId,OrdinalPosition:-1,TypeId:-2,Value:((EntityComment)this).CommentLine));

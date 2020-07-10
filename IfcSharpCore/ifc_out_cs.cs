@@ -29,7 +29,7 @@ cnt++;
                               else if( ((SELECT)o).SelectValue()==null  ) s="null"; 
                               else s="new ifc."+o.GetType().Name+"(("+((SELECT)o).SelectType()+")"+((SELECT)o).SelectValue().ToString().Replace('\'','"')+")";
                              }
-     else if (o is ENTITY)   {if (((ENTITY)o).Id>0) s=EntityVarName(((ENTITY)o).Id); else s="null";}
+     else if (o is ENTITY)   {if (((ENTITY)o).LocalId>0) s=EntityVarName(((ENTITY)o).LocalId); else s="null";}
      else if (o is TypeBase) {TypeBase tb=(TypeBase)o;
                               if (o is ifc.Logical)  {s="(ifc.Logical)";if (o.ToString()=="False)") s+="false"; else s+="true";} else
                               if (o is ifc.Boolean)  {s="(ifc.Boolean)";if (o.ToString()=="False)") s+="false"; else s+="true";} else
@@ -51,7 +51,7 @@ cnt++;
                           int pos=0; 
                           foreach (object item in (IEnumerable)o) if (item!=null) 
                                  {pos++;if (pos>1) s+=","; 
-                                       if (item is ENTITY) s+=EntityVarName(((ENTITY)item).Id);
+                                       if (item is ENTITY) s+=EntityVarName(((ENTITY)item).LocalId);
                                   else if (item is SELECT) {if (((SELECT)item).Id>0) s+="new ifc."+item.GetType().Name+"("+EntityVarName(((SELECT)item).Id)+")"; else    CsOut(((SELECT)item).SelectValue());}
                                   else if (item is TypeBase) {TypeBase tb=(TypeBase)item;
                                                                    if (tb.GetBaseType()==typeof(NetSystem.String)) {if (item.ToString()=="") s+=""; /* null */else s+="(ifc."+item.GetType().Name+")\""+item.ToString()+"\""; } 
@@ -78,7 +78,7 @@ int ElementNameMaxSize=35;
 if  (ElementName.Length<ElementNameMaxSize) ElementName+=new string(' ',ElementNameMaxSize-ElementName.Length);
 int IdStringMaxSize=ElementNameMaxSize+4;
 
-string IdString=EntityVarName(this.Id);
+string IdString=EntityVarName(this.LocalId);
 if  (IdString.Length<IdStringMaxSize) IdString+=new string(' ',IdStringMaxSize-IdString.Length);
 
 if (this is ifc.EntityComment) s=new string(' ',IdStringMaxSize)+"     new "+ElementName+"(";

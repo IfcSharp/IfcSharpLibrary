@@ -28,7 +28,7 @@ namespace ifc
 
             // find corresponding datarow
             bool addNewRow = false;
-            SQLiteDataRow dataRow = dataTable.Rows.FirstOrDefault(r => r.Id == this.Id || r.IsEmpty);
+            SQLiteDataRow dataRow = dataTable.Rows.FirstOrDefault(r => r.Id == this.LocalId || r.IsEmpty);
             if (dataRow == null)
             {
                 addNewRow = true;
@@ -37,7 +37,7 @@ namespace ifc
             else
             {
                 SQLiteDataField idField = dataRow.Fields.FirstOrDefault(f => f.Parameter.ParameterName == "Id");
-                if (idField != null) idField.Parameter.Value = this.Id;
+                if (idField != null) idField.Parameter.Value = this.LocalId;
             }
 
             if (addNewRow == true || updateExisting == true)
@@ -104,7 +104,7 @@ namespace ifc
             {
                 if (dataRow.Fields.Count > 0)
                 {
-                    dataRow.Fields.Add(new SQLiteDataField(0, "Id", DbType.Int32, false, this.Id));
+                    dataRow.Fields.Add(new SQLiteDataField(0, "Id", DbType.Int32, false, this.LocalId));
                     dataRow.Fields.Add(new SQLiteDataField(dataRow.Fields.Count, "EndOfLineComment", DbType.String, true, this.EndOfLineComment));
                 }
 
@@ -201,7 +201,7 @@ namespace ifc
                 dataColumn = new DataColumn("Id", typeof(int));
                 dataTable.Columns.Add(dataColumn);
             }
-            dataRow.SetField(dataColumn, this.Id);
+            dataRow.SetField(dataColumn, this.LocalId);
 
             // before we add the row, we sort the values by their ordinal position
             foreach (FieldInfo field in this.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
@@ -269,7 +269,7 @@ namespace ifc
                 ENTITY e = ifc.Repository.CurrentModel.EntityList[i];
                 if (e is ifc.Root) if (((ifc.Root)e).GlobalId == null) ((ifc.Root)e).GlobalId = ifc.GloballyUniqueId.NewId();
                 e.ToSqliteDataSet(ref sqliteDataSet, true, prevEntityId);
-                prevEntityId = e.Id;
+                prevEntityId = e.LocalId;
             }
 
             //TODO: Check if custom DataSet Class 'SQLiteDataSet' can be omitted and instead use a regular 'DataSet'

@@ -31,8 +31,8 @@ public Dictionary<int,ENTITY> EntityDict=new Dictionary<int,ENTITY>();
 public void AssignEntities()
 {
 EntityDict.Clear();
-foreach (ENTITY e in EntityList) if (e.Id>0) if (!EntityDict.ContainsKey(e.Id))  {EntityDict.Add(e.Id,e);} else Console.WriteLine("#"+e.Id+" already exist! (double Entry)");
-foreach (ENTITY e in EntityList) if (e.Id>0)
+foreach (ENTITY e in EntityList) if (e.LocalId>0) if (!EntityDict.ContainsKey(e.LocalId))  {EntityDict.Add(e.LocalId,e);} else Console.WriteLine("#"+e.LocalId+" already exist! (double Entry)");
+foreach (ENTITY e in EntityList) if (e.LocalId>0)
         {//####################################################################################################
          Dictionary<int,FieldInfo> VarDict=new Dictionary<int,FieldInfo>();
          int VarCount=0; foreach (FieldInfo field in e.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)) foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {VarDict.Add(((ifcAttribute)attr).OrdinalPosition,field);VarCount++;} 
@@ -42,8 +42,8 @@ foreach (ENTITY e in EntityList) if (e.Id>0)
 
                    if ( field.FieldType.IsSubclassOf(typeof(ENTITY))) 
                       {ENTITY E=(ENTITY)field.GetValue(e);
-                       if (E!=null) {if (E.Id>0) if (EntityDict.ContainsKey(E.Id)) field.SetValue(e,EntityDict[E.Id]); /* E=EntityDict[E.Id];*/  
-                                     else Console.WriteLine("E.Id="+E.Id+" nicht gefunden"); 
+                       if (E!=null) {if (E.LocalId>0) if (EntityDict.ContainsKey(E.LocalId)) field.SetValue(e,EntityDict[E.LocalId]); /* E=EntityDict[E.Id];*/  
+                                     else Console.WriteLine("E.Id="+E.LocalId+" nicht gefunden"); 
                                     } 
                       }
               else if (field.FieldType.IsSubclassOf(typeof(SELECT))) 
@@ -53,7 +53,7 @@ foreach (ENTITY e in EntityList) if (e.Id>0)
                           {//...........................................
                            if   (S.Id>0 && EntityDict.ContainsKey(S.Id)) S.SetValueAndType(EntityDict[S.Id],EntityDict[S.Id].GetType()); 
                            else if (!S.IsNull) {ENTITY E=null; if (S!=null)   if ( S.SelectType().IsSubclassOf(typeof(ENTITY)) ) E=(ENTITY)S.SelectValue(); 
-                                                if (E!=null) if (E.Id>0 && EntityDict.ContainsKey(E.Id)) S.SetValueAndType(EntityDict[E.Id],EntityDict[E.Id].GetType()); 
+                                                if (E!=null) if (E.LocalId>0 && EntityDict.ContainsKey(E.LocalId)) S.SetValueAndType(EntityDict[E.LocalId],EntityDict[E.LocalId].GetType()); 
                                                }
                            }//...........................................
 
@@ -74,7 +74,7 @@ foreach (ENTITY e in EntityList) if (e.Id>0)
                                 object item=VarDict1[i1]; //Console.Write(field.Name+", "+i+" "+i1);
                                      if (item is SELECT) {//Console.WriteLine("SELECT item "+((SELECT)item).Id +" "+((SELECT)item).SelectType().Name); 
 
-                                                           if (((SELECT)item).Id==0) if ( ((SELECT)item).SelectType().IsSubclassOf(typeof(ENTITY)) ) { ((SELECT)item).Id=((ENTITY)((SELECT)item).SelectValue()).Id; } 
+                                                           if (((SELECT)item).Id==0) if ( ((SELECT)item).SelectType().IsSubclassOf(typeof(ENTITY)) ) { ((SELECT)item).Id=((ENTITY)((SELECT)item).SelectValue()).LocalId; } 
 
                                                            if (((SELECT)item).Id>0) {//SELECT s=new SELECT(); /*((SELECT)item)*/ 
                                                                                       SELECT s=(SELECT)item;
@@ -85,10 +85,10 @@ foreach (ENTITY e in EntityList) if (e.Id>0)
                                                            
                                                          }
                                 else if (item is ENTITY) {//===================
-                                                          if (((ENTITY)item).Id>0) 
+                                                          if (((ENTITY)item).LocalId>0) 
                                                              {ENTITY E=(ENTITY)item; // Console.WriteLine("((ENTITY)item).Id="+((ENTITY)item).Id );
-                                                              if (E!=null) if (E.Id>0) {//........................
-                                                                                        if (EntityDict.ContainsKey(E.Id)) E=EntityDict[E.Id];  else Console.WriteLine("E.Id="+E.Id+" nicht gefunden");}
+                                                              if (E!=null) if (E.LocalId>0) {//........................
+                                                                                        if (EntityDict.ContainsKey(E.LocalId)) E=EntityDict[E.LocalId];  else Console.WriteLine("E.Id="+E.LocalId+" nicht gefunden");}
                                                                                         FieldCtorArgs[i1]=E;       
                                                                                        }//........................
                                                          }//===================
