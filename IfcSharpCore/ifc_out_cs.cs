@@ -83,12 +83,20 @@ if  (IdString.Length<IdStringMaxSize) IdString+=new string(' ',IdStringMaxSize-I
 
 if (this is ifc.EntityComment) s=new string(' ',IdStringMaxSize)+"     new "+ElementName+"(";
 else                           s="var "+IdString+"=new "+ElementName+"(";
+int VarInsert=s.Length; 
+if (VarInsert<4) VarInsert=4;
+if (VarInsert>3) VarInsert-=3;
 
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-int sep=0;foreach (FieldInfo field in AttribList) s+=((++sep>1)?",":"")+field.Name+":"+CsOut(field.GetValue(this));
+int sep=0;foreach (FieldInfo field in AttribList) {bool optional=((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).optional;
+                                                   bool Cmt=optional;if (CsOut(field.GetValue(this))!="null") Cmt=false;
+                                                   s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+field.Name+":"+CsOut(field.GetValue(this));
+                                                   s+="// #"+((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).OrdinalPosition;
+                                                   if (optional) s+=" [optional]";
+                                                  }
 if (this.EndOfLineComment!=null) if (this.EndOfLineComment.Length>0) s+=",\""+this.EndOfLineComment+'"';
 if (this is ifc.EntityComment) s+="\""+((ifc.EntityComment)this).CommentLine.TrimEnd(' ')+'"';
-return s+");";// //#"+(this.SortPos);
+return s+="\r\n"+new string(' ',VarInsert)+");";// //#"+(this.SortPos);
 }
 
 
@@ -129,7 +137,7 @@ sw.WriteLine("");
 sw.WriteLine("public class ifcOut{ public static void Generated(){ // ##########################################");
 sw.WriteLine("");
 sw.WriteLine("ifc.Repository.CurrentModel.ClearEntityList();");
-sw.WriteLine("ifc.Repository.CurrentModel.Header.name=\"generated_from_IfcSharp_ifc_Model_ToCsFile()\"");
+sw.WriteLine("ifc.Repository.CurrentModel.Header.name=\"generated_from_IfcSharp_ifc_Model_ToCsFile()\";");
 if (AssignedEntityDict==null) throw new ifc.Exception("AssignedEntityDict is not initialized");
 foreach (KeyValuePair<int,ENTITY> kvp in AssignedEntityDict) sw.WriteLine(kvp.Value.ToCs());  
 sw.WriteLine("");
