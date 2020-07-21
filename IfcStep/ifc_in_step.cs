@@ -28,7 +28,7 @@ public static object Parse2TYPE(string value,Type FieldType)
  else {//=====================================================================
             if (BaseType==typeof(String)) { if (value=="$") TypeCtorArgs[0]=""; else  TypeCtorArgs[0]=ifc.IfcString.Decode(value);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs); }
        else if (BaseType==typeof(int)) { TypeCtorArgs[0]=int.Parse(value);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
-       else if (BaseType==typeof(double)) {  TypeCtorArgs[0]=double.Parse(value,CultureInfo.InvariantCulture);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
+       else if (BaseType==typeof(double)) try{  TypeCtorArgs[0]=double.Parse(value,CultureInfo.InvariantCulture);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}catch{Console.WriteLine("Error on Parse2TYPE: "+CurrentLine);}
        else if (BaseType==typeof(bool)){TypeCtorArgs[0]=(value==".T.");NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
        else if (BaseType.IsSubclassOf(typeof(TypeBase))) { NewType=Activator.CreateInstance(FieldType,Parse2TYPE(value,BaseType));}
        else Console.WriteLine("UNKNOWN TYPE for expected Type "+FieldType.Name+": Base="+BaseType.Name+" value="+value+"\r\n"+CurrentLine);   
@@ -115,7 +115,11 @@ public static object Parse2LIST(string value,Type FieldType)
  if ( (value=="$") || (value=="*") ) return Activator.CreateInstance(FieldType); // warum  nicht null ?
 Type GenericType=GetGenericType(FieldType);
  string[] ListElements=value.TrimStart('(').TrimEnd(')').Split(','); if (ListElements.Length==0) Console.WriteLine("ListElements.Length=0");
- return Activator.CreateInstance(FieldType,GetFieldCtorArgs(GenericType,ListElements));
+object o=null;
+
+if (ListElements[0]=="") try {o=Activator.CreateInstance(FieldType);}catch{Console.WriteLine("ERROR on Parse2LIST.1:"+CurrentLine); }
+else                     try {o=Activator.CreateInstance(FieldType,GetFieldCtorArgs(GenericType,ListElements));}catch{Console.WriteLine("ERROR on Parse2LIST.2:"+CurrentLine); }
+return o;
  } //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
  
@@ -219,14 +223,14 @@ for (int i=1;i<=VarCount;i++)
                                                              }
      else if (field.FieldType.IsSubclassOf(typeof(Enum)))    {try{object FieldInstance=Activator.CreateInstance(field.FieldType);
                                                                   if ((value.Length>0) && (value[0]=='$')) FieldInstance=0;
-                                                                  else FieldInstance=Enum.Parse(field.FieldType, value.Substring(1,value.Length-2));
+                                                                  else try{FieldInstance=Enum.Parse(field.FieldType, value.Substring(1,value.Length-2));}catch{Console.WriteLine("enum "+field.FieldType+"."+value+" not recognized");}
                                                                   field.SetValue(CurrentEntity,FieldInstance);
                                                                  }catch(Exception e){throw new Exception("Parse.Enum: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
                                                              }
      else if ( (Nullable.GetUnderlyingType(field.FieldType)!=null) && (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum))) ) 
                                                              {try{object FieldInstance=null; 
                                                                   if ((value.Length>0) && (value[0]!='$')) {FieldInstance=Activator.CreateInstance(field.FieldType);
-                                                                                                            FieldInstance=Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1,value.Length-2));
+                                                                                                            try{FieldInstance=Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1,value.Length-2));}catch{Console.WriteLine("enum "+field.FieldType+"."+value+" not recognized");}
                                                                                                            }
                                                                   field.SetValue(CurrentEntity,FieldInstance);
                                                                  }catch(Exception e){throw new Exception("Parse.Enum: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
