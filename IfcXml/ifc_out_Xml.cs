@@ -58,7 +58,7 @@ Entityausgabe
                                     // else  s="IFC"+((SELECT)o).SelectType().Name.ToUpper()+"("+((SELECT)o).SelectValue().ToString()+")";
                                   // }
                              }
-     else if (o is ENTITY)   {if (((ENTITY)o).IsAssigned) {xmlStart(xml,Name);xmlAttrib(xml,"xsi","nil",null,"true");xmlAttrib(xml,"ref","i"+((ENTITY)o).Id);xmlEnd(xml);}
+     else if (o is ENTITY)   {if (((ENTITY)o).IsAssigned) {xmlStart(xml,Name);xmlAttrib(xml,"xsi","nil",null,"true");xmlAttrib(xml,"ref","i"+((ENTITY)o).LocalId);xmlEnd(xml);}
                               else                        {((ENTITY)o).ToIfcXml(xml);((ENTITY)o).IsAssigned=true;}
                              }
      else if (o is TypeBase) {if (!((TypeBase)o).IsNull) xmlAttrib(xml,Name,o.ToString());}

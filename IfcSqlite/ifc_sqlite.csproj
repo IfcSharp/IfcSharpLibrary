@@ -43,10 +43,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+<!--
   <ItemGroup>
     <Compile Include="..\..\..\IfcSharpLibrary\IfcSqlite\ifc_sqlite_database.cs" Link="ifc_sqlite_database.cs" />
     <Compile Include="..\..\..\IfcSharpLibrary\IfcSqlite\ifc_sqlite_data.cs" Link="ifc_sqlite_data.cs" />
     <Compile Include="..\..\..\IfcSharpLibrary\IfcSqlite\ifc_in_sqlite.cs" Link="ifc_in_sqlite.cs" />
     <Compile Include="..\..\..\IfcSharpLibrary\IfcSqlite\ifc_out_sqlite.cs" Link="ifc_out_sqlite.cs" />
   </ItemGroup>
+-->
 </Project>

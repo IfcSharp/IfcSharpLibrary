@@ -48,12 +48,12 @@ string s="";
           if (o==null)       { s=HtmlNullOut(field,IsDerived);}
      else if (o is Enum)     {/*if (o.ToString()=="_NULL") s=HtmlNullOut(field,IsDerived); else */ s=HtmlEnumOut(field,o.ToString());}
      else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s=HtmlNullOut(field,IsDerived);
-                              else { if (((SELECT)o).Id==0) if ( ((SELECT)o).SelectType().IsSubclassOf(typeof(ENTITY)) ) { ((SELECT)o).Id=((ENTITY)((SELECT)o).SelectValue()).Id; } 
+                              else { if (((SELECT)o).Id==0) if ( ((SELECT)o).SelectType().IsSubclassOf(typeof(ENTITY)) ) { ((SELECT)o).Id=((ENTITY)((SELECT)o).SelectValue()).LocalId; } 
                                      if (((SELECT)o).Id>0) s=HtmlRefOut(field,"#"+((SELECT)o).Id.ToString(),(ENTITY)(((SELECT)o).SelectValue())); 
                                      else                  s="IFC"+((SELECT)o).SelectType().Name.ToUpper()+"("+HtmlOut(field,((SELECT)o).SelectValue().ToString(),IsDerived)+")";
                                    }
                              }
-     else if (o is ENTITY)    if ( ((ENTITY)o).Id==0 ) s=HtmlNullOut(field,IsDerived); else  s=HtmlRefOut(field,((ENTITY)o).IfcId(),(ENTITY)o); 
+     else if (o is ENTITY)    if ( ((ENTITY)o).LocalId==0 ) s=HtmlNullOut(field,IsDerived); else  s=HtmlRefOut(field,((ENTITY)o).IfcId(),(ENTITY)o); 
      else if (o is TypeBase) {TypeBase tb=(TypeBase)o;if (tb.GetBaseType()==typeof(String)) {if (o.ToString()=="" || o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else  s=HtmlTextOut(field,o.ToString()); } else  {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"float",o.ToString());}
                              // Console.WriteLine(o.ToString()+ " GetBaseType= "+tb.GetBaseType().ToString());
                                }
@@ -89,7 +89,7 @@ AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribLis
 int sep=0;foreach (FieldInfo field in AttribList) Args+=((++sep>1)?",":"")+field.FieldType.Name +field.Name;
 Args+=")";
 
-s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.Id.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.Id.ToString()+"\">#"+ this.Id.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
+s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
 +EntityClassName+"\" title=\"ifc"+ElementName
 +Args
 +"\">"+ElementName+"</span>(";

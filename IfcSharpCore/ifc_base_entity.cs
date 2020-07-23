@@ -19,8 +19,8 @@ namespace ifc{//==============================
 public partial class ENTITY:ifcSqlType{//==========================================================================================
 public               ENTITY(){} 
 
-public int Id=0;
-public string IfcId() => (this.Id==0)?"*":"#"+this.Id;
+public int LocalId=0;
+public string IfcId() => (this.LocalId==0)?"*":"#"+this.LocalId;
 public override string ToString() => IfcId();
 public string ShortTypeName() => this.GetType().ToString().Replace("IFC4","ifc").Replace("ifc.","");
 //public int SqlTypeId() => ((ifc.ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeId;
@@ -33,11 +33,11 @@ public virtual void AssignInverseElements(){}
 // static:
 public partial class ENTITY:ifcSqlType{//==========================================================================================
 static public int NextGlobalId=1;
-protected void AddNext(){Id=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/  Repository.CurrentModel.EntityList.Add(this);}
+protected void AddNext(){LocalId=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/  Repository.CurrentModel.EntityList.Add(this);}
 protected virtual void CheckValues(){}
 protected virtual void SetDefaultValues(){}
 static public int NextGlobalCommentId=0;
-protected void AddNextCommentLine(){Id=NextGlobalCommentId--;Repository.CurrentModel.EntityList.Add(this);}
+protected void AddNextCommentLine(){LocalId=NextGlobalCommentId--;Repository.CurrentModel.EntityList.Add(this);}
 }//=====================================================================================================================
 
 

@@ -22,37 +22,33 @@ public static string ReplaceCharAt(string s,int i, char c){char[] array = s.ToCh
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 public static object Parse2TYPE(string value,Type FieldType)
 {Type  BaseType=FieldType.BaseType.GetGenericArguments()[0]; 
- if (BaseType.BaseType.GetGenericArguments().Length>0) BaseType=BaseType.BaseType;//.GetGenericArguments()[0];
-
-//Console.WriteLine("Parse2TYPE.BaseType= "+BaseType.Name+" "+value); Console.ReadLine();
-
  object NewType=null;
  object[] TypeCtorArgs=new object[1];
        if ( (value=="$") || (value=="*") ) NewType=Activator.CreateInstance(FieldType);
  else {//=====================================================================
             if (BaseType==typeof(String)) { if (value=="$") TypeCtorArgs[0]=""; else  TypeCtorArgs[0]=ifc.IfcString.Decode(value);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs); }
        else if (BaseType==typeof(int)) { TypeCtorArgs[0]=int.Parse(value);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
-       else if (BaseType==typeof(double)) {  TypeCtorArgs[0]=double.Parse(value,CultureInfo.InvariantCulture);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
+       else if (BaseType==typeof(double)) try{  TypeCtorArgs[0]=double.Parse(value,CultureInfo.InvariantCulture);NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}catch{Console.WriteLine("Error on Parse2TYPE: "+CurrentLine);}
        else if (BaseType==typeof(bool)){TypeCtorArgs[0]=(value==".T.");NewType=Activator.CreateInstance(FieldType,TypeCtorArgs);}
-       else Console.WriteLine("UNKNOWN TYPE: Base="+BaseType.Name+" value="+value);   
+       else if (BaseType.IsSubclassOf(typeof(TypeBase))) { NewType=Activator.CreateInstance(FieldType,Parse2TYPE(value,BaseType));}
+       else Console.WriteLine("UNKNOWN TYPE for expected Type "+FieldType.Name+": Base="+BaseType.Name+" value="+value+"\r\n"+CurrentLine);   
       } //=====================================================================
-//Console.WriteLine(NewType);
  return NewType;
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 /*
-Beispiel: List1to3_LengthMeasure
+Example: List1to3_LengthMeasure
 --------
-Beispiel:  CartesianPoint.List1to3_LengthMeasure ( List1to3_LengthMeasure:List1to3<LengthMeasure is TYPE:TYPE<Double>>
+Example 1:  CartesianPoint.List1to3_LengthMeasure ( List1to3_LengthMeasure:List1to3<LengthMeasure is TYPE:TYPE<Double>>
 FieldType: List1to3_LengthMeasure
 FieldType.BaseType: List1to3<LengthMeasure>
 FieldType.BaseType.GetGenericArguments()[0]: LengthMeasure
 FieldType.BaseType.GetGenericArguments()[0].BaseType: TYPE<Double>
 FieldType.BaseType.GetGenericArguments()[0].GetGenericArguments()[0]: Double
- * Ziel dieser Funktion: NewInstance=new List1to3_LengthMeasure(new LengthMeasure(0.1),new LengthMeasure(1.2),new LengthMeasure(2.3));
- Beipiel 2:
+ * Function target: NewInstance=new List1to3_LengthMeasure(new LengthMeasure(0.1),new LengthMeasure(1.2),new LengthMeasure(2.3));
+ Example 2:
  Polyline.List2toUnbounded_CartesianPoint ( List2toUnbounded_CartesianPoint:List2toUnbounded<CartesianPoint: is ENTITY, not TYPE<ENTITY> !!
   [ifcSql(TypeId:  21)] public partial class List2toUnbounded_CartesianPoint:List2toUnbounded<CartesianPoint>{public List2toUnbounded_CartesianPoint(List2toUnbounded<CartesianPoint> value):base(value){} public List2toUnbounded_CartesianPoint(){} public List2toUnbounded_CartesianPoint(params CartesianPoint[] items):base(){foreach (CartesianPoint e in items)  this.Add(e);} new bool IsNull{get{return (this.Count==0);}set{if (value) this.Clear();}} }
 */
@@ -85,7 +81,7 @@ public static object[] GetFieldCtorArgs(Type GenericType,string[] ListElements)
                                                                    FieldCtorArgs[ListPos]=Activator.CreateInstance(GenericType,GenericCtorArgs);
                                                                   }
                    else if (GenericType.IsSubclassOf(typeof(ENTITY)))   {object o=Activator.CreateInstance(GenericType);
-                                                                         ((ENTITY)o).Id=int.Parse(ListElement.Trim(' ').Substring(1));
+                                                                         ((ENTITY)o).LocalId=int.Parse(ListElement.Trim(' ').Substring(1));
                                                                          FieldCtorArgs[ListPos]=o;
                                                                         }
                    else if (GenericType.IsSubclassOf(typeof(SELECT)))   {object o=Activator.CreateInstance(GenericType);
@@ -108,7 +104,7 @@ public static object[] GetFieldCtorArgs(Type GenericType,string[] ListElements)
                                                                                   }catch(Exception){} 
                                                                               }
                                                                          FieldCtorArgs[ListPos]=o;                                                                  } 
-                   else {Console.WriteLine("TODO List++TYPE: Base="+GenericType.Name+" not supportet. in\n"+CurrentLine); }// andere Typen
+                   else {Console.WriteLine("TODO List++TYPE: Base="+GenericType.Name+" not supportet. in \r\n"+CurrentLine); }// andere Typen
                   }//.....................................................
 return FieldCtorArgs;
 }
@@ -119,30 +115,44 @@ public static object Parse2LIST(string value,Type FieldType)
  if ( (value=="$") || (value=="*") ) return Activator.CreateInstance(FieldType); // warum  nicht null ?
 Type GenericType=GetGenericType(FieldType);
  string[] ListElements=value.TrimStart('(').TrimEnd(')').Split(','); if (ListElements.Length==0) Console.WriteLine("ListElements.Length=0");
- return Activator.CreateInstance(FieldType,GetFieldCtorArgs(GenericType,ListElements));
+object o=null;
+
+if (ListElements[0]=="") try {o=Activator.CreateInstance(FieldType);}catch{Console.WriteLine("ERROR on Parse2LIST.1:"+CurrentLine); }
+else                     try {o=Activator.CreateInstance(FieldType,GetFieldCtorArgs(GenericType,ListElements));}catch{Console.WriteLine("ERROR on Parse2LIST.2:"+CurrentLine); }
+return o;
  } //++++++++++++++++++++++++++++++++++++++++++++++++++++
 
  
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+//public static string[] BaseTypes=new string[]{"INTEGER","BINARY","LOGICAL","REAL","BOOLEAN"};
 
 public static object ParseSelect(string Element,object o)
 {
 //Console.WriteLine("Parse SELECT: "+Element);
-string ElementName=Element.Replace("IFC","ifc.");
+string ElementName=Element.Replace("IFC","");
+
+
 int posLpar=ElementName.IndexOf('(');
 int posRpar=ElementName.LastIndexOf(')');
-
 string body=ElementName.Substring(posLpar+1,posRpar-posLpar-1); // Argumenkörper extrahieren
 ElementName=ElementName.Substring(0,posLpar);
-try{Type t=Type.GetType(ElementName,true,true); // Console.WriteLine("A");
+
+
+bool ignoreCase=true;
+//foreach (string s in BaseTypes ) if (s==ElementName) {ElementName=ElementName.Substring(0,1)+ElementName.Substring(1).ToLower();ignoreCase=false;}
+ElementName="ifc."+ElementName;
+
+try{Type t=Type.GetType(typeName:ElementName,throwOnError:true,ignoreCase:ignoreCase); // Console.WriteLine("A");
+
     if (t.IsSubclassOf(typeof(TypeBase))) {object[] TypeCtorArgs=new object[1];// Console.WriteLine("B");
                                            Type SelectType=o.GetType(); // Console.WriteLine("C");
                                            TypeCtorArgs[0]=Parse2TYPE(body,t); // Console.WriteLine("D");
+                                           //Console.WriteLine(Element);
                                            //Console.WriteLine(ElementName+": "+body+ " o: "+o.GetType().Name+" [0]= "+TypeCtorArgs[0].GetType().Name);
-                                           o=Activator.CreateInstance(SelectType,TypeCtorArgs); // Console.WriteLine("E");
+                                           if (TypeCtorArgs[0]==null) Console.WriteLine("SELECT-type is null"+"\r\n"+CurrentLine);
+                                           else try{o=Activator.CreateInstance(SelectType,TypeCtorArgs);}catch(Exception e){Console.WriteLine(e.Message+"\r\n"+CurrentLine);}
                                           }
-   }catch(Exception e){Console.WriteLine(ElementName+" body="+body+" ERROR SELECT: "+posLpar+" "+e.Message+"\n"+CurrentLine);}// 2. true: ignoreCase
+   }catch(Exception e){Console.WriteLine(ElementName+" body="+body+" ERROR SELECT: "+posLpar+" "+e.Message+"\r\n"+CurrentLine);}// 2. true: ignoreCase
 return o;
 }
 
@@ -179,7 +189,7 @@ string[] args=body.Split(',');
 for (int i=0;i<args.Length;i++) args[i]=args[i].Replace((char)9,',');
 try{Type t=Type.GetType("ifc."+ElementName,true,true);// 2. true: ignoreCase
 object CurrentEntity=Activator.CreateInstance(t); if (CommentOpenPos>0) ((ENTITY)CurrentEntity).EndOfLineComment=CurrentEntityComment;
-((ENTITY)CurrentEntity).Id=int.Parse(line.Substring(1,posA-1));
+((ENTITY)CurrentEntity).LocalId=int.Parse(line.Substring(1,posA-1));
 Dictionary<int,FieldInfo> VarDict=new Dictionary<int,FieldInfo>();
 int VarCount=0;
 
@@ -207,20 +217,20 @@ for (int i=1;i<=VarCount;i++)
                                                              }
      else if (field.FieldType.IsSubclassOf(typeof(ENTITY)))  {try{object o=null; //falls $
                                                                   if (value.Length>0) if (value[0]=='*') o=Activator.CreateInstance(field.FieldType);
-                                                                  if (value.Length>0) if (value[0]=='#'){o=Activator.CreateInstance(field.FieldType);((ENTITY)o).Id=int.Parse(value.Substring(1));}
+                                                                  if (value.Length>0) if (value[0]=='#'){o=Activator.CreateInstance(field.FieldType);((ENTITY)o).LocalId=int.Parse(value.Substring(1));}
                                                                   field.SetValue(CurrentEntity,o);
                                                                  }catch(Exception e){throw new Exception("Parse.ENTITY: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
                                                              }
      else if (field.FieldType.IsSubclassOf(typeof(Enum)))    {try{object FieldInstance=Activator.CreateInstance(field.FieldType);
                                                                   if ((value.Length>0) && (value[0]=='$')) FieldInstance=0;
-                                                                  else FieldInstance=Enum.Parse(field.FieldType, value.Substring(1,value.Length-2));
+                                                                  else try{FieldInstance=Enum.Parse(field.FieldType, value.Substring(1,value.Length-2));}catch{Console.WriteLine("enum "+field.FieldType+"."+value+" not recognized");}
                                                                   field.SetValue(CurrentEntity,FieldInstance);
                                                                  }catch(Exception e){throw new Exception("Parse.Enum: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
                                                              }
      else if ( (Nullable.GetUnderlyingType(field.FieldType)!=null) && (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum))) ) 
                                                              {try{object FieldInstance=null; 
                                                                   if ((value.Length>0) && (value[0]!='$')) {FieldInstance=Activator.CreateInstance(field.FieldType);
-                                                                                                            FieldInstance=Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1,value.Length-2));
+                                                                                                            try{FieldInstance=Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1,value.Length-2));}catch{Console.WriteLine("enum "+field.FieldType+"."+value+" not recognized");}
                                                                                                            }
                                                                   field.SetValue(CurrentEntity,FieldInstance);
                                                                  }catch(Exception e){throw new Exception("Parse.Enum: Field "+i+": "+field.FieldType.ToString()+": "+e.Message);}
@@ -254,12 +264,26 @@ public partial class Model{//===================================================
 public static Model FromStepFile(string FileName)
 {
 //ifc.Repository.CurrentModel.
+
+string FileSchema="-";
 Model CurrentModel=new ifc.Model(FileName.Replace(".ifc",""));
 StreamReader sr=new StreamReader(FileName);
 string line="";
-//while ( (line = sr.ReadLine()) != null  && (line.Length>1) && ((line+' ')[0]!='#') ) {};//Header.Add(line);
-while ( (line = sr.ReadLine()) != null  && (line.Length>1) && ((line+' ')[0]!='#') && (!line.StartsWith("DATA")) ) {};//Header.Add(line);
-//Console.WriteLine("XX");
+while ( (line = sr.ReadLine()) != null  && (line.Length>1) && ((line+' ')[0]!='#') && (!line.StartsWith("DATA")) ) 
+      { if (line.StartsWith("FILE_DESCRIPTION"))  CurrentModel.Header.description   =line.Split('\'')[1*2-1];
+        if (line.StartsWith("FILE_NAME"       )) {string[] HeaderLine=line.Split('\'');
+                                                  CurrentModel.Header.name                =HeaderLine[1*2-1];
+                                                  CurrentModel.Header.time_stamp          =HeaderLine[2*2-1];
+                                                  CurrentModel.Header.author              =HeaderLine[3*2-1];
+                                                  CurrentModel.Header.organization        =HeaderLine[4*2-1];
+                                                  CurrentModel.Header.preprocessor_version=HeaderLine[5*2-1];
+                                                  CurrentModel.Header.originating_system  =HeaderLine[6*2-1];
+                                                  CurrentModel.Header.authorization       =HeaderLine[7*2-1];
+                                                 }
+        if (line.StartsWith("FILE_SCHEMA"    ))   FileSchema                        =line.Split('\'')[1*2-1];
+      };
+if (FileSchema!=Specification.SchemaName) Console.WriteLine("WARNING! Expected schema is '"+Specification.SchemaName+"', detected schema is '"+FileSchema+"'");
+
 //if (line.Length>1) ENTITY.ParseIfcLine(CurrentModel,line); 
 while ( (line = sr.ReadLine()) != null) if (line.Length>3) 
       {line=line.TrimStart(' '); //Console.WriteLine(line);

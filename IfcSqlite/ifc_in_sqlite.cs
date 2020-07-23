@@ -50,7 +50,7 @@ namespace ifc
                         entityInstance = Activator.CreateInstance(entityType, ctorArgs) as ENTITY;
                     }
 
-                    if (row["Id"] != null) entityInstance.Id = (int)row["Id"];
+                    if (row["Id"] != null) entityInstance.LocalId = (int)row["Id"];
                     CurrentModel.EntityList.Add(entityInstance);
 #if _DEBUG
                     foreach (DataColumn c in dt.Columns) Console.Write(string.Format("{0} ", row[c] is DBNull ? "NULL" : row[c].ToString()));
@@ -61,14 +61,14 @@ namespace ifc
             Console.WriteLine("======================================================");
 
             // before we assign the entities, we need to order the list according to the Ids
-            CurrentModel.EntityList = CurrentModel.EntityList.OrderBy(e => e.Id).ToList();
+            CurrentModel.EntityList = CurrentModel.EntityList.OrderBy(e => e.LocalId).ToList();
 
             // then we change the position of all EntityComment´s to match the actual order,
             // since they are being read sequentially
             foreach (EntityComment ec in CurrentModel.EntityList.FindAll(e => e.GetType() == typeof(EntityComment)))
             {
-                int oldIndex = CurrentModel.EntityList.FindIndex(e => e.Id == ec.Id);
-                int newIndex = CurrentModel.EntityList.FindIndex(e => e.Id == ec.PreviousEntityId) + 1;
+                int oldIndex = CurrentModel.EntityList.FindIndex(e => e.LocalId == ec.LocalId);
+                int newIndex = CurrentModel.EntityList.FindIndex(e => e.LocalId == ec.PreviousEntityId) + 1;
                 var item = CurrentModel.EntityList[oldIndex];
                 CurrentModel.EntityList.RemoveAt(oldIndex);
 
@@ -101,11 +101,22 @@ namespace ifc
                         }
                         else if (fieldName == "DirectionRatios")
                         {
+#if IFC2X3
+                            List<double> coords = new List<double>();
+                            if (dataRow["X"] != DBNull.Value) coords.Add((double)dataRow["X"]);
+                            if (dataRow["Y"] != DBNull.Value) coords.Add((double)dataRow["Y"]);
+                            if (dataRow["Z"] != DBNull.Value) coords.Add((double)dataRow["Z"]);
+                            o=new List2to3_double();
+                            ((List2to3_double)o).Add(coords[0]);
+                            ((List2to3_double)o).Add(coords[1]);
+                            ((List2to3_double)o).Add(coords[2]);
+#else
                             List<Real> coords = new List<Real>();
                             if (dataRow["X"] != DBNull.Value) coords.Add(new Real((double)dataRow["X"]));
                             if (dataRow["Y"] != DBNull.Value) coords.Add(new Real((double)dataRow["Y"]));
                             if (dataRow["Z"] != DBNull.Value) coords.Add(new Real((double)dataRow["Z"]));
                             o = new List2to3_Real(coords.ToArray());
+#endif   
                         }
                         else
                         {
@@ -136,7 +147,7 @@ namespace ifc
             else if (fieldType.IsSubclassOf(typeof(ENTITY)))
             {
                 o = Activator.CreateInstance(fieldType);
-                if(value != null) ((ENTITY)o).Id = (int)value;
+                if(value != null) ((ENTITY)o).LocalId = (int)value;
             }
             else if (fieldType.IsSubclassOf(typeof(TypeBase))) o = ParseBaseType(fieldType, value);
             else if ((Nullable.GetUnderlyingType(fieldType) != null) && Nullable.GetUnderlyingType(fieldType).IsSubclassOf(typeof(Enum)))
@@ -228,7 +239,7 @@ namespace ifc
                 else if (genericType.IsSubclassOf(typeof(ENTITY)))
                 {
                     object o = Activator.CreateInstance(genericType);
-                    ((ENTITY)o).Id = int.Parse(elem.Trim(' ').Substring(1));
+                    ((ENTITY)o).LocalId = int.Parse(elem.Trim(' ').Substring(1));
                     args.Add(o);
                 }
                 else if (genericType.IsSubclassOf(typeof(SELECT)))
