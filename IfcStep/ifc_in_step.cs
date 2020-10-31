@@ -248,7 +248,7 @@ for (int i=1;i<=VarCount;i++)
 CurrentModel.EntityList.Add((ENTITY)CurrentEntity); //Console.WriteLine();Console.WriteLine("AAA "+((ENTITY)CurrentEntity).ToString());
 }catch(Exception e){Console.WriteLine ("ERROR on ParseIfcLine:"+e.Message);Console.WriteLine (line);}//Console.ReadLine();}
           }//====================================================================================================
-else {EntityComment ec=new EntityComment();ec.CommentLine=CurrentEntityComment;CurrentModel.EntityList.Add(ec);}
+else {EntityComment ec=new EntityComment();ec.CommentLine=CurrentEntityComment;ec.LocalId=NextGlobalCommentId--;CurrentModel.EntityList.Add(ec);}
 }
 
 
@@ -290,7 +290,7 @@ while ( (line = sr.ReadLine()) != null) if (line.Length>3)
        if (line.Length>3) if (line[0]=='#' || (line[0]=='/' && line[1]=='*') ) ENTITY.ParseIfcLine(CurrentModel,line);  
       }
 sr.Close(); 
-CurrentModel.AssignEntities();
+CurrentModel.AssignEntities(); 
 return CurrentModel;
 }// of FromStepFile
 }// of Model ==========================================================================================================

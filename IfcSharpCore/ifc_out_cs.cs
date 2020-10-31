@@ -17,19 +17,20 @@ public partial class ENTITY{//==================================================
 
 protected static int cnt=0;
 
-public  string EntityVarName(int Id){if (Id>0) return ifc.Repository.CurrentModel.EntityDict[Id].ShortTypeName()+Id.ToString(); else return "comment"+ NetSystem.Math.Abs(Id);}
+public  string EntityVarName(int Id,Model CurrentModel){try{if (Id>0) return CurrentModel.EntityDict[Id].ShortTypeName()+Id.ToString(); else return "comment"+ NetSystem.Math.Abs(Id);}catch(NetSystem.Exception ex){throw new NetSystem.Exception(ex.Message+": Id="+Id);} }
+
                               
 
-public  string CsOut(object o){
+public  string CsOut(object o,Model CurrentModel){
 string s=""; 
 cnt++;
           if (o==null)         s="null";
      else if (o is NetSystem.Enum)     {if (o.ToString()=="_NULL") s= "ifc."+o.GetType().Name+"._NULL"; else s="ifc."+o.GetType().Name+"."+o.ToString();}
-     else if (o is SELECT)   {     if (((SELECT)o).Id>0) s="new ifc."+o.GetType().Name+"("+EntityVarName(((SELECT)o).Id)+")"; 
+     else if (o is SELECT)   {     if (((SELECT)o).Id>0) s="new ifc."+o.GetType().Name+"("+EntityVarName(((SELECT)o).Id,CurrentModel)+")"; 
                               else if( ((SELECT)o).SelectValue()==null  ) s="null"; 
                               else s="new ifc."+o.GetType().Name+"(("+((SELECT)o).SelectType()+")"+((SELECT)o).SelectValue().ToString().Replace('\'','"')+")";
                              }
-     else if (o is ENTITY)   {if (((ENTITY)o).LocalId>0) s=EntityVarName(((ENTITY)o).LocalId); else s="null";}
+     else if (o is ENTITY)   {if (((ENTITY)o).LocalId>0) s=EntityVarName(((ENTITY)o).LocalId,CurrentModel); else s="null";}
      else if (o is TypeBase) {TypeBase tb=(TypeBase)o;
                               if (o is ifc.Logical)  {s="(ifc.Logical)";if (o.ToString()=="False)") s+="false"; else s+="true";} else
                               if (o is ifc.Boolean)  {s="(ifc.Boolean)";if (o.ToString()=="False)") s+="false"; else s+="true";} else
@@ -51,8 +52,8 @@ cnt++;
                           int pos=0; 
                           foreach (object item in (IEnumerable)o) if (item!=null) 
                                  {pos++;if (pos>1) s+=","; 
-                                       if (item is ENTITY) s+=EntityVarName(((ENTITY)item).LocalId);
-                                  else if (item is SELECT) {if (((SELECT)item).Id>0) s+="new ifc."+item.GetType().Name+"("+EntityVarName(((SELECT)item).Id)+")"; else    CsOut(((SELECT)item).SelectValue());}
+                                       if (item is ENTITY) s+=EntityVarName(((ENTITY)item).LocalId,CurrentModel);
+                                  else if (item is SELECT) {if (((SELECT)item).Id>0) s+="new ifc."+item.GetType().Name+"("+EntityVarName(((SELECT)item).Id,CurrentModel)+")"; else    CsOut(((SELECT)item).SelectValue(),CurrentModel);}
                                   else if (item is TypeBase) {TypeBase tb=(TypeBase)item;
                                                                    if (tb.GetBaseType()==typeof(NetSystem.String)) {if (item.ToString()=="") s+=""; /* null */else s+="(ifc."+item.GetType().Name+")\""+item.ToString()+"\""; } 
                                                               else if( typeof(IEnumerable).IsAssignableFrom(tb.GetBaseType())) {s+="new ifc."+item.GetType().Name+item.ToString();} 
@@ -69,16 +70,16 @@ cnt++;
 return s;
 }
 
-public virtual string ToCs(){
+public virtual string ToCs(Model CurrentModel){
 Threading.Thread.CurrentThread.CurrentCulture=CultureInfo.InvariantCulture;
 string s="";
 
-string ElementName=this.GetType().ToString().Replace("IFC4","ifc");
+string ElementName=this.GetType().ToString();//.Replace("IFC4","ifc");
 int ElementNameMaxSize=35;
 if  (ElementName.Length<ElementNameMaxSize) ElementName+=new string(' ',ElementNameMaxSize-ElementName.Length);
 int IdStringMaxSize=ElementNameMaxSize+4;
 
-string IdString=EntityVarName(this.LocalId);
+string IdString=EntityVarName(this.LocalId,CurrentModel);
 if  (IdString.Length<IdStringMaxSize) IdString+=new string(' ',IdStringMaxSize-IdString.Length);
 
 if (this is ifc.EntityComment) s=new string(' ',IdStringMaxSize)+"     new "+ElementName+"(";
@@ -86,17 +87,33 @@ else                           s="var "+IdString+"=new "+ElementName+"(";
 int VarInsert=s.Length; 
 if (VarInsert<4) VarInsert=4;
 if (VarInsert>3) VarInsert-=3;
+bool CR=true;
+if   (this.GetType()==typeof(ifc.CartesianPoint)  )  
+     {//-------------------------------------------------------------------------------------------
+       ifc.CartesianPoint p=(ifc.CartesianPoint)this; CR=false;
+       s+="x:"+p.x+",y:"+p.y;if (p.Coordinates.Count>2) s+=",z:"+p.z; 
+     }//-------------------------------------------------------------------------------------------
+else
+if   ( this.GetType()==typeof(ifc.Direction) )  
+     {//-------------------------------------------------------------------------------------------
+       ifc.Direction p=(ifc.Direction)this; CR=false;
+      s+="x:"+p.x+",y:"+p.y;if (p.DirectionRatios.Count>2) s+=",z:"+p.z;
+     }//-------------------------------------------------------------------------------------------
+else {//-------------------------------------------------------------------------------------------
 
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
 int sep=0;foreach (FieldInfo field in AttribList) {bool optional=((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).optional;
-                                                   bool Cmt=optional;if (CsOut(field.GetValue(this))!="null") Cmt=false;
-                                                   s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+field.Name+":"+CsOut(field.GetValue(this));
+                                                   bool Cmt=optional;if (CsOut(field.GetValue(this),CurrentModel)!="null") Cmt=false;
+                                                   s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+field.Name+":"+CsOut(field.GetValue(this),CurrentModel);
                                                    s+="// #"+((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).OrdinalPosition;
                                                    if (optional) s+=" [optional]";
                                                   }
+     }//-------------------------------------------------------------------------------------------
+
 if (this.EndOfLineComment!=null) if (this.EndOfLineComment.Length>0) s+=",\""+this.EndOfLineComment+'"';
-if (this is ifc.EntityComment) s+="\""+((ifc.EntityComment)this).CommentLine.TrimEnd(' ')+'"';
-return s+="\r\n"+new string(' ',VarInsert)+");";// //#"+(this.SortPos);
+if (this is ifc.EntityComment) {s+="\""+((ifc.EntityComment)this).CommentLine.TrimEnd(' ')+'"';CR=false;}
+if (CR) s+="\r\n"+new string(' ',VarInsert+2);
+return s+=");";// //#"+(this.SortPos);
 }
 
 
@@ -125,11 +142,12 @@ ifc.Repository.CurrentModel.AssignEntities();
 }// of ENTITY =========================================================================================================
 
 public partial class Model{//==========================================================================================
-public void ToCsFile()
+public void ToCsFile(string FileName=null)
 {
 AssignEntities();
 SortEntities();
-StreamWriter sw=new StreamWriter(Header.name+".cs",false,Encoding.Default);
+if (FileName==null) FileName=Header.name;
+StreamWriter sw=new StreamWriter(FileName+".cs",false,Encoding.Default);
 sw.WriteLine("");
 sw.WriteLine("// CAUTION! THIS IS A GENERATED FILE! IT WILL BE OVERWRITTEN AT ANY TIME! ");
 sw.WriteLine(@"// created with https://github.com/IfcSharp");
@@ -139,7 +157,7 @@ sw.WriteLine("");
 sw.WriteLine("ifc.Repository.CurrentModel.ClearEntityList();");
 sw.WriteLine("ifc.Repository.CurrentModel.Header.name=\"generated_from_IfcSharp_ifc_Model_ToCsFile()\";");
 if (AssignedEntityDict==null) throw new ifc.Exception("AssignedEntityDict is not initialized");
-foreach (KeyValuePair<int,ENTITY> kvp in AssignedEntityDict) sw.WriteLine(kvp.Value.ToCs());  
+foreach (KeyValuePair<int,ENTITY> kvp in AssignedEntityDict) sw.WriteLine(kvp.Value.ToCs(CurrentModel:this));  
 sw.WriteLine("");
 sw.WriteLine("ifc.Repository.CurrentModel.ToStepFile();");
 sw.WriteLine("}/* of void */ } // of class #####################################################################");

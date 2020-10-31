@@ -18,7 +18,14 @@ public static ifc.Model CurrentModel=new ifc.Model();
 public partial class Model{//==========================================================================================
 public               Model(){}
 public               Model(string name){this.Header.name=name;}
-
+public               Model(string name,string description,string author,string organization,string originating_system,string documentation)
+                          {this.Header.name = name;
+                           this.Header.description = description;
+                           this.Header.author = author;
+                           this.Header.organization = organization;
+                           this.Header.originating_system = originating_system;
+                           this.Header.documentation = documentation;
+                          }
 
 public int NextGlobalId=1;
 public int NextGlobalCommentId=0;
@@ -31,8 +38,8 @@ public Dictionary<int,ENTITY> EntityDict=new Dictionary<int,ENTITY>();
 public void AssignEntities()
 {
 EntityDict.Clear();
-foreach (ENTITY e in EntityList) if (e.LocalId>0) if (!EntityDict.ContainsKey(e.LocalId))  {EntityDict.Add(e.LocalId,e);} else Console.WriteLine("#"+e.LocalId+" already exist! (double Entry)");
-foreach (ENTITY e in EntityList) if (e.LocalId>0)
+foreach (ENTITY e in EntityList) /* if (e.LocalId>0) */ if (!EntityDict.ContainsKey(e.LocalId))  {EntityDict.Add(e.LocalId,e);} else Console.WriteLine("#"+e.LocalId+" already exist! (double Entry)");
+foreach (ENTITY e in EntityList) /* if (e.LocalId>0) */
         {//####################################################################################################
          Dictionary<int,FieldInfo> VarDict=new Dictionary<int,FieldInfo>();
          int VarCount=0; foreach (FieldInfo field in e.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)) foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {VarDict.Add(((ifcAttribute)attr).OrdinalPosition,field);VarCount++;} 

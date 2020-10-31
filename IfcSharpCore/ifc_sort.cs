@@ -1,6 +1,6 @@
 // ifc_sort.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
-using System;
+using NetSystem=System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Reflection;
@@ -26,7 +26,7 @@ foreach (ENTITY e in EntityList) if (!e.IsAssigned)
         {e.IsAssigned=true;
           //if (e.Id== 103)  Console.WriteLine(e.ToIfc());
          foreach (FieldInfo field in e.GetType().GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)) 
-foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) // nur IFC-Atribute
+foreach (NetSystem.Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) // nur IFC-Atribute
                  {if (field.FieldType.IsSubclassOf(typeof(ENTITY))) 
                           {ENTITY E=(ENTITY)field.GetValue(e);
                           // if (E!=null) if (E.Id>0) Console.WriteLine(field.Name+"="+E.Id+" "+E.IsAssigned+" "+AssignedEntityDict.ContainsKey(E.Id));
@@ -45,7 +45,7 @@ foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttri
                  }// of foreach field
        //   if (e.Id==1) 
       //   Console.WriteLine(e.Id+" IsAssigned="+e.IsAssigned);
-          if (e.IsAssigned) {e.SortPos=++GlobalSortPos; AssignedEntityDict.Add(e.LocalId,e);cnt++;}//Console.WriteLine(cnt+": "+e.Id);}
+          if (e.IsAssigned) /* if (!(e is ifc.EntityComment)) */ {e.SortPos=++GlobalSortPos;try{AssignedEntityDict.Add(e.LocalId,e);}catch(NetSystem.Exception ex){throw new NetSystem.Exception(ex.Message+e.ToStepLine());};cnt++;}//Console.WriteLine(cnt+": "+e.Id);}
         }//of foreach Entity
 //Console.WriteLine("----------------------");
 return cnt;
@@ -59,7 +59,7 @@ foreach (ENTITY e in EntityList) e.IsAssigned=false;
 GlobalSortPos=0;
 int cnt=0; do{cnt=SetAssignedEntityForSort();} while (cnt>0);
 bool FirstDisplay=true;
-foreach (ENTITY e in EntityList) if (!e.IsAssigned) if (FirstDisplay)  {Console.WriteLine("ifc.Model.SortEntities: NOT ASSIGNED: "+e.ToStepLine());FirstDisplay=false;};
+foreach (ENTITY e in EntityList) if (!e.IsAssigned) if (FirstDisplay)  {NetSystem.Console.WriteLine("ifc.Model.SortEntities: NOT ASSIGNED: "+e.ToStepLine());FirstDisplay=false;};
 //here better an exception
 }//of void
 
