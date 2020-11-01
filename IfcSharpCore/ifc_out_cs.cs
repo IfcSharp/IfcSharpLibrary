@@ -36,7 +36,7 @@ cnt++;
                               if (o is ifc.Boolean)  {s="(ifc.Boolean)";if (o.ToString()=="False)") s+="false"; else s+="true";} else
                               if (o is ifc.GloballyUniqueId) s="ifc.GloballyUniqueId.NewId() /*\""+o.ToString()+"\"*/"; else 
                               if (tb.IsNull) s="null"; else
-                                 {if (tb.GetBaseType()==typeof(NetSystem.String)) {if ( ((TypeBase)o).IsNull /*.ToString()==""*/) s="null";else s="new ifc."+o.GetType().Name+"(\""+o.ToString()+"\")"; } 
+                                 {if (tb.GetBaseType()==typeof(NetSystem.String)) {if ( ((TypeBase)o).IsNull /*.ToString()==""*/) s="null";else s="new ifc."+o.GetType().Name+"("+o.ToString().Replace('\'','"') +")"; } 
                                   else if( typeof(IEnumerable).IsAssignableFrom(tb.GetBaseType())) 
                                          {ifcListInterface li=(ifcListInterface)tb.GetBaseType(); 
                                           s="new ifc."+o.GetType().Name+o.ToString();
@@ -55,7 +55,7 @@ cnt++;
                                        if (item is ENTITY) s+=EntityVarName(((ENTITY)item).LocalId,CurrentModel);
                                   else if (item is SELECT) {if (((SELECT)item).Id>0) s+="new ifc."+item.GetType().Name+"("+EntityVarName(((SELECT)item).Id,CurrentModel)+")"; else    CsOut(((SELECT)item).SelectValue(),CurrentModel);}
                                   else if (item is TypeBase) {TypeBase tb=(TypeBase)item;
-                                                                   if (tb.GetBaseType()==typeof(NetSystem.String)) {if (item.ToString()=="") s+=""; /* null */else s+="(ifc."+item.GetType().Name+")\""+item.ToString()+"\""; } 
+                                                                   if (tb.GetBaseType()==typeof(NetSystem.String)) {if (item.ToString()=="") s+=""; /* null */else s+="(ifc."+item.GetType().Name+")"+item.ToString().Replace('\'','"').Replace("\"\"","\""); } 
                                                               else if( typeof(IEnumerable).IsAssignableFrom(tb.GetBaseType())) {s+="new ifc."+item.GetType().Name+item.ToString();} 
                                                               else {if (TypeDisplay)  s+="(ifc."+item.GetType().Name+")("+item.ToString()+")"; else s+=item.ToString(); }
                                                              }
@@ -107,10 +107,11 @@ int sep=0;foreach (FieldInfo field in AttribList) {bool optional=((ifcAttribute)
                                                    s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+field.Name+":"+CsOut(field.GetValue(this),CurrentModel);
                                                    s+="// #"+((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).OrdinalPosition;
                                                    if (optional) s+=" [optional]";
+                                                   if (Cmt) s+=" ("+field.FieldType.ToString()+")" ;
                                                   }
      }//-------------------------------------------------------------------------------------------
 
-if (this.EndOfLineComment!=null) if (this.EndOfLineComment.Length>0) s+=",\""+this.EndOfLineComment+'"';
+if (this.EndOfLineComment!=null) if (this.EndOfLineComment.Length>0) s+=  "\r\n"+new string(' ',VarInsert)+"  ,EndOfLineComment:"+"\""+this.EndOfLineComment+"\"";
 if (this is ifc.EntityComment) {s+="\""+((ifc.EntityComment)this).CommentLine.TrimEnd(' ')+'"';CR=false;}
 if (CR) s+="\r\n"+new string(' ',VarInsert+2);
 return s+=");";// //#"+(this.SortPos);
