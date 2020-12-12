@@ -8,17 +8,23 @@ namespace ifc{//================================================================
 
 public partial class ENTITY{//=====================================================================
 
+public class AttribInfo{
+public       AttribInfo(FieldInfo field,int OrdinalPosition, bool IsDerived,bool optional){this.field=field;this.OrdinalPosition=OrdinalPosition;this.IsDerived=IsDerived;this.optional=optional;}
+public FieldInfo field=null;
+public int OrdinalPosition=0;
+public bool IsDerived=false;
+public bool optional=false; 
+}
 
-
-public class AttribListType:List<FieldInfo>{//-----------------------------------------------------
+public class AttribListType:List<AttribInfo>{//-----------------------------------------------------
 public       AttribListType(){}
 public       AttribListType(NetSystem.Type EntityType){
 TemporaryAttribDict.Clear();int VarCount=0;
 foreach (FieldInfo field in EntityType.GetFields(BindingFlags.Public|BindingFlags.Instance|BindingFlags.FlattenHierarchy)) 
-   foreach (NetSystem.Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {TemporaryAttribDict.Add(((ifcAttribute)attr).OrdinalPosition,field);VarCount++;}
+   foreach (NetSystem.Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {TemporaryAttribDict.Add(((ifcAttribute)attr).OrdinalPosition,new AttribInfo(field,((ifcAttribute)attr).OrdinalPosition,((ifcAttribute)attr).derived,((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).optional));VarCount++;}
 for (int i=1;i<=VarCount;i++) this.Add(TemporaryAttribDict[i]);
  }
-public static Dictionary<int,FieldInfo> TemporaryAttribDict=new Dictionary<int,FieldInfo>();
+public static Dictionary<int,AttribInfo> TemporaryAttribDict=new Dictionary<int,AttribInfo>();
 };//------------------------------------------------------------------------------------------------
 
 public class InversListType:List<FieldInfo>{//-----------------------------------------------------
@@ -58,8 +64,9 @@ foreach ( NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.G
              || (t.IsSubclassOf(typeof(ifc.SELECT))) 
              || (t.IsSubclassOf(typeof(ifc.TypeBase)))
              || (typeof(ifcListInterface).IsAssignableFrom(t)) 
-            ) foreach (NetSystem.Attribute attr in t.GetCustomAttributes(true)) if (attr is ifcSqlAttribute) 
-                      {TypeIdNameDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t.Name);
+            ) foreach (NetSystem.Attribute attr in t.GetCustomAttributes(true)) if (attr is ifcSqlAttribute) if (((ifcSqlAttribute)attr).SqlTypeId!=0)
+                      {if (TypeIdNameDict.ContainsKey( ((ifcSqlAttribute)attr).SqlTypeId ) ) throw new NetSystem.Exception("Error on FillEntityTypeComponentsDict: double (Sql)TypeId="+((ifcSqlAttribute)attr).SqlTypeId);
+                       TypeIdNameDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t.Name);
                        TypeIdTypeDict.Add( ((ifcSqlAttribute)attr).SqlTypeId, t);
                        }                                                                          
         }

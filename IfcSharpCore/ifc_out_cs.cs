@@ -102,12 +102,12 @@ if   ( this.GetType()==typeof(ifc.Direction) )
 else {//-------------------------------------------------------------------------------------------
 
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-int sep=0;foreach (FieldInfo field in AttribList) {bool optional=((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).optional;
-                                                   bool Cmt=optional;if (CsOut(field.GetValue(this),CurrentModel)!="null") Cmt=false;
-                                                   s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+field.Name+":"+CsOut(field.GetValue(this),CurrentModel);
-                                                   s+="// #"+((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).OrdinalPosition;
-                                                   if (optional) s+=" [optional]";
-                                                   if (Cmt) s+=" ("+field.FieldType.ToString()+")" ;
+int sep=0;foreach (AttribInfo attrib in AttribList) {//bool optional=((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).optional;
+                                                   bool Cmt=attrib.optional;if (CsOut(attrib.field.GetValue(this),CurrentModel)!="null") Cmt=false;
+                                                   s+=((++sep>1)?"\r\n"+new string(' ',VarInsert)+(Cmt?"//,":"  ,"):"")+attrib.field.Name+":"+CsOut(attrib.field.GetValue(this),CurrentModel);
+                                                   s+="// #"+attrib.OrdinalPosition;//((ifcAttribute)field.GetCustomAttributes(inherit:(true))[0]).OrdinalPosition;
+                                                   if (attrib.optional) s+=" [optional]";
+                                                   if (Cmt) s+=" ("+attrib.field.FieldType.ToString()+")" ;
                                                   }
      }//-------------------------------------------------------------------------------------------
 

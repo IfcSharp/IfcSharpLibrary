@@ -86,7 +86,7 @@ if (NameKeywDict.ContainsKey(ElementName)) IdClassName+=" keyw"+NameKeywDict[Ele
 
 string Args="(";
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-int sep=0;foreach (FieldInfo field in AttribList) Args+=((++sep>1)?",":"")+field.FieldType.Name +field.Name;
+int sep=0;foreach (AttribInfo attrib in AttribList) Args+=((++sep>1)?",":"")+attrib.field.FieldType.Name +attrib.field.Name;
 Args+=")";
 
 s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
@@ -96,11 +96,8 @@ s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.Lo
 
  
 
-sep=0;
-foreach (FieldInfo field in AttribList)
-        {bool IsDerived=false;foreach (ifcAttribute attr in field.GetCustomAttributes(true)) if (attr.derived) IsDerived=true;
-         s+=((++sep>1)?",":"")+HtmlOut(field,field.GetValue(this),IsDerived); 
-        }
+sep=0;foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+HtmlOut(attrib.field,attrib.field.GetValue(this),attrib.IsDerived); 
+      
 
 s+=")<span class=\"semik\">;</span>";
 if (EndOfLineComment!=null) s+="<span class=\"EndOfLineComment\">/* "+EndOfLineComment+" */</span>";

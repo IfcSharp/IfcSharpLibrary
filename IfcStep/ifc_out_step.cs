@@ -13,9 +13,9 @@ namespace ifc{//################################################################
 
 public partial class ENTITY{//=====================================================================
 
-public static string StepAttributeOut(object o){//-------------------------------------------------
-string s=""; 
-          if (o==null)       s="$";  
+public static string StepAttributeOut(object o,AttribInfo attrib=null){//-------------------------------------------------
+string s;//=""; 
+          if (o==null)       {if (attrib==null) s="$"; else s=((attrib.IsDerived)?"*":"$");}
      else if (o is Enum)     {s="."+o.ToString()+".";}
      else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s="$";
                               else { if (((SELECT)o).SelectValue() is ENTITY) s=((SELECT)o).SelectValue().ToString(); 
@@ -34,7 +34,7 @@ return s;
 public virtual string ToStepLine(){//--------------------------------------------------------------
 string s=this.IfcId()+"=IFC"+this.GetType().Name.ToUpper()+"(";
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-int sep=0;foreach (FieldInfo field in AttribList) s+=((++sep>1)?",":"")+StepAttributeOut(field.GetValue(this));
+int sep=0;foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+StepAttributeOut(attrib.field.GetValue(this),attrib);
 s+=");";
 if (EndOfLineComment!=null) s+="/* "+EndOfLineComment+" */";
 return s;

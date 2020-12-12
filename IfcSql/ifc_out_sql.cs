@@ -93,7 +93,7 @@ else if (this is Direction)      {double X=0;double Y=0;double? Z=null;
                                   ifcSqlInstance.cp.EntityAttributeOfVector.Add(new ifcSQL.ifcInstance.EntityAttributeOfVector_Row(this.ifcSqlGlobalId,1,42,X,Y,Z));  
                                  }
 else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-                                  int OrdinalPosition=0; foreach (FieldInfo field in AttribList) SqlOut0(this.ifcSqlGlobalId,++OrdinalPosition,field.GetValue(this));
+                                  foreach (AttribInfo attrib in AttribList) SqlOut0(this.ifcSqlGlobalId,attrib.OrdinalPosition,attrib.field.GetValue(this));
                                 }
 }//....................................................................................................................
 
