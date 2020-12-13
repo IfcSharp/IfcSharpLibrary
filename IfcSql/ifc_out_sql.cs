@@ -42,7 +42,7 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){//object als üb
          if (o==null)               {}
     else if (o is Enum)             {ifcSqlInstance.cp.EntityAttributeOfEnum.Add(new ifcSQL.ifcInstance.EntityAttributeOfEnum_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()),((int)o))); } 
     else if (o is SELECT)           {SqlOut0(GlobalId,OrdinalPosition,(ifcSqlType)((SELECT)o).SelectValue());}
-    else if (o is ENTITY)           {ifcSqlInstance.cp.EntityAttributeOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row(GlobalId,OrdinalPosition,((ifcSqlType)o).SqlTypeId(),((ENTITY)o).ifcSqlGlobalId)); } 
+    else if (o is ENTITY)           {if (((ENTITY)o).ifcSqlGlobalId>0) ifcSqlInstance.cp.EntityAttributeOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row(GlobalId,OrdinalPosition,((ifcSqlType)o).SqlTypeId(),((ENTITY)o).ifcSqlGlobalId)); } 
     else if (o is ifcListInterface) {if (((ifcSqlTypeInterface)o).SqlTypeGroupId()==(int)ifc.TypeGroup.LISTTYPE1D) 
                                         {ifcSqlInstance.cp.EntityAttributeOfList.Add(new ifcSQL.ifcInstance.EntityAttributeOfList_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()) ));
                                          int ListDim1Position=0;foreach (object item in (IEnumerable)o) SqlOut1(GlobalId,OrdinalPosition,ListDim1Position++,item);

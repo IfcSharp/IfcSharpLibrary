@@ -60,7 +60,9 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                           attrib.field.SetValue(CurrentEntity,Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs));
                                                                          }
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEnum_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)rb;
-                                                                        attrib.field.SetValue(CurrentEntity,a.Value);
+                                                                        Type UnderlyingType = Nullable.GetUnderlyingType(   attrib.field.FieldType);
+                                                                        if  (UnderlyingType!=null && UnderlyingType.IsEnum) attrib.field.SetValue(CurrentEntity,Enum.ToObject(UnderlyingType, a.Value));
+                                                                        else                                                attrib.field.SetValue(CurrentEntity,a.Value); 
                                                                        }
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)   {ifcSQL.ifcInstance.EntityAttributeOfInteger_Row a=(ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)rb;
                                                                              object o=Activator.CreateInstance(ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],a.Value);
@@ -74,10 +76,12 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                            }
 
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEntityRef_Row)rb;  
-                                                                             Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
-                                                                             object o=Activator.CreateInstance(AttributeInstanceType);((ENTITY)o).LocalId=LocalIdFromGlobalIdDict[a.Value];
-                                                                             if (attrib.field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs);}
-                                                                             attrib.field.SetValue(CurrentEntity,o);
+                                                                             if (a.Value>0) 
+                                                                                {Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId]; 
+                                                                                 object o=Activator.CreateInstance(AttributeInstanceType);((ENTITY)o).LocalId=LocalIdFromGlobalIdDict[a.Value];
+                                                                                 if (attrib.field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs);}
+                                                                                 attrib.field.SetValue(CurrentEntity,o);
+                                                                                } 
                                                                             }
 
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfList_Row)    {ifcSQL.ifcInstance.EntityAttributeOfList_Row a=(ifcSQL.ifcInstance.EntityAttributeOfList_Row)rb;  
