@@ -7,9 +7,9 @@ using System.Collections.Generic;
 namespace ifc{//########################################################################################################
 
 public sealed class Specification{
-public const int    SpecificationId=42
-public const string SpecificationName="4.2.0.0 IFC4.2 2019-04"
-public const string SchemaName="IFC4X2"
+public const int    SpecificationId=42;
+public const string SpecificationName="4.2.0.0 IFC4.2 2019-04";
+public const string SchemaName="IFC4X2";
 }
 
 /// <summary> <para>Derived Classes:</para></summary>
