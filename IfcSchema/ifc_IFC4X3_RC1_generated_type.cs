@@ -1,10 +1,9 @@
 // ifc_IFC4X3_RC1_generated_type.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
-// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/DEV/IFC4_3/RC1\EXPRESS\IFC4x3_RC1.exp)
+// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/DEV/IFC4_3/RC1/EXPRESS/IFC4x3_RC1.exp)
 
 // CAUTION! THIS IS GENERATED CODE! DON'T MODIFY THIS FILE. THIS FILE WILL BE UPDATED WITH NEW VERSIONS.
 using System;
 using System.Collections.Generic;
-#if IFC4X3_RC1
 namespace ifc{//########################################################################################################
 
 
@@ -306,4 +305,3 @@ namespace ifc{//################################################################
 [ifcSql(TypeGroupId:7,TypeId:430149,TableId:0)] public partial class ListElement_List3to3_ParameterValue:List3to3<ParameterValue>{public ListElement_List3to3_ParameterValue(List3to3<ParameterValue> value):base(value){} public ListElement_List3to3_ParameterValue(){} public ListElement_List3to3_ParameterValue(params ParameterValue[] items):base(){foreach (ParameterValue e in items)  this.Add(e);} new bool IsNull{get{return (this.Count==0);}set{if (value) this.Clear();}} }
 
 }// of ifc #############################################################################################################
-#endif //IFC4X3_RC1

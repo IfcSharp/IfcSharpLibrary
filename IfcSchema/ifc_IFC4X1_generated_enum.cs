@@ -1,10 +1,9 @@
 // ifc_IFC4X1_generated_enum.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
-// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC4_1/FINAL\EXPRESS\IFC4x1.exp)
+// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC4_1/FINAL/EXPRESS/IFC4x1.exp)
 
 // CAUTION! THIS IS GENERATED CODE! DON'T MODIFY THIS FILE. THIS FILE WILL BE UPDATED WITH NEW VERSIONS.
 using System;
 using System.Collections.Generic;
-#if IFC4X1
 namespace ifc{//########################################################################################################
 
 [ifcSql(TypeGroupId:4,TypeId:410270,TableId:4)] public enum ActionRequestTypeEnum                {EMAIL=1, FAX=2, PHONE=3, POST=4, VERBAL=5, USERDEFINED=6, NOTDEFINED=7, }
@@ -219,4 +218,3 @@ namespace ifc{//################################################################
 [ifcSql(TypeGroupId:4,TypeId:410479,TableId:4)] public enum WorkScheduleTypeEnum                 {ACTUAL=1, BASELINE=2, PLANNED=3, USERDEFINED=4, NOTDEFINED=5, }
 
 }// of ifc #############################################################################################################
-#endif //IFC4X1

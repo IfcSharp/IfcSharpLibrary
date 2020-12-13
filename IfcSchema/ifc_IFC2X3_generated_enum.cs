@@ -1,10 +1,9 @@
 // ifc_IFC2X3_generated_enum.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
-// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1\EXPRESS\IFC2X3_TC1.exp)
+// ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/EXPRESS/IFC2X3_TC1.exp)
 
 // CAUTION! THIS IS GENERATED CODE! DON'T MODIFY THIS FILE. THIS FILE WILL BE UPDATED WITH NEW VERSIONS.
 using System;
 using System.Collections.Generic;
-#if IFC2X3
 namespace ifc{//########################################################################################################
 
 [ifcSql(TypeGroupId:4,TypeId:230217,TableId:4)] public enum ActionSourceTypeEnum                 {DEAD_LOAD_G=1, COMPLETION_G1=2, LIVE_LOAD_Q=3, SNOW_S=4, WIND_W=5, PRESTRESSING_P=6, SETTLEMENT_U=7, TEMPERATURE_T=8, EARTHQUAKE_E=9, FIRE=10, IMPULSE=11, IMPACT=12, TRANSPORT=13, ERECTION=14, PROPPING=15, SYSTEM_IMPERFECTION=16, SHRINKAGE=17, CREEP=18, LACK_OF_FIT=19, BUOYANCY=20, ICE=21, CURRENT=22, WAVE=23, RAIN=24, BRAKES=25, USERDEFINED=26, NOTDEFINED=27, }
@@ -173,4 +172,3 @@ namespace ifc{//################################################################
 [ifcSql(TypeGroupId:4,TypeId:230380,TableId:4)] public enum WorkControlTypeEnum                  {ACTUAL=1, BASELINE=2, PLANNED=3, USERDEFINED=4, NOTDEFINED=5, }
 
 }// of ifc #############################################################################################################
-#endif //IFC2X3
