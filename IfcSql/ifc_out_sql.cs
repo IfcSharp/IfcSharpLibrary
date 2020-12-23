@@ -60,7 +60,6 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){//object als üb
                                          case (int)ifc.SqlTable.EntityAttributeOfBoolean: ifcSqlInstance.cp.EntityAttributeOfBoolean.Add(new ifcSQL.ifcInstance.EntityAttributeOfBoolean_Row(GlobalId,OrdinalPosition,tb.SqlTypeId(),(bool)((TYPE<bool>)o).TypeValue)); break;
                                          case (int)ifc.SqlTable.EntityAttributeOfFloat  : ifcSqlInstance.cp.EntityAttributeOfFloat  .Add(new ifcSQL.ifcInstance.EntityAttributeOfFloat_Row  (GlobalId,OrdinalPosition,tb.SqlTypeId(),(double)((TYPE<double>)o).TypeValue)); break;
                                          case (int)ifc.SqlTable.EntityAttributeOfInteger: ifcSqlInstance.cp.EntityAttributeOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeOfInteger_Row(GlobalId,OrdinalPosition,tb.SqlTypeId(),(int)((TYPE<int>)o).TypeValue )); break;
-                                         //case (int)ifc.SqlTable.EntityAttributeOfString : ifcSQL.ifcInstance.EntityAttributeOfString .Add(new ifcSQL.ifcInstance.EntityAttributeOfString_Row (GlobalId,OrdinalPosition,tb.SqlTypeId(),o.ToString())); break;
                                          case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeOfString .Add(new ifcSQL.ifcInstance.EntityAttributeOfString_Row (GlobalId,OrdinalPosition,tb.SqlTypeId(),(string)((TYPE<string>)o).TypeValue)) /*  o.ToString() )) */; break;
                                         }
                                 } 
@@ -92,7 +91,7 @@ else if (this is Direction)      {double X=0;double Y=0;double? Z=null;
                                   if (((Direction)this).DirectionRatios.Count>2) {Z=(double)((Direction)this).DirectionRatios[2];}
                                   ifcSqlInstance.cp.EntityAttributeOfVector.Add(new ifcSQL.ifcInstance.EntityAttributeOfVector_Row(this.ifcSqlGlobalId,1,42,X,Y,Z));  
                                  }
-else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
+else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList; Console.WriteLine(this.ToStepLine());
                                   foreach (AttribInfo attrib in AttribList) SqlOut0(this.ifcSqlGlobalId,attrib.OrdinalPosition,attrib.field.GetValue(this));
                                 }
 }//....................................................................................................................
@@ -134,7 +133,7 @@ long LastGlobalId=0;
 
 ifcSQL.conn.Open(); 
 if (WriteMode==eWriteMode.CreateNewProject) {ifcSQL.ExecuteNonQuery("app.NewProject '"+Header.name+"'");ProjectId=0;}
-if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()");
+if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
                             ifcSQL.ExecuteNonQuery("ifcProject.NewLastGlobalId "+ProjectId+", "+ifc.Repository.CurrentModel.EntityList.Count);

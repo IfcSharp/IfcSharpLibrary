@@ -116,6 +116,9 @@ public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instan
 {
 
 ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+                                    ifcSQLin.conn.Open(); 
+if (ProjectId>0)                    ifcSQLin.ExecuteNonQuery("app.SelectProject "+ProjectId);
+                                    ifcSQLin.conn.Close(); 
                                     ifcSQLin.LoadAllTables();  
 
 Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();

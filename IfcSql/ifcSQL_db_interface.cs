@@ -63,15 +63,15 @@ public override void SelectAll(){SqlCommand cmd = new SqlCommand("select * from 
 public override string InsertString(){Object o = new T();RowBase rb=((RowBase)o);string s=rb.InsertStringOpen(TableName);int pos=0;foreach (RowBase row in this) s+=((++pos>1)?",":"")+row.InsertStringValuesRow();s+=rb.InsertStringClose();return s; }
 
 public override void BulkInsert(){using (SqlBulkCopy bulkCopy = new SqlBulkCopy(tableSet.conn))// ..........................
-                                        {            bulkCopy.DestinationTableName = TableName;
-                                                     bulkCopy.WriteToServer(FilledDataTable());
+                                        {            bulkCopy.DestinationTableName = TableName; //Console.WriteLine("TableName="+TableName+": "+InsertString());
+                                                     bulkCopy.WriteToServer(FilledDataTable()); // if (TableName=="[cp].[EntityAttributeOfString]") {bulkCopy.BatchSize=100000;bulkCopy.BulkCopyTimeout=3;} sometimes timeout, don't no why
                                         }
 }//.........................................................................................................................
 
 private DataTable FilledDataTable() {//............................................................
                                      DataTable table = new DataTable();
-                                     Object rb = new T();((RowBase)rb).AddDataTableColumns(table);
-                                     foreach (RowBase row in this) table.Rows.Add(row.DataTableRow(table));
+                                     Object rb = new T();((RowBase)rb).AddDataTableColumns(table); 
+                                     foreach (RowBase row in this) table.Rows.Add(row.DataTableRow(table)); 
                                      return table; 
                                     }//............................................................
 
