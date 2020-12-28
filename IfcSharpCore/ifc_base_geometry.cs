@@ -24,12 +24,15 @@ public double y {get{return this.DirectionRatios[1].TypeValue;}}
 public double z {get{return this.DirectionRatios[2].TypeValue;}}
 public static Direction operator - (Direction d              ) {return new Direction(-d.x,-d.y,-d.z);               }// issue: need for distinction 2D/3D here
 public static Direction operator + (Direction d1,Direction d2) {return new Direction(d1.x+d2.x,d1.y+d2.y,d1.z+d2.z);}// issue: need for distinction 2D/3D here
+public static Direction operator - (Direction d1,Direction d2) {return new Direction(d1.x-d2.x,d1.y-d2.y,d1.z-d2.z);}// issue: need for distinction 2D/3D here
+public static Direction operator * (Direction d, double Scale) {return new Direction(d.x*Scale,d.y*Scale,d.z*Scale);}// issue: need for distinction 2D/3D here
+
 }//=====================================================================================================================
 #endif
 
 public partial class Axis2Placement3D:Placement{//======================================================================
-public               Axis2Placement3D(Axis2Placement3D a):base(){AddNext();this.Location=a.Location;this.Axis=a.Axis;this.RefDirection=a.RefDirection;this.EndOfLineComment=a.EndOfLineComment;}
-public               Axis2Placement3D Clone(CartesianPoint p) {return new Axis2Placement3D(Location:p,Axis:this.Axis,RefDirection:this.RefDirection,EndOfLineComment:this.EndOfLineComment);}
+public               Axis2Placement3D(Axis2Placement3D template,string EndOfLineComment=null):base(){AddNext();this.Location=template.Location;this.Axis=template.Axis;this.RefDirection=template.RefDirection;this.EndOfLineComment=EndOfLineComment;}
+public               Axis2Placement3D Clone(CartesianPoint p,string EndOfLineComment=null) {return new Axis2Placement3D(Location:p,Axis:this.Axis,RefDirection:this.RefDirection,EndOfLineComment:EndOfLineComment);}
 
 }//=====================================================================================================================
 

@@ -58,7 +58,7 @@ string s="";
                              // Console.WriteLine(o.ToString()+ " GetBaseType= "+tb.GetBaseType().ToString());
                                }
      else if (o is String)   {if (o.ToString()=="") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"text",o.ToString());}
-     else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) {s=HtmlOut(field,"list",HtmlRefOut(o.ToString()));} // noch anders lösen
+     else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) {s=HtmlOut(field,"list",HtmlRefOut(o.ToString()));}
      else                     {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived); else s=HtmlOut(field,"int",o.ToString());} 
                              
 return s;
@@ -94,9 +94,10 @@ s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.Lo
 +Args
 +"\">"+ElementName+"</span>(";
 
- 
-
-sep=0;foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+HtmlOut(attrib.field,attrib.field.GetValue(this),attrib.IsDerived); 
+ sep=0;
+     if (this is CartesianPoint) {CartesianPoint cp=(CartesianPoint)this;string coords="";foreach (LengthMeasure lm in cp.Coordinates    ) coords+=((++sep>1)?",":"")+((double)lm).ToString("#0.0000"); s+=HtmlOut(AttribList[0].field,"list",coords);}
+else if (this is Direction     ) {Direction      cp=(Direction)     this;string coords="";foreach (Real          lm in cp.DirectionRatios) coords+=((++sep>1)?",":"")+((double)lm).ToString("#0.0000"); s+=HtmlOut(AttribList[0].field,"list",coords);}
+else foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+HtmlOut(attrib.field,attrib.field.GetValue(this),attrib.IsDerived); 
       
 
 s+=")<span class=\"semik\">;</span>";
@@ -113,7 +114,15 @@ return s;
 public partial class EntityComment:ENTITY{//==========================================================================================
 public override string ToHtml(){HtmlCnt++;return "\r\n<span class=\"Commentline\">/* "+CommentLine+" */</span><br/>";}
 }//=====================================================================================================================
+/*
+public partial class CartesianPoint:Point{//==========================================================================================
+public override string ToHtml(){;return "\r\n<span class=\"Commentline\"> "+"CartesianPoint"+" </span><br/>";}
 
+}//=====================================================================================================================
+*/
+
+//<div class="line1"><a name="1"/><span class="id"><a href="#1">#1</a></span><span class="equal">=</span><span class="ifc">ifc</span><span class="entity" title="ifcCartesianPoint(List1to3_LengthMeasureCoordinates)">CartesianPoint</span>(<span class="list">(0.,0.,0.)</span>)<span class="semik">;</span><span class="EndOfLineComment">/* origin */</span><br/></div>
+//<div class="line1"><a name="2"/><span class="id"><a href="#2">#2</a></span><span class="equal">=</span><span class="ifc">ifc</span><span class="entity" title="ifcDirection(List2to3_RealDirectionRatios)">Direction</span>(<span class="list">(1.,0.,0.)</span>)<span class="semik">;</span><span class="EndOfLineComment">/* X-axis */</span><br/></div>
 
 
 public partial class Model{//==========================================================================================

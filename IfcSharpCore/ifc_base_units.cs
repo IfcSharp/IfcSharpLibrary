@@ -4,6 +4,7 @@ using System;
 
 public class units{
 public static double mm2m=1.0/1000.0;
+public static double m2mm=1000.0;
 }
 
 namespace ifc{//==============================
