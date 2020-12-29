@@ -30,14 +30,7 @@ if (expr.Contains("#"))
 return expr;
 }
 
-public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){//ENTITY e=ifc.ENTITY.AssignedEntityDict[int.Parse(IfcId.Substring(1))];
-
-//string EntityClassName="entity";
-//if (NameKeywDict.ContainsKey(ElementName)) EntityClassName+=" keyw"+NameKeywDict[ElementName];
-
-                                              string RefClassName="ref";
-                                               if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];
-                                               return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\">"+IfcId+"</a>";} //s="<a class=\""+RefClassName+"\" href=\"#"+((ENTITY)o).Id+"\">"+((ENTITY)o).IfcId()+"</a>";
+public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\">"+IfcId+"</a>";}
 public static string HtmlOut(FieldInfo field,string ClassName, string value){return "<span class=\""+ClassName+"\">"+value+"</span>";}
 public static string HtmlNullOut(FieldInfo field,bool IsDerived){return "<span class=\"dollar\">"+((IsDerived)?"*":"$")+"</span>";}
 public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"\" >."+value+".</span>";}
@@ -54,9 +47,7 @@ string s="";
                                    }
                              }
      else if (o is ENTITY)    if ( ((ENTITY)o).LocalId==0 ) s=HtmlNullOut(field,IsDerived); else  s=HtmlRefOut(field,((ENTITY)o).IfcId(),(ENTITY)o); 
-     else if (o is TypeBase) {TypeBase tb=(TypeBase)o;if (tb.GetBaseType()==typeof(String)) {if (o.ToString()=="" || o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else  s=HtmlTextOut(field,o.ToString()); } else  {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"float",o.ToString());}
-                             // Console.WriteLine(o.ToString()+ " GetBaseType= "+tb.GetBaseType().ToString());
-                               }
+     else if (o is TypeBase) {TypeBase tb=(TypeBase)o;if (tb.GetBaseType()==typeof(String)) {if (o.ToString()=="" || o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else  s=HtmlTextOut(field,o.ToString()); } else  {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"float",o.ToString());} }
      else if (o is String)   {if (o.ToString()=="") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"text",o.ToString());}
      else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) {s=HtmlOut(field,"list",HtmlRefOut(o.ToString()));}
      else                     {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived); else s=HtmlOut(field,"int",o.ToString());} 
@@ -64,32 +55,20 @@ string s="";
 return s;
 }
 
-
-
 public static Dictionary<string, int>  NameKeywDict=new Dictionary<string,int>();
-
 
 public virtual string ToHtml(){
 Threading.Thread.CurrentThread.CurrentCulture=CultureInfo.InvariantCulture;
-string s="";
-
 string ElementName=this.GetType().ToString().Replace("IFC4","ifc").Replace("ifc.","");
-
-string EntityClassName="entity";
-if (NameKeywDict.ContainsKey(ElementName)) EntityClassName+=" keyw"+NameKeywDict[ElementName];
-string IdClassName="id";
-if (NameKeywDict.ContainsKey(ElementName)) IdClassName+=" keyw"+NameKeywDict[ElementName];
-
-
-
-
+string EntityClassName="entity";if (NameKeywDict.ContainsKey(ElementName)) EntityClassName+=" keyw"+NameKeywDict[ElementName];
+string     IdClassName="id";    if (NameKeywDict.ContainsKey(ElementName))     IdClassName+=" keyw"+NameKeywDict[ElementName];
 
 string Args="(";
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
 int sep=0;foreach (AttribInfo attrib in AttribList) Args+=((++sep>1)?",":"")+attrib.field.FieldType.Name +attrib.field.Name;
 Args+=")";
 
-s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
+string s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
 +EntityClassName+"\" title=\"ifc"+ElementName
 +Args
 +"\">"+ElementName+"</span>(";
@@ -98,7 +77,6 @@ s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.Lo
      if (this is CartesianPoint) {CartesianPoint cp=(CartesianPoint)this;string coords="";foreach (LengthMeasure lm in cp.Coordinates    ) coords+=((++sep>1)?",":"")+((double)lm).ToString("#0.0000"); s+=HtmlOut(AttribList[0].field,"list",coords);}
 else if (this is Direction     ) {Direction      cp=(Direction)     this;string coords="";foreach (Real          lm in cp.DirectionRatios) coords+=((++sep>1)?",":"")+((double)lm).ToString("#0.0000"); s+=HtmlOut(AttribList[0].field,"list",coords);}
 else foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+HtmlOut(attrib.field,attrib.field.GetValue(this),attrib.IsDerived); 
-      
 
 s+=")<span class=\"semik\">;</span>";
 if (EndOfLineComment!=null) s+="<span class=\"EndOfLineComment\">/* "+EndOfLineComment+" */</span>";
@@ -114,15 +92,6 @@ return s;
 public partial class EntityComment:ENTITY{//==========================================================================================
 public override string ToHtml(){HtmlCnt++;return "\r\n<span class=\"Commentline\">/* "+CommentLine+" */</span><br/>";}
 }//=====================================================================================================================
-/*
-public partial class CartesianPoint:Point{//==========================================================================================
-public override string ToHtml(){;return "\r\n<span class=\"Commentline\"> "+"CartesianPoint"+" </span><br/>";}
-
-}//=====================================================================================================================
-*/
-
-//<div class="line1"><a name="1"/><span class="id"><a href="#1">#1</a></span><span class="equal">=</span><span class="ifc">ifc</span><span class="entity" title="ifcCartesianPoint(List1to3_LengthMeasureCoordinates)">CartesianPoint</span>(<span class="list">(0.,0.,0.)</span>)<span class="semik">;</span><span class="EndOfLineComment">/* origin */</span><br/></div>
-//<div class="line1"><a name="2"/><span class="id"><a href="#2">#2</a></span><span class="equal">=</span><span class="ifc">ifc</span><span class="entity" title="ifcDirection(List2to3_RealDirectionRatios)">Direction</span>(<span class="list">(1.,0.,0.)</span>)<span class="semik">;</span><span class="EndOfLineComment">/* X-axis */</span><br/></div>
 
 
 public partial class Model{//==========================================================================================
