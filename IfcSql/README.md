@@ -35,4 +35,9 @@ and like this for view:
 ![](doc/img/ifcSQL_Instance_views.png)
 
 
+The BCF-implementation in ifcSQL look like this (see ifcSQL_BCF_part_create.sql.txt):
+
+![](doc/img/ifcSQL_BCF_part.png)
+
+
 
