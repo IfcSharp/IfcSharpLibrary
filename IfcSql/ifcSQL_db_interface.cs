@@ -81,13 +81,12 @@ public partial class SchemaBase{}//---------------------------------------------
 
 public class TableSet{//---------------------------------------------------------------------------
 public  TableSet(){AssignTableNames();}
-public  TableSet(string ServerName,string DatabaseName){AssignTableNames();
-                                                        this.ServerName=ServerName;this.DatabaseName=DatabaseName;
+public  TableSet(string ServerName,string DatabaseName){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
                                                         conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
                                                        }
 public void AssignTableNames(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
                                    foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
-                                           { ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).TableName="["+SchemaField.Name+"].["+TableField.Name+"]";
+                                           { ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).TableName="["+this.DatabaseName+"].["+SchemaField.Name+"].["+TableField.Name+"]";
                                              ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).tableSet=this;
                                            }   
                               }
