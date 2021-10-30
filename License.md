@@ -15,7 +15,7 @@ The above copyright notice and this permission notice must be included<br/>
 * in all copies or substantial portions of the sourcecode in the headline
 * in executable software in the info-dialog or commandline-header
 
-this way: „..., parts of this software use IfcSharp (see https://github.com/IfcSharp)“
+this way: „..., parts of this software use IfcSharp (see https://github.com/IfcSharp )“
 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
