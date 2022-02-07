@@ -56,6 +56,18 @@ public override string ToString(){return CommentLine;}
 public static int HtmlCnt=0;
 }//=====================================================================================================================
 
+[ifcSql(TypeGroupId:5,TypeId:-3)] public partial class ImageComment:EntityComment{//==========================================================================================
+public               ImageComment(){} 
+public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine();
+                                                                               this.CommentLine="<img src=\""+ImgFileName+"\"";
+                                                                               if (height>0) this.CommentLine+=" height=\""+height+"\"";
+                                                                               if (width >0) this.CommentLine+=" width=\""+width+"\"";
+                                                                               this.CommentLine+="/>";
+                                                                              }
+public override string ToHtml(){return CommentLine+"<BR/>";}
+}//=====================================================================================================================
+
+
  #if !IFC2X3
 public partial class CartesianTransformationOperator3DnonUniform:CartesianTransformationOperator3D{//===================
 protected override void CheckValues(){} // Check >0
