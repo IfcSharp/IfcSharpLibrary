@@ -48,16 +48,18 @@ else return "unknown Type "+field.FieldType.ToString();
 
 }//------------------------------------------------------------------------------------------------
 
-public class TableBase : List<Object>{//-----------------------------------------------------------
+public partial class TableBase : List<Object>{//-----------------------------------------------------------
 public string TableName="-";
 public TableSet tableSet=null;
-public virtual void SelectAll(){}
+public virtual void SelectAll(string where=""){}
 public virtual string InsertString(){return "-";} // better using Interface
 public virtual void BulkInsert(){} 
+public string order;
 }// of TableBase ----------------------------------------------------------------------------------
 
-public class RowList<T> : TableBase where T : new(){//---------------------------------------------
-public override void SelectAll(){SqlCommand cmd = new SqlCommand("select * from "+TableName,tableSet.conn);
+public partial class RowList<T> : TableBase where T : new(){//---------------------------------------------
+public               RowList(string order=""){this.order=order;}
+public override void SelectAll(string where=""){SqlCommand cmd = new SqlCommand("select * from "+TableName+" "+where+" "+order,tableSet.conn);
                                  using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
                                 }
 public override string InsertString(){Object o = new T();RowBase rb=((RowBase)o);string s=rb.InsertStringOpen(TableName);int pos=0;foreach (RowBase row in this) s+=((++pos>1)?",":"")+row.InsertStringValuesRow();s+=rb.InsertStringClose();return s; }
@@ -79,7 +81,7 @@ public DataTable FilledDataTable() {//..........................................
 
 public partial class SchemaBase{}//----------------------------------------------------------------
 
-public class TableSet{//---------------------------------------------------------------------------
+public partial class TableSet{//---------------------------------------------------------------------------
 public  TableSet(){AssignTableNames();}
 public  TableSet(string ServerName,string DatabaseName){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
                                                         conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
