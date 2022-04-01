@@ -1,5 +1,8 @@
 ﻿// ifc_sqlite_data.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
+
+//EF-2021-04-01: Added preprocessor flag 'INCLUDE_SQLITE' so that the compilation without sqlite-support is possible
+#if INCLUDE_SQLITE
 using System.Collections.Generic;
 using System.Linq;
 using System.Data.SQLite;
@@ -100,3 +103,5 @@ namespace ifc
         }
     }
 }
+
+#endif
