@@ -18,11 +18,14 @@ public       TYPE(T v){IsNull=false;TypeValue=v;}
 public T TypeValue;
 public override Type GetBaseType(){return typeof(T);}
 
-public override string ToString(){if (IsNull) return "$"; 
-                                  else if ( typeof(T).Equals(typeof(double)) ) return  ((double)(object)TypeValue).ToString("0.0000000000",CultureInfo.InvariantCulture).TrimEnd('0');
-                                  else if ( typeof(T).Equals(typeof(bool)) ) return ((bool)(object)TypeValue)?".T.":".F.";
-                                  else if ( typeof(T).Equals(typeof(string)) ) {if (HasStringChar) return StringChar+((string)(object)TypeValue).ToString()+StringChar; else return ((string)(object)TypeValue).ToString();}
-                                  else return TypeValue.ToString();}
+public override string ToString(){if (IsNull) return "$";
+            //EF-2021-03-02: commented out 'TrimEnd'. for trailing zeros, this is considered as schema violation, because the decimalpoint has no following zero
+            //((double)(object)TypeValue).ToString("0.0000000000", CultureInfo.InvariantCulture).TrimEnd('0'); 
+            else if (typeof(T).Equals(typeof(double))) return string.Format("{0:0.0###########}", (double)(object)TypeValue);
+            else if (typeof(T).Equals(typeof(bool))) return ((bool)(object)TypeValue) ? ".T." : ".F.";
+            else if (typeof(T).Equals(typeof(string))) { if (HasStringChar) return StringChar + ((string)(object)TypeValue).ToString() + StringChar; else return ((string)(object)TypeValue).ToString(); }
+            else return TypeValue.ToString();
+        }
 }//-----------------------------------------------------
 
 
