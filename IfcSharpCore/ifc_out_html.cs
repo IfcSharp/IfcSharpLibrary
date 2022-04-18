@@ -37,7 +37,7 @@ public static string HtmlEnumOut(FieldInfo field,string value){return "<span cla
 public static string HtmlTextOut(FieldInfo field,string value){return "<span class=\"text\">"+value+"</span>";}
 
 public static string HtmlOut(FieldInfo field,object o,bool IsDerived){
-string s=""; 
+string s=""; Console.WriteLine(field.FieldType+"="+field.Name);  // here field-tooltip (title)
           if (o==null)       { s=HtmlNullOut(field,IsDerived);}
      else if (o is Enum)     {/*if (o.ToString()=="_NULL") s=HtmlNullOut(field,IsDerived); else */ s=HtmlEnumOut(field,o.ToString());}
      else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s=HtmlNullOut(field,IsDerived);
