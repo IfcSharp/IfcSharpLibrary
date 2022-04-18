@@ -14,6 +14,10 @@ namespace ifc{//==============================
 
 public partial class ENTITY{//==========================================================================================
 
+public override void Initialise(){Highlighted=Highlighting;}
+public bool Highlighted=false;
+public static bool Highlighting=false;
+
 public static string HtmlRefOut(string expr)
 {
 List<int> SharpList=new List<int>();
@@ -30,14 +34,14 @@ if (expr.Contains("#"))
 return expr;
 }
 
-public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\">"+IfcId+"</a>";}
-public static string HtmlOut(FieldInfo field,string ClassName, string value){return "<span class=\""+ClassName+"\">"+value+"</span>";}
-public static string HtmlNullOut(FieldInfo field,bool IsDerived){return "<span class=\"dollar\">"+((IsDerived)?"*":"$")+"</span>";}
-public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"\" >."+value+".</span>";}
-public static string HtmlTextOut(FieldInfo field,string value){return "<span class=\"text\">"+value+"</span>";}
+public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\" title=\""+field.FieldType.Name+" "+field.Name+"="+IfcId+"\">"+IfcId+"</a>";}
+public static string HtmlOut(FieldInfo field,string ClassName, string value){return "<span class=\""+ClassName+"\" title=\""+field.FieldType.Name+" "+field.Name /*+"="+value*/ +"\" >"+value+"</span>";}
+public static string HtmlNullOut(FieldInfo field,bool IsDerived){return "<span class=\"dollar\" title=\""+field.FieldType.Name+" "+field.Name+"="+((IsDerived)?"* (is derived) ":"$ (null)")+"\" >"+((IsDerived)?"*":"$")+"</span>";}
+public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" >."+value+".</span>";}
+public static string HtmlTextOut(FieldInfo field,string value){return "<span class=\"text\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" >"+value+"</span>";}
 
 public static string HtmlOut(FieldInfo field,object o,bool IsDerived){
-string s=""; Console.WriteLine(field.FieldType+"="+field.Name);  // here field-tooltip (title)
+string s=""; // Console.WriteLine(field.FieldType+"="+field.Name);  // here field-tooltip (title)
           if (o==null)       { s=HtmlNullOut(field,IsDerived);}
      else if (o is Enum)     {/*if (o.ToString()=="_NULL") s=HtmlNullOut(field,IsDerived); else */ s=HtmlEnumOut(field,o.ToString());}
      else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s=HtmlNullOut(field,IsDerived);
@@ -59,16 +63,25 @@ public static Dictionary<string, int>  NameKeywDict=new Dictionary<string,int>()
 
 public virtual string ToHtml(){
 Threading.Thread.CurrentThread.CurrentCulture=CultureInfo.InvariantCulture;
-string ElementName=this.GetType().ToString().Replace("IFC4","ifc").Replace("ifc.","");
+string ElementName=this.GetType().ToString().Replace("ifc.","");
 string EntityClassName="entity";if (NameKeywDict.ContainsKey(ElementName)) EntityClassName+=" keyw"+NameKeywDict[ElementName];
 string     IdClassName="id";    if (NameKeywDict.ContainsKey(ElementName))     IdClassName+=" keyw"+NameKeywDict[ElementName];
 
 string Args="(";
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
-int sep=0;foreach (AttribInfo attrib in AttribList) Args+=((++sep>1)?",":"")+attrib.field.FieldType.Name +attrib.field.Name;
-Args+=")";
+int sep=0;foreach (AttribInfo attrib in AttribList) Args+=((++sep>1)?",":"")+"&#013;&#010;"+sep+"&#009;"+attrib.field.FieldType.Name+"&#009;"+attrib.field.Name+"&#009;[of class "+attrib.field.DeclaringType.FullName+"]" ;//+"&#009;"+"="+attrib.field.GetValue(this);
+Args+="&#013;&#010;"+")";
 
-string s="\r\n<div class=\"line"+(ifc.EntityComment.HtmlCnt%4) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
+List<string> InheritanceList=new List<string>();  
+
+Args+="&#013;&#010;"+"Inheritance of "+this.GetType().ToString().Replace("ifc.","ifc")+":";
+Type t=this.GetType();       InheritanceList.Add(t.ToString().Replace("ifc.","ifc"));  
+while ((t=t.BaseType)!=null) InheritanceList.Add(t.ToString().Replace("ifc.","ifc"));
+InheritanceList.Reverse();
+bool Display=false;foreach(string sx in InheritanceList) {if (Display) Args+="&#013;&#010;"+sx;if (sx=="ifcENTITY") Display=true;}
+
+
+string s="\r\n<div class=\"line"+(Highlighted?"X":(ifc.EntityComment.HtmlCnt%4).ToString()) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
 +EntityClassName+"\" title=\"ifc"+ElementName
 +Args
 +"\">"+ElementName+"</span>(";
@@ -79,18 +92,26 @@ else if (this is Direction     ) {Direction      cp=(Direction)     this;string 
 else foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+HtmlOut(attrib.field,attrib.field.GetValue(this),attrib.IsDerived); 
 
 s+=")<span class=\"semik\">;</span>";
-if (EndOfLineComment!=null) s+="<span class=\"EndOfLineComment\">/* "+EndOfLineComment+" */</span>";
+
+string HtmlCommentClass="EndOfLineComment";if (Highlighted) HtmlCommentClass="lineXC";
+
+if (EndOfLineComment!=null) s+="<span class=\""+HtmlCommentClass+"\">/* "+EndOfLineComment+" */</span>";
 s+="<br/></div>";
 
 return s;
 }
+
 
 }//of ENTITY ==========================================================================================================
 
 
 
 public partial class EntityComment:ENTITY{//==========================================================================================
-public override string ToHtml(){HtmlCnt++;return "\r\n<span class=\"Commentline\">/* "+CommentLine+" */</span><br/>";}
+public override string ToHtml(){HtmlCnt++;string HtmlClass="Commentline";if (Highlighted) HtmlClass="lineXC";if (CommentLine.TrimStart(' ').Length==0) return ""; else return "\r\n<span class=\""+HtmlClass+"\">/* "+CommentLine+" */</span><br/>";}
+
+public               EntityComment(string CommentLine,bool Highlighting){this.Highlighted=ENTITY.Highlighting=Highlighting; AddNextCommentLine();this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);}
+public               EntityComment(bool Highlighting){this.Highlighted=ENTITY.Highlighting=Highlighting; AddNextCommentLine();this.CommentLine="";}
+
 }//=====================================================================================================================
 
 
@@ -137,6 +158,8 @@ sw.WriteLine("  .line0 {background-color:#F0FFFF;}");
 sw.WriteLine("  .line1 {background-color:#FAFAFA;}");
 sw.WriteLine("  .line2 {background-color:#FFFFF8;}");
 sw.WriteLine("  .line3 {background-color:#F0FFF0;}");
+sw.WriteLine("  .lineX {background-color:#FFFF00;}");
+sw.WriteLine("  .lineXC{background-color:#FFFF00;font-weight:bold;}");
 sw.WriteLine("</style>");
 
 sw.WriteLine("</head>");

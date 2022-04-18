@@ -33,7 +33,7 @@ public virtual void AssignInverseElements(){}
 // static:
 public partial class ENTITY:ifcSqlType{//==========================================================================================
 static public int NextGlobalId=1;
-protected void AddNext(){LocalId=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/  Repository.CurrentModel.EntityList.Add(this);}
+protected void AddNext(){LocalId=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/ Initialise(); Repository.CurrentModel.EntityList.Add(this);}
 protected virtual void CheckValues(){}
 protected virtual void SetDefaultValues(){}
 static public int NextGlobalCommentId=0;

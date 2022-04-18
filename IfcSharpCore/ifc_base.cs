@@ -48,6 +48,7 @@ object Parse(string value);
 }
 
 public class ifcType{ // place-holder
+public virtual void Initialise(){}
 }
 
 public class ifcSqlType:ifcType,ifcSqlTypeInterface{
