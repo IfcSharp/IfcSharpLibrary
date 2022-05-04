@@ -18,23 +18,35 @@ public override void Initialise(){Highlighted=Highlighting;}
 public bool Highlighted=false;
 public static bool Highlighting=false;
 
-public static string HtmlRefOut(string expr)
+public static string HtmlRefOut(object o)
 {
+                                                                 
+string expr=o.ToString();
 List<int> SharpList=new List<int>();
 if (expr.Contains("#")) 
-   {for (int pos=0;pos<expr.Length;pos++) if (expr[pos]=='#') SharpList.Add(pos);
-    string NewExpr=expr;
-    foreach (int SharpPos in SharpList) {int pos=SharpPos;while ( (pos<expr.Length) && (expr[pos]!=',') && (expr[pos]!=')') ) pos++;
-                                         string link="-"; if (pos>SharpPos) link=expr.Substring(SharpPos,pos-SharpPos);
-                                         string NewLink="<a href=\""+link+"\" class=\"ref\">"+link+"</a>";
-                                         NewExpr=NewExpr.Replace(link, NewLink);
-                                        }  
-    expr=NewExpr;
+   {string SavedExpr=expr;
+    expr="(";
+    int pos=0;   
+    foreach (object item in (IEnumerable)o) if (item!=null) if (item is ENTITY || item is SELECT)
+            {pos++;if (pos>1) expr+=","; 
+             ENTITY e=null;
+
+             if  ((item is SELECT) && ( typeof(ENTITY).IsAssignableFrom( ((SELECT)item).SelectType())) ) e= (ENTITY) ((SELECT)item).SelectValue();
+             else if (item is ENTITY) e=(ENTITY)item;
+
+             if (e!=null)
+                {string RefClassName="ref";if (e.Highlighted) RefClassName="refX";
+                 expr+="<a href=\"#"+e.LocalId+"\" class=\""+RefClassName+"\">#"+e.LocalId+"</a>";
+                }
+           // if (item is ENTITY) s+=EntityVarName(((ENTITY)item).LocalId,CurrentModel);
+            }
+    expr+=")";
+if (expr.Length==2) expr=SavedExpr;
    }
 return expr;
 }
 
-public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\" title=\""+field.FieldType.Name+" "+field.Name+"="+IfcId+"\">"+IfcId+"</a>";}
+public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (e.Highlighted) RefClassName="refX"; if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\" title=\""+field.FieldType.Name+" "+field.Name+"="+IfcId+"\">"+IfcId+"</a>";}
 public static string HtmlOut(FieldInfo field,string ClassName, string value){return "<span class=\""+ClassName+"\" title=\""+field.FieldType.Name+" "+field.Name /*+"="+value*/ +"\" >"+value+"</span>";}
 public static string HtmlNullOut(FieldInfo field,bool IsDerived){return "<span class=\"dollar\" title=\""+field.FieldType.Name+" "+field.Name+"="+((IsDerived)?"* (is derived) ":"$ (null)")+"\" >"+((IsDerived)?"*":"$")+"</span>";}
 public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" >."+value+".</span>";}
@@ -53,7 +65,7 @@ string s=""; // Console.WriteLine(field.FieldType+"="+field.Name);  // here fiel
      else if (o is ENTITY)    if ( ((ENTITY)o).LocalId==0 ) s=HtmlNullOut(field,IsDerived); else  s=HtmlRefOut(field,((ENTITY)o).IfcId(),(ENTITY)o); 
      else if (o is TypeBase) {TypeBase tb=(TypeBase)o;if (tb.GetBaseType()==typeof(String)) {if (o.ToString()=="" || o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else  s=HtmlTextOut(field,o.ToString()); } else  {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"float",o.ToString());} }
      else if (o is String)   {if (o.ToString()=="") s=HtmlNullOut(field,IsDerived);else s=HtmlOut(field,"text",o.ToString());}
-     else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) {s=HtmlOut(field,"list",HtmlRefOut(o.ToString()));}
+     else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) s=HtmlOut(field,"list",HtmlRefOut(o));
      else                     {if (o.ToString()=="null") s=HtmlNullOut(field,IsDerived); else s=HtmlOut(field,"int",o.ToString());} 
                              
 return s;
@@ -139,6 +151,7 @@ sw.WriteLine("  .ifc {color: gray;}");
 sw.WriteLine("  .commentline {color: black; background-color:white; font-weight: bold;white-space: pre;text-decoration: underline;}");
 sw.WriteLine("  .EndOfLineComment {color: black; background-color:white; font-weight: bold;white-space: pre;}");
 sw.WriteLine("  .ref {color: blue;text-decoration: underline;}");
+sw.WriteLine("  .refX {color: blue;text-decoration: underline;background-color:#FFFF00;}");
 sw.WriteLine("  .entity {color: navy;font-weight:bold;}");
 sw.WriteLine("  .text {color: maroon; font-weight:bold;}");
 sw.WriteLine("  .dollar {color: gray; }");
