@@ -133,7 +133,7 @@ private static string FormattedHeaderLine(string line){return "<span class=\"hea
 
 public void ToHtmlFile()
 {
-StreamWriter sw=new StreamWriter(Header.name+".html");
+StreamWriter sw=new StreamWriter(Header.name+".ifc.html");
 //Console.WriteLine("Start ToHtmlFile");
 sw.WriteLine("<html>");
 sw.WriteLine("<head>");
