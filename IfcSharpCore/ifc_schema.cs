@@ -58,7 +58,8 @@ foreach (NetSystem.Type t in NetSystem.Reflection.Assembly.GetAssembly(typeof(if
 foreach (ComponentsType ct in EntityTypeComponentsList) EntityTypeComponentsDict.Add(ct.EntityType,ct);
 
 
-foreach ( NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.GetAssemblies())  foreach (NetSystem.Type t in a.GetTypes()) 
+foreach ( NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.GetAssemblies())  if (NetSystem.Diagnostics.Process.GetCurrentProcess().ProcessName==a.GetName().Name)
+    foreach (NetSystem.Type t in a.GetTypes()) 
         {if (   (t.IsEnum)      
              || (t.IsSubclassOf(typeof(ifc.ENTITY)))
              || (t.IsSubclassOf(typeof(ifc.SELECT))) 
