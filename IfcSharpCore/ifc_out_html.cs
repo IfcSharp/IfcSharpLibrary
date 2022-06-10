@@ -100,7 +100,10 @@ private static string FormattedHeaderLine(string line){return "<span class=\"hea
 
 public void ToHtmlFile()
 {
-StreamWriter sw=new StreamWriter(Header.name+".html");
+// 2022-06-10 (ef): the filename from the Header can contain the whole path to the file
+//                  therefore we only use the filename without extension as the output path.
+string filename = NetSystem.IO.Path.GetFileNameWithoutExtension(Header.name);
+StreamWriter sw=new StreamWriter(filename + ".html");
 //Console.WriteLine("Start ToHtmlFile");
 sw.WriteLine("<html>");
 sw.WriteLine("<head>");

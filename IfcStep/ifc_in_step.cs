@@ -1,19 +1,18 @@
 // ifc_in_step.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
+// TODO (ef): refactor and cleanup
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
-namespace ifc
-{//==============================
+namespace ifc {//==============================
 
 
-    public partial class ENTITY
-    {//==========================================================================================
+    public partial class ENTITY {//==========================================================================================
 
         public static string ReplaceCharAt(string s, int i, char c) { char[] array = s.ToCharArray(); array[i] = c; s = new string(array); return s; }
 
@@ -29,7 +28,21 @@ namespace ifc
                 else if (BaseType == typeof(double)) try { TypeCtorArgs[0] = double.Parse(value, CultureInfo.InvariantCulture); NewType = Activator.CreateInstance(FieldType, TypeCtorArgs); } catch { Console.WriteLine("Error on Parse2TYPE: " + CurrentLine); }
                 else if (BaseType == typeof(bool)) { TypeCtorArgs[0] = (value == ".T."); NewType = Activator.CreateInstance(FieldType, TypeCtorArgs); }
                 else if (BaseType.IsSubclassOf(typeof(TypeBase))) { NewType = Activator.CreateInstance(FieldType, Parse2TYPE(value, BaseType)); }
-                else Console.WriteLine("UNKNOWN TYPE for expected Type " + FieldType.Name + ": Base=" + BaseType.Name + " value=" + value + "\r\n" + CurrentLine);
+                // 2022-06-10 (ef):  for lists which are defined inline (i.e.: #42= IFCSITE('0KMpiAlnb52RgQuM1CwVfd',#10,'1','2','3',#11,#12,$,.ELEMENT.,(49,6,1,566000),(8,26,11,540400),110.,$,$);)
+                //                  we need to also check if the baseclass of the given 'FieldType' can be represented as a subclass of LIST.
+                //                  if so, the given args are parsed to the type of LIST and the the FieldType instance is created.
+                else if (typeof(ifcListInterface).IsAssignableFrom(BaseType)) {
+                    try {
+                        TypeCtorArgs[0] = Parse2LIST(BaseType, value);
+                        NewType = Activator.CreateInstance(FieldType, TypeCtorArgs[0]);
+                    }
+                    catch (Exception e) {
+                        Console.WriteLine("Parse2TYPE (parsing list):" + value + "\nException: " + e.Message);
+                    }
+                }
+                else {
+                    Console.WriteLine("UNKNOWN TYPE for expected Type " + FieldType.Name + ": Base=" + BaseType.Name + " value=" + value + "\r\n" + CurrentLine);
+                }
             } //=====================================================================
             return NewType;
         }
@@ -58,7 +71,7 @@ namespace ifc
 
         // 2022-04-04 (ef): now supports lists of list
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
-        public static object[] GetFieldCtorArgs(Type GenericType, string[] ListElements, Type ParentType=null) {
+        public static object[] GetFieldCtorArgs(Type GenericType, string[] ListElements, Type ParentType = null) {
             object[] FieldCtorArgs = new object[ListElements.Length];
 
             for (int ListPos = 0; ListPos < ListElements.Length; ListPos++) {//.....................................................
@@ -118,7 +131,7 @@ namespace ifc
                                 }
                                 o = Activator.CreateInstance(t, GenericCtorArgs);
                             }
-                            
+
                             Type genericType = GetGenericType(t);
                             if (typeof(ifcListInterface).IsAssignableFrom(genericType)) {
                                 int posL = ListElement.IndexOf('(') + 1;
@@ -144,7 +157,7 @@ namespace ifc
         }
         // 2022-04-04 (ef): now supports higher order lists, as well as lists of not TypeBase-Elements (e.g.: SELECT)
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
-        public static object Parse2LIST(Type FieldType, string body, Type ParentType=null) {
+        public static object Parse2LIST(Type FieldType, string body, Type ParentType = null) {
             if (!typeof(IEnumerable).IsAssignableFrom(FieldType)) Console.WriteLine("Parse2LIST: " + FieldType + " is not IEnumerable");
             if ((body == "$") || (body == "*")) return Activator.CreateInstance(FieldType); // warum  nicht null ?
             Type GenericType = GetGenericType(FieldType);
@@ -153,7 +166,7 @@ namespace ifc
             string[] ListElements;
             bool isListOfList = body.Contains("),");
 
-            int posL = body.IndexOf('(')+1;
+            int posL = body.IndexOf('(') + 1;
             string innerBody = body.Substring(posL, body.Substring(posL).LastIndexOf(')'));
             if (isListOfList && innerBody.StartsWith("(")) {
                 o = Parse2LIST(GenericType, innerBody, FieldType);
@@ -161,14 +174,14 @@ namespace ifc
             }
             else if (isListOfList && innerBody.StartsWith("IFC")) {
                 ListElements = innerBody.Split(new string[] { ")," }, StringSplitOptions.None);
-                for (int i = 0; i < ListElements.Length-1; i++) ListElements[i] += ")";
+                for (int i = 0; i < ListElements.Length - 1; i++) ListElements[i] += ")";
             }
             else if (!isListOfList && body.StartsWith("IFC")) {
                 ListElements = new string[] { body };
             }
             else if (isListOfList && !innerBody.StartsWith("(")) {
                 ListElements = body.Split(new string[] { ")," }, StringSplitOptions.None);
-                for (int i = 0; i < ListElements.Length; i++) if(!ListElements[i].EndsWith(")")) ListElements[i] += ")";
+                for (int i = 0; i < ListElements.Length; i++) if (!ListElements[i].EndsWith(")")) ListElements[i] += ")";
             }
             else {
                 ListElements = innerBody.Split(',');
@@ -204,7 +217,7 @@ namespace ifc
 
 
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        //public static string[] BaseTypes=new string[]{"INTEGER","BINARY","LOGICAL","REAL","BOOLEAN"};
+        public static string[] BaseTypes = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
 
         public static object ParseSelect(string Element, object o) {
             //Console.WriteLine("Parse SELECT: "+Element);
@@ -216,9 +229,12 @@ namespace ifc
             string body = ElementName.Substring(posLpar + 1, posRpar - posLpar - 1); // Argumenkörper extrahieren
             ElementName = ElementName.Substring(0, posLpar);
 
-
             bool ignoreCase = true;
-            //foreach (string s in BaseTypes ) if (s==ElementName) {ElementName=ElementName.Substring(0,1)+ElementName.Substring(1).ToLower();ignoreCase=false;}
+            // 2022-06-10 (ef): there is currently some ambivalence with the naming scheme which is case-senstive.
+            //                  BASETYPES (which are representing the types availble in the database) are capitalized,
+            //                  whereas the actual IFC-Types are not. This can lead to confusion when parsing a STEP-file.
+            //                  Therefore, we need to check if the current 'ElementName' is one of the BaseTypes, if so we change the name to first letter captitalized and remaining lower.
+            foreach (string s in BaseTypes) if (s == ElementName) { ElementName = ElementName.Substring(0, 1) + ElementName.Substring(1).ToLower(); ignoreCase = false; }
             ElementName = "ifc." + ElementName;
 
             try {
@@ -231,7 +247,14 @@ namespace ifc
                                                            //Console.WriteLine(Element);
                                                            //Console.WriteLine(ElementName+": "+body+ " o: "+o.GetType().Name+" [0]= "+TypeCtorArgs[0].GetType().Name);
                     if (TypeCtorArgs[0] == null) Console.WriteLine("SELECT-type is null" + "\r\n" + CurrentLine);
-                    else try { o = Activator.CreateInstance(SelectType, TypeCtorArgs); } catch (Exception e) { Console.WriteLine(e.Message + "\r\n" + CurrentLine); }
+                    else {
+                        try {
+                            o = Activator.CreateInstance(SelectType, TypeCtorArgs);
+                        }
+                        catch (Exception e) {
+                            Console.WriteLine(e.Message + "\r\n" + CurrentLine);
+                        }
+                    }
                 }
             }
             catch (Exception e) { Console.WriteLine(ElementName + " body=" + body + " ERROR SELECT: " + posLpar + " " + e.Message + "\r\n" + CurrentLine); }// 2. true: ignoreCase
@@ -366,8 +389,7 @@ namespace ifc
     }//ENTITY=====================================================================================================================
 
 
-    public partial class Model
-    {//==========================================================================================
+    public partial class Model {//==========================================================================================
 
         // 2022-04-02 (ef): new method 'ParseFileHeader'
         private static Dictionary<string, string> ParseFileHeader(string filePath) {
