@@ -268,7 +268,7 @@ public void EvalListNode(FieldInfo field, XmlNode n)//--------------------------
 #if(TRACE)
 Console.WriteLine("  LIST="+field.Name+":"+n.Name);//Console.ReadLine(); // Typ von n.Name ermiiiteln => field.FieldType 
 #endif
-Type GenericType=ENTITY.GetGenericType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
+Type GenericType=ENTITY.GetValueType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
 try {//Console.WriteLine("EvalListNode:"+field.FieldType.Name+" # "+n.Name+" GenericType="+GenericType.Name);
         object[] o=GetFieldCtorArgsFromXml(GenericType,n); 
 //     Console.WriteLine("XXXXXXXX:"+o.Length+" for ListType "+field.FieldType.Name);
@@ -292,7 +292,7 @@ Console.WriteLine("  EvalInverseEntityListNode="+field.Name+":"+n.Name);//Consol
 #endif
 //ifc.Project p=new Project();
 //ifc.RelContainedInSpatialStructure r=new RelContainedInSpatialStructure();r.RelatedElements
-Type GenericType=GetGenericType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
+Type GenericType= GetValueType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
 try {//Console.WriteLine("field.FieldType:"+field.FieldType.Name+" GenericType.Name:"+GenericType.Name);
 //ifc.Building b=new Building(); //b.ContainsElements
         object[] o=GetFieldCtorArgsFromXml(GenericType,n); 

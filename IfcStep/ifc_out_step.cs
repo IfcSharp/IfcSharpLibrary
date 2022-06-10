@@ -15,17 +15,25 @@ public partial class ENTITY{//==================================================
 
 public static string StepAttributeOut(object o,AttribInfo attrib=null){//-------------------------------------------------
 string s;//=""; 
-          if (o==null)       {if (attrib==null) s="$"; else s=((attrib.IsDerived)?"*":"$");}
-     else if (o is Enum)     {s="."+o.ToString()+".";}
-     else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s="$";
-                              else { if (((SELECT)o).SelectValue() is ENTITY) s=((SELECT)o).SelectValue().ToString(); 
-                                     else  s="IFC"+((SELECT)o).SelectType().Name.ToUpper()+"("+((SELECT)o).SelectValue().ToString()+")";
-                                   }
-                             }
-     else if (o is ENTITY)                                       s=((ENTITY)o).IfcId();
-     else if (o is TypeBase)                                     s=o.ToString();
-     else if( typeof(IEnumerable).IsAssignableFrom(o.GetType())) s=o.ToString();
-     else                                                        s=o.ToString();
+            if (o == null) { if (attrib == null) s = "$"; else s = ((attrib.IsDerived) ? "*" : "$"); }
+            else if (o is Enum) { s = "." + o.ToString() + "."; }
+            else if (o is SELECT) {
+                if (((SELECT)o).IsNull) {
+                    if (attrib.IsDerived == false) s = "$";
+                    else s = "*";//2022-06-10 (ef): derived attributes which are NULL are written as '*'
+                }
+                else {
+                    if (((SELECT)o).SelectValue() is ENTITY) s = ((SELECT)o).SelectValue().ToString();
+                    else s = "IFC" + ((SELECT)o).SelectType().Name.ToUpper() + "(" + ((SELECT)o).SelectValue().ToString() + ")";
+                }
+            }
+            else if (o is ENTITY) s = ((ENTITY)o).IfcId();
+            else if (o is TypeBase) {
+                if (((TypeBase)o).IsNull && attrib.IsDerived) s = "*"; //2022-06-10 (ef): derived attributes which are NULL are written as '*'
+                else s = o.ToString();
+            }
+            else if (typeof(IEnumerable).IsAssignableFrom(o.GetType())) s = o.ToString();
+            else s = o.ToString();
 return s;
 }//------------------------------------------------------------------------------------------------
 
@@ -55,7 +63,7 @@ public void ToStepFile(string filePath="")//------------------------------------
 Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 foreach (ENTITY e in EntityList) if (e is ifc.Root) if (((ifc.Root)e).GlobalId == null) ((ifc.Root)e).GlobalId = ifc.GloballyUniqueId.NewId();
 //EF-2021-03-02: added support for the definition of a filepath, if the filepath is omitted, we use the headername of the Model
-if (string.IsNullOrEmpty(filePath)) filePath = Header.name + ".ifc";
+if (string.IsNullOrEmpty(filePath)) filePath = Header.name + "_out.ifc";
 StreamWriter sw = new StreamWriter(filePath);
 sw.WriteLine("ISO-10303-21;");
 sw.WriteLine("HEADER;");

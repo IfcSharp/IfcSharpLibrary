@@ -18,7 +18,8 @@ public       TYPE(T v){IsNull=false;TypeValue=v;}
 public T TypeValue;
 public override Type GetBaseType(){return typeof(T);}
 
-public override string ToString(){if (IsNull) return "$";
+public override string ToString(){
+            if (IsNull)  return "$";
             //EF-2021-03-02: commented out 'TrimEnd'. for trailing zeros, this is considered as schema violation, because the decimalpoint has no following zero
             //((double)(object)TypeValue).ToString("0.0000000000", CultureInfo.InvariantCulture).TrimEnd('0'); 
             else if (typeof(T).Equals(typeof(double))) return string.Format("{0:0.0###########}", (double)(object)TypeValue);
