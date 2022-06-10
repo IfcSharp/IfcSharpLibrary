@@ -33,7 +33,7 @@ public virtual void AssignInverseElements(){}
 // static:
 public partial class ENTITY:ifcSqlType{//==========================================================================================
 static public int NextGlobalId=1;
-protected void AddNext(){LocalId=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/  Repository.CurrentModel.EntityList.Add(this);}
+protected void AddNext(){LocalId=NextGlobalId++;/*NetSystem.Console.WriteLine(this.ToStepLine());*/ Initialise(); Repository.CurrentModel.EntityList.Add(this);}
 protected virtual void CheckValues(){}
 protected virtual void SetDefaultValues(){}
 static public int NextGlobalCommentId=0;
@@ -43,8 +43,12 @@ protected void AddNextCommentLine(){LocalId=NextGlobalCommentId--;Repository.Cur
 
 [ifcSql(TypeGroupId:5,TypeId:-1)] public partial class EntityComment:ENTITY{//==========================================================================================
 public               EntityComment(){} 
-public               EntityComment(string CommentLine){AddNextCommentLine();this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);}
-public               EntityComment(string CommentLine,char FrameChar){this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);
+public               EntityComment(string CommentLine){this.Highlighted=ENTITY.Highlighting; 
+                                                       AddNextCommentLine();
+                                                       this.CommentLine=CommentLine;
+                                                       if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);}
+public               EntityComment(string CommentLine,char FrameChar){this.Highlighted=ENTITY.Highlighting; 
+                                                                      this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);
                                                                       new EntityComment(new string(' ',74));
                                                                       new EntityComment(new string(FrameChar,74));
                                                                       AddNextCommentLine();
