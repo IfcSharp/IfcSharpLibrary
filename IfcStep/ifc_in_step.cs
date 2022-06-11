@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Linq;
 
 namespace ifc {
 
@@ -89,10 +88,6 @@ namespace ifc {
         */
 
         // 
-
-
-
-
         // 2022-04-04 (ef): now supports higher order lists, as well as lists of not TypeBase-Elements (e.g.: SELECT)
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
         public static object Parse2LIST(Type listType, string body, Type parentType = null) {
@@ -131,9 +126,6 @@ namespace ifc {
                 try {
                     object[] ctorArgs = new object[values.Length];
                     if (isListOfList && parentType != null) {
-                        //Type GenericBaseType = fieldType.BaseType.GetGenericArguments()[0];
-                        //ctorArgs = GetListCtorArgs(valueType, values);
-                        //instance = Activator.CreateInstance(listType, ctorArgs);
                         ctorArgs = GetListCtorArgs(listType, values);
                         instance = Activator.CreateInstance(parentType, ctorArgs);
                     }
@@ -152,9 +144,6 @@ namespace ifc {
 
         // 2022-04-04 (ef): now supports lists of list
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
-
-        // only used in Parse2LIST
-        // itself uses Parse2LIST
         public static object[] GetListCtorArgs(Type valueType, string[] values) {
             object[] valueInstances = new object[values.Length];
 
@@ -369,10 +358,9 @@ namespace ifc {
                         orderedAttributeDictionary.Add(((ifcAttribute)attr).OrdinalPosition, field);
                     }
             }
-            return orderedAttributeDictionary;//.OrderBy(a => a.Key).ToDictionary(k=>k.Key, v=>v.Value);
+            return orderedAttributeDictionary;
         }
     }
-
 
     public partial class Model {
 
@@ -406,7 +394,6 @@ namespace ifc {
             return headerInfo;
         }
         public static Model FromStepFile(string FileName) {
-            //ifc.Repository.CurrentModel.
             string FileSchema = "-";
             Model CurrentModel = new ifc.Model(FileName.Replace(".ifc", ""));
             Dictionary<string, string> headerInfo = ParseFileHeader(FileName);
