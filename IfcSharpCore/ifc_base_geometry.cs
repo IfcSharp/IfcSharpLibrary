@@ -28,7 +28,22 @@ public static Direction operator - (Direction d1,Direction d2) {return new Direc
 public static Direction operator * (Direction d, double Scale) {return new Direction(d.x*Scale,d.y*Scale,d.z*Scale);}// issue: need for distinction 2D/3D here
 
 }//=====================================================================================================================
+#else
+public partial class Direction:GeometricRepresentationItem{//===========================================================
+public               Direction(double x, double y, double z,string EndOfLineComment=null):base(){AddNext();this.DirectionRatios=new List2to3_double((REAL)  x,(REAL)  y,(REAL)  z);this.EndOfLineComment=  EndOfLineComment;}
+public               Direction(double x, double y          ,string EndOfLineComment=null):base(){AddNext();this.DirectionRatios=new List2to3_double((REAL)  x,(REAL)  y);            this.EndOfLineComment=  EndOfLineComment;}
+public               Direction(Direction d                                              ):base(){AddNext();this.DirectionRatios=new List2to3_double((REAL)d.x,(REAL)d.y,(REAL)d.z);this.EndOfLineComment=d.EndOfLineComment;} // issue: need for distinction 2D/3D here
+public double x {get{return this.DirectionRatios[0];}}
+public double y {get{return this.DirectionRatios[1];}}
+public double z {get{return this.DirectionRatios[2];}}
+public static Direction operator - (Direction d              ) {return new Direction(-d.x,-d.y,-d.z);               }// issue: need for distinction 2D/3D here
+public static Direction operator + (Direction d1,Direction d2) {return new Direction(d1.x+d2.x,d1.y+d2.y,d1.z+d2.z);}// issue: need for distinction 2D/3D here
+public static Direction operator - (Direction d1,Direction d2) {return new Direction(d1.x-d2.x,d1.y-d2.y,d1.z-d2.z);}// issue: need for distinction 2D/3D here
+public static Direction operator * (Direction d, double Scale) {return new Direction(d.x*Scale,d.y*Scale,d.z*Scale);}// issue: need for distinction 2D/3D here
+
+}//=====================================================================================================================
 #endif
+
 
 public partial class Axis2Placement3D:Placement{//======================================================================
 public               Axis2Placement3D(Axis2Placement3D template,string EndOfLineComment=null):base(){AddNext();this.Location=template.Location;this.Axis=template.Axis;this.RefDirection=template.RefDirection;this.EndOfLineComment=EndOfLineComment;}
