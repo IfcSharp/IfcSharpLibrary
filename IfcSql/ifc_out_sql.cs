@@ -109,7 +109,7 @@ public partial class Model{//===================================================
 
 
 
-public void ToSqlFile(int ProjectId=0,long StartGlobalId=1,string DatabaseName="ifcSQL_Instance")//.........
+public void ToSqlFile(int ProjectId=0,long StartGlobalId=1,string DatabaseName="ifcSQL")//.........
 {
 //if (ENTITY.ifcSqlInstance==null) 
 ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance();
@@ -125,14 +125,14 @@ sw.Close();
 public enum eWriteMode{CreateNewProject, OnlyIfEmpty,DeleteBeforeWrite }
 
 //.................................................................................................
-public void ToSql(string ServerName,string DatabaseName="ifcSQL_instance",eWriteMode WriteMode=eWriteMode.CreateNewProject,int ProjectId=0)
+public void ToSql(string ServerName,string DatabaseName="ifcSQL",eWriteMode WriteMode=eWriteMode.CreateNewProject,int ProjectId=0,int ProjectGroupId=0)
 {
                       ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance(ServerName: ServerName,DatabaseName:DatabaseName);
 ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
 long LastGlobalId=0;
 
 ifcSQL.conn.Open(); 
-if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.name+"',@ProjectDescription='"+Header.description+"',@ProjectGroupId=0,@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.author+"',@Organization='"+Header.organization+"',@OriginatingSystem='"+Header.originating_system+"',@Documentation='"+Header.documentation+"';select @r");                                            
+if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.name+"',@ProjectDescription='"+Header.description+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.author+"',@Organization='"+Header.organization+"',@OriginatingSystem='"+Header.originating_system+"',@Documentation='"+Header.documentation+"';select @r");                                            
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
