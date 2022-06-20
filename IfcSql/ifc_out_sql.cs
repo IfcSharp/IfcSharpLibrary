@@ -91,7 +91,7 @@ else if (this is Direction)      {double X=0;double Y=0;double? Z=null;
                                   if (((Direction)this).DirectionRatios.Count>2) {Z=(double)((Direction)this).DirectionRatios[2];}
                                   ifcSqlInstance.cp.EntityAttributeOfVector.Add(new ifcSQL.ifcInstance.EntityAttributeOfVector_Row(this.ifcSqlGlobalId,1,42,X,Y,Z));  
                                  }
-else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList; Console.WriteLine(this.ToStepLine());
+else                             {AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
                                   foreach (AttribInfo attrib in AttribList) SqlOut0(this.ifcSqlGlobalId,attrib.OrdinalPosition,attrib.field.GetValue(this));
                                 }
 }//....................................................................................................................
@@ -132,7 +132,7 @@ ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
 long LastGlobalId=0;
 
 ifcSQL.conn.Open(); 
-if (WriteMode==eWriteMode.CreateNewProject) {ifcSQL.ExecuteNonQuery("app.NewProject '"+Header.name+"'");ProjectId=0;}
+if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.name+"',@ProjectDescription='"+Header.description+"',@ProjectGroupId=0,@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.author+"',@Organization='"+Header.organization+"',@OriginatingSystem='"+Header.originating_system+"',@Documentation='"+Header.documentation+"';select @r");                                            
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
