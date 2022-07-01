@@ -268,7 +268,7 @@ namespace ifc
                                 o = Activator.CreateInstance(t, genericCtorArgs);
                             }
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message); }
+                        catch (IfcSharpException e) { Console.WriteLine(e.Message); }
                     }
                     args.Add(o);
                 }

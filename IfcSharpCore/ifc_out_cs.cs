@@ -60,7 +60,7 @@ cnt++;
                                                               else {if (TypeDisplay)  s+="(ifc."+item.GetType().Name+")("+item.ToString()+")"; else s+=item.ToString(); }
                                                              }
                                   else if (item is double  ) {s+=item.ToString(); }
-                                  else throw new ifc.Exception("CsOut: unknown enumerable-type"); 
+                                  else throw new ifc.IfcSharpException("CsOut: unknown enumerable-type"); 
                                  }
                           if (TypeDisplay) s+=")";
                          }
@@ -147,7 +147,7 @@ public void ToCsFile(string FileName=null)
 {
 AssignEntities();
 SortEntities();
-if (FileName==null) FileName=Header.name;
+if (FileName==null) FileName=Header.Name;
 StreamWriter sw=new StreamWriter(FileName+".cs",false,Encoding.Default);
 sw.WriteLine("");
 sw.WriteLine("// CAUTION! THIS IS A GENERATED FILE! IT WILL BE OVERWRITTEN AT ANY TIME! ");
@@ -157,7 +157,7 @@ sw.WriteLine("public class ifcOut{ public static void Generated(){ // ##########
 sw.WriteLine("");
 sw.WriteLine("ifc.Repository.CurrentModel.ClearEntityList();");
 sw.WriteLine("ifc.Repository.CurrentModel.Header.name=\"generated_from_IfcSharp_ifc_Model_ToCsFile()\";");
-if (AssignedEntityDict==null) throw new ifc.Exception("AssignedEntityDict is not initialized");
+if (AssignedEntityDict==null) throw new ifc.IfcSharpException("AssignedEntityDict is not initialized");
 foreach (KeyValuePair<int,ENTITY> kvp in AssignedEntityDict) sw.WriteLine(kvp.Value.ToCs(CurrentModel:this));  
 sw.WriteLine("");
 sw.WriteLine("ifc.Repository.CurrentModel.ToStepFile();");

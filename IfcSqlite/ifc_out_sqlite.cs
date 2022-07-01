@@ -257,7 +257,7 @@ namespace ifc
         public void ToSqliteFile()
         {
             AssignEntities();
-            string fullPath = Header.name + ".sqlite";
+            string fullPath = Header.Name + ".sqlite";
             SQLiteDataSet sqliteDataSet = new SQLiteDataSet();
 
 #if EXPORT_COMPLETE_SCHEMA

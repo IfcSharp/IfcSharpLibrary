@@ -3,18 +3,21 @@
 
 namespace ifc{//==============================
 public class HeaderData{//==============================================================================================
-public string description=ifc.Specification.SchemaName;// e.g. ViewDefinition[CoordinationView], only STEP, not ifcXML
-public string name="";// FileName
-public string time_stamp="";
-public string author="Bernhard Simon Bock, Friedrich Eder";
-public string organization=@"https://github.com/IfcSharp";
-public string preprocessor_version=@"https://github.com/IfcSharp";
-public string originating_system="";
-public string authorization="";
-public string documentation="";
-public void Init(string name,string description, string author,string preprocessor_version)
-{this.name=name;this.description=description;this.author=author;this.preprocessor_version=preprocessor_version;}
-public void Reset(){description=ifc.Specification.SchemaName;name="IfcSharp";time_stamp="";author="Bernhard Simon Bock, Friedrich Eder";organization=@"https://github.com/IfcSharp";preprocessor_version="";originating_system="";authorization=@"https://github.com/IfcSharp";documentation=""; }
+//see: https://standards.buildingsmart.org/documents/Implementation/ImplementationGuide_IFCHeaderData_Version_1.0.2.pdf
+public string ViewDefinition="$";// e.g. ViewDefinition[CoordinationView], only STEP, not ifcXML
+public string ImplementationLevel = "2;1";
+public string Name="";// FileName
+public string TimeStamp="";
+public string Author="Bernhard Simon Bock, Friedrich Eder";
+public string Organization=@"https://github.com/IfcSharp";
+public string PreprocessorVersion=@"https://github.com/IfcSharp";
+public string OriginatingSystem="";
+public string Authorization="";
+public string Documentation="";
+public string FileSchema = ifc.Specification.SchemaName;
+public void Init(string name,string viewDefinition, string author,string preprocessorVersion)
+{this.Name=name;this.ViewDefinition=viewDefinition;this.Author=author;this.PreprocessorVersion=preprocessorVersion;}
+public void Reset(){ViewDefinition=ifc.Specification.SchemaName;Name="IfcSharp";TimeStamp="";Author="Bernhard Simon Bock, Friedrich Eder";Organization=@"https://github.com/IfcSharp";PreprocessorVersion="";OriginatingSystem="";Authorization=@"https://github.com/IfcSharp";Documentation=""; }
 }//====================================================================================================================
 
 }// ifc=======================================

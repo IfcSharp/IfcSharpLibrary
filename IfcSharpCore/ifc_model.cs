@@ -18,14 +18,14 @@ public static ifc.Model CurrentModel=new ifc.Model();
     public partial class Model
     {//==========================================================================================
         public Model() { }
-        public Model(string name) { this.Header.name = name; }
-        public Model(string name, string description, string author, string organization, string originating_system, string documentation) {
-            this.Header.name = name;
-            this.Header.description = description;
-            this.Header.author = author;
-            this.Header.organization = organization;
-            this.Header.originating_system = originating_system;
-            this.Header.documentation = documentation;
+        public Model(string name) { this.Header.Name = name; }
+        public Model(string name, string viewDefinition, string author, string organization, string originating_system, string documentation) {
+            this.Header.Name = name;
+            this.Header.ViewDefinition = viewDefinition;
+            this.Header.Author = author;
+            this.Header.Organization = organization;
+            this.Header.OriginatingSystem = originating_system;
+            this.Header.Documentation = documentation;
         }
 
         public int NextGlobalId = 1;

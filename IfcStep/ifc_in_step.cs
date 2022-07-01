@@ -1,13 +1,17 @@
 // ifc_in_step.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
 // TODO (ef): refactor and cleanup
-//            every 'Console.WriteLine' needs to be logged
+// TODO (ef): every 'Console.WriteLine' needs to be logged
+// TODO (ef): make tests for each IFC Version
+// TODO (ef): write build version of IfcSharp to IFC file
 
 using System;
+using NetSystem = System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace ifc {
@@ -26,29 +30,48 @@ namespace ifc {
         /// <returns>type of generic constructor arguments</returns>
         public static Type GetValueType(Type fieldType) {
             if (fieldType.BaseType.GetGenericArguments().Length > 0) return fieldType.BaseType.GetGenericArguments()[0]; //i.e. LengthMeasure or CartesianPoint
-            else return fieldType.BaseType.BaseType.GetGenericArguments()[0]; //i.e. CompoundPlaneAngleMeasure
+            return fieldType.BaseType.BaseType.GetGenericArguments()[0]; //i.e. CompoundPlaneAngleMeasure
         }
 
         /// <summary>
-        /// parses given <param name="value"></param> and tries to instantiate an object of given <param name="valueType"></param>
+        /// parses given <param name="value">value</param> and tries to instantiate an object of given <param name="valueType">valueType</param>
         /// </summary>
         /// <param name="value"></param>
         /// <param name="valueType"></param>
-        /// <returns>null on error; instance of <param name="valueType"></returns>
+        /// <returns>null on error; instance of <param>valueType</param> on success</returns>
         public static object Parse2TYPE(string value, Type valueType) {
-            Type valueBaseType = GetValueType(valueType);//valueType.BaseType.GetGenericArguments()[0];
+            
+            Type valueBaseType = GetValueType(valueType); //valueType.BaseType.GetGenericArguments()[0];
             object instance = null;
             object[] ctorArgs = new object[1];
-            
             //if ((value == "$") || (value == "*")) instance = Activator.CreateInstance(valueType);
             if (value == "$") return null;
             else if (value == "*") instance = Activator.CreateInstance(valueType);
             else {
-                if (valueBaseType == typeof(string)) { if (value == "$") ctorArgs[0] = ""; else ctorArgs[0] = ifc.IfcString.Decode(value); instance = Activator.CreateInstance(valueType, ctorArgs); }
-                else if (valueBaseType == typeof(int)) { ctorArgs[0] = int.Parse(value); instance = Activator.CreateInstance(valueType, ctorArgs); }
-                else if (valueBaseType == typeof(double)) try { ctorArgs[0] = double.Parse(value, CultureInfo.InvariantCulture); instance = Activator.CreateInstance(valueType, ctorArgs); } catch { Console.WriteLine("Error on Parse2TYPE: " + CurrentLine); }
-                else if (valueBaseType == typeof(bool)) { ctorArgs[0] = (value == ".T."); instance = Activator.CreateInstance(valueType, ctorArgs); }
-                else if (valueBaseType.IsSubclassOf(typeof(TypeBase))) { instance = Activator.CreateInstance(valueType, Parse2TYPE(value, valueBaseType)); }
+                if (valueBaseType == typeof(string)) {
+                    if (value == "$") ctorArgs[0] = "";
+                    else ctorArgs[0] = ifc.IfcString.Decode(value);
+                    instance = Activator.CreateInstance(valueType, ctorArgs);
+                }
+                else if (valueBaseType == typeof(int)) {
+                    ctorArgs[0] = int.Parse(value);
+                    instance = Activator.CreateInstance(valueType, ctorArgs);
+                }
+                else if (valueBaseType == typeof(double))
+                    try {
+                        ctorArgs[0] = double.Parse(value, CultureInfo.InvariantCulture);
+                        instance = Activator.CreateInstance(valueType, ctorArgs);
+                    }
+                    catch {
+                        Console.WriteLine("Error on Parse2TYPE: " + CurrentLine);
+                    }
+                else if (valueBaseType == typeof(bool)) {
+                    ctorArgs[0] = (value == ".T.");
+                    instance = Activator.CreateInstance(valueType, ctorArgs);
+                }
+                else if (valueBaseType.IsSubclassOf(typeof(TypeBase))) {
+                    instance = Activator.CreateInstance(valueType, Parse2TYPE(value, valueBaseType));
+                }
 
                 // 2022-06-10 (ef): for lists which are defined inline (i.e.: (49,6,1,566000))
                 //                  we need to also check if the baseclass of the given 'FieldType' can be represented as a subclass of LIST.
@@ -58,16 +81,15 @@ namespace ifc {
                         ctorArgs[0] = Parse2LIST(valueBaseType, value);
                         instance = Activator.CreateInstance(valueType, ctorArgs[0]);
                     }
-                    catch (Exception e) {
-                        // TODO (ef): implement logging
-                        Console.WriteLine("Parse2TYPE (parsing list):" + value + "\nException: " + e.Message);
+                    catch (NetSystem.Exception e) {
+                        Log.Add($"Parse2TYPE (parsing list): {value}\nException: {e.Message}", Log.Level.Exception);
                     }
                 }
                 else {
-                    // TODO (ef): implement logging
-                    Console.WriteLine("UNKNOWN TYPE for expected Type " + valueType.Name + ": Base=" + valueBaseType.Name + " value=" + value + "\r\n" + CurrentLine);
+                    Log.Add($"UNKNOWN TYPE for expected Type {valueType.Name}: Base={valueBaseType.Name} value={value}\r\n{CurrentLine}", Log.Level.Error);
                 }
-            } 
+            }
+
             return instance;
         }
 
@@ -125,17 +147,11 @@ namespace ifc {
             else {
                 try {
                     object[] ctorArgs = new object[values.Length];
-                    if (isListOfList && parentType != null) {
-                        ctorArgs = GetListCtorArgs(listType, values);
-                        instance = Activator.CreateInstance(parentType, ctorArgs);
-                    }
-                    else {
-                        ctorArgs = GetListCtorArgs(valueType, values);
-                        instance = Activator.CreateInstance(listType, ctorArgs);
-                    }
+                    if (isListOfList && parentType != null) instance = Activator.CreateInstance(parentType, GetListCtorArgs(listType, values));
+                    else instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values)); 
                 }
                 catch (Exception e) {
-                    Console.WriteLine($"ERROR on Parse2LIST.2:{CurrentLine}\n{e}");
+                    Log.Add($"ERROR on Parse2LIST.2:{CurrentLine}\n{e}", Log.Level.Exception);
                 }
             }
             return instance;
@@ -144,13 +160,13 @@ namespace ifc {
 
         // 2022-04-04 (ef): now supports lists of list
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
-        public static object[] GetListCtorArgs(Type valueType, string[] values) {
+        private static object[] GetListCtorArgs(Type valueType, string[] values) {
             object[] valueInstances = new object[values.Length];
 
             for (int i = 0; i < values.Length; i++) {
                 string value = values[i];
-                if (valueType == typeof(Int32)) {
-                    valueInstances[i] = Int32.Parse(value);
+                if (valueType == typeof(int)) {
+                    valueInstances[i] = int.Parse(value);
                 }
                 else if (valueType == typeof(double)) {
                     valueInstances[i] = double.Parse(value, CultureInfo.InvariantCulture);
@@ -171,7 +187,7 @@ namespace ifc {
                     }
                     else {
                         // otherwise we parse the entire SELECT
-                        o = ParseSelect(value, valueType);
+                        o = ParseSELECT(value, valueType);
                     }
                     valueInstances[i] = o;
                 }
@@ -179,7 +195,7 @@ namespace ifc {
                     valueInstances[i] = Parse2LIST(valueType, value);
                 }
                 else {
-                    Console.WriteLine("Base=" + valueType.Name + " not supportet. in \r\n" + CurrentLine);
+                    Console.WriteLine("Base=" + valueType.Name + " not supported. in \r\n" + CurrentLine);
                 }
             }
             return valueInstances;
@@ -187,9 +203,9 @@ namespace ifc {
         
 
         
-        public static string[] BaseTypeNames = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
+        private static readonly string[] BaseTypeNames = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
 
-        public static object ParseSelect(string value, Type selectType) {
+        public static object ParseSELECT(string value, Type selectType) {
             object instance = null;
             string selectedTypeName = value.Replace("IFC", "");
 
@@ -201,7 +217,7 @@ namespace ifc {
 
             bool ignoreCase = true;
             // 2022-06-10 (ef): there is currently some ambivalence with the naming scheme which is case-senstive.
-            //                  BASETYPES (which are representing the types availble in the database) are capitalized,
+            //                  BASETYPES (which are representing the types available in the database) are capitalized,
             //                  whereas the actual IFC-Types are not. This can lead to confusion when parsing a STEP-file.
             //                  Therefore, we need to check if the current 'ElementName' is one of the BaseTypes, if so we change the name to first letter captitalized and remaining lower.
             foreach (string name in BaseTypeNames) if (name == selectedTypeName) { selectedTypeName = selectedTypeName.Substring(0, 1) + selectedTypeName.Substring(1).ToLower(); ignoreCase = false; }
@@ -219,207 +235,288 @@ namespace ifc {
                             instance = Activator.CreateInstance(selectType, typeCtorArgs);
                         }
                         catch (Exception e) {
-                            Console.WriteLine(e.Message + "\r\n" + CurrentLine);
+                            Log.Add(e.Message + "\r\n" + CurrentLine, Log.Level.Exception);
                         }
                     }
                 }
             }
-            catch (Exception e) { Console.WriteLine(selectedTypeName + " body=" + body + " ERROR SELECT: " + posLpar + " " + e.Message + "\r\n" + CurrentLine); }
+            catch (Exception e) { Log.Add(selectedTypeName + " body=" + body + " ERROR SELECT: " + posLpar + " " + e.Message + "\r\n" + CurrentLine, Log.Level.Exception); }
             return instance;
         }
+        
+        private static string CurrentLine { get; set; } = "";
 
-
-
-        public static string CurrentLine = "";
-        public static string CurrentEntityComment = "";
+        private static string CurrentEntityComment { get; set; } = "";
+        
         // 2022-04-02 (ef): added CurrentElementName, CurrentArgs and CurrentEntity as a static property
         //                  this helps with debugging and readability
-        public static string CurrentElementName = "";
-        public static string[] CurrentArgs;
-        public static object CurrentEntity = null;
+        private static string CurrentTypeName { get; set; } = "";
+        private static string[] CurrentArgs { get; set; }
+        private static object CurrentInstance { get; set; }
 
-        // 2022-04-02 (ef): formatting 
-        public static void ParseIfcLine(Model CurrentModel, string line) {
+        /// <summary>
+        /// Parses the given <paramref name="ifcLine"/> and tries to add the resulting <code>ENTITY</code> to the given <paramref name="targetModel"/> 
+        /// </summary>
+        /// <param name="targetModel"></param>
+        /// <param name="ifcLine"></param>
+        /// <exception cref="IfcSharpException"></exception>
+        public static void ParseIfcLine(Model targetModel, string ifcLine) {
             //Console.WriteLine("parse="+line);
-            CurrentLine = line;
-            int CommentOpenPos = line.IndexOf("/*"); if (CommentOpenPos >= 0) {
-                CurrentEntityComment = line.Substring(CommentOpenPos + 2).Replace("*/", ""); line = line.Substring(0, CommentOpenPos);
+            CurrentLine = ifcLine;
+            int commentOpenPos = ifcLine.IndexOf("/*"); 
+            if (commentOpenPos >= 0) {
+                CurrentEntityComment = ifcLine.Substring(commentOpenPos + 3).Replace(" */", ""); ifcLine = ifcLine.Substring(0, commentOpenPos);
                 //Console.WriteLine("CommentOpenPos="+CommentOpenPos+" "+CurrentEntityComment);  
             }
-            // if (EndOfLineComment!=null) s+="/* "+EndOfLineComment+" */";
-            if (CommentOpenPos != 0) {
-
-                int posA = line.IndexOf('=');
-                int posLpar = line.IndexOf('(');
-                int posRpar = line.LastIndexOf(')');
-                CurrentElementName = line.Substring(posA + 1, posLpar - posA - 1).TrimStart(' ').Substring(3);
-                string body = line.Substring(posLpar + 1, posRpar - posLpar - 1); // Argumentk�rper extrahieren
-                bool TxtOpen = false;
-                int ParOpen = 0;
+            if (commentOpenPos != 0) {
+                int posA = ifcLine.IndexOf('=');
+                int posLpar = ifcLine.IndexOf('(');
+                int posRpar = ifcLine.LastIndexOf(')');
+                CurrentTypeName = ifcLine.Substring(posA + 1, posLpar - posA - 1).TrimStart(' ').TrimEnd(' ').Substring(3);
+                string body = ifcLine.Substring(posLpar + 1, posRpar - posLpar - 1); // Argumentkoerper extrahieren
+                bool txtOpen = false;
+                int parOpen = 0;
                 for (int i = 0; i < body.Length; i++) {
-                    if ((!TxtOpen) && (body[i] == '\'')) { TxtOpen = true; }//body=ReplaceCharAt(body,i,'[');}
-                    else if ((!TxtOpen) && (body[i] == '(')) { ParOpen++; }//body=ReplaceCharAt(body,i,'<');}
-                    else if ((!TxtOpen) && (body[i] == ')')) { ParOpen--; }//body=ReplaceCharAt(body,i,'>');}
-                    else if ((TxtOpen) && (body[i] == '\'')) { TxtOpen = false; }//body=ReplaceCharAt(body,i,']');}
-                    if ((TxtOpen) || (ParOpen > 0)) if (body[i] == ',') { body = ReplaceCharAt(body, i, (char)9); }
+                    if ((!txtOpen) && (body[i] == '\'')) { txtOpen = true; }//body=ReplaceCharAt(body,i,'[');}
+                    else if ((!txtOpen) && (body[i] == '(')) { parOpen++; }//body=ReplaceCharAt(body,i,'<');}
+                    else if ((!txtOpen) && (body[i] == ')')) { parOpen--; }//body=ReplaceCharAt(body,i,'>');}
+                    else if ((txtOpen) && (body[i] == '\'')) { txtOpen = false; }//body=ReplaceCharAt(body,i,']');}
+                    if ((txtOpen) || (parOpen > 0)) if (body[i] == ',') { body = ReplaceCharAt(body, i, (char)9); }
                 }
                 CurrentArgs = body.Split(',');
                 for (int i = 0; i < CurrentArgs.Length; i++) CurrentArgs[i] = CurrentArgs[i].Replace((char)9, ',');
 
                 try {
-                    Type t = Type.GetType("ifc." + CurrentElementName, true, true);// 2. true: ignoreCase
-                    CurrentEntity = Activator.CreateInstance(t); if (CommentOpenPos > 0) ((ENTITY)CurrentEntity).EndOfLineComment = CurrentEntityComment;
-                    ((ENTITY)CurrentEntity).LocalId = int.Parse(line.Substring(1, posA - 1));
+                    Type t = Type.GetType("ifc." + CurrentTypeName, throwOnError: true, ignoreCase: true);
+                    CurrentInstance = Activator.CreateInstance(t);
+                    if (commentOpenPos > 0) ((ENTITY) CurrentInstance).EndOfLineComment = CurrentEntityComment;
+                    ((ENTITY) CurrentInstance).LocalId = int.Parse(ifcLine.Substring(1, posA - 1));
 
-                    Dictionary<int, FieldInfo> orderedAttributeDictionary = GetOrderedAttributeDictionaryForCurrentEntity();
-                    for (int i = 1; i <= orderedAttributeDictionary.Count; i++) {
-                        FieldInfo field = orderedAttributeDictionary[i];
+                    Dictionary<int, FieldInfo> attributes = GetAttributesOfObject(CurrentInstance);
+                    for (int i = 1; i <= attributes.Count; i++) {
+                        FieldInfo field = attributes[i];// we access a dictionary via key (which starts at 1), not an array
                         string value = "$";
                         if (i <= CurrentArgs.GetLength(0)) value = CurrentArgs[i - 1].Trim(' ').Trim('\'');
-                        if (field.FieldType == typeof(String)) { if (value == "$") field.SetValue(CurrentEntity, ""/*null*/); else field.SetValue(CurrentEntity, ifc.IfcString.Decode(value)); }
-                        else if (field.FieldType == typeof(int)) { if (value == "$") field.SetValue(CurrentEntity, 0); else field.SetValue(CurrentEntity, int.Parse(value)); }
+                        if (field.FieldType == typeof(string)) {
+                            if (value == "$") field.SetValue(CurrentInstance, "" /*null*/);
+                            else field.SetValue(CurrentInstance, IfcString.Decode(value));
+                        }
+                        else if (field.FieldType == typeof(int)) {
+                            if (value == "$") field.SetValue(CurrentInstance, 0);
+                            else field.SetValue(CurrentInstance, int.Parse(value));
+                        }
                         else if (field.FieldType.IsSubclassOf(typeof(TypeBase))) {
-                            try { field.SetValue(CurrentEntity, Parse2TYPE(value, field.FieldType)); } catch (Exception e) { throw new Exception("Parse.Type: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message); }
+                            try {
+                                field.SetValue(CurrentInstance, Parse2TYPE(value, field.FieldType));
+                            }
+                            catch (Exception e) {
+                                string msg = "Parse.Type: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
+                            }
                         } //tb.GetBaseType()
                         else if (field.FieldType.IsSubclassOf(typeof(SELECT))) {
-                            //Console.WriteLine("begin SELECT: "+line);
                             try {
-                                object o = Activator.CreateInstance(field.FieldType);
-                                if ((value.Length > 0) && (value[0] == '$')) { }
-                                else if ((value.Length > 0) && (value[0] == '*')) { }
-                                else if ((value.Length > 0) && (value[0] == '#')) { ((SELECT)o).Id = int.Parse(value.Substring(1)); }
-                                else o = ParseSelect(value, field.FieldType);
-                                field.SetValue(CurrentEntity, o);
+                                object selectTypeInstance = Activator.CreateInstance(field.FieldType);
+                                if (value.StartsWith("#")) {
+                                    ((SELECT) selectTypeInstance).Id = int.Parse(value.Substring(1));
+                                }
+                                else if (!value.StartsWith("$") && !value.StartsWith("*")) {
+                                    selectTypeInstance = ParseSELECT(value, field.FieldType);
+                                }
+
+                                field.SetValue(CurrentInstance, selectTypeInstance);
+
+                                // if ((value.Length > 0) && (value[0] == '$')) { }
+                                // else if ((value.Length > 0) && (value[0] == '*')) { }
+                                // else if ((value.Length > 0) && (value[0] == '#')) { ((SELECT)selectTypeInstance).Id = int.Parse(value.Substring(1)); }
+                                // else selectTypeInstance = ParseSelect(value, field.FieldType);
+                                //field.SetValue(CurrentInstance, selectTypeInstance);
                             }
-                            catch (Exception e) { throw new Exception("xx Parse.SELECT: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message); }
+                            catch (Exception e) {
+                                //TODO: logging
+                                string msg = "xx Parse.SELECT: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
+                            }
                         }
                         else if (field.FieldType.IsSubclassOf(typeof(ENTITY))) {
                             try {
-                                object o = null; //falls $
-                                if (value.Length > 0) if (value[0] == '*') o = Activator.CreateInstance(field.FieldType);
-                                if (value.Length > 0) if (value[0] == '#') { o = Activator.CreateInstance(field.FieldType); ((ENTITY)o).LocalId = int.Parse(value.Substring(1)); }
-                                field.SetValue(CurrentEntity, o);
+                                object entityInstance = null; //falls $
+                                // if (value.Length > 0)
+                                //     if (value[0] == '*')
+                                if (value.StartsWith("*")) entityInstance = Activator.CreateInstance(field.FieldType);
+                                // if (value.Length > 0)
+                                //     if (value[0] == '#')
+                                else if (value.StartsWith("#")) {
+                                    entityInstance = Activator.CreateInstance(field.FieldType);
+                                    ((ENTITY) entityInstance).LocalId = int.Parse(value.Substring(1));
+                                }
+
+                                field.SetValue(CurrentInstance, entityInstance);
                             }
-                            catch (Exception e) { throw new Exception("Parse.ENTITY: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message); }
+                            catch (Exception e) {
+                                string msg = "Parse.ENTITY: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
+                            }
                         }
                         else if (field.FieldType.IsSubclassOf(typeof(Enum))) {
                             try {
-                                object FieldInstance = Activator.CreateInstance(field.FieldType);
-                                if ((value.Length > 0) && (value[0] == '$')) FieldInstance = 0;
-                                else{ 
+                                object enumInstance = Activator.CreateInstance(field.FieldType);
+                                if ((value.Length > 0) && (value[0] == '$')) enumInstance = 0;
+                                else {
                                     try {
-                                        FieldInstance = Enum.Parse(field.FieldType, value.Substring(1, value.Length - 2));
-                                        field.SetValue(CurrentEntity, FieldInstance);
+                                        enumInstance = Enum.Parse(field.FieldType,
+                                            value.Substring(1, value.Length - 2));
+                                        field.SetValue(CurrentInstance, enumInstance);
+                                    }
+                                    catch {
+                                        //TODO: logging
+                                        Console.WriteLine("enum " + field.FieldType + "." + value + " not recognized");
+                                    }
+                                }
+                            }
+                            catch (Exception e) {
+                                string msg = "Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
+                            }
+                        }
+                        else if ((Nullable.GetUnderlyingType(field.FieldType) != null) &&
+                                 (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum)))) {
+                            try {
+                                object enumInstance = null;
+                                if ((value.Length > 0) && (value[0] != '$')) {
+                                    enumInstance = Activator.CreateInstance(field.FieldType);
+                                    try {
+                                        enumInstance = Enum.Parse(Nullable.GetUnderlyingType(field.FieldType),
+                                            value.Substring(1, value.Length - 2));
                                     }
                                     catch {
                                         Console.WriteLine("enum " + field.FieldType + "." + value + " not recognized");
                                     }
                                 }
-                            }
-                            catch (Exception e) { throw new Exception("Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message); }
-                        }
-                        else if ((Nullable.GetUnderlyingType(field.FieldType) != null) && (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum)))) {
-                            try {
-                                object FieldInstance = null;
-                                if ((value.Length > 0) && (value[0] != '$')) {
-                                    FieldInstance = Activator.CreateInstance(field.FieldType);
-                                    try { FieldInstance = Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1, value.Length - 2)); } catch { Console.WriteLine("enum " + field.FieldType + "." + value + " not recognized"); }
-                                }
-                                field.SetValue(CurrentEntity, FieldInstance);
-                            }
-                            catch (Exception e) { throw new Exception("Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message); }
-                        }
-                        //else if( typeof(IEnumerable).IsAssignableFrom(field.FieldType)){
-                        else if (typeof(ifcListInterface).IsAssignableFrom(field.FieldType)) {
-                            try {
-                                if (value == "$") field.SetValue(CurrentEntity, null);
-                                else field.SetValue(CurrentEntity, Parse2LIST(field.FieldType, value));
+
+                                field.SetValue(CurrentInstance, enumInstance);
                             }
                             catch (Exception e) {
-                                Console.WriteLine("Parse.LIST:" + line);
-                                throw new Exception("Parse.LIST: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message);
+                                string msg = "Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
                             }
                         }
-                        else Console.WriteLine(i + ": is " + field.FieldType.Name + "???????x? " + field.FieldType.Name + "  " + line); //ifc.WallStandardCase
+                        else if (typeof(ifcListInterface).IsAssignableFrom(field.FieldType)) {
+                            try {
+                                if (value.StartsWith("$")) field.SetValue(CurrentInstance, null);
+                                else field.SetValue(CurrentInstance, Parse2LIST(field.FieldType, value));
+                            }
+                            catch (Exception e) {
+                                string msg = "Parse.LIST: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                Log.Add(msg, Log.Level.Exception);
+                                throw new IfcSharpException(msg);
+                            }
+                        }
+                        else {
+                            Log.Add(i + ": is " + field.FieldType.Name + "???????x? " + field.FieldType.Name + "  " + ifcLine, Log.Level.Error);
+                        }
                     }
 
-                    CurrentModel.EntityList.Add((ENTITY)CurrentEntity); //Console.WriteLine();Console.WriteLine("AAA "+((ENTITY)CurrentEntity).ToString());
+                    targetModel.EntityList.Add((ENTITY) CurrentInstance);
                 }
-                catch (Exception e) { Console.WriteLine("ERROR on ParseIfcLine:" + e.Message); Console.WriteLine(line); }//Console.ReadLine();}
+                catch (Exception e) {
+                    Log.Add("ERROR on ParseIfcLine:" + e.Message+ "\nline:"+ifcLine, Log.Level.Exception);
+                }
             }
-            else { EntityComment ec = new EntityComment(); ec.CommentLine = CurrentEntityComment; ec.LocalId = NextGlobalCommentId--; CurrentModel.EntityList.Add(ec); }
+            else { EntityComment ec = new EntityComment(); ec.CommentLine = CurrentEntityComment; ec.LocalId = NextGlobalCommentId--; targetModel.EntityList.Add(ec); }
         }
 
         // 2022-04-02 (ef): new method 'GetOrderedAttributeDictionaryForCurrentEntity'
-        private static Dictionary<int, FieldInfo> GetOrderedAttributeDictionaryForCurrentEntity() {
-            Dictionary<int, FieldInfo> orderedAttributeDictionary = new Dictionary<int, FieldInfo>();
-            foreach (FieldInfo field in CurrentEntity.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)) {
-                foreach (Attribute attr in field.GetCustomAttributes(true)) if (attr is ifcAttribute) {
-                        orderedAttributeDictionary.Add(((ifcAttribute)attr).OrdinalPosition, field);
+        private static Dictionary<int, FieldInfo> GetAttributesOfObject(object obj) {
+            Dictionary<int, FieldInfo> attributeDictionary = new Dictionary<int, FieldInfo>();
+            foreach (FieldInfo field in obj.GetType()
+                         .GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)) {
+                foreach (Attribute attr in field.GetCustomAttributes(true))
+                    if (attr is ifcAttribute) {
+                        attributeDictionary.Add(((ifcAttribute) attr).OrdinalPosition, field);
                     }
             }
-            return orderedAttributeDictionary;
+
+            return attributeDictionary;
         }
     }
 
     public partial class Model {
+        
+        /// <summary>
+        /// Parses the IFC Header Data of the given <paramref name="filePath"/> and returns a <see cref="HeaderData"/> instance.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns>Instance of <see cref="HeaderData"/>; null if an error occurs</returns>
+        private static HeaderData ParseHeaderData(string filePath) {
+            string fileDescription = string.Empty;
+            string fileName = string.Empty;
+            string fileSchema = string.Empty;
+            try {
+                HeaderData headerData = new HeaderData();
+                using (StreamReader sr = new StreamReader(filePath)) {
+                    string line;
+                    string currentSection = string.Empty;
+                    while ((line = sr.ReadLine()) != null) {
+                        if (line.StartsWith("ENDSEC")) break;
+                        if (line.StartsWith("FILE_DESCRIPTION")) currentSection = "FILE_DESCRIPTION";
+                        else if (line.StartsWith("FILE_NAME")) currentSection = "FILE_NAME";
+                        else if (line.StartsWith("FILE_SCHEMA")) currentSection = "FILE_SCHEMA";
+                        if (currentSection == "FILE_DESCRIPTION") fileDescription += line;
+                        if (currentSection == "FILE_NAME") fileName += line;
+                        if (currentSection == "FILE_SCHEMA") fileSchema += line;
+                    }
+                }
 
-        // 2022-04-02 (ef): new method 'ParseFileHeader'
-        private static Dictionary<string, string> ParseFileHeader(string filePath) {
-            StreamReader sr = new StreamReader(filePath);
-            Dictionary<string, string> headerInfo = new Dictionary<string, string>();
-            string line;
-            string currentKey = string.Empty;
-            string values = "";
-            while ((line = sr.ReadLine()) != null && (line.Length > 1) && ((line + ' ')[0] != '#') && (!line.StartsWith("DATA"))) {
-                if (line.StartsWith("FILE_DESCRIPTION")) {
-                    currentKey = "FILE_DESCRIPTION";
-                }
-                if (line.StartsWith("FILE_NAME")) {
-                    currentKey = "FILE_NAME";
-                }
-                if (line.StartsWith("FILE_SCHEMA")) {
-                    currentKey = "FILE_SCHEMA";
-                }
+                fileDescription = fileDescription.Replace(" ", "");
+                fileName = fileName.Replace(" ", "");
+                fileSchema = fileSchema.Replace(" ", "");
 
-                if (!string.IsNullOrEmpty(currentKey) && !headerInfo.ContainsKey(currentKey)) {
-                    headerInfo.Add(currentKey, values);
-                    values = "";
-                }
+                // now, that the data is cleaned up, we can parse the data
+                headerData.ViewDefinition = fileDescription.Split('\'')[1 * 2 - 1];
+                headerData.ImplementationLevel = fileDescription.Split('\'')[1 * 4 - 1];
+                string[] fileNameArgs = fileName.Split('\'');
+                headerData.Name = fileNameArgs[1 * 2 - 1];
+                headerData.TimeStamp = fileNameArgs[2 * 2 - 1];
+                headerData.Author = fileNameArgs[3 * 2 - 1];
+                headerData.Organization = fileNameArgs[4 * 2 - 1];
+                headerData.PreprocessorVersion = fileNameArgs[5 * 2 - 1];
+                headerData.OriginatingSystem = fileNameArgs[6 * 2 - 1];
+                headerData.Authorization = fileNameArgs[7 * 2 - 1];
+                headerData.FileSchema = fileSchema.Split('\'')[1 * 2 - 1];
 
-                if (headerInfo.ContainsKey(currentKey)) {
-                    headerInfo[currentKey] += line;
-                }
-            };
-            return headerInfo;
-        }
-        public static Model FromStepFile(string FileName) {
-            string FileSchema = "-";
-            Model CurrentModel = new ifc.Model(FileName.Replace(".ifc", ""));
-            Dictionary<string, string> headerInfo = ParseFileHeader(FileName);
-            if (headerInfo.ContainsKey("FILE_DESCRIPTION")) CurrentModel.Header.description = headerInfo["FILE_DESCRIPTION"].Split('\'')[1 * 2 - 1];
-            if (headerInfo.ContainsKey("FILE_NAME")) {
-                string[] HeaderLine = headerInfo["FILE_NAME"].Split('\'');
-                CurrentModel.Header.name = HeaderLine[1 * 2 - 1];
-                CurrentModel.Header.time_stamp = HeaderLine[2 * 2 - 1];
-                CurrentModel.Header.author = HeaderLine[3 * 2 - 1];
-                CurrentModel.Header.organization = HeaderLine[4 * 2 - 1];
-                CurrentModel.Header.preprocessor_version = HeaderLine[5 * 2 - 1];
-                CurrentModel.Header.originating_system = HeaderLine[6 * 2 - 1];
-                CurrentModel.Header.authorization = HeaderLine[7 * 2 - 1];
+                if (headerData.FileSchema != Specification.SchemaName) Log.Add($"Expected schema '{Specification.SchemaName}' != '{fileSchema}'", Log.Level.Warning);
+
+                return headerData;
             }
-            if (headerInfo.ContainsKey("FILE_SCHEMA")) FileSchema = headerInfo["FILE_SCHEMA"].Split('\'')[1 * 2 - 1];
-            if (FileSchema != Specification.SchemaName) Console.WriteLine("WARNING! Expected schema is '" + Specification.SchemaName + "', detected schema is '" + FileSchema + "'");
+            catch (Exception e) {
+                Log.Add($"Exception parsing Header: {fileDescription};{fileName};{fileSchema}->{e.Message}",Log.Level.Exception);
+                return null;
+            }
+        }
 
-            StreamReader sr = new StreamReader(FileName);
+        public static Model FromStepFile(string filePath) {
+            Log.Add($"Reading STEP file '{filePath}'", Log.Level.Info);
+            Model model = new ifc.Model(filePath.Replace(".ifc", ""));
+            model.Header = ParseHeaderData(filePath);
+            if (model.Header == null) model.Header = new HeaderData(); model.Header.Init(NetSystem.IO.Path.GetFileNameWithoutExtension(filePath), "N/A", "N/A", "N/A");
+            
+            StreamReader sr = new StreamReader(filePath);
             string line = "";
             while ((line = sr.ReadLine()) != null) if (line.Length > 3) {
-                    line = line.TrimStart(' '); //Console.WriteLine(line);
-                    if (line.Length > 3) if (line[0] == '#' || (line[0] == '/' && line[1] == '*')) ENTITY.ParseIfcLine(CurrentModel, line);
-                }
+                    line = line.TrimStart(' ');
+                    if (line.Length > 3) if (line[0] == '#' || (line[0] == '/' && line[1] == '*')) ENTITY.ParseIfcLine(model, line);
+            }
             sr.Close();
-            CurrentModel.AssignEntities();
-            return CurrentModel;
+            model.AssignEntities();
+            Log.Add($"Finished reading STEP file '{filePath}'.", Log.Level.Info);
+            Log.Add($"Created {model.EntityList.Count} IFC Entities.", Log.Level.Info);
+            return model;
         }
     }
 

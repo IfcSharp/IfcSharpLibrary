@@ -71,7 +71,7 @@ namespace ifc
                 //CommitTransaction();
                 //CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 Debug.WriteLine(e.Message + "\n" + e.StackTrace);
                 CancelChanges();
@@ -164,7 +164,7 @@ namespace ifc
                 CommitTransaction();
                 CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = "Exception in 'CreateDatabase(SqliteDataSet dataSet)':\n" + e.Message;
                 Debug.WriteLine(msg);
@@ -184,7 +184,7 @@ namespace ifc
                 {
                     this.Connection.Cancel();
                 }
-                catch (Exception e)
+                catch (IfcSharpException e)
                 {
                     Debug.WriteLine(e.Message);
                 }
@@ -230,7 +230,7 @@ namespace ifc
             {
                 this.ActiveTransaction = this.Connection.BeginTransaction();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 Debug.WriteLine("Exception in 'BeginTransaction()': " + e.Message);
                 return 0;
@@ -327,7 +327,7 @@ namespace ifc
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
@@ -367,7 +367,7 @@ namespace ifc
                 Console.WriteLine(msg);
                 Debug.WriteLine(msg);
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
@@ -414,7 +414,7 @@ namespace ifc
                 CommitTransaction();
                 CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = "Exception in 'CreateDatabase(DataSet dataSet)':\n" + e.Message;
                 Debug.WriteLine(msg);
@@ -444,7 +444,7 @@ namespace ifc
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
