@@ -14,12 +14,12 @@ namespace ifc{//==============================
 
 
 public partial interface ifcListInterface{
-void ToÍfcXml(XmlWriter xml);
+void ToIfcXml(XmlWriter xml);
 }
 
 public partial class LIST<T> : List<T>,ifcListInterface,ifcSqlTypeInterface{
 //public partial class LIST<T> {
-public void ToÍfcXml(XmlWriter xml){foreach (T t in this)  ENTITY.IfcXmlOut(t,t.GetType().ToString(),xml); //hier noch Exluding Attribute
+public void ToIfcXml(XmlWriter xml){foreach (T t in this)  ENTITY.IfcXmlOut(t,t.GetType().ToString(),xml); //hier noch Exluding Attribute
                                    }
 }
 
@@ -62,7 +62,7 @@ Entityausgabe
                               else                        {((ENTITY)o).ToIfcXml(xml);((ENTITY)o).IsAssigned=true;}
                              }
      else if (o is TypeBase) {if (!((TypeBase)o).IsNull) xmlAttrib(xml,Name,o.ToString());}
-     else if (o is ifcListInterface)  {((ifcListInterface)o).ToÍfcXml(xml);} // noch anders lösen 
+     else if (o is ifcListInterface)  {((ifcListInterface)o).ToIfcXml(xml);} // noch anders lï¿½sen 
      else                    {}// error
 
 //var x=new ifc.SimplePropertyTemplate(); new ifc.PropertyEnumeration()
@@ -102,8 +102,8 @@ for (int i=1;i<=VarCount;i++) if (!IsAttribute(VarDict[i].FieldType)) IfcXmlOut(
 
 /*
 if(1==2)
-foreach (FieldInfo f in InverseList) {// über Listenelemnete iterieren
-                                      // Prüfung ob Listenelemente bereits verwendet 
+foreach (FieldInfo f in InverseList) {// ï¿½ber Listenelemnete iterieren
+                                      // Prï¿½fung ob Listenelemente bereits verwendet 
                                       xml.WriteStartElement(f.Name);
              
                                       xml.WriteEndElement();
@@ -154,7 +154,7 @@ char SaveStringChar=TypeBase.StringChar;
 bool SaveHasStringChar=TypeBase.HasStringChar;
                       TypeBase.HasStringChar=false;  
 //XmlWriter       xml = XmlWriter.Create(sw /*Header.name+".ifcXml" */ , settings); // ifcXml
-  XmlWriter       xml = XmlWriter.Create(Header.name+".ifcXml", settings);
+  XmlWriter       xml = XmlWriter.Create(Header.Name+".ifcXml", settings);
                  
                 xml.WriteProcessingInstruction("xml", "version='1.0' encoding='utf-8'");
                 xml.WriteStartElement(prefix:"ifc", localName:"ifcXML",ns:@"http://www.buildingsmart-tech.org/ifc/IFC4x2/final");
@@ -162,14 +162,14 @@ bool SaveHasStringChar=TypeBase.HasStringChar;
                     xml.WriteAttributeString(             localName:"xmlns" ,value:@"http://www.buildingsmart-tech.org/ifc/IFC4x2/final");
 
                     xml.WriteStartElement("header");
-                      xml.WriteElementString("name",Header.name);
-                      xml.WriteElementString("time_stamp",Header.time_stamp);
-                      xml.WriteElementString("author",Header.author);
-                      xml.WriteElementString("organization",Header.organization);
-                      xml.WriteElementString("preprocessor_version",Header.preprocessor_version);
-                      xml.WriteElementString("originating_system",Header.originating_system);
-                      xml.WriteElementString("authorization",Header.authorization);
-                      xml.WriteElementString("documentation",Header.documentation);
+                      xml.WriteElementString("name",Header.Name);
+                      xml.WriteElementString("time_stamp",Header.TimeStamp);
+                      xml.WriteElementString("author",Header.Author);
+                      xml.WriteElementString("organization",Header.Organization);
+                      xml.WriteElementString("preprocessor_version",Header.PreprocessorVersion);
+                      xml.WriteElementString("originating_system",Header.OriginatingSystem);
+                      xml.WriteElementString("authorization",Header.Authorization);
+                      xml.WriteElementString("documentation",Header.Documentation);
                     xml.WriteEndElement();  // header
 
 
