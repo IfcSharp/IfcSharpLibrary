@@ -2,6 +2,8 @@
 
 //#define EXPORT_COMPLETE_SCHEMA
 
+//EF-2021-04-01: Added preprocessor flag 'INCLUDE_SQLITE' so that the compilation without sqlite-support is possible
+#if INCLUDE_SQLITE
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -153,7 +155,7 @@ namespace ifc
             }
         }
 
-        #region DataSet-Interface
+#region DataSet-Interface
         public static Type TypeFromTableId(int id)
         {
             switch (id)
@@ -223,7 +225,7 @@ namespace ifc
                 dataSet.Tables.Add(dataTable);
             }
         }
-        #endregion
+#endregion
 
     }
     public partial class EntityComment : ENTITY
@@ -255,7 +257,7 @@ namespace ifc
         public void ToSqliteFile()
         {
             AssignEntities();
-            string fullPath = Header.name + ".sqlite";
+            string fullPath = Header.Name + ".sqlite";
             SQLiteDataSet sqliteDataSet = new SQLiteDataSet();
 
 #if EXPORT_COMPLETE_SCHEMA
@@ -352,3 +354,4 @@ namespace ifc
     }
 }
 
+#endif

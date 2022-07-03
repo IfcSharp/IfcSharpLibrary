@@ -2,6 +2,9 @@
 
 //#define _DEBUG
 
+//EF-2021-04-01: Added preprocessor flag 'INCLUDE_SQLITE' so that the compilation without sqlite-support is possible
+#if INCLUDE_SQLITE
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -116,7 +119,7 @@ namespace ifc
                             if (dataRow["Y"] != DBNull.Value) coords.Add(new Real((double)dataRow["Y"]));
                             if (dataRow["Z"] != DBNull.Value) coords.Add(new Real((double)dataRow["Z"]));
                             o = new List2to3_Real(coords.ToArray());
-#endif   
+#endif
                         }
                         else
                         {
@@ -265,7 +268,7 @@ namespace ifc
                                 o = Activator.CreateInstance(t, genericCtorArgs);
                             }
                         }
-                        catch (Exception e) { Console.WriteLine(e.Message); }
+                        catch (IfcSharpException e) { Console.WriteLine(e.Message); }
                     }
                     args.Add(o);
                 }
@@ -276,3 +279,4 @@ namespace ifc
     }
 }
 
+#endif

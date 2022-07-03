@@ -1,5 +1,9 @@
 ﻿// ifc_sqlite_database.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
+
+//EF-2021-04-01: Added preprocessor flag 'INCLUDE_SQLITE' so that the compilation without sqlite-support is possible
+#if INCLUDE_SQLITE
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,7 +71,7 @@ namespace ifc
                 //CommitTransaction();
                 //CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 Debug.WriteLine(e.Message + "\n" + e.StackTrace);
                 CancelChanges();
@@ -160,7 +164,7 @@ namespace ifc
                 CommitTransaction();
                 CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = "Exception in 'CreateDatabase(SqliteDataSet dataSet)':\n" + e.Message;
                 Debug.WriteLine(msg);
@@ -180,7 +184,7 @@ namespace ifc
                 {
                     this.Connection.Cancel();
                 }
-                catch (Exception e)
+                catch (IfcSharpException e)
                 {
                     Debug.WriteLine(e.Message);
                 }
@@ -226,7 +230,7 @@ namespace ifc
             {
                 this.ActiveTransaction = this.Connection.BeginTransaction();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 Debug.WriteLine("Exception in 'BeginTransaction()': " + e.Message);
                 return 0;
@@ -323,7 +327,7 @@ namespace ifc
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
@@ -363,7 +367,7 @@ namespace ifc
                 Console.WriteLine(msg);
                 Debug.WriteLine(msg);
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
@@ -371,7 +375,7 @@ namespace ifc
 
         }
 
-        #region DataSet-Interface
+#region DataSet-Interface
 
         public static Dictionary<Type, DbType> TypeToDbType = new Dictionary<Type, DbType>
         {
@@ -410,7 +414,7 @@ namespace ifc
                 CommitTransaction();
                 CloseConnection();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = "Exception in 'CreateDatabase(DataSet dataSet)':\n" + e.Message;
                 Debug.WriteLine(msg);
@@ -440,7 +444,7 @@ namespace ifc
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (IfcSharpException e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
                 Debug.WriteLine(msg);
@@ -448,6 +452,8 @@ namespace ifc
             }
             return returnValue;
         }
-        #endregion
+#endregion
     }
 }
+
+#endif

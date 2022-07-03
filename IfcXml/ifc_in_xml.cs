@@ -111,7 +111,7 @@ foreach (XmlNode n in xml.ChildNodes)
                   {//.....................................................
                    ListPos++;      
                    string ListElement=n.InnerText;// Console.WriteLine("n.InnerText="+n.InnerText);
-                       if (GenericType==typeof(   Int32)) {Console.WriteLine("is Int32 XXXXXXXXXXXXXXX");  FieldCtorArgs[ListPos]=Int32.Parse(n.InnerText);} // tritt das überhaupt auf ?
+                       if (GenericType==typeof(   Int32)) {Console.WriteLine("is Int32 XXXXXXXXXXXXXXX");  FieldCtorArgs[ListPos]=Int32.Parse(n.InnerText);} // tritt das ï¿½berhaupt auf ?
                   else if (GenericType.IsSubclassOf(typeof(TypeBase))) {Console.WriteLine("is TypeBase");
                                                                         object[] GenericCtorArgs=new object[1];
                                                                                  GenericCtorArgs[0]=Activator.CreateInstance(GenericType); //LengthMeasure or CartesianPoint
@@ -124,7 +124,7 @@ foreach (XmlNode n in xml.ChildNodes)
                                                                    FieldCtorArgs[ListPos]=Activator.CreateInstance(GenericType,GenericCtorArgs);
                                                                   }
                    else if (GenericType.IsSubclassOf(typeof(ENTITY)))   {//Console.WriteLine("ListElement is ENTITY, n.Name="+n.Name);
-                                                                         try {FieldCtorArgs[ListPos]=EvalEntityNode(Model.CurrentModel,n);}catch(Exception e){throw new Exception("FieldCtorArgs[ListPos]: Field: "+n.Name+": "+e.Message);  } 
+                                                                         try {FieldCtorArgs[ListPos]=EvalEntityNode(Model.CurrentModel,n);}catch(IfcSharpException e){throw new IfcSharpException("FieldCtorArgs[ListPos]: Field: "+n.Name+": "+e.Message);  } 
                                                                         }
 
 
@@ -136,7 +136,7 @@ foreach (XmlNode n in xml.ChildNodes)
                                                                                    
                                                                                    object[] CtorArg=new object[1];
                                                                                    if (t.IsSubclassOf(typeof(ENTITY)))       {//Console.WriteLine("is ENTITY"); Console.WriteLine("n.Name="+n.Name);
-                                                                                                                              try {CtorArg[0]=EvalEntityNode(Model.CurrentModel,n,n.Name.Substring(3));}catch(Exception e){throw new Exception("GenericCtorArgs[0]: Field: "+n.Name+": "+e.Message);  } 
+                                                                                                                              try {CtorArg[0]=EvalEntityNode(Model.CurrentModel,n,n.Name.Substring(3));}catch(IfcSharpException e){throw new IfcSharpException("GenericCtorArgs[0]: Field: "+n.Name+": "+e.Message);  } 
                                                                                                                             }                     
                                                                                    else  if (t.IsSubclassOf(typeof(TypeBase)))  
                                                                                       {object[] GenericCtorArgs=new object[1];
@@ -144,7 +144,7 @@ foreach (XmlNode n in xml.ChildNodes)
                                                                                        else if (t.IsSubclassOf(typeof(TYPE<   int>))) {                      GenericCtorArgs[0]=int.Parse(ListElement);}
                                                                                        else if (t.IsSubclassOf(typeof(TYPE< Int32>))) {                      GenericCtorArgs[0]=Int32.Parse(ListElement);}
                                                                                        else if (t.IsSubclassOf(typeof(TYPE<double>))) {                      GenericCtorArgs[0]=double.Parse(ListElement,CultureInfo.InvariantCulture);}
-                                                                                       else throw new Exception("FieldCtorArgs[ListPos]: Select-Field-TYPE: "+n.Name+": unknown TYPE "+t.Name);
+                                                                                       else throw new IfcSharpException("FieldCtorArgs[ListPos]: Select-Field-TYPE: "+n.Name+": unknown TYPE "+t.Name);
                                                                                        CtorArg[0]=Activator.CreateInstance(t,GenericCtorArgs);
                                                                                       }
                                                                       /*
@@ -158,7 +158,7 @@ foreach (XmlNode n in xml.ChildNodes)
                                                                               FieldCtorArgs[ListPos]=Activator.CreateInstance(GenericType,CtorArg);     
                                                                               //Console.WriteLine("C: "+TreeOfParents(n,n.Name));                                                            
                                                                                        
-                                                                                  }catch(Exception e){throw new Exception("FieldCtorArgs[ListPos]: Select-Field: "+n.Name+": "+e.Message);  } 
+                                                                                  }catch(IfcSharpException e){throw new IfcSharpException("FieldCtorArgs[ListPos]: Select-Field: "+n.Name+": "+e.Message);  } 
                                                                          }
 
                                                                          
@@ -194,7 +194,7 @@ public void EvalTypeString(FieldInfo field, string Value)//---------------------
 Console.WriteLine("  EvalTypeString="+field.Name+":"+Value);
 #endif
 try{field.SetValue(this,ENTITY.Parse2TYPE(Value,field.FieldType));}
- catch(Exception e){throw new Exception("EvalTypeString:"+field.Name+": "+field.FieldType.ToString()+": "+e.Message);}
+ catch(IfcSharpException e){throw new IfcSharpException("EvalTypeString:"+field.Name+": "+field.FieldType.ToString()+": "+e.Message);}
 }//--------------------------------------------------------------------------------------------------------------------
 
 public void EvalEnumString(FieldInfo field, string Value)//------------------------------------------------------------------
@@ -206,7 +206,7 @@ try{object FieldInstance=Activator.CreateInstance(field.FieldType);
             FieldInstance=Enum.Parse(field.FieldType,Value.ToUpper());
      field.SetValue(this,FieldInstance);
     }
- catch(Exception e){throw new Exception("EvalEnumString:"+field.Name+": ("+Value+") "+field.FieldType.ToString()+": "+e.Message);}
+ catch(IfcSharpException e){throw new IfcSharpException("EvalEnumString:"+field.Name+": ("+Value+") "+field.FieldType.ToString()+": "+e.Message);}
 }//--------------------------------------------------------------------------------------------------------------------
 
 public void EvalNEnmString(FieldInfo field, string Value)//------------------------------------------------------------------
@@ -218,7 +218,7 @@ try{object FieldInstance=Activator.CreateInstance(field.FieldType);
             FieldInstance=Enum.Parse(Nullable.GetUnderlyingType(field.FieldType),Value.ToUpper());
      field.SetValue(this,FieldInstance);
     }
- catch(Exception e){throw new Exception("EvalNEnmString:"+field.Name+": ("+Value+") "+field.FieldType.ToString()+": "+e.Message);}
+ catch(IfcSharpException e){throw new IfcSharpException("EvalNEnmString:"+field.Name+": ("+Value+") "+field.FieldType.ToString()+": "+e.Message);}
 }//--------------------------------------------------------------------------------------------------------------------
 
 
@@ -236,7 +236,7 @@ else try {
           string EntityTypeName=( ((XmlElement)n).HasAttribute("xsi:type") )?n.Attributes["xsi:type"].Value.Substring(3) : field.FieldType.Name; 
 //Console.WriteLine(EntityTypeName);
           field.SetValue(this,EvalEntityNode(Model.CurrentModel,n,EntityTypeName));
-         }catch(Exception e){throw new Exception("EvalEntityNode:"+field.FieldType.ToString()+": "+e.Message);  } 
+         }catch(IfcSharpException e){throw new IfcSharpException("EvalEntityNode:"+field.FieldType.ToString()+": "+e.Message);  } 
  
 
 }//--------------------------------------------------------------------------------------------------------------------
@@ -259,7 +259,7 @@ foreach (XmlNode n2 in n.ChildNodes)
              else {Console.WriteLine("no TypeInstance createtd for SELECTed-Type="+"ifc."+n2.Name.Substring(3));}
 
                       field.SetValue(this,Activator.CreateInstance(field.FieldType,TypeCtorArgs));
-            }catch(Exception e){throw new Exception("EvalSelectNode:"+field.FieldType.ToString()+": "+e.Message);} //   Console.WriteLine("SELECT="+n.Name+" of "+xml.Name);Console.ReadLine();                                              
+            }catch(IfcSharpException e){throw new IfcSharpException("EvalSelectNode:"+field.FieldType.ToString()+": "+e.Message);} //   Console.WriteLine("SELECT="+n.Name+" of "+xml.Name);Console.ReadLine();                                              
         }
 }//--------------------------------------------------------------------------------------------------------------------
 
@@ -268,13 +268,13 @@ public void EvalListNode(FieldInfo field, XmlNode n)//--------------------------
 #if(TRACE)
 Console.WriteLine("  LIST="+field.Name+":"+n.Name);//Console.ReadLine(); // Typ von n.Name ermiiiteln => field.FieldType 
 #endif
-Type GenericType=ENTITY.GetGenericType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
+Type GenericType=ENTITY.GetValueType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
 try {//Console.WriteLine("EvalListNode:"+field.FieldType.Name+" # "+n.Name+" GenericType="+GenericType.Name);
         object[] o=GetFieldCtorArgsFromXml(GenericType,n); 
 //     Console.WriteLine("XXXXXXXX:"+o.Length+" for ListType "+field.FieldType.Name);
 //     if (o.Length>0) Console.WriteLine("YYYYYYYYY:"+o[0].ToString()+":"+o[0].GetType().Name);
      field.SetValue(this,Activator.CreateInstance(field.FieldType,o));//ifc.TableColumn tc=new TableColumn(); //tc.ReferencePath.InnerReference.ListPositions.li
-}catch(Exception e){throw new Exception("EvalListNode:"+field.FieldType.ToString()+": "+e.Message); }
+}catch(IfcSharpException e){throw new IfcSharpException("EvalListNode:"+field.FieldType.ToString()+": "+e.Message); }
 }//--------------------------------------------------------------------------------------------------------------------
 
 public void EvalInverseEntityNode(FieldInfo field, XmlNode n)//------------------------------------------------------------------
@@ -292,7 +292,7 @@ Console.WriteLine("  EvalInverseEntityListNode="+field.Name+":"+n.Name);//Consol
 #endif
 //ifc.Project p=new Project();
 //ifc.RelContainedInSpatialStructure r=new RelContainedInSpatialStructure();r.RelatedElements
-Type GenericType=GetGenericType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
+Type GenericType= GetValueType(field.FieldType); //Console.WriteLine("xml.Name="+xml.Name); //Console.WriteLine("n.Name="+n.Name+" fieldTypeName="+field.FieldType.Name);
 try {//Console.WriteLine("field.FieldType:"+field.FieldType.Name+" GenericType.Name:"+GenericType.Name);
 //ifc.Building b=new Building(); //b.ContainsElements
         object[] o=GetFieldCtorArgsFromXml(GenericType,n); 
@@ -300,7 +300,7 @@ try {//Console.WriteLine("field.FieldType:"+field.FieldType.Name+" GenericType.N
      //if (o.Length>0) Console.WriteLine("YYYYYYYYY:"+o[0].ToString()+":"+o[0].GetType().Name);
      //Console.WriteLine(this.XmlTypeInfo.ToString());
      field.SetValue(this,Activator.CreateInstance(field.FieldType,o));} 
-catch(Exception e){throw new Exception("EvalInverseEntityListNode:"+field.FieldType.ToString()+": "+e.Message); }
+catch(IfcSharpException e){throw new IfcSharpException("EvalInverseEntityListNode:"+field.FieldType.ToString()+": "+e.Message); }
 }//--------------------------------------------------------------------------------------------------------------------
 
 public static string TreeOfParents(XmlNode xml, string s)
@@ -347,7 +347,7 @@ CurrentEntity=(ENTITY)Activator.CreateInstance(t);CurrentEntity.AddNext(); // in
 
 
 if (xml.Attributes["id"]!=null) {CurrentEntity.XmlId=xml.Attributes["id"].Value;if (!XmlIdDict.ContainsKey(CurrentEntity.XmlId)) XmlIdDict.Add(CurrentEntity.XmlId,CurrentEntity); 
-                                 else throw new Exception("double id="+xml.Attributes["id"].Value+" in Xml");
+                                 else throw new IfcSharpException("double id="+xml.Attributes["id"].Value+" in Xml");
 //                                 Model.log.WriteLine(TreeOfParents(xml,xml.Name)+" (id="+xml.Attributes["id"].Value+")"); // ifc.ConversionBasedUnitWithOffset
                                 }
 //else                             Model.log.WriteLine(TreeOfParents(xml,xml.Name)); 
@@ -398,7 +398,7 @@ foreach (XmlNode n in xml.ChildNodes)
 
 //Console.WriteLine("C");
 
-}catch(Exception e){Console.WriteLine ("ERROR on EvalEntityNode:"+e.Message);Console.WriteLine (xml.Name);}//Console.ReadLine();}
+}catch(IfcSharpException e){Console.WriteLine ("ERROR on EvalEntityNode:"+e.Message);Console.WriteLine (xml.Name);}//Console.ReadLine();}
 
 return CurrentEntity;
 }
@@ -422,14 +422,14 @@ public partial class Model{//===================================================
 public void EvalHeaderNode(XmlNode xml)
 {
 foreach (XmlNode n in xml)
-  switch (n.Name) {case "name": Header.name=n.InnerText;break;
-                   case "time_stamp": Header.time_stamp=n.InnerText;break;
-                   case "author": Header.author=n.InnerText;break;
-                   case "organization": Header.organization=n.InnerText;break;
-                   case "preprocessor_version": Header.preprocessor_version=n.InnerText;break;
-                   case "originating_system": Header.originating_system=n.InnerText;break;
-                   case "authorization": Header.authorization=n.InnerText;break;
-                   case "documentation": Header.documentation=n.InnerText;break;          
+  switch (n.Name) {case "name": Header.Name=n.InnerText;break;
+                   case "time_stamp": Header.TimeStamp=n.InnerText;break;
+                   case "author": Header.Author=n.InnerText;break;
+                   case "organization": Header.Organization=n.InnerText;break;
+                   case "preprocessor_version": Header.PreprocessorVersion=n.InnerText;break;
+                   case "originating_system": Header.OriginatingSystem=n.InnerText;break;
+                   case "authorization": Header.Authorization=n.InnerText;break;
+                   case "documentation": Header.Documentation=n.InnerText;break;          
                    default:break;  
                   }
 
