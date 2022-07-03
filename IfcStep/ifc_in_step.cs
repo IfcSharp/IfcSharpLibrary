@@ -22,11 +22,11 @@ namespace ifc {
         public static string ReplaceCharAt(string s, int i, char c) { char[] array = s.ToCharArray(); array[i] = c; s = new string(array); return s; }
 
         /// <summary>
-        /// get the type of a the value of given <param name="FieldType"></param>.
+        /// get the type of a the value of given <paramref name="fieldType"/>.
         /// SELECT and LIST-types sometimes contain more complex objects.
         /// This helper-method retrieves the type of such objects, so it can be instatiated.
         /// </summary>
-        /// <param name="FieldType"></param>
+        /// <param name="fieldType"></param>
         /// <returns>type of generic constructor arguments</returns>
         public static Type GetValueType(Type fieldType) {
             if (fieldType.BaseType.GetGenericArguments().Length > 0) return fieldType.BaseType.GetGenericArguments()[0]; //i.e. LengthMeasure or CartesianPoint
@@ -65,7 +65,7 @@ namespace ifc {
                         instance = Activator.CreateInstance(valueType, ctorArgs);
                     }
                     catch (Exception e){
-                        Console.WriteLine("Error on Parse2TYPE: " + CurrentLine);
+                        Log.Add("Error on Parse2TYPE: " + CurrentLine+e.Message, Log.Level.Exception);
                     }
                 else if (valueBaseType == typeof(bool)) {
                     ctorArgs[0] = (value == ".T.");
