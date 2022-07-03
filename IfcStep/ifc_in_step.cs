@@ -39,7 +39,7 @@ namespace ifc {
         /// <param name="value"></param>
         /// <param name="valueType"></param>
         /// <returns>null on error; instance of <param>valueType</param> on success</returns>
-        public static object Parse2TYPE(string value, Type valueType) {#
+        public static object Parse2TYPE(string value, Type valueType) {
             //TODO: catch more specific exceptions and throw custom IfcSharpExceptions
             //      i.e.: infer argument mismatches and the like
             if (value == "$") return null;
