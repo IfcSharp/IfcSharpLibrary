@@ -39,14 +39,16 @@ namespace ifc {
         /// <param name="value"></param>
         /// <param name="valueType"></param>
         /// <returns>null on error; instance of <param>valueType</param> on success</returns>
-        public static object Parse2TYPE(string value, Type valueType) {
+        public static object Parse2TYPE(string value, Type valueType) {#
+            //TODO: catch more specific exceptions and throw custom IfcSharpExceptions
+            //      i.e.: infer argument mismatches and the like
+            if (value == "$") return null;
             
             Type valueBaseType = GetValueType(valueType); //valueType.BaseType.GetGenericArguments()[0];
             object instance = null;
             object[] ctorArgs = new object[1];
             //if ((value == "$") || (value == "*")) instance = Activator.CreateInstance(valueType);
-            if (value == "$") return null;
-            else if (value == "*") instance = Activator.CreateInstance(valueType);
+            if (value == "*") instance = Activator.CreateInstance(valueType);
             else {
                 if (valueBaseType == typeof(string)) {
                     if (value == "$") ctorArgs[0] = "";
@@ -62,7 +64,7 @@ namespace ifc {
                         ctorArgs[0] = double.Parse(value, CultureInfo.InvariantCulture);
                         instance = Activator.CreateInstance(valueType, ctorArgs);
                     }
-                    catch {
+                    catch (Exception e){
                         Console.WriteLine("Error on Parse2TYPE: " + CurrentLine);
                     }
                 else if (valueBaseType == typeof(bool)) {
@@ -81,7 +83,7 @@ namespace ifc {
                         ctorArgs[0] = Parse2LIST(valueBaseType, value);
                         instance = Activator.CreateInstance(valueType, ctorArgs[0]);
                     }
-                    catch (NetSystem.Exception e) {
+                    catch (Exception e) {
                         Log.Add($"Parse2TYPE (parsing list): {value}\nException: {e.Message}", Log.Level.Exception);
                     }
                 }
@@ -181,7 +183,7 @@ namespace ifc {
                 }
                 else if (valueType.IsSubclassOf(typeof(SELECT))) {
                     object o = Activator.CreateInstance(valueType);
-                    if ((value.Length > 0) && value[0] == '#') {
+                    if (value.Length > 0 && value.Trim(' ')[0] == '#') {
                         // if SELECT refers to another line, we only need the Id
                         ((SELECT)o).Id = int.Parse(value.Trim(' ').Substring(1)); 
                     }
@@ -478,8 +480,8 @@ namespace ifc {
                 fileSchema = fileSchema.Replace(" ", "");
 
                 // now, that the data is cleaned up, we can parse the data
-                headerData.ViewDefinition = fileDescription.Split('\'')[1 * 2 - 1];
-                headerData.ImplementationLevel = fileDescription.Split('\'')[1 * 4 - 1];
+                headerData.ViewDefinition = fileDescription.Contains('$') ? "ViewDefinition[undefinded]" : fileDescription.Split('\'')[1 * 2 - 1];
+                headerData.ImplementationLevel = fileDescription.Contains('$') ? "2;1" : fileDescription.Split('\'')[1 * 4 - 1];
                 string[] fileNameArgs = fileName.Split('\'');
                 headerData.Name = fileNameArgs[1 * 2 - 1];
                 headerData.TimeStamp = fileNameArgs[2 * 2 - 1];
@@ -504,7 +506,10 @@ namespace ifc {
             Log.Add($"Reading STEP file '{filePath}'", Log.Level.Info);
             Model model = new ifc.Model(filePath.Replace(".ifc", ""));
             model.Header = ParseHeaderData(filePath);
-            if (model.Header == null) model.Header = new HeaderData(); model.Header.Init(NetSystem.IO.Path.GetFileNameWithoutExtension(filePath), "N/A", "N/A", "N/A");
+            if (model.Header == null) {
+                model.Header = new HeaderData(); 
+                model.Header.Init(NetSystem.IO.Path.GetFileNameWithoutExtension(filePath), "N/A", "N/A", "N/A");
+            }
             
             StreamReader sr = new StreamReader(filePath);
             string line = "";
