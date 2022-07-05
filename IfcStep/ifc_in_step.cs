@@ -433,14 +433,15 @@ namespace ifc {
             else { EntityComment ec = new EntityComment(); ec.CommentLine = CurrentEntityComment; ec.LocalId = NextGlobalCommentId--; targetModel.EntityList.Add(ec); }
         }
 
-        // 2022-04-02 (ef): new method 'GetOrderedAttributeDictionaryForCurrentEntity'
-        private static Dictionary<int, FieldInfo> GetAttributesOfObject(object obj) {
+        // 2022-07-05 (ef): renamed method 'GetAttributesOfObject'
+        // TODO: move to reflection_helper
+        public static Dictionary<int, FieldInfo> GetAttributesOfObject(object obj) {
             Dictionary<int, FieldInfo> attributeDictionary = new Dictionary<int, FieldInfo>();
             foreach (FieldInfo field in obj.GetType()
                          .GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)) {
                 foreach (Attribute attr in field.GetCustomAttributes(true))
-                    if (attr is ifcAttribute) {
-                        attributeDictionary.Add(((ifcAttribute) attr).OrdinalPosition, field);
+                    if (attr is ifcAttribute ifcAttribute) {
+                        attributeDictionary.Add(ifcAttribute.OrdinalPosition, field);
                     }
             }
 
