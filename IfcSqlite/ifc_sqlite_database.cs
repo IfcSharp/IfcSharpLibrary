@@ -7,39 +7,45 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
+using Mono.Data.Sqlite;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using NetSystem = System;
 
+//TODO: implement database interfaces for
+// 1. MariaDB
+// 2. MySQL
+// 3. SQLite (System.Data.SQLite)
+// 4. SQLite (Mono.Data.Sqlite)
+
 namespace ifc
 {
-    class SQLiteDatabase : IDisposable
+    class IfcSharpSqLiteDatabase : IDisposable
     {
-        private SQLiteConnection Connection = null;
-        private SQLiteTransaction ActiveTransaction = null;
+        private SqliteConnection Connection { get; set; }
+        private SqliteTransaction ActiveTransaction { get; set; }
 
-        public SQLiteDatabase()
+        public IfcSharpSqLiteDatabase()
         {
 
         }
-        public SQLiteDatabase(string fullPath)
+        public IfcSharpSqLiteDatabase(string fullPath)
         {
-            Console.WriteLine(string.Format("{0}: Creating Database '{1}'", NetSystem.DateTime.Now.ToString("HH:mm:ss.ffff"), fullPath));
+            Log.Add($"Creating Database '{fullPath}'", Log.Level.Info);
             InitDatabase(fullPath);
         }
 
         public void ConnectToDatabase(string fullPath)
         {
-            if (this.Connection != null)
+            if (Connection != null)
             {
                 CloseConnection();
-                this.Connection = null;
+                Connection = null;
             }
 
-            string connection = string.Format("Data Source={0};Version=3;", fullPath);
-            this.Connection = new SQLiteConnection(connection);
+            string connection = $"Data Source={fullPath};Version=3;";
+            Connection = new SqliteConnection(connection);
         }
         public int InitDatabase(string fullPath)
         {
@@ -56,10 +62,10 @@ namespace ifc
             // create the database-file
             try
             {
-                SQLiteConnection.CreateFile(fullPath);
+                SqliteConnection.CreateFile(fullPath);
                 // connect to the database and open the connection
-                string connection = string.Format("Data Source={0};Version=3;", fullPath);
-                this.Connection = new SQLiteConnection(connection);
+                string connection = $"Data Source={fullPath};Version=3;";
+                this.Connection = new SqliteConnection(connection);
 
                 //this.Connection.Open();
                 //// due to the m:n relation of certain tables
@@ -73,7 +79,7 @@ namespace ifc
             }
             catch (IfcSharpException e)
             {
-                Debug.WriteLine(e.Message + "\n" + e.StackTrace);
+                Log.Add(e.Message + "\n" + e.StackTrace, Log.Level.Exception);
                 CancelChanges();
                 CloseConnection();
                 return 0;
@@ -93,9 +99,9 @@ namespace ifc
             catch (IOException)
             {
                 //the file is unavailable because it is:
-                //still being written to
-                //or being processed by another thread
-                //or does not exist (has already been processed)
+                //1. still being written to
+                //2. or being processed by another thread
+                //3. or does not exist (has already been processed)
                 return true;
             }
             finally
@@ -126,16 +132,18 @@ namespace ifc
                 this.Connection.Open();
             }
             int returnValue = 0;
-            SQLiteCommand command = new SQLiteCommand(string.Format("DELETE FROM {0};", tableName), this.Connection);
+            SqliteCommand command = new SqliteCommand(string.Format("DELETE FROM {0};", tableName), this.Connection);
             try
             {
                 returnValue = command.ExecuteNonQuery();
             }
-            catch (SQLiteException sqle)
+            catch (SqliteException sqle)
             {
                 // Handle DB exception
-                if (sqle.ErrorCode != (int)SQLiteErrorCode.Error)
-                    Debug.WriteLine(sqle.ResultCode.ToString());
+                if (sqle.ErrorCode != SQLiteErrorCode.Error) {
+                    Log.Add(sqle.ErrorCode.ToString(), Log.Level.Exception);
+                    throw new IfcSharpException($"Unhandled SqliteException '{sqle.ErrorCode}' in 'TruncateTable");
+                }
             }
             finally
             {
@@ -146,7 +154,7 @@ namespace ifc
 
         public void FillFromDataSet(SQLiteDataSet dataSet)
         {
-            Console.WriteLine(string.Format("{0}: Filling Database", NetSystem.DateTime.Now.ToString("HH:mm:ss.ffff")));
+            Log.Add($"Filling Database from DataSet...", Log.Level.Info);
 
             try
             {
@@ -167,7 +175,7 @@ namespace ifc
             catch (IfcSharpException e)
             {
                 string msg = "Exception in 'CreateDatabase(SqliteDataSet dataSet)':\n" + e.Message;
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
                 CloseConnection();
             }
         }
@@ -180,13 +188,14 @@ namespace ifc
         {
             if (this.Connection != null && this.Connection.State == NetSystem.Data.ConnectionState.Open)
             {
-                try
-                {
-                    this.Connection.Cancel();
+                try {
+                    if (ActiveTransaction != null) {
+                        ActiveTransaction.Rollback();
+                    }
                 }
-                catch (IfcSharpException e)
+                catch (Exception e)
                 {
-                    Debug.WriteLine(e.Message);
+                    Log.Add(e.Message, Log.Level.Exception);
                 }
                 return 1;
             }
@@ -199,14 +208,14 @@ namespace ifc
         /// <returns></returns>
         public int CloseConnection()
         {
-            if (this.Connection == null)
+            if (Connection == null)
             {
-                Debug.WriteLine("Error in 'OpenConnection()': this.DatabaseConnection == null");
+                Log.Add("Error in 'OpenConnection()': this.DatabaseConnection == null", Log.Level.Error);
                 return 0;
             }
 
-            if (this.Connection.State == NetSystem.Data.ConnectionState.Open)
-                this.Connection.Close();
+            if (Connection.State == NetSystem.Data.ConnectionState.Open)
+                Connection.Close();
 
             return 1;
         }
@@ -219,7 +228,7 @@ namespace ifc
         {
             if (this.Connection == null)
             {
-                Debug.WriteLine("Error in 'BeginTransaction()': this.DatabaseConnection == null");
+                Log.Add("Error in 'BeginTransaction()': this.DatabaseConnection == null", Log.Level.Error);
                 return 0;
             }
 
@@ -232,10 +241,9 @@ namespace ifc
             }
             catch (IfcSharpException e)
             {
-                Debug.WriteLine("Exception in 'BeginTransaction()': " + e.Message);
+                Log.Add("Exception in 'BeginTransaction()': " + e.Message, Log.Level.Exception);
                 return 0;
             }
-
             return 1;
         }
 
@@ -247,7 +255,7 @@ namespace ifc
         {
             if (this.ActiveTransaction == null)
             {
-                Debug.WriteLine("Error in 'CommitTransaction()': this.DatabaseConnection == null");
+                Log.Add("Error in 'CommitTransaction()': this.DatabaseConnection == null", Log.Level.Error);
                 return 0;
             }
 
@@ -276,7 +284,7 @@ namespace ifc
         {
             if (this.Connection == null)
             {
-                Debug.WriteLine("Error in 'CommitTransaction()': this.DatabaseConnection == null");
+                Log.Add("Error in 'CommitTransaction()': this.DatabaseConnection == null", Log.Level.Error);
                 return 0;
             }
 
@@ -293,13 +301,13 @@ namespace ifc
             OpenConnection();
 
             // first we get a list of all tables from the db
-            SQLiteCommand command = new SQLiteCommand("SELECT name FROM sqlite_master WHERE type = 'table';", this.Connection);
-            SQLiteDataReader dataReader = command.ExecuteReader();
+            SqliteCommand command = new SqliteCommand("SELECT name FROM sqlite_master WHERE type = 'table';", this.Connection);
+            SqliteDataReader dataReader = command.ExecuteReader();
 
             while (dataReader.Read())
             {
                 string tableName = dataReader.GetString(0);
-                SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(string.Format("SELECT * From {0}", tableName), this.Connection);
+                SqliteDataAdapter dataAdapter = new SqliteDataAdapter($"SELECT * FROM {tableName}", this.Connection);
 
                 dataAdapter.FillSchema(dataSet, SchemaType.Source, tableName);
                 dataAdapter.Fill(dataSet, tableName);
@@ -320,17 +328,17 @@ namespace ifc
         private int CreateTable(SQLiteDataTable table)
         {
             int returnValue = 0;
-            SQLiteCommand sqlCommand = new SQLiteCommand(this.Connection);
+            SqliteCommand sqlCommand = new SqliteCommand(this.Connection);
             string commandText = string.Format("CREATE TABLE IF NOT EXISTS '{0}' ({1});", table.Name, GetColumnAttributes(table));
             try
             {
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (IfcSharpException e)
+            catch (Exception e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
                 returnValue = -1;
             }
             return returnValue;
@@ -354,23 +362,21 @@ namespace ifc
             string commandText = string.Format("INSERT INTO {0} ({1}) VALUES ({2})", tableName, string.Join(",", valueNames), string.Join(",", valuePlaceholders));
             try
             {
-                SQLiteCommand command = new SQLiteCommand(commandText, this.Connection);
+                SqliteCommand command = new SqliteCommand(commandText, this.Connection);
                 for (int i = 0; i < values.Count; i++)
                     command.Parameters.AddWithValue(valuePlaceholders[i], values[i]);
                 int retVal = command.ExecuteNonQuery();
             }
-
-
-            catch (SQLiteException sqliteExc)
+            catch (SqliteException sqliteExc)
             {
                 string msg = string.Format("Error on 'INSERT INTO {0}': {1}", tableName, sqliteExc.Message.Split('\n')[1]);
                 Console.WriteLine(msg);
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
             }
-            catch (IfcSharpException e)
+            catch (Exception e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
             }
 
         }
@@ -414,10 +420,10 @@ namespace ifc
                 CommitTransaction();
                 CloseConnection();
             }
-            catch (IfcSharpException e)
+            catch (Exception e)
             {
                 string msg = "Exception in 'CreateDatabase(DataSet dataSet)':\n" + e.Message;
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
                 //CloseConnection();
             }
         }
@@ -437,17 +443,17 @@ namespace ifc
         private int CreateTable(DataTable table)
         {
             int returnValue = 0;
-            SQLiteCommand sqlCommand = new SQLiteCommand(this.Connection);
+            SqliteCommand sqlCommand = new SqliteCommand(this.Connection);
             string commandText = string.Format("CREATE TABLE IF NOT EXISTS '{0}' ({1});", table.TableName, GetColumnAttributes(table));
             try
             {
                 sqlCommand.CommandText = commandText;
                 sqlCommand.ExecuteNonQuery();
             }
-            catch (IfcSharpException e)
+            catch (Exception e)
             {
                 string msg = string.Format("Exception in executing command: '{0}':\n{1}", commandText, e.Message);
-                Debug.WriteLine(msg);
+                Log.Add(msg, Log.Level.Exception);
                 returnValue = -1;
             }
             return returnValue;

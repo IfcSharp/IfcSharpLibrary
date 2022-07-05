@@ -122,24 +122,22 @@ namespace ifc
         public object SqliteAttributeOut(FieldInfo field, object o)
         {
             if (o == null) return DBNull.Value;
-            else
+            
+            if (o is Enum) return o.ToString();
+            if (o is string) return o.ToString();
+            if (o is SELECT select)
             {
-                if (o is Enum) return o.ToString();
-                else if (o is string) return o.ToString();
-                else if (o is SELECT select)
-                {
-                    if (select.IsNull) return "NULL";
-                    else if (select.SelectType().IsSubclassOf(typeof(TypeBase))) return select.SelectType().Name + "|" + select.SelectValue().ToString();
-                    else return SqliteAttributeOut(field, select.SelectValue());
-                }
-                else if (o.GetType().IsSubclassOf(typeof(TypeBase))) return ((TypeBase)o).ToSqliteValue();
-                else if (typeof(ifcListInterface).IsAssignableFrom(o.GetType()))
-                {
-                    //TODO: Implement "ToXML"
-                    return o.ToString();
-                }
-                else return o.ToString().Replace("#", "");
+                if (select.IsNull) return "NULL";
+                else if (select.SelectType().IsSubclassOf(typeof(TypeBase))) return select.SelectType().Name + "|" + select.SelectValue().ToString();
+                else return SqliteAttributeOut(field, select.SelectValue());
             }
+            if (o.GetType().IsSubclassOf(typeof(TypeBase))) return ((TypeBase)o).ToSqliteValue();
+            if (typeof(ifcListInterface).IsAssignableFrom(o.GetType()))
+            {
+                //TODO: Implement "ToXML"
+                return o.ToString();
+            }
+            return o.ToString().Replace("#", "");
         }
 
         public static DbType DbTypeFromTableId(int id)
@@ -254,21 +252,21 @@ namespace ifc
 
     public partial class Model
     {
-        public void ToSqliteFile()
+        public void ToSqliteFile(string filePath="")
         {
             AssignEntities();
-            string fullPath = Header.Name + ".sqlite";
+            if(string.IsNullOrEmpty(filePath)) filePath = Header.Name + ".sqlite";
             SQLiteDataSet sqliteDataSet = new SQLiteDataSet();
 
 #if EXPORT_COMPLETE_SCHEMA
             BuildIfcDataSet(ref ifcDataSet);
 #endif
 
-            Console.WriteLine(string.Format("{0}: Exporting Entities to SQLite-File", NetSystem.DateTime.Now.ToString("HH:mm:ss.ffff")));
+            Log.Add($"Exporting '{EntityList.Count}' Entities to SQLite-File...", Log.Level.Info);
             int prevEntityId = 0;
-            for (int i = 0; i < ifc.Repository.CurrentModel.EntityList.Count; i++)
+            for (int i = 0; i < EntityList.Count; i++)
             {
-                ENTITY e = ifc.Repository.CurrentModel.EntityList[i];
+                ENTITY e = EntityList[i];//ifc.Repository.CurrentModel.EntityList[i];
                 if (e is ifc.Root) if (((ifc.Root)e).GlobalId == null) ((ifc.Root)e).GlobalId = ifc.GloballyUniqueId.NewId();
                 e.ToSqliteDataSet(ref sqliteDataSet, true, prevEntityId);
                 prevEntityId = e.LocalId;
@@ -281,11 +279,10 @@ namespace ifc
             //    e.ToDataSet(ref dataSet);
             //}
 
-            SQLiteDatabase database = new SQLiteDatabase(fullPath);
+            IfcSharpSqLiteDatabase database = new IfcSharpSqLiteDatabase(filePath);
             database.FillFromDataSet(sqliteDataSet);
 
-            Console.WriteLine(string.Format("{0}: Finished Export", NetSystem.DateTime.Now.ToString("HH:mm:ss.ffff")));
-            Console.WriteLine("======================================================");
+            Log.Add("Finished Export", Log.Level.Info);
         }
 
         private bool BuildIfcDataSet(ref SQLiteDataSet ifcDataSet)
