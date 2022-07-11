@@ -47,7 +47,8 @@ namespace ifc
                     ENTITY entityInstance;
                     if (entityType == typeof(EntityComment))
                     {
-                        EntityComment ec = new EntityComment((string)row["Comment"], (int)(long)row["PreviousEntity"]);
+                        int prevEntityId = row["PreviousEntity"] is int ? (int)row["PreviousEntity"] : (int)(long)row["PreviousEntity"];
+                        EntityComment ec = new EntityComment((string)row["Comment"], prevEntityId);
                         entityInstance = ec;
                     }
                     else
@@ -59,7 +60,10 @@ namespace ifc
                         continue;
                     }
 
-                    if (row["Id"] != null) entityInstance.LocalId = (int)(long)row["Id"];
+                    if (row["Id"] != null) {
+                        int localId = row["Id"] is int ? (int)row["Id"] : (int)(long)row["Id"];
+                        entityInstance.LocalId = localId;
+                    }
                     model.EntityList.Add(entityInstance);
 #if DEBUG
                     foreach (DataColumn c in dt.Columns) Console.Write($"{row[c]}");
@@ -106,7 +110,7 @@ namespace ifc
                 FieldInfo field = attributes[i];
                 object o;
                 string fieldName = field.Name.Replace("_", "");
-                if (fieldName == "Coordinates")
+                if (type == typeof(CartesianPoint))//(fieldName == "Coordinates")
                 {
                     List<LengthMeasure> coords = new List<LengthMeasure>();
                     if (record["X"] != DBNull.Value) coords.Add(new LengthMeasure((double)record["X"]));
@@ -114,7 +118,7 @@ namespace ifc
                     if (record["Z"] != DBNull.Value) coords.Add(new LengthMeasure((double)record["Z"]));
                     o = new List1to3_LengthMeasure(coords.ToArray());
                 }
-                else if (fieldName == "DirectionRatios")
+                else if (type == typeof(Direction))//(fieldName == "DirectionRatios")
                 {
 #if IFC2X3
                     List<double> coords = new List<double>();
@@ -141,7 +145,6 @@ namespace ifc
                 field.SetValue(instance, o);
 
                 if (i == attributes.Count) field.SetValue(instance, record["EndOfLineComment"] is DBNull ? null : record["EndOfLineComment"]);
-                if (i == attributes.Count) field.SetValue(instance, record["EndOfLineComment"] is DBNull ? null : record["EndOfLineComment"]);
             }
             return instance as ENTITY;
         }
@@ -157,9 +160,10 @@ namespace ifc
             else if (fieldType.IsSubclassOf(typeof(ENTITY)))
             {
                 o = Activator.CreateInstance(fieldType);
-                ((ENTITY)o).LocalId = (int)(long)value;
+                int localId = value is int ? (int)value : (int)(long)value;
+                ((ENTITY)o).LocalId = localId;
             }
-            else if (fieldType.IsSubclassOf(typeof(TypeBase))) o = ParseBaseType(fieldType, value);
+            else if (fieldType.IsSubclassOf(typeof(TypeBase))) o = Parse2TYPE(value.ToString(), fieldType);//ParseBaseType(fieldType, value);
             else if ((Nullable.GetUnderlyingType(fieldType) != null) && Nullable.GetUnderlyingType(fieldType).IsSubclassOf(typeof(Enum)))
             {
                 if ((string)value != "NULL") o = Enum.Parse(Nullable.GetUnderlyingType(fieldType), (string)value);
@@ -195,7 +199,7 @@ namespace ifc
                     Type valueType = Type.GetType("ifc." + s.Split('|')[0], true, false);
                     if (valueType.IsSubclassOf(typeof(TypeBase)))
                     {
-                        object arg = ParseBaseType(valueType, s.Split('|')[1]);
+                        object arg = Parse2TYPE(s.Split('|')[1], valueType);//ParseBaseType(valueType, s.Split('|')[1]);
                         select = Activator.CreateInstance(selectType, arg);
                     }
                 }

@@ -15,26 +15,29 @@ namespace ifc
 {
     public partial class ENTITY
     {
-        public virtual void ToSqliteDataSet(ref SQLiteDataSet dataSet, bool updateExisting, int prevEntityId)
+        public virtual void ToSqliteDataSet(ref IfcSqliteDataSet dataSet, bool updateExisting, int prevEntityId)
         {
             string paramName = "";
 
             // find corresponding datatable
             bool addNewTable = false;
-            SQLiteDataTable dataTable = dataSet.Tables.FirstOrDefault(t => t.Name == this.GetType().Name);
+            //SQLiteDataTable dataTable = dataSet.Tables.FirstOrDefault(t => t.Name == this.GetType().Name);
+            IfcSqliteDataTable dataTable = (IfcSqliteDataTable)dataSet.Tables[this.GetType().Name];
             if (dataTable == null)
             {
                 addNewTable = true;
-                dataTable = new SQLiteDataTable(this.GetType().Name);
+                dataTable = new IfcSqliteDataTable(this.GetType().Name);
             }
 
             // find corresponding datarow
             bool addNewRow = false;
-            SQLiteDataRow dataRow = dataTable.Rows.FirstOrDefault(r => r.Id == this.LocalId || r.IsEmpty);
+            //IfcSqliteDataRow dataRow = dataTable.Rows.FirstOrDefault(r => r.Id == this.LocalId || r.IsEmpty);
+            IfcSqliteDataRow dataRow = null;
+            if (dataTable.Columns.Contains("Id")) dataRow = dataTable.Select($"Id = {LocalId}").FirstOrDefault() as IfcSqliteDataRow;
             if (dataRow == null)
             {
                 addNewRow = true;
-                dataRow = new SQLiteDataRow();
+                dataRow = dataTable.NewRow() as IfcSqliteDataRow;
             }
             else
             {
@@ -256,7 +259,7 @@ namespace ifc
         {
             AssignEntities();
             if(string.IsNullOrEmpty(filePath)) filePath = Header.Name + ".sqlite";
-            SQLiteDataSet sqliteDataSet = new SQLiteDataSet();
+            IfcSqliteDataSet sqliteDataSet = new IfcSqliteDataSet();
 
 #if EXPORT_COMPLETE_SCHEMA
             BuildIfcDataSet(ref ifcDataSet);
@@ -285,7 +288,7 @@ namespace ifc
             Log.Add("Finished Export", Log.Level.Info);
         }
 
-        private bool BuildIfcDataSet(ref SQLiteDataSet ifcDataSet)
+        private bool BuildIfcDataSet(ref IfcSqliteDataSet ifcDataSet)
         {
             if (ifcDataSet == null)
                 return false;
@@ -301,8 +304,8 @@ namespace ifc
                     {
                         if (t.IsSubclassOf(typeof(ifc.ENTITY)))
                         {
-                            SQLiteDataTable dataTable = new SQLiteDataTable(t.Name);
-                            SQLiteDataRow dataRow = new SQLiteDataRow();
+                            IfcSqliteDataTable dataTable = new IfcSqliteDataTable(t.Name);
+                            IfcSqliteDataRow dataRow = dataTable.NewRow() as IfcSqliteDataRow;
                             foreach (FieldInfo field in t.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy))
                             {
                                 foreach (Attribute attr in field.GetCustomAttributes(true))

@@ -4,46 +4,58 @@
 //EF-2021-04-01: Added preprocessor flag 'INCLUDE_SQLITE' so that the compilation without sqlite-support is possible
 #if INCLUDE_SQLITE
 using System.Collections.Generic;
-using System.Linq;
+using System.Data;
 using System.Data.SQLite;
+using System.Linq;
 using NetSystem = System;
 
-namespace ifc
-{
-    public class SQLiteDataSet
+namespace ifc {
+    public class IfcSqliteDataSet : DataSet
     {
-        public IList<SQLiteDataTable> Tables { get; internal set; }
+        //public IList<SQLiteDataTable> Tables { get; internal set; }
 
-        public SQLiteDataSet()
+        public IfcSqliteDataSet()
         {
-            this.Tables = new List<SQLiteDataTable>();
+            //this.Tables = new List<SQLiteDataTable>();
         }
 
-        public void Clear()
-        {
-            Tables.Clear();
-        }
+        //public void Clear()
+        //{
+        //    Tables.Clear();
+        //}
     }
 
-    public class SQLiteDataTable
+    public class IfcSqliteDataTable : DataTable
     {
-        public string Name { get; private set; }
-        public IList<SQLiteDataRow> Rows { get; private set; }
+        //public string Name { get; private set; }
+        //public IList<SQLiteDataRow> Rows { get; private set; }
 
-        public SQLiteDataTable(string name)
+        protected override NetSystem.Type GetRowType() {
+            return typeof(IfcSqliteDataRow);
+        }
+        protected override DataRow NewRowFromBuilder(DataRowBuilder Builder) {
+            return new IfcSqliteDataRow(Builder);
+        }
+
+        public IfcSqliteDataTable(string name)
         {
-            this.Name = name;
-            this.Rows = new List<SQLiteDataRow>();
+            TableName = name;
+            //this.Name = name;
+            //this.Rows = new List<SQLiteDataRow>();
         }
 
     }
-    public class SQLiteDataRow
+    public class IfcSqliteDataRow : DataRow
     {
-        public IList<SQLiteDataField> Fields { get; private set; }
-        public SQLiteDataRow()
-        {
+        protected internal IfcSqliteDataRow(DataRowBuilder builder) : base(builder) {
             this.Fields = new List<SQLiteDataField>();
         }
+
+        public IList<SQLiteDataField> Fields { get; private set; }
+        //public IfcSqliteDataRow()
+        //{
+        //    
+        //}
         public int Id 
         {
             get 
