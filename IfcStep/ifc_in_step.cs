@@ -30,6 +30,7 @@ namespace ifc {
         /// <param name="fieldType"></param>
         /// <returns>type of generic constructor arguments</returns>
         public static Type GetValueType(Type fieldType) {
+            if (fieldType == null) throw new ArgumentNullException($"GetValueType(): Argument 'fieldType' == null");
             if (fieldType.BaseType.GetGenericArguments().Length > 0) return fieldType.BaseType.GetGenericArguments()[0]; //i.e. LengthMeasure or CartesianPoint
             return fieldType.BaseType.BaseType.GetGenericArguments()[0]; //i.e. CompoundPlaneAngleMeasure
         }
@@ -53,27 +54,31 @@ namespace ifc {
             else {
                 if (valueBaseType == typeof(string)) {
                     if (value == "$") ctorArgs[0] = "";
-                    else ctorArgs[0] = ifc.IfcString.Decode(value);
-                    instance = Activator.CreateInstance(valueType, ctorArgs);
+                    else {
+                        value = value.Trim('\''); // 2022-07-11 (ef): the ' at the start and end of the string is not part of the actual value and needs to be trimmed
+                        ctorArgs[0] = ifc.IfcString.Decode(value);
+                    }
                 }
                 else if (valueBaseType == typeof(int)) {
-                    ctorArgs[0] = int.Parse(value);
-                    instance = Activator.CreateInstance(valueType, ctorArgs);
+                    try {
+                        ctorArgs[0] = int.Parse(value);
+                    }
+                    catch (Exception e) {
+                        Log.Add($"Parse2TYPE: Exception parsing to int\n{CurrentLine}{e.Message}", Log.Level.Exception);
+                    }
                 }
                 else if (valueBaseType == typeof(double))
                     try {
                         ctorArgs[0] = double.Parse(value, CultureInfo.InvariantCulture);
-                        instance = Activator.CreateInstance(valueType, ctorArgs);
                     }
-                    catch (Exception e){
+                    catch (Exception e) {
                         Log.Add($"Parse2TYPE: Exception parsing to double\n{CurrentLine}{e.Message}", Log.Level.Exception);
                     }
                 else if (valueBaseType == typeof(bool)) {
                     ctorArgs[0] = (value == ".T.");
-                    instance = Activator.CreateInstance(valueType, ctorArgs);
                 }
                 else if (valueBaseType.IsSubclassOf(typeof(TypeBase))) {
-                    instance = Activator.CreateInstance(valueType, Parse2TYPE(value, valueBaseType));
+                    ctorArgs[0] = Parse2TYPE(value, valueBaseType);
                 }
 
                 // 2022-06-10 (ef): for lists which are defined inline (i.e.: (49,6,1,566000))
@@ -82,7 +87,6 @@ namespace ifc {
                 else if (typeof(ifcListInterface).IsAssignableFrom(valueBaseType)) {
                     try {
                         ctorArgs[0] = Parse2LIST(valueBaseType, value);
-                        instance = Activator.CreateInstance(valueType, ctorArgs[0]);
                     }
                     catch (Exception e) {
                         Log.Add($"Parse2TYPE (parsing list): {value}\nException: {e.Message}", Log.Level.Exception);
@@ -91,6 +95,7 @@ namespace ifc {
                 else {
                     Log.Add($"UNKNOWN TYPE for expected Type {valueType.Name}: Base={valueBaseType.Name} value={value}\r\n{CurrentLine}", Log.Level.Error);
                 }
+                instance = Activator.CreateInstance(valueType, ctorArgs);
             }
 
             return instance;
@@ -111,10 +116,6 @@ namespace ifc {
          Polyline.List2toUnbounded_CartesianPoint ( List2toUnbounded_CartesianPoint:List2toUnbounded<CartesianPoint: is ENTITY, not TYPE<ENTITY> !!
           [ifcSql(TypeId:  21)] public partial class List2toUnbounded_CartesianPoint:List2toUnbounded<CartesianPoint>{public List2toUnbounded_CartesianPoint(List2toUnbounded<CartesianPoint> value):base(value){} public List2toUnbounded_CartesianPoint(){} public List2toUnbounded_CartesianPoint(params CartesianPoint[] items):base(){foreach (CartesianPoint e in items)  this.Add(e);} new bool IsNull{get{return (this.Count==0);}set{if (value) this.Clear();}} }
         */
-
-        // 
-        // 2022-04-04 (ef): now supports higher order lists, as well as lists of not TypeBase-Elements (e.g.: SELECT)
-        // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
         
         /// <summary>
         /// Parses a given <paramref name="body"/> and tries to instantiate a type <paramref name="listType"/>.
@@ -123,7 +124,7 @@ namespace ifc {
         /// <param name="body"></param>
         /// <returns></returns>
         /// <exception cref="IfcSharpException"></exception>
-        public static object Parse2LIST(Type listType, string body) {
+        private static object Parse2LIST(Type listType, string body) {
             if (!typeof(IEnumerable).IsAssignableFrom(listType)) Console.WriteLine("Parse2LIST: " + listType + " is not IEnumerable");
             if ((body == "$") || (body == "*")) return Activator.CreateInstance(listType);
             Type valueType = GetValueType(listType);
@@ -165,7 +166,6 @@ namespace ifc {
         /// <returns>Array of <see cref="object"/> instances of the given <see cref="Type"/> <paramref name="valueType"/></returns>
         private static object[] GetListCtorArgs(Type valueType, string[] values) {
             object[] valueInstances = new object[values.Length];
-
             for (int i = 0; i < values.Length; i++) {
                 string value = values[i];
                 if (valueType == typeof(int)) {
@@ -184,12 +184,10 @@ namespace ifc {
                 }
                 else if (valueType.IsSubclassOf(typeof(SELECT))) {
                     object o = Activator.CreateInstance(valueType);
-                    if (value.Length > 0 && value.Trim(' ')[0] == '#') {
-                        // if SELECT refers to another line, we only need the Id
+                    if (value.Length > 0 && value.Trim(' ')[0] == '#') {// if SELECT refers to another line, we only need the Id
                         ((SELECT)o).Id = int.Parse(value.Trim(' ').Substring(1)); 
                     }
-                    else {
-                        // otherwise we parse the entire SELECT
+                    else {// otherwise we parse the entire SELECT
                         o = ParseSELECT(value, valueType);
                     }
                     valueInstances[i] = o;
@@ -203,11 +201,6 @@ namespace ifc {
             }
             return valueInstances;
         }
-        
-
-        
-        private static string[] BaseTypeNames { get; } = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
-
         private static object ParseSELECT(string value, Type selectType) {
             object instance = null;
             string selectedTypeName = value.Replace("IFC", "");
@@ -222,6 +215,7 @@ namespace ifc {
             //                  BASETYPES (which are representing the types available in the database) are capitalized,
             //                  whereas the actual IFC-Types are not. This can lead to confusion when parsing a STEP-file.
             //                  Therefore, we need to check if the current 'ElementName' is one of the BaseTypes, if so we change the name to first letter captitalized and remaining lower.
+            string[] BaseTypeNames = { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
             foreach (string name in BaseTypeNames) {
                 if (name != selectedTypeName) continue;
                 selectedTypeName = selectedTypeName.Substring(0, 1) + selectedTypeName.Substring(1).ToLower();
@@ -354,7 +348,6 @@ namespace ifc {
                             }
                         }
                         else if (field.FieldType.IsSubclassOf(typeof(Enum))) {
-                            Log.Add($"Enum in {CurrentLine}", Log.Level.Debug);
                             try {
                                 object enumInstance = Activator.CreateInstance(field.FieldType);
                                 if ((value.Length > 0) && (value[0] == '$')) enumInstance = 0;
@@ -408,11 +401,10 @@ namespace ifc {
                             Log.Add($"{i}: is {field.FieldType.Name} ???????x? {field.FieldType.Name} {ifcLine}", Log.Level.Error);
                         }
                     }
-
                     targetModel.EntityList.Add((ENTITY) CurrentInstance);
                 }
                 catch (Exception e) {
-                    Log.Add($"ERROR on ParseIfcLine: {e.Message}\n{ifcLine}", Log.Level.Exception);
+                    Log.Add($"ERROR on ParseIfcLine: {e.Message} | {ifcLine}", Log.Level.Exception);
                 }
             }
             else { EntityComment ec = new EntityComment(); ec.CommentLine = CurrentEntityComment; ec.LocalId = NextGlobalCommentId--; targetModel.EntityList.Add(ec); }
@@ -507,7 +499,6 @@ namespace ifc {
             return model;
         }
     }
-
 }
 
 
