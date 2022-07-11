@@ -18,14 +18,14 @@ public static ifc.Model CurrentModel=new ifc.Model();
     public partial class Model
     {//==========================================================================================
         public Model() { }
-        public Model(string name) { this.Header.Name = name; }
-        public Model(string name, string viewDefinition, string author, string organization, string originating_system, string documentation) {
-            this.Header.Name = name;
-            this.Header.ViewDefinition = viewDefinition;
-            this.Header.Author = author;
-            this.Header.Organization = organization;
-            this.Header.OriginatingSystem = originating_system;
-            this.Header.Documentation = documentation;
+        public Model(string Name) { this.Header.Name = Name; }
+        public Model(string Name, string ViewDefinition, string Author, string Organization, string OriginatingSystem, string Documentation) {
+            this.Header.Name = Name;
+            this.Header.ViewDefinition = ViewDefinition;
+            this.Header.Author = Author;
+            this.Header.Organization = Organization;
+            this.Header.OriginatingSystem = OriginatingSystem;
+            this.Header.Documentation = Documentation;
         }
 
         public int NextGlobalId = 1;
@@ -51,7 +51,7 @@ public static ifc.Model CurrentModel=new ifc.Model();
                         ENTITY E = (ENTITY)field.GetValue(e);
                         if (E != null) {
                             if (E.LocalId > 0) if (EntityDict.ContainsKey(E.LocalId)) field.SetValue(e, EntityDict[E.LocalId]); /* E=EntityDict[E.Id];*/
-                                else Console.WriteLine("E.Id=" + E.LocalId + " nicht gefunden");
+                                else Console.WriteLine("E.Id=" + E.LocalId + " not found");
                         }
                     }
                     else if (field.FieldType.IsSubclassOf(typeof(SELECT))) {

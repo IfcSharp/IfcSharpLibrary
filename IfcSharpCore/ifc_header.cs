@@ -15,8 +15,8 @@ public string OriginatingSystem="";
 public string Authorization="";
 public string Documentation="";
 public string FileSchema = ifc.Specification.SchemaName;
-public void Init(string name,string viewDefinition, string author,string preprocessorVersion)
-{this.Name=name;this.ViewDefinition=viewDefinition;this.Author=author;this.PreprocessorVersion=preprocessorVersion;}
+public void Init(string Name,string ViewDefinition, string Author,string PreprocessorVersion)
+{this.Name=Name;this.ViewDefinition=ViewDefinition;this.Author=Author;this.PreprocessorVersion=PreprocessorVersion;}
 public void Reset(){ViewDefinition=ifc.Specification.SchemaName;Name="IfcSharp";TimeStamp="";Author="Bernhard Simon Bock, Friedrich Eder";Organization=@"https://github.com/IfcSharp";PreprocessorVersion="";OriginatingSystem="";Authorization=@"https://github.com/IfcSharp";Documentation=""; }
 }//====================================================================================================================
 
