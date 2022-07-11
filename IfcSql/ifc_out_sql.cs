@@ -47,7 +47,7 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){//object als üb
                                         {ifcSqlInstance.cp.EntityAttributeOfList.Add(new ifcSQL.ifcInstance.EntityAttributeOfList_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()) ));
                                          int ListDim1Position=0;foreach (object item in (IEnumerable)o) SqlOut1(GlobalId,OrdinalPosition,ListDim1Position++,item);
                                         } 
-                                     else throw new  ifc.Exception("SqlOut0: LISTTYPE2D CURRENTLY NOT  SUPPORTED.");
+                                     else throw new  ifc.IfcSharpException("SqlOut0: LISTTYPE2D CURRENTLY NOT  SUPPORTED.");
                                     }
 
     else if (o is TypeBase) {TypeBase tb=(TypeBase)o;// Console.WriteLine(o.ToString());// funktioniert noch nicht 8PropertySingleValue)
@@ -115,7 +115,7 @@ public void ToSqlFile(int ProjectId=0,long StartGlobalId=1,string DatabaseName="
 ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance();
 FillTables(ProjectId:ProjectId,StartGlobalId:StartGlobalId);
 
-StreamWriter sw = new StreamWriter(Header.name+".sql");
+StreamWriter sw = new StreamWriter(Header.Name+".sql");
 sw.WriteLine("use "+DatabaseName+"\r\ngo\r\n");foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) sw.WriteLine(tb.InsertString()+"go\r\n");
 sw.Close();
 
@@ -132,7 +132,7 @@ ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
 long LastGlobalId=0;
 
 ifcSQL.conn.Open(); 
-if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.name+"',@ProjectDescription='"+Header.description+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.author+"',@Organization='"+Header.organization+"',@OriginatingSystem='"+Header.originating_system+"',@Documentation='"+Header.documentation+"';select @r");                                            
+if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.Name+"',@ProjectDescription='"+Header.ViewDefinition+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.Author+"',@Organization='"+Header.Organization+"',@OriginatingSystem='"+Header.OriginatingSystem+"',@Documentation='"+Header.Documentation+"';select @r");                                            
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
