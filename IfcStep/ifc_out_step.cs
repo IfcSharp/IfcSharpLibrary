@@ -19,7 +19,7 @@ string s;//="";
             else if (o is Enum) { s = "." + o.ToString() + "."; }
             else if (o is SELECT) {
                 if (((SELECT)o).IsNull) {
-                    if (attrib.IsDerived == false) s = "$";
+                    if (attrib != null && attrib.IsDerived == false) s = "$";
                     else s = "*";//2022-06-10 (ef): derived attributes which are NULL are written as '*'
                 }
                 else {

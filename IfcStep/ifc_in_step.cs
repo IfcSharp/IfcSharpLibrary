@@ -13,6 +13,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ifc {
 
@@ -65,7 +66,7 @@ namespace ifc {
                         instance = Activator.CreateInstance(valueType, ctorArgs);
                     }
                     catch (Exception e){
-                        Log.Add("Error on Parse2TYPE: " + CurrentLine+e.Message, Log.Level.Exception);
+                        Log.Add($"Parse2TYPE: Exception parsing to double\n{CurrentLine}{e.Message}", Log.Level.Exception);
                     }
                 else if (valueBaseType == typeof(bool)) {
                     ctorArgs[0] = (value == ".T.");
@@ -114,54 +115,54 @@ namespace ifc {
         // 
         // 2022-04-04 (ef): now supports higher order lists, as well as lists of not TypeBase-Elements (e.g.: SELECT)
         // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
-        public static object Parse2LIST(Type listType, string body, Type parentType = null) {
+        
+        /// <summary>
+        /// Parses a given <paramref name="body"/> and tries to instantiate a type <paramref name="listType"/>.
+        /// </summary>
+        /// <param name="listType"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        /// <exception cref="IfcSharpException"></exception>
+        public static object Parse2LIST(Type listType, string body) {
             if (!typeof(IEnumerable).IsAssignableFrom(listType)) Console.WriteLine("Parse2LIST: " + listType + " is not IEnumerable");
             if ((body == "$") || (body == "*")) return Activator.CreateInstance(listType);
             Type valueType = GetValueType(listType);
-
             object instance = null;
-            string[] values;
-            bool isListOfList = body.Contains("),");
+            string valuesString = body.Substring(1, body.Length - 2);
+            string delimiter = valuesString.Contains(")") ? ")," : ",";
+            string[] values = valuesString.Split(new string[] { delimiter }, StringSplitOptions.None);
+            if (delimiter == "),") {
+                // when the valueString was split by '),' we need to add the closing braces again at the end of each 'value'
+                for (int i = 0; i < values.Length - 1; i++) {
+                    values[i] = values[i] += ")";
+                }
+            }
 
-            int posL = body.IndexOf('(') + 1;
-            string innerBody = body.Substring(posL, body.Substring(posL).LastIndexOf(')'));
-            if (isListOfList && innerBody.StartsWith("(")) {
-                instance = Parse2LIST(valueType, innerBody, listType);
-                return instance;
+            if (values.Length == 0) {
+                string msg = $"No values were parsed in {listType} of #{CurrentId}";
+                Log.Add(msg, Log.Level.Error);
+                throw new IfcSharpException(msg);
             }
-            else if (isListOfList && innerBody.StartsWith("IFC")) {
-                values = innerBody.Split(new string[] { ")," }, StringSplitOptions.None);
-                for (int i = 0; i < values.Length - 1; i++) values[i] += ")";
-            }
-            else if (!isListOfList && body.StartsWith("IFC")) {
-                values = new string[] { body };
-            }
-            else if (isListOfList && !innerBody.StartsWith("(")) {
-                values = body.Split(new string[] { ")," }, StringSplitOptions.None);
-                for (int i = 0; i < values.Length; i++) if (!values[i].EndsWith(")")) values[i] += ")";
+
+            if (values[0] == "") {
+                try { instance = Activator.CreateInstance(listType); }
+                catch { Log.Add($"ERROR on Parse2LIST.1: #{CurrentId}", Log.Level.Exception); }
             }
             else {
-                values = innerBody.Split(',');
-            }
-            if (values.Length == 0) Console.WriteLine("ListElements.Length=0");
-
-            if (values[0] == "") try { instance = Activator.CreateInstance(listType); } catch { Console.WriteLine("ERROR on Parse2LIST.1:" + CurrentLine); }
-            else {
-                try {
-                    object[] ctorArgs = new object[values.Length];
-                    if (isListOfList && parentType != null) instance = Activator.CreateInstance(parentType, GetListCtorArgs(listType, values));
-                    else instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values)); 
-                }
-                catch (Exception e) {
-                    Log.Add($"ERROR on Parse2LIST.2:{CurrentLine}\n{e}", Log.Level.Exception);
-                }
+                try { instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values)); }
+                catch (Exception e) { Log.Add($"ERROR on Parse2LIST.2: #{CurrentId}\n{e}", Log.Level.Exception); }
             }
             return instance;
         }
 
 
-        // 2022-04-04 (ef): now supports lists of list
-        // TODO 2022-04-04 (ef) : refactor, de-spaghettify, look at use of 'GetFieldCtorArgs' vs. 'Parse2LIST'
+        /// <summary>
+        /// Helper Method which creates instances of given <paramref name="valueType"/> by the given array of <paramref name="values"/>
+        /// The <paramref name="values"/> are passed as <see cref="string"/> and are being parsed at runtime.
+        /// </summary>
+        /// <param name="valueType"><see cref="Type"/> of values stored in the list</param>
+        /// <param name="values">Array of values as <see cref="string"/></param>
+        /// <returns>Array of <see cref="object"/> instances of the given <see cref="Type"/> <paramref name="valueType"/></returns>
         private static object[] GetListCtorArgs(Type valueType, string[] values) {
             object[] valueInstances = new object[values.Length];
 
@@ -205,12 +206,11 @@ namespace ifc {
         
 
         
-        private static readonly string[] BaseTypeNames = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
+        private static string[] BaseTypeNames { get; } = new string[] { "INTEGER", "BINARY", "LOGICAL", "REAL", "BOOLEAN" };
 
-        public static object ParseSELECT(string value, Type selectType) {
+        private static object ParseSELECT(string value, Type selectType) {
             object instance = null;
             string selectedTypeName = value.Replace("IFC", "");
-
 
             int posLpar = selectedTypeName.IndexOf('(');
             int posRpar = selectedTypeName.LastIndexOf(')');
@@ -222,27 +222,26 @@ namespace ifc {
             //                  BASETYPES (which are representing the types available in the database) are capitalized,
             //                  whereas the actual IFC-Types are not. This can lead to confusion when parsing a STEP-file.
             //                  Therefore, we need to check if the current 'ElementName' is one of the BaseTypes, if so we change the name to first letter captitalized and remaining lower.
-            foreach (string name in BaseTypeNames) if (name == selectedTypeName) { selectedTypeName = selectedTypeName.Substring(0, 1) + selectedTypeName.Substring(1).ToLower(); ignoreCase = false; }
+            foreach (string name in BaseTypeNames) {
+                if (name != selectedTypeName) continue;
+                selectedTypeName = selectedTypeName.Substring(0, 1) + selectedTypeName.Substring(1).ToLower();
+                ignoreCase = false;
+            }
             selectedTypeName = "ifc." + selectedTypeName;
-
+            
             try {
                 Type selectValueType = Type.GetType(typeName: selectedTypeName, throwOnError: true, ignoreCase: ignoreCase);
-
                 if (selectValueType.IsSubclassOf(typeof(TypeBase))) {
                     object[] typeCtorArgs = new object[1];
                     typeCtorArgs[0] = Parse2TYPE(body, selectValueType);
-                    if (typeCtorArgs[0] == null) Console.WriteLine("SELECT-type is null" + "\r\n" + CurrentLine);
+                    if (typeCtorArgs[0] == null) Log.Add($"SELECT-type #{CurrentId} is null", Log.Level.Error);
                     else {
-                        try {
-                            instance = Activator.CreateInstance(selectType, typeCtorArgs);
-                        }
-                        catch (Exception e) {
-                            Log.Add(e.Message + "\r\n" + CurrentLine, Log.Level.Exception);
-                        }
+                        try { instance = Activator.CreateInstance(selectType, typeCtorArgs); }
+                        catch (Exception e) { Log.Add($"Exception in ParseSELECT: #{CurrentId} | {e.Message}", Log.Level.Exception); }
                     }
                 }
             }
-            catch (Exception e) { Log.Add(selectedTypeName + " body=" + body + " ERROR SELECT: " + posLpar + " " + e.Message + "\r\n" + CurrentLine, Log.Level.Exception); }
+            catch (Exception e) { Log.Add($"Exception in ParseSELECT: #{CurrentId} | {e.Message}", Log.Level.Exception); }
             return instance;
         }
         
@@ -255,7 +254,10 @@ namespace ifc {
         private static string CurrentTypeName { get; set; } = "";
         private static string[] CurrentArgs { get; set; }
         private static object CurrentInstance { get; set; }
-
+        private static int CurrentId {
+            get { return CurrentInstance is ENTITY e ? e.LocalId : -1; }
+        }
+        
         /// <summary>
         /// Parses the given <paramref name="ifcLine"/> and tries to add the resulting <code>ENTITY</code> to the given <paramref name="targetModel"/> 
         /// </summary>
@@ -268,21 +270,20 @@ namespace ifc {
             int commentOpenPos = ifcLine.IndexOf("/*"); 
             if (commentOpenPos >= 0) {
                 CurrentEntityComment = ifcLine.Substring(commentOpenPos + 3).Replace(" */", ""); ifcLine = ifcLine.Substring(0, commentOpenPos);
-                //Console.WriteLine("CommentOpenPos="+CommentOpenPos+" "+CurrentEntityComment);  
             }
             if (commentOpenPos != 0) {
                 int posA = ifcLine.IndexOf('=');
                 int posLpar = ifcLine.IndexOf('(');
                 int posRpar = ifcLine.LastIndexOf(')');
                 CurrentTypeName = ifcLine.Substring(posA + 1, posLpar - posA - 1).TrimStart(' ').TrimEnd(' ').Substring(3);
-                string body = ifcLine.Substring(posLpar + 1, posRpar - posLpar - 1); // Argumentkoerper extrahieren
+                string body = ifcLine.Substring(posLpar + 1, posRpar - posLpar - 1); // extract argument-body
                 bool txtOpen = false;
                 int parOpen = 0;
                 for (int i = 0; i < body.Length; i++) {
-                    if ((!txtOpen) && (body[i] == '\'')) { txtOpen = true; }//body=ReplaceCharAt(body,i,'[');}
-                    else if ((!txtOpen) && (body[i] == '(')) { parOpen++; }//body=ReplaceCharAt(body,i,'<');}
-                    else if ((!txtOpen) && (body[i] == ')')) { parOpen--; }//body=ReplaceCharAt(body,i,'>');}
-                    else if ((txtOpen) && (body[i] == '\'')) { txtOpen = false; }//body=ReplaceCharAt(body,i,']');}
+                    if ((!txtOpen) && (body[i] == '\'')) { txtOpen = true; }
+                    else if ((!txtOpen) && (body[i] == '(')) { parOpen++; }
+                    else if ((!txtOpen) && (body[i] == ')')) { parOpen--; }
+                    else if ((txtOpen) && (body[i] == '\'')) { txtOpen = false; }
                     if ((txtOpen) || (parOpen > 0)) if (body[i] == ',') { body = ReplaceCharAt(body, i, (char)9); }
                 }
                 CurrentArgs = body.Split(',');
@@ -300,7 +301,7 @@ namespace ifc {
                         string value = "$";
                         if (i <= CurrentArgs.GetLength(0)) value = CurrentArgs[i - 1].Trim(' ').Trim('\'');
                         if (field.FieldType == typeof(string)) {
-                            if (value == "$") field.SetValue(CurrentInstance, "" /*null*/);
+                            if (value == "$") field.SetValue(CurrentInstance, string.Empty /*null*/);
                             else field.SetValue(CurrentInstance, IfcString.Decode(value));
                         }
                         else if (field.FieldType == typeof(int)) {
@@ -316,7 +317,7 @@ namespace ifc {
                                 Log.Add(msg, Log.Level.Exception);
                                 throw new IfcSharpException(msg);
                             }
-                        } //tb.GetBaseType()
+                        } 
                         else if (field.FieldType.IsSubclassOf(typeof(SELECT))) {
                             try {
                                 object selectTypeInstance = Activator.CreateInstance(field.FieldType);
@@ -326,14 +327,7 @@ namespace ifc {
                                 else if (!value.StartsWith("$") && !value.StartsWith("*")) {
                                     selectTypeInstance = ParseSELECT(value, field.FieldType);
                                 }
-
                                 field.SetValue(CurrentInstance, selectTypeInstance);
-
-                                // if ((value.Length > 0) && (value[0] == '$')) { }
-                                // else if ((value.Length > 0) && (value[0] == '*')) { }
-                                // else if ((value.Length > 0) && (value[0] == '#')) { ((SELECT)selectTypeInstance).Id = int.Parse(value.Substring(1)); }
-                                // else selectTypeInstance = ParseSelect(value, field.FieldType);
-                                //field.SetValue(CurrentInstance, selectTypeInstance);
                             }
                             catch (Exception e) {
                                 //TODO: logging
@@ -345,11 +339,7 @@ namespace ifc {
                         else if (field.FieldType.IsSubclassOf(typeof(ENTITY))) {
                             try {
                                 object entityInstance = null; //falls $
-                                // if (value.Length > 0)
-                                //     if (value[0] == '*')
                                 if (value.StartsWith("*")) entityInstance = Activator.CreateInstance(field.FieldType);
-                                // if (value.Length > 0)
-                                //     if (value[0] == '#')
                                 else if (value.StartsWith("#")) {
                                     entityInstance = Activator.CreateInstance(field.FieldType);
                                     ((ENTITY) entityInstance).LocalId = int.Parse(value.Substring(1));
@@ -364,46 +354,41 @@ namespace ifc {
                             }
                         }
                         else if (field.FieldType.IsSubclassOf(typeof(Enum))) {
+                            Log.Add($"Enum in {CurrentLine}", Log.Level.Debug);
                             try {
                                 object enumInstance = Activator.CreateInstance(field.FieldType);
                                 if ((value.Length > 0) && (value[0] == '$')) enumInstance = 0;
                                 else {
                                     try {
-                                        enumInstance = Enum.Parse(field.FieldType,
-                                            value.Substring(1, value.Length - 2));
+                                        enumInstance = Enum.Parse(field.FieldType, value.Substring(1, value.Length - 2));
                                         field.SetValue(CurrentInstance, enumInstance);
                                     }
-                                    catch {
-                                        //TODO: logging
-                                        Console.WriteLine("enum " + field.FieldType + "." + value + " not recognized");
-                                    }
+                                    catch { Log.Add($"enum {field.FieldType}.{value} not recognized", Log.Level.Exception); }
                                 }
                             }
                             catch (Exception e) {
-                                string msg = "Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                string msg = $"Parse.Enum: Field {i}: {field.FieldType}: {e.Message}";
                                 Log.Add(msg, Log.Level.Exception);
                                 throw new IfcSharpException(msg);
                             }
                         }
-                        else if ((Nullable.GetUnderlyingType(field.FieldType) != null) &&
-                                 (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum)))) {
+                        else if ((Nullable.GetUnderlyingType(field.FieldType) != null) && (Nullable.GetUnderlyingType(field.FieldType).IsSubclassOf(typeof(Enum)))) {
                             try {
                                 object enumInstance = null;
                                 if ((value.Length > 0) && (value[0] != '$')) {
                                     enumInstance = Activator.CreateInstance(field.FieldType);
                                     try {
-                                        enumInstance = Enum.Parse(Nullable.GetUnderlyingType(field.FieldType),
-                                            value.Substring(1, value.Length - 2));
+                                        enumInstance = Enum.Parse(Nullable.GetUnderlyingType(field.FieldType), value.Substring(1, value.Length - 2));
                                     }
                                     catch {
-                                        Console.WriteLine("enum " + field.FieldType + "." + value + " not recognized");
+                                        Log.Add($"enum {field.FieldType}.{value} not recognized", Log.Level.Exception);
                                     }
                                 }
 
                                 field.SetValue(CurrentInstance, enumInstance);
                             }
                             catch (Exception e) {
-                                string msg = "Parse.Enum: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                string msg = $"Parse.Enum: Field {i}: {field.FieldType}: {e.Message}";
                                 Log.Add(msg, Log.Level.Exception);
                                 throw new IfcSharpException(msg);
                             }
@@ -411,23 +396,23 @@ namespace ifc {
                         else if (typeof(ifcListInterface).IsAssignableFrom(field.FieldType)) {
                             try {
                                 if (value.StartsWith("$")) field.SetValue(CurrentInstance, null);
-                                else field.SetValue(CurrentInstance, Parse2LIST(field.FieldType, value));
+                                else field.SetValue(CurrentInstance, Parse2LIST(field.FieldType, value.Replace(" ","")));
                             }
                             catch (Exception e) {
-                                string msg = "Parse.LIST: Field " + i + ": " + field.FieldType.ToString() + ": " + e.Message;
+                                string msg = $"Parse.LIST: Field {i}: {field.FieldType}: {e.Message}";
                                 Log.Add(msg, Log.Level.Exception);
                                 throw new IfcSharpException(msg);
                             }
                         }
                         else {
-                            Log.Add(i + ": is " + field.FieldType.Name + "???????x? " + field.FieldType.Name + "  " + ifcLine, Log.Level.Error);
+                            Log.Add($"{i}: is {field.FieldType.Name} ???????x? {field.FieldType.Name} {ifcLine}", Log.Level.Error);
                         }
                     }
 
                     targetModel.EntityList.Add((ENTITY) CurrentInstance);
                 }
                 catch (Exception e) {
-                    Log.Add("ERROR on ParseIfcLine:" + e.Message+ "\nline:"+ifcLine, Log.Level.Exception);
+                    Log.Add($"ERROR on ParseIfcLine: {e.Message}\n{ifcLine}", Log.Level.Exception);
                 }
             }
             else { EntityComment ec = new EntityComment(); ec.CommentLine = CurrentEntityComment; ec.LocalId = NextGlobalCommentId--; targetModel.EntityList.Add(ec); }
@@ -435,16 +420,13 @@ namespace ifc {
 
         // 2022-07-05 (ef): renamed method 'GetAttributesOfObject'
         // TODO: move to reflection_helper
-        public static Dictionary<int, FieldInfo> GetAttributesOfObject(object obj) {
+        private static Dictionary<int, FieldInfo> GetAttributesOfObject(object obj) {
             Dictionary<int, FieldInfo> attributeDictionary = new Dictionary<int, FieldInfo>();
-            foreach (FieldInfo field in obj.GetType()
-                         .GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)) {
-                foreach (Attribute attr in field.GetCustomAttributes(true))
-                    if (attr is ifcAttribute ifcAttribute) {
-                        attributeDictionary.Add(ifcAttribute.OrdinalPosition, field);
-                    }
+            foreach (FieldInfo field in obj.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)) {
+                foreach (Attribute attr in field.GetCustomAttributes(true)) {
+                    if (attr is ifcAttribute ifcAttribute) attributeDictionary.Add(ifcAttribute.OrdinalPosition, field);
+                }
             }
-
             return attributeDictionary;
         }
     }
