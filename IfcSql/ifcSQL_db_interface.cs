@@ -45,7 +45,7 @@ else if (field.FieldType==typeof(System.Boolean))   return (field.GetValue(this)
 else if (field.FieldType==typeof(System.Byte))      return field.GetValue(this).ToString();
 else return "unknown Type "+field.FieldType.ToString();
 }//................................................................................................
-
+public virtual void Load(TableBase rows){}
 }//------------------------------------------------------------------------------------------------
 
 public partial class TableBase : List<Object>{//-----------------------------------------------------------
@@ -61,6 +61,7 @@ public partial class RowList<T> : TableBase where T : new(){//------------------
 public               RowList(string order=""){this.order=order;}
 public override void SelectAll(string where=""){SqlCommand cmd = new SqlCommand("select * from "+TableName+" "+where+" "+order,tableSet.conn);
                                  using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
+                                ((RowBase)(object)new T()).Load(this);
                                 }
 public override string InsertString(){Object o = new T();RowBase rb=((RowBase)o);string s=rb.InsertStringOpen(TableName);int pos=0;foreach (RowBase row in this) s+=((++pos>1)?",":"")+row.InsertStringValuesRow();s+=rb.InsertStringClose();return s; }
 
