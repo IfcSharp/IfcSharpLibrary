@@ -84,9 +84,10 @@ public partial class SchemaBase{}//---------------------------------------------
 
 public partial class TableSet{//---------------------------------------------------------------------------
 public  TableSet(){AssignTableNames();}
-public  TableSet(string ServerName,string DatabaseName){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
-                                                        conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
-                                                       }
+public  TableSet(string ServerName,string DatabaseName,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
+                                                                              conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
+                                                                              if (DirectLoad) LoadAllTables();
+                                                                             }
 public void AssignTableNames(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
                                    foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
                                            { ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).TableName="["+this.DatabaseName+"].["+SchemaField.Name+"].["+TableField.Name+"]";
