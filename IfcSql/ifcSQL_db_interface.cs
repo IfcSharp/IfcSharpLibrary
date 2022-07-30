@@ -16,8 +16,8 @@ using System.Text;
 namespace db{//====================================================================================
 
 
-public class DbField : System.Attribute { public bool PrimaryKey=false; public bool SortAscending=false; public bool SortDescending=false;}
-[System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;}
+public class DbField : System.Attribute { public bool PrimaryKey=false;public string PkName=null; public bool SortAscending=false; public bool SortDescending=false;}
+[System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string FkName=null;public string RefPkName=null;public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;}
 public class UserType : System.Attribute {public string schema=null;public string name=null;}
 
 
