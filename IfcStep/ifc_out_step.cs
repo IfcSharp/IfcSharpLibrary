@@ -63,7 +63,7 @@ public void ToStepFile(string filePath="")//------------------------------------
 Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 foreach (ENTITY e in EntityList) if (e is ifc.Root) if (((ifc.Root)e).GlobalId == null) ((ifc.Root)e).GlobalId = ifc.GloballyUniqueId.NewId();
 //EF-2021-03-02: added support for the definition of a filepath, if the filepath is omitted, we use the headername of the Model
-if (string.IsNullOrEmpty(filePath)) filePath = Header.Name + "_out.ifc";
+if (string.IsNullOrEmpty(filePath)) filePath = Header.Name + ".ifc";
 StreamWriter sw = new StreamWriter(filePath);
 sw.WriteLine("ISO-10303-21;");
 sw.WriteLine("HEADER;");
