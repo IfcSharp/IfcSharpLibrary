@@ -1,6 +1,7 @@
 // ifc_base_entity.cs, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
 
 using NetSystem=System;
+using System.IO;
 
 public class ifcAttribute:System.Attribute{public ifcAttribute(int OrdinalPosition,bool optional=false,bool derived=false){this.OrdinalPosition=OrdinalPosition;this.optional=optional;this.derived=derived;}
                                            public int OrdinalPosition=0;
@@ -62,11 +63,16 @@ public static int HtmlCnt=0;
 
 [ifcSql(TypeGroupId:5,TypeId:-3)] public partial class ImageComment:EntityComment{//==========================================================================================
 public               ImageComment(){} 
-public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine();
-                                                                               this.CommentLine="<img src=\""+ImgFileName+"\"";
-                                                                               if (height>0) this.CommentLine+=" height=\""+height+"\"";
-                                                                               if (width >0) this.CommentLine+=" width=\""+width+"\"";
-                                                                               this.CommentLine+="/>";
+public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine(); 
+                                                                               string TargetFileName="copyof_"+NetSystem.IO.Path.GetFileName(ImgFileName);
+                                                                               this.CommentLine="<a href=\""+TargetFileName+"\">"+TargetFileName+"</a><BR/>"; 
+                                                                               if (!NetSystem.IO.File.Exists(TargetFileName)) // insert and copy only first time if file not exist
+                                                                                  {NetSystem.IO.File.Copy(ImgFileName,TargetFileName);
+                                                                                   this.CommentLine+="<img src=\""+TargetFileName+"\"";
+                                                                                   if (height>0) this.CommentLine+=" height=\""+height+"\"";
+                                                                                   if (width >0) this.CommentLine+=" width=\""+width+"\"";
+                                                                                   this.CommentLine+="/>";
+                                                                                  }
                                                                               }
 public override string ToHtml(){return CommentLine+"<BR/>";}
 }//=====================================================================================================================
