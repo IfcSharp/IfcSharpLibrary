@@ -88,6 +88,14 @@ public  TableSet(string ServerName,string DatabaseName,bool DirectLoad=false){th
                                                                               conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
                                                                               if (DirectLoad) LoadAllTables();
                                                                              }
+public  TableSet(string ServerName,string DatabaseName,string UserName,string Password,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
+                                                                              conn=new SqlConnection("Data Source="+ServerName+";Network Library=DBMSSOCN;Initial Catalog="+DatabaseName+";User ID="+UserName+";Password='"+Password+"'");
+                                                                              if (DirectLoad) LoadAllTables();
+                                                                             }
+
+
+
+
 public void AssignTableNames(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
                                    foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
                                            { ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).TableName="["+this.DatabaseName+"].["+SchemaField.Name+"].["+TableField.Name+"]";
