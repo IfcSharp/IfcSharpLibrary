@@ -65,9 +65,11 @@ public static int HtmlCnt=0;
 public               ImageComment(){} 
 public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine(); 
                                                                                string TargetFileName="copyof_"+NetSystem.IO.Path.GetFileName(ImgFileName);
-                                                                               this.CommentLine="<a href=\""+TargetFileName+"\">"+TargetFileName+"</a><BR/>"; 
+                                                                               //this.CommentLine="<a href=\""+TargetFileName+"\">"+TargetFileName+"</a><BR/>"; // 2022-10-16 (bb) removed simple link, added www-refs
+                                                                               this.CommentLine="<a href=\""+TargetFileName+"\" target=\"popup\" onclick=\"window.open('"+TargetFileName+"','popup','width=400,height=400,toolbar=0'); return false;\">"+ImgFileName+"</a>"; // (bb) added popup window for image-comments
                                                                                if (!NetSystem.IO.File.Exists(TargetFileName)) // insert and copy only first time if file not exist
-                                                                                  {NetSystem.IO.File.Copy(ImgFileName,TargetFileName);
+                                                                                  {if (ImgFileName.Contains("http")) try{new NetSystem.Net.WebClient().DownloadFile(ImgFileName,TargetFileName);}catch(NetSystem.Exception e){Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
+                                                                                   else {if (NetSystem.IO.File.Exists(ImgFileName)) NetSystem.IO.File.Copy(ImgFileName,TargetFileName); else Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
                                                                                    this.CommentLine+="<img src=\""+TargetFileName+"\"";
                                                                                    if (height>0) this.CommentLine+=" height=\""+height+"\"";
                                                                                    if (width >0) this.CommentLine+=" width=\""+width+"\"";
