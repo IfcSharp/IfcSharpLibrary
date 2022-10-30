@@ -5,5 +5,5 @@
 IfcSharpCore contains the baseclasses, that are used in IfcSchema of IfcSharp.
 In addition there are 2 output-interfaces:
 **ifc_out_cs.cs** to create  C#-code from existing models and<br/>
-**if_cout_html.cs** to cretae good readable step-files with syntax-highlighting.
+**ifc_out_html.cs** to create good readable step-files with syntax-highlighting.
 
