@@ -52,6 +52,7 @@ public partial class TableBase : List<Object>{//--------------------------------
 public string TableName="-";
 public TableSet tableSet=null;
 public virtual void SelectAll(string where=""){}
+public virtual void Load(){}
 public virtual string InsertString(){return "-";} // better using Interface
 public virtual void BulkInsert(){} 
 public string order;
@@ -60,9 +61,11 @@ public string order;
 public partial class RowList<T> : TableBase where T : new(){//---------------------------------------------
 public               RowList(string order=""){this.order=order;}
 public override void SelectAll(string where=""){SqlCommand cmd = new SqlCommand("select * from "+TableName+" "+where+" "+order,tableSet.conn);
-                                 using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
-                                ((RowBase)(object)new T()).Load(this);
-                                }
+                                                using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
+                                                //((RowBase)(object)new T()).Load(this);
+                                               }
+public override void Load   (){((RowBase)(object)new T()).Load(this);} // (bb) 30.10.2022 seperated load for serialsation
+
 public override string InsertString(){Object o = new T();RowBase rb=((RowBase)o);string s=rb.InsertStringOpen(TableName);int pos=0;foreach (RowBase row in this) s+=((++pos>1)?",":"")+row.InsertStringValuesRow();s+=rb.InsertStringClose();return s; }
 
 public override void BulkInsert(){using (SqlBulkCopy bulkCopy = new SqlBulkCopy(tableSet.conn))// ..........................
@@ -86,11 +89,11 @@ public partial class TableSet{//------------------------------------------------
 public  TableSet(){AssignTableNames();}
 public  TableSet(string ServerName,string DatabaseName,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
                                                                               conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
-                                                                              if (DirectLoad) LoadAllTables();
+                                                                              if (DirectLoad) {LoadAllTables();LoadAllMaps();}
                                                                              }
 public  TableSet(string ServerName,string DatabaseName,string UserName,string Password,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
                                                                               conn=new SqlConnection("Data Source="+ServerName+";Network Library=DBMSSOCN;Initial Catalog="+DatabaseName+";User ID="+UserName+";Password='"+Password+"'");
-                                                                              if (DirectLoad) LoadAllTables();
+                                                                              if (DirectLoad) {LoadAllTables();LoadAllMaps();}
                                                                              }
 
 
@@ -108,10 +111,14 @@ public void LoadAllTables(){conn.Open();
                                        ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).SelectAll();
                             conn.Close();
                            }
+public void LoadAllMaps(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
+                                   foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
+                                       ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).Load();
+                         }
 
 public string DatabaseName="-";
 public string ServerName="-";
-public  SqlConnection conn=null;
+[XmlIgnore] public  SqlConnection conn=null; // (bb) 30.10.2022 [XmlIgnore] for serialisation
 
 public DbCommand Command(string cmd) {return new SqlCommand  (cmd,conn);}
 public void ExecuteNonQuery(string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();Command(sql).ExecuteNonQuery();if (DoOpenAndClose) conn.Close();}
