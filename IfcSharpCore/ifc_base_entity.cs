@@ -42,7 +42,7 @@ protected void AddNextCommentLine(){LocalId=NextGlobalCommentId--;Repository.Cur
 }//=====================================================================================================================
 
 
-[ifcSql(TypeGroupId:5,TypeId:-1)] public partial class EntityComment:ENTITY{//==========================================================================================
+[ifcSql(TypeGroupId:5,TypeId:-1,TableId:3,LayerId: 0)] public partial class EntityComment:ENTITY{//==========================================================================================
 public               EntityComment(){} 
 public               EntityComment(string CommentLine){this.Highlighted=ENTITY.Highlighting; 
                                                        AddNextCommentLine();
@@ -61,7 +61,7 @@ public override string ToString(){return CommentLine;}
 public static int HtmlCnt=0;
 }//=====================================================================================================================
 
-[ifcSql(TypeGroupId:5,TypeId:-3)] public partial class ImageComment:EntityComment{//==========================================================================================
+[ifcSql(TypeGroupId:5,TypeId:-3,TableId:3,LayerId: 0)] public partial class ImageComment:EntityComment{//==========================================================================================
 public               ImageComment(){} 
 public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine(); 
                                                                                string TargetFileName="copyof_"+NetSystem.IO.Path.GetFileName(ImgFileName);

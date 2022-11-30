@@ -1,19 +1,22 @@
-// ifc_IFC2X3_generated_select.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
+// ifc_IFC2X3_generated_select.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/blob/master/License.md)
 // ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/EXPRESS/IFC2X3_TC1.exp)
+// official documentation see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML
 
 // CAUTION! THIS IS GENERATED CODE! DON'T MODIFY THIS FILE. THIS FILE WILL BE UPDATED WITH NEW VERSIONS.
 using System;
 using System.Collections.Generic;
 namespace ifc{//########################################################################################################
 
-[ifcSql(TypeGroupId:6,TypeId:230381,TableId:-1)] public partial class ActorSelect:SELECT{//------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcactorselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230381,TableId:-1,LayerId:22)] public partial class ActorSelect:SELECT{//------------------------------------------------------------------------------
 public               ActorSelect           (){}
 public               ActorSelect           (Organization              _Organization             ){IsNull=false;_SelectValue=_Organization             ;_Type=_Organization             .GetType();} public static explicit operator Organization             (ActorSelect            value){return (Organization             )(value._SelectValue);}
 public               ActorSelect           (Person                    _Person                   ){IsNull=false;_SelectValue=_Person                   ;_Type=_Person                   .GetType();} public static explicit operator Person                   (ActorSelect            value){return (Person                   )(value._SelectValue);}
 public               ActorSelect           (PersonAndOrganization     _PersonAndOrganization    ){IsNull=false;_SelectValue=_PersonAndOrganization    ;_Type=_PersonAndOrganization    .GetType();} public static explicit operator PersonAndOrganization    (ActorSelect            value){return (PersonAndOrganization    )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230382,TableId:-1)] public partial class AppliedValueSelect:SELECT{//-----------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcappliedvalueselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230382,TableId:-1,LayerId:25)] public partial class AppliedValueSelect:SELECT{//-----------------------------------------------------------------------
 public               AppliedValueSelect    (){}
 public               AppliedValueSelect    (RatioMeasure              _RatioMeasure             ){IsNull=false;_SelectValue=_RatioMeasure             ;_Type=_RatioMeasure             .GetType();} public static explicit operator RatioMeasure             (AppliedValueSelect     value){return (RatioMeasure             )(value._SelectValue);}
 public               AppliedValueSelect    (MonetaryMeasure           _MonetaryMeasure          ){IsNull=false;_SelectValue=_MonetaryMeasure          ;_Type=_MonetaryMeasure          .GetType();} public static explicit operator MonetaryMeasure          (AppliedValueSelect     value){return (MonetaryMeasure          )(value._SelectValue);}
@@ -22,13 +25,15 @@ public               AppliedValueSelect    (PositiveRatioMeasure      _PositiveR
 public               AppliedValueSelect    (MeasureWithUnit           _MeasureWithUnit          ){IsNull=false;_SelectValue=_MeasureWithUnit          ;_Type=_MeasureWithUnit          .GetType();} public static explicit operator MeasureWithUnit          (AppliedValueSelect     value){return (MeasureWithUnit          )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230383,TableId:-1)] public partial class Axis2Placement:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcaxis2placement.htm
+[ifcSql(TypeGroupId:6,TypeId:230383,TableId:-1,LayerId:30)] public partial class Axis2Placement:SELECT{//---------------------------------------------------------------------------
 public               Axis2Placement        (){}
 public               Axis2Placement        (Axis2Placement2D          _Axis2Placement2D         ){IsNull=false;_SelectValue=_Axis2Placement2D         ;_Type=_Axis2Placement2D         .GetType();} public static explicit operator Axis2Placement2D         (Axis2Placement         value){return (Axis2Placement2D         )(value._SelectValue);}
 public               Axis2Placement        (Axis2Placement3D          _Axis2Placement3D         ){IsNull=false;_SelectValue=_Axis2Placement3D         ;_Type=_Axis2Placement3D         .GetType();} public static explicit operator Axis2Placement3D         (Axis2Placement         value){return (Axis2Placement3D         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230384,TableId:-1)] public partial class BooleanOperand:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbooleanoperand.htm
+[ifcSql(TypeGroupId:6,TypeId:230384,TableId:-1,LayerId:29)] public partial class BooleanOperand:SELECT{//---------------------------------------------------------------------------
 public               BooleanOperand        (){}
 public               BooleanOperand        (Block                     _Block                    ){IsNull=false;_SelectValue=_Block                    ;_Type=_Block                    .GetType();} public static explicit operator Block                    (BooleanOperand         value){return (Block                    )(value._SelectValue);}
 public               BooleanOperand        (BooleanClippingResult     _BooleanClippingResult    ){IsNull=false;_SelectValue=_BooleanClippingResult    ;_Type=_BooleanClippingResult    .GetType();} public static explicit operator BooleanClippingResult    (BooleanOperand         value){return (BooleanClippingResult    )(value._SelectValue);}
@@ -53,18 +58,21 @@ public               BooleanOperand        (ManifoldSolidBrep         _ManifoldS
 public               BooleanOperand        (PolygonalBoundedHalfSpace _PolygonalBoundedHalfSpace){IsNull=false;_SelectValue=_PolygonalBoundedHalfSpace;_Type=_PolygonalBoundedHalfSpace.GetType();} public static explicit operator PolygonalBoundedHalfSpace(BooleanOperand         value){return (PolygonalBoundedHalfSpace)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230385,TableId:-1)] public partial class CharacterStyleSelect:SELECT{//---------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccharacterstyleselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230385,TableId:-1,LayerId:33)] public partial class CharacterStyleSelect:SELECT{//---------------------------------------------------------------------
 public               CharacterStyleSelect  (){}
 public               CharacterStyleSelect  (TextStyleForDefinedFont   _TextStyleForDefinedFont  ){IsNull=false;_SelectValue=_TextStyleForDefinedFont  ;_Type=_TextStyleForDefinedFont  .GetType();} public static explicit operator TextStyleForDefinedFont  (CharacterStyleSelect   value){return (TextStyleForDefinedFont  )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230386,TableId:-1)] public partial class ClassificationNotationSelect:SELECT{//-------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationnotationselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230386,TableId:-1,LayerId:27)] public partial class ClassificationNotationSelect:SELECT{//-------------------------------------------------------------
 public               ClassificationNotationSelect(){}
 public               ClassificationNotationSelect(ClassificationNotation    _ClassificationNotation   ){IsNull=false;_SelectValue=_ClassificationNotation   ;_Type=_ClassificationNotation   .GetType();} public static explicit operator ClassificationNotation   (ClassificationNotationSelect value){return (ClassificationNotation   )(value._SelectValue);}
 public               ClassificationNotationSelect(ClassificationReference   _ClassificationReference  ){IsNull=false;_SelectValue=_ClassificationReference  ;_Type=_ClassificationReference  .GetType();} public static explicit operator ClassificationReference  (ClassificationNotationSelect value){return (ClassificationReference  )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230387,TableId:-1)] public partial class Colour:SELECT{//-----------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolour.htm
+[ifcSql(TypeGroupId:6,TypeId:230387,TableId:-1,LayerId:33)] public partial class Colour:SELECT{//-----------------------------------------------------------------------------------
 public               Colour                (){}
 public               Colour                (ColourRgb                 _ColourRgb                ){IsNull=false;_SelectValue=_ColourRgb                ;_Type=_ColourRgb                .GetType();} public static explicit operator ColourRgb                (Colour                 value){return (ColourRgb                )(value._SelectValue);}
 public               Colour                (ColourSpecification       _ColourSpecification      ){IsNull=false;_SelectValue=_ColourSpecification      ;_Type=_ColourSpecification      .GetType();} public static explicit operator ColourSpecification      (Colour                 value){return (ColourSpecification      )(value._SelectValue);}
@@ -72,20 +80,23 @@ public               Colour                (DraughtingPreDefinedColour _Draughti
 public               Colour                (PreDefinedColour          _PreDefinedColour         ){IsNull=false;_SelectValue=_PreDefinedColour         ;_Type=_PreDefinedColour         .GetType();} public static explicit operator PreDefinedColour         (Colour                 value){return (PreDefinedColour         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230388,TableId:-1)] public partial class ColourOrFactor:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolourorfactor.htm
+[ifcSql(TypeGroupId:6,TypeId:230388,TableId:-1,LayerId:33)] public partial class ColourOrFactor:SELECT{//---------------------------------------------------------------------------
 public               ColourOrFactor        (){}
 public               ColourOrFactor        (NormalisedRatioMeasure    _NormalisedRatioMeasure   ){IsNull=false;_SelectValue=_NormalisedRatioMeasure   ;_Type=_NormalisedRatioMeasure   .GetType();} public static explicit operator NormalisedRatioMeasure   (ColourOrFactor         value){return (NormalisedRatioMeasure   )(value._SelectValue);}
 public               ColourOrFactor        (ColourRgb                 _ColourRgb                ){IsNull=false;_SelectValue=_ColourRgb                ;_Type=_ColourRgb                .GetType();} public static explicit operator ColourRgb                (ColourOrFactor         value){return (ColourRgb                )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230389,TableId:-1)] public partial class ConditionCriterionSelect:SELECT{//-----------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconditioncriterionselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230389,TableId:-1,LayerId:-6)] public partial class ConditionCriterionSelect:SELECT{//-----------------------------------------------------------------
 public               ConditionCriterionSelect(){}
 public               ConditionCriterionSelect(Label                     _Label                    ){IsNull=false;_SelectValue=_Label                    ;_Type=_Label                    .GetType();} public static explicit operator Label                    (ConditionCriterionSelect value){return (Label                    )(value._SelectValue);}
 public               ConditionCriterionSelect(BoxAlignment              _BoxAlignment             ){IsNull=false;_SelectValue=_BoxAlignment             ;_Type=_BoxAlignment             .GetType();} public static explicit operator BoxAlignment             (ConditionCriterionSelect value){return (BoxAlignment             )(value._SelectValue);}
 public               ConditionCriterionSelect(MeasureWithUnit           _MeasureWithUnit          ){IsNull=false;_SelectValue=_MeasureWithUnit          ;_Type=_MeasureWithUnit          .GetType();} public static explicit operator MeasureWithUnit          (ConditionCriterionSelect value){return (MeasureWithUnit          )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230390,TableId:-1)] public partial class CsgSelect:SELECT{//--------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccsgselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230390,TableId:-1,LayerId:29)] public partial class CsgSelect:SELECT{//--------------------------------------------------------------------------------
 public               CsgSelect             (){}
 public               CsgSelect             (Block                     _Block                    ){IsNull=false;_SelectValue=_Block                    ;_Type=_Block                    .GetType();} public static explicit operator Block                    (CsgSelect              value){return (Block                    )(value._SelectValue);}
 public               CsgSelect             (BooleanClippingResult     _BooleanClippingResult    ){IsNull=false;_SelectValue=_BooleanClippingResult    ;_Type=_BooleanClippingResult    .GetType();} public static explicit operator BooleanClippingResult    (CsgSelect              value){return (BooleanClippingResult    )(value._SelectValue);}
@@ -97,7 +108,8 @@ public               CsgSelect             (RightCircularCylinder     _RightCirc
 public               CsgSelect             (Sphere                    _Sphere                   ){IsNull=false;_SelectValue=_Sphere                   ;_Type=_Sphere                   .GetType();} public static explicit operator Sphere                   (CsgSelect              value){return (Sphere                   )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230391,TableId:-1)] public partial class CurveFontOrScaledCurveFontSelect:SELECT{//---------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvefontorscaledcurvefontselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230391,TableId:-1,LayerId:33)] public partial class CurveFontOrScaledCurveFontSelect:SELECT{//---------------------------------------------------------
 public               CurveFontOrScaledCurveFontSelect(){}
 public               CurveFontOrScaledCurveFontSelect(CurveStyleFontSelect      _CurveStyleFontSelect     ){IsNull=false;_SelectValue=_CurveStyleFontSelect     ;_Type=_CurveStyleFontSelect     .GetType();} public static explicit operator CurveStyleFontSelect     (CurveFontOrScaledCurveFontSelect value){return (CurveStyleFontSelect     )(value._SelectValue);}
 public               CurveFontOrScaledCurveFontSelect(CurveStyleFont            _CurveStyleFont           ){IsNull=false;_SelectValue=_CurveStyleFont           ;_Type=_CurveStyleFont           .GetType();} public static explicit operator CurveStyleFont           (CurveFontOrScaledCurveFontSelect value){return (CurveStyleFont           )(value._SelectValue);}
@@ -106,7 +118,8 @@ public               CurveFontOrScaledCurveFontSelect(DraughtingPreDefinedCurveF
 public               CurveFontOrScaledCurveFontSelect(PreDefinedCurveFont       _PreDefinedCurveFont      ){IsNull=false;_SelectValue=_PreDefinedCurveFont      ;_Type=_PreDefinedCurveFont      .GetType();} public static explicit operator PreDefinedCurveFont      (CurveFontOrScaledCurveFontSelect value){return (PreDefinedCurveFont      )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230392,TableId:-1)] public partial class CurveOrEdgeCurve:SELECT{//-------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurveoredgecurve.htm
+[ifcSql(TypeGroupId:6,TypeId:230392,TableId:-1,LayerId:28)] public partial class CurveOrEdgeCurve:SELECT{//-------------------------------------------------------------------------
 public               CurveOrEdgeCurve      (){}
 public               CurveOrEdgeCurve      (_2DCompositeCurve         __2DCompositeCurve        ){IsNull=false;_SelectValue=__2DCompositeCurve        ;_Type=__2DCompositeCurve        .GetType();} public static explicit operator _2DCompositeCurve        (CurveOrEdgeCurve       value){return (_2DCompositeCurve        )(value._SelectValue);}
 public               CurveOrEdgeCurve      (BSplineCurve              _BSplineCurve             ){IsNull=false;_SelectValue=_BSplineCurve             ;_Type=_BSplineCurve             .GetType();} public static explicit operator BSplineCurve             (CurveOrEdgeCurve       value){return (BSplineCurve             )(value._SelectValue);}
@@ -119,21 +132,24 @@ public               CurveOrEdgeCurve      (RationalBezierCurve       _RationalB
 public               CurveOrEdgeCurve      (TrimmedCurve              _TrimmedCurve             ){IsNull=false;_SelectValue=_TrimmedCurve             ;_Type=_TrimmedCurve             .GetType();} public static explicit operator TrimmedCurve             (CurveOrEdgeCurve       value){return (TrimmedCurve             )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230393,TableId:-1)] public partial class CurveStyleFontSelect:SELECT{//---------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvestylefontselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230393,TableId:-1,LayerId:33)] public partial class CurveStyleFontSelect:SELECT{//---------------------------------------------------------------------
 public               CurveStyleFontSelect  (){}
 public               CurveStyleFontSelect  (CurveStyleFont            _CurveStyleFont           ){IsNull=false;_SelectValue=_CurveStyleFont           ;_Type=_CurveStyleFont           .GetType();} public static explicit operator CurveStyleFont           (CurveStyleFontSelect   value){return (CurveStyleFont           )(value._SelectValue);}
 public               CurveStyleFontSelect  (DraughtingPreDefinedCurveFont _DraughtingPreDefinedCurveFont){IsNull=false;_SelectValue=_DraughtingPreDefinedCurveFont;_Type=_DraughtingPreDefinedCurveFont.GetType();} public static explicit operator DraughtingPreDefinedCurveFont(CurveStyleFontSelect   value){return (DraughtingPreDefinedCurveFont)(value._SelectValue);}
 public               CurveStyleFontSelect  (PreDefinedCurveFont       _PreDefinedCurveFont      ){IsNull=false;_SelectValue=_PreDefinedCurveFont      ;_Type=_PreDefinedCurveFont      .GetType();} public static explicit operator PreDefinedCurveFont      (CurveStyleFontSelect   value){return (PreDefinedCurveFont      )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230394,TableId:-1)] public partial class DateTimeSelect:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdatetimeselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230394,TableId:-1,LayerId:26)] public partial class DateTimeSelect:SELECT{//---------------------------------------------------------------------------
 public               DateTimeSelect        (){}
 public               DateTimeSelect        (CalendarDate              _CalendarDate             ){IsNull=false;_SelectValue=_CalendarDate             ;_Type=_CalendarDate             .GetType();} public static explicit operator CalendarDate             (DateTimeSelect         value){return (CalendarDate             )(value._SelectValue);}
 public               DateTimeSelect        (DateAndTime               _DateAndTime              ){IsNull=false;_SelectValue=_DateAndTime              ;_Type=_DateAndTime              .GetType();} public static explicit operator DateAndTime              (DateTimeSelect         value){return (DateAndTime              )(value._SelectValue);}
 public               DateTimeSelect        (LocalTime                 _LocalTime                ){IsNull=false;_SelectValue=_LocalTime                ;_Type=_LocalTime                .GetType();} public static explicit operator LocalTime                (DateTimeSelect         value){return (LocalTime                )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230395,TableId:-1)] public partial class DefinedSymbolSelect:SELECT{//----------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdefinedsymbolselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230395,TableId:-1,LayerId:34)] public partial class DefinedSymbolSelect:SELECT{//----------------------------------------------------------------------
 public               DefinedSymbolSelect   (){}
 public               DefinedSymbolSelect   (ExternallyDefinedSymbol   _ExternallyDefinedSymbol  ){IsNull=false;_SelectValue=_ExternallyDefinedSymbol  ;_Type=_ExternallyDefinedSymbol  .GetType();} public static explicit operator ExternallyDefinedSymbol  (DefinedSymbolSelect    value){return (ExternallyDefinedSymbol  )(value._SelectValue);}
 public               DefinedSymbolSelect   (PreDefinedDimensionSymbol _PreDefinedDimensionSymbol){IsNull=false;_SelectValue=_PreDefinedDimensionSymbol;_Type=_PreDefinedDimensionSymbol.GetType();} public static explicit operator PreDefinedDimensionSymbol(DefinedSymbolSelect    value){return (PreDefinedDimensionSymbol)(value._SelectValue);}
@@ -142,7 +158,8 @@ public               DefinedSymbolSelect   (PreDefinedSymbol          _PreDefine
 public               DefinedSymbolSelect   (PreDefinedTerminatorSymbol _PreDefinedTerminatorSymbol){IsNull=false;_SelectValue=_PreDefinedTerminatorSymbol;_Type=_PreDefinedTerminatorSymbol.GetType();} public static explicit operator PreDefinedTerminatorSymbol(DefinedSymbolSelect    value){return (PreDefinedTerminatorSymbol)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230396,TableId:-1)] public partial class DerivedMeasureValue:SELECT{//----------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcderivedmeasurevalue.htm
+[ifcSql(TypeGroupId:6,TypeId:230396,TableId:-1,LayerId:32)] public partial class DerivedMeasureValue:SELECT{//----------------------------------------------------------------------
 public               DerivedMeasureValue   (){}
 public               DerivedMeasureValue   (AbsorbedDoseMeasure       _AbsorbedDoseMeasure      ){IsNull=false;_SelectValue=_AbsorbedDoseMeasure      ;_Type=_AbsorbedDoseMeasure      .GetType();} public static explicit operator AbsorbedDoseMeasure      (DerivedMeasureValue    value){return (AbsorbedDoseMeasure      )(value._SelectValue);}
 public               DerivedMeasureValue   (AccelerationMeasure       _AccelerationMeasure      ){IsNull=false;_SelectValue=_AccelerationMeasure      ;_Type=_AccelerationMeasure      .GetType();} public static explicit operator AccelerationMeasure      (DerivedMeasureValue    value){return (AccelerationMeasure      )(value._SelectValue);}
@@ -214,13 +231,15 @@ public               DerivedMeasureValue   (ElectricResistanceMeasure _ElectricR
 public               DerivedMeasureValue   (ElectricVoltageMeasure    _ElectricVoltageMeasure   ){IsNull=false;_SelectValue=_ElectricVoltageMeasure   ;_Type=_ElectricVoltageMeasure   .GetType();} public static explicit operator ElectricVoltageMeasure   (DerivedMeasureValue    value){return (ElectricVoltageMeasure   )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230397,TableId:-1)] public partial class DocumentSelect:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdocumentselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230397,TableId:-1,LayerId:27)] public partial class DocumentSelect:SELECT{//---------------------------------------------------------------------------
 public               DocumentSelect        (){}
 public               DocumentSelect        (DocumentInformation       _DocumentInformation      ){IsNull=false;_SelectValue=_DocumentInformation      ;_Type=_DocumentInformation      .GetType();} public static explicit operator DocumentInformation      (DocumentSelect         value){return (DocumentInformation      )(value._SelectValue);}
 public               DocumentSelect        (DocumentReference         _DocumentReference        ){IsNull=false;_SelectValue=_DocumentReference        ;_Type=_DocumentReference        .GetType();} public static explicit operator DocumentReference        (DocumentSelect         value){return (DocumentReference        )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230398,TableId:-1)] public partial class DraughtingCalloutElement:SELECT{//-----------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingcalloutelement.htm
+[ifcSql(TypeGroupId:6,TypeId:230398,TableId:-1,LayerId:-4)] public partial class DraughtingCalloutElement:SELECT{//-----------------------------------------------------------------
 public               DraughtingCalloutElement(){}
 public               DraughtingCalloutElement(AnnotationCurveOccurrence _AnnotationCurveOccurrence){IsNull=false;_SelectValue=_AnnotationCurveOccurrence;_Type=_AnnotationCurveOccurrence.GetType();} public static explicit operator AnnotationCurveOccurrence(DraughtingCalloutElement value){return (AnnotationCurveOccurrence)(value._SelectValue);}
 public               DraughtingCalloutElement(AnnotationSymbolOccurrence _AnnotationSymbolOccurrence){IsNull=false;_SelectValue=_AnnotationSymbolOccurrence;_Type=_AnnotationSymbolOccurrence.GetType();} public static explicit operator AnnotationSymbolOccurrence(DraughtingCalloutElement value){return (AnnotationSymbolOccurrence)(value._SelectValue);}
@@ -231,12 +250,14 @@ public               DraughtingCalloutElement(ProjectionCurve           _Project
 public               DraughtingCalloutElement(TerminatorSymbol          _TerminatorSymbol         ){IsNull=false;_SelectValue=_TerminatorSymbol         ;_Type=_TerminatorSymbol         .GetType();} public static explicit operator TerminatorSymbol         (DraughtingCalloutElement value){return (TerminatorSymbol         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230399,TableId:-1)] public partial class FillAreaStyleTileShapeSelect:SELECT{//-------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillareastyletileshapeselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230399,TableId:-1,LayerId:33)] public partial class FillAreaStyleTileShapeSelect:SELECT{//-------------------------------------------------------------
 public               FillAreaStyleTileShapeSelect(){}
 public               FillAreaStyleTileShapeSelect(FillAreaStyleTileSymbolWithStyle _FillAreaStyleTileSymbolWithStyle){IsNull=false;_SelectValue=_FillAreaStyleTileSymbolWithStyle;_Type=_FillAreaStyleTileSymbolWithStyle.GetType();} public static explicit operator FillAreaStyleTileSymbolWithStyle(FillAreaStyleTileShapeSelect value){return (FillAreaStyleTileSymbolWithStyle)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230400,TableId:-1)] public partial class FillStyleSelect:SELECT{//--------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillstyleselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230400,TableId:-1,LayerId:33)] public partial class FillStyleSelect:SELECT{//--------------------------------------------------------------------------
 public               FillStyleSelect       (){}
 public               FillStyleSelect       (Colour                    _Colour                   ){IsNull=false;_SelectValue=_Colour                   ;_Type=_Colour                   .GetType();} public static explicit operator Colour                   (FillStyleSelect        value){return (Colour                   )(value._SelectValue);}
 public               FillStyleSelect       (ColourRgb                 _ColourRgb                ){IsNull=false;_SelectValue=_ColourRgb                ;_Type=_ColourRgb                .GetType();} public static explicit operator ColourRgb                (FillStyleSelect        value){return (ColourRgb                )(value._SelectValue);}
@@ -248,7 +269,8 @@ public               FillStyleSelect       (FillAreaStyleTiles        _FillAreaS
 public               FillStyleSelect       (PreDefinedColour          _PreDefinedColour         ){IsNull=false;_SelectValue=_PreDefinedColour         ;_Type=_PreDefinedColour         .GetType();} public static explicit operator PreDefinedColour         (FillStyleSelect        value){return (PreDefinedColour         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230401,TableId:-1)] public partial class GeometricSetSelect:SELECT{//-----------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometricsetselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230401,TableId:-1,LayerId:29)] public partial class GeometricSetSelect:SELECT{//-----------------------------------------------------------------------
 public               GeometricSetSelect    (){}
 public               GeometricSetSelect    (_2DCompositeCurve         __2DCompositeCurve        ){IsNull=false;_SelectValue=__2DCompositeCurve        ;_Type=__2DCompositeCurve        .GetType();} public static explicit operator _2DCompositeCurve        (GeometricSetSelect     value){return (_2DCompositeCurve        )(value._SelectValue);}
 public               GeometricSetSelect    (BSplineCurve              _BSplineCurve             ){IsNull=false;_SelectValue=_BSplineCurve             ;_Type=_BSplineCurve             .GetType();} public static explicit operator BSplineCurve             (GeometricSetSelect     value){return (BSplineCurve             )(value._SelectValue);}
@@ -280,14 +302,16 @@ public               GeometricSetSelect    (CurveBoundedPlane         _CurveBoun
 public               GeometricSetSelect    (ElementarySurface         _ElementarySurface        ){IsNull=false;_SelectValue=_ElementarySurface        ;_Type=_ElementarySurface        .GetType();} public static explicit operator ElementarySurface        (GeometricSetSelect     value){return (ElementarySurface        )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230402,TableId:-1)] public partial class HatchLineDistanceSelect:SELECT{//------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifchatchlinedistanceselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230402,TableId:-1,LayerId:33)] public partial class HatchLineDistanceSelect:SELECT{//------------------------------------------------------------------
 public               HatchLineDistanceSelect(){}
 public               HatchLineDistanceSelect(PositiveLengthMeasure     _PositiveLengthMeasure    ){IsNull=false;_SelectValue=_PositiveLengthMeasure    ;_Type=_PositiveLengthMeasure    .GetType();} public static explicit operator PositiveLengthMeasure    (HatchLineDistanceSelect value){return (PositiveLengthMeasure    )(value._SelectValue);}
 public               HatchLineDistanceSelect(OneDirectionRepeatFactor  _OneDirectionRepeatFactor ){IsNull=false;_SelectValue=_OneDirectionRepeatFactor ;_Type=_OneDirectionRepeatFactor .GetType();} public static explicit operator OneDirectionRepeatFactor (HatchLineDistanceSelect value){return (OneDirectionRepeatFactor )(value._SelectValue);}
 public               HatchLineDistanceSelect(TwoDirectionRepeatFactor  _TwoDirectionRepeatFactor ){IsNull=false;_SelectValue=_TwoDirectionRepeatFactor ;_Type=_TwoDirectionRepeatFactor .GetType();} public static explicit operator TwoDirectionRepeatFactor (HatchLineDistanceSelect value){return (TwoDirectionRepeatFactor )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230403,TableId:-1)] public partial class LayeredItem:SELECT{//------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclayereditem.htm
+[ifcSql(TypeGroupId:6,TypeId:230403,TableId:-1,LayerId:35)] public partial class LayeredItem:SELECT{//------------------------------------------------------------------------------
 public               LayeredItem           (){}
 public               LayeredItem           (_2DCompositeCurve         __2DCompositeCurve        ){IsNull=false;_SelectValue=__2DCompositeCurve        ;_Type=__2DCompositeCurve        .GetType();} public static explicit operator _2DCompositeCurve        (LayeredItem            value){return (_2DCompositeCurve        )(value._SelectValue);}
 public               LayeredItem           (AngularDimension          _AngularDimension         ){IsNull=false;_SelectValue=_AngularDimension         ;_Type=_AngularDimension         .GetType();} public static explicit operator AngularDimension         (LayeredItem            value){return (AngularDimension         )(value._SelectValue);}
@@ -422,13 +446,15 @@ public               LayeredItem           (Axis1Placement            _Axis1Plac
 public               LayeredItem           (Axis2Placement2D          _Axis2Placement2D         ){IsNull=false;_SelectValue=_Axis2Placement2D         ;_Type=_Axis2Placement2D         .GetType();} public static explicit operator Axis2Placement2D         (LayeredItem            value){return (Axis2Placement2D         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230404,TableId:-1)] public partial class LibrarySelect:SELECT{//----------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclibraryselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230404,TableId:-1,LayerId:27)] public partial class LibrarySelect:SELECT{//----------------------------------------------------------------------------
 public               LibrarySelect         (){}
 public               LibrarySelect         (LibraryInformation        _LibraryInformation       ){IsNull=false;_SelectValue=_LibraryInformation       ;_Type=_LibraryInformation       .GetType();} public static explicit operator LibraryInformation       (LibrarySelect          value){return (LibraryInformation       )(value._SelectValue);}
 public               LibrarySelect         (LibraryReference          _LibraryReference         ){IsNull=false;_SelectValue=_LibraryReference         ;_Type=_LibraryReference         .GetType();} public static explicit operator LibraryReference         (LibrarySelect          value){return (LibraryReference         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230405,TableId:-1)] public partial class LightDistributionDataSourceSelect:SELECT{//--------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightdistributiondatasourceselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230405,TableId:-1,LayerId:35)] public partial class LightDistributionDataSourceSelect:SELECT{//--------------------------------------------------------
 public               LightDistributionDataSourceSelect(){}
 public               LightDistributionDataSourceSelect(ClassificationReference   _ClassificationReference  ){IsNull=false;_SelectValue=_ClassificationReference  ;_Type=_ClassificationReference  .GetType();} public static explicit operator ClassificationReference  (LightDistributionDataSourceSelect value){return (ClassificationReference  )(value._SelectValue);}
 public               LightDistributionDataSourceSelect(DocumentReference         _DocumentReference        ){IsNull=false;_SelectValue=_DocumentReference        ;_Type=_DocumentReference        .GetType();} public static explicit operator DocumentReference        (LightDistributionDataSourceSelect value){return (DocumentReference        )(value._SelectValue);}
@@ -441,7 +467,8 @@ public               LightDistributionDataSourceSelect(LibraryReference         
 public               LightDistributionDataSourceSelect(LightIntensityDistribution _LightIntensityDistribution){IsNull=false;_SelectValue=_LightIntensityDistribution;_Type=_LightIntensityDistribution.GetType();} public static explicit operator LightIntensityDistribution(LightDistributionDataSourceSelect value){return (LightIntensityDistribution)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230406,TableId:-1)] public partial class MaterialSelect:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmaterialselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230406,TableId:-1,LayerId:31)] public partial class MaterialSelect:SELECT{//---------------------------------------------------------------------------
 public               MaterialSelect        (){}
 public               MaterialSelect        (Material                  _Material                 ){IsNull=false;_SelectValue=_Material                 ;_Type=_Material                 .GetType();} public static explicit operator Material                 (MaterialSelect         value){return (Material                 )(value._SelectValue);}
 public               MaterialSelect        (MaterialLayer             _MaterialLayer            ){IsNull=false;_SelectValue=_MaterialLayer            ;_Type=_MaterialLayer            .GetType();} public static explicit operator MaterialLayer            (MaterialSelect         value){return (MaterialLayer            )(value._SelectValue);}
@@ -450,7 +477,8 @@ public               MaterialSelect        (MaterialLayerSetUsage     _MaterialL
 public               MaterialSelect        (MaterialList              _MaterialList             ){IsNull=false;_SelectValue=_MaterialList             ;_Type=_MaterialList             .GetType();} public static explicit operator MaterialList             (MaterialSelect         value){return (MaterialList             )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230407,TableId:-1)] public partial class MeasureValue:SELECT{//-----------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmeasurevalue.htm
+[ifcSql(TypeGroupId:6,TypeId:230407,TableId:-1,LayerId:32)] public partial class MeasureValue:SELECT{//-----------------------------------------------------------------------------
 public               MeasureValue          (){}
 public               MeasureValue          (RatioMeasure              _RatioMeasure             ){IsNull=false;_SelectValue=_RatioMeasure             ;_Type=_RatioMeasure             .GetType();} public static explicit operator RatioMeasure             (MeasureValue           value){return (RatioMeasure             )(value._SelectValue);}
 public               MeasureValue          (LengthMeasure             _LengthMeasure            ){IsNull=false;_SelectValue=_LengthMeasure            ;_Type=_LengthMeasure            .GetType();} public static explicit operator LengthMeasure            (MeasureValue           value){return (LengthMeasure            )(value._SelectValue);}
@@ -476,7 +504,8 @@ public               MeasureValue          (LuminousIntensityMeasure  _LuminousI
 public               MeasureValue          (MassMeasure               _MassMeasure              ){IsNull=false;_SelectValue=_MassMeasure              ;_Type=_MassMeasure              .GetType();} public static explicit operator MassMeasure              (MeasureValue           value){return (MassMeasure              )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230408,TableId:-1)] public partial class MetricValueSelect:SELECT{//------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmetricvalueselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230408,TableId:-1,LayerId:24)] public partial class MetricValueSelect:SELECT{//------------------------------------------------------------------------
 public               MetricValueSelect     (){}
 public               MetricValueSelect     (Text                      _Text                     ){IsNull=false;_SelectValue=_Text                     ;_Type=_Text                     .GetType();} public static explicit operator Text                     (MetricValueSelect      value){return (Text                     )(value._SelectValue);}
 public               MetricValueSelect     (DateTimeSelect            _DateTimeSelect           ){IsNull=false;_SelectValue=_DateTimeSelect           ;_Type=_DateTimeSelect           .GetType();} public static explicit operator DateTimeSelect           (MetricValueSelect      value){return (DateTimeSelect           )(value._SelectValue);}
@@ -491,7 +520,8 @@ public               MetricValueSelect     (Table                     _Table    
 public               MetricValueSelect     (TimeSeries                _TimeSeries               ){IsNull=false;_SelectValue=_TimeSeries               ;_Type=_TimeSeries               .GetType();} public static explicit operator TimeSeries               (MetricValueSelect      value){return (TimeSeries               )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230409,TableId:-1)] public partial class ObjectReferenceSelect:SELECT{//--------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcobjectreferenceselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230409,TableId:-1,LayerId:37)] public partial class ObjectReferenceSelect:SELECT{//--------------------------------------------------------------------
 public               ObjectReferenceSelect (){}
 public               ObjectReferenceSelect (Address                   _Address                  ){IsNull=false;_SelectValue=_Address                  ;_Type=_Address                  .GetType();} public static explicit operator Address                  (ObjectReferenceSelect  value){return (Address                  )(value._SelectValue);}
 public               ObjectReferenceSelect (AppliedValue              _AppliedValue             ){IsNull=false;_SelectValue=_AppliedValue             ;_Type=_AppliedValue             .GetType();} public static explicit operator AppliedValue             (ObjectReferenceSelect  value){return (AppliedValue             )(value._SelectValue);}
@@ -521,14 +551,16 @@ public               ObjectReferenceSelect (ExternallyDefinedSurfaceStyle _Exter
 public               ObjectReferenceSelect (ExternallyDefinedSymbol   _ExternallyDefinedSymbol  ){IsNull=false;_SelectValue=_ExternallyDefinedSymbol  ;_Type=_ExternallyDefinedSymbol  .GetType();} public static explicit operator ExternallyDefinedSymbol  (ObjectReferenceSelect  value){return (ExternallyDefinedSymbol  )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230410,TableId:-1)] public partial class OrientationSelect:SELECT{//------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcorientationselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230410,TableId:-1,LayerId:20)] public partial class OrientationSelect:SELECT{//------------------------------------------------------------------------
 public               OrientationSelect     (){}
 public               OrientationSelect     (PlaneAngleMeasure         _PlaneAngleMeasure        ){IsNull=false;_SelectValue=_PlaneAngleMeasure        ;_Type=_PlaneAngleMeasure        .GetType();} public static explicit operator PlaneAngleMeasure        (OrientationSelect      value){return (PlaneAngleMeasure        )(value._SelectValue);}
 public               OrientationSelect     (PositivePlaneAngleMeasure _PositivePlaneAngleMeasure){IsNull=false;_SelectValue=_PositivePlaneAngleMeasure;_Type=_PositivePlaneAngleMeasure.GetType();} public static explicit operator PositivePlaneAngleMeasure(OrientationSelect      value){return (PositivePlaneAngleMeasure)(value._SelectValue);}
 public               OrientationSelect     (Direction                 _Direction                ){IsNull=false;_SelectValue=_Direction                ;_Type=_Direction                .GetType();} public static explicit operator Direction                (OrientationSelect      value){return (Direction                )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230411,TableId:-1)] public partial class PointOrVertexPoint:SELECT{//-----------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpointorvertexpoint.htm
+[ifcSql(TypeGroupId:6,TypeId:230411,TableId:-1,LayerId:28)] public partial class PointOrVertexPoint:SELECT{//-----------------------------------------------------------------------
 public               PointOrVertexPoint    (){}
 public               PointOrVertexPoint    (CartesianPoint            _CartesianPoint           ){IsNull=false;_SelectValue=_CartesianPoint           ;_Type=_CartesianPoint           .GetType();} public static explicit operator CartesianPoint           (PointOrVertexPoint     value){return (CartesianPoint           )(value._SelectValue);}
 public               PointOrVertexPoint    (Point                     _Point                    ){IsNull=false;_SelectValue=_Point                    ;_Type=_Point                    .GetType();} public static explicit operator Point                    (PointOrVertexPoint     value){return (Point                    )(value._SelectValue);}
@@ -537,7 +569,8 @@ public               PointOrVertexPoint    (PointOnSurface            _PointOnSu
 public               PointOrVertexPoint    (VertexPoint               _VertexPoint              ){IsNull=false;_SelectValue=_VertexPoint              ;_Type=_VertexPoint              .GetType();} public static explicit operator VertexPoint              (PointOrVertexPoint     value){return (VertexPoint              )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230412,TableId:-1)] public partial class PresentationStyleSelect:SELECT{//------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpresentationstyleselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230412,TableId:-1,LayerId:33)] public partial class PresentationStyleSelect:SELECT{//------------------------------------------------------------------
 public               PresentationStyleSelect(){}
 public               PresentationStyleSelect(NullStyle                 _NullStyle                ){IsNull=false;_SelectValue=_NullStyle                ;_Type=_NullStyle                .GetType();} public static explicit operator NullStyle                (PresentationStyleSelect value){return (NullStyle                )(value._SelectValue);}
 public               PresentationStyleSelect(CurveStyle                _CurveStyle               ){IsNull=false;_SelectValue=_CurveStyle               ;_Type=_CurveStyle               .GetType();} public static explicit operator CurveStyle               (PresentationStyleSelect value){return (CurveStyle               )(value._SelectValue);}
@@ -547,13 +580,15 @@ public               PresentationStyleSelect(SymbolStyle               _SymbolSt
 public               PresentationStyleSelect(TextStyle                 _TextStyle                ){IsNull=false;_SelectValue=_TextStyle                ;_Type=_TextStyle                .GetType();} public static explicit operator TextStyle                (PresentationStyleSelect value){return (TextStyle                )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230413,TableId:-1)] public partial class Shell:SELECT{//------------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcshell.htm
+[ifcSql(TypeGroupId:6,TypeId:230413,TableId:-1,LayerId:41)] public partial class Shell:SELECT{//------------------------------------------------------------------------------------
 public               Shell                 (){}
 public               Shell                 (ClosedShell               _ClosedShell              ){IsNull=false;_SelectValue=_ClosedShell              ;_Type=_ClosedShell              .GetType();} public static explicit operator ClosedShell              (Shell                  value){return (ClosedShell              )(value._SelectValue);}
 public               Shell                 (OpenShell                 _OpenShell                ){IsNull=false;_SelectValue=_OpenShell                ;_Type=_OpenShell                .GetType();} public static explicit operator OpenShell                (Shell                  value){return (OpenShell                )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230414,TableId:-1)] public partial class SimpleValue:SELECT{//------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsimplevalue.htm
+[ifcSql(TypeGroupId:6,TypeId:230414,TableId:-1,LayerId:32)] public partial class SimpleValue:SELECT{//------------------------------------------------------------------------------
 public               SimpleValue           (){}
 public               SimpleValue           (Label                     _Label                    ){IsNull=false;_SelectValue=_Label                    ;_Type=_Label                    .GetType();} public static explicit operator Label                    (SimpleValue            value){return (Label                    )(value._SelectValue);}
 public               SimpleValue           (Boolean                   _Boolean                  ){IsNull=false;_SelectValue=_Boolean                  ;_Type=_Boolean                  .GetType();} public static explicit operator Boolean                  (SimpleValue            value){return (Boolean                  )(value._SelectValue);}
@@ -565,23 +600,26 @@ public               SimpleValue           (Real                      _Real     
 public               SimpleValue           (Text                      _Text                     ){IsNull=false;_SelectValue=_Text                     ;_Type=_Text                     .GetType();} public static explicit operator Text                     (SimpleValue            value){return (Text                     )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230415,TableId:-1)] public partial class SizeSelect:SELECT{//-------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsizeselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230415,TableId:-1,LayerId:33)] public partial class SizeSelect:SELECT{//-------------------------------------------------------------------------------
 public               SizeSelect            (){}
-public               SizeSelect            (RatioMeasure              _RatioMeasure             ){IsNull=false;_SelectValue=_RatioMeasure             ;_Type=_RatioMeasure             .GetType();} public static explicit operator RatioMeasure             (SizeSelect             value){return (RatioMeasure             )(value._SelectValue);}
 public               SizeSelect            (LengthMeasure             _LengthMeasure            ){IsNull=false;_SelectValue=_LengthMeasure            ;_Type=_LengthMeasure            .GetType();} public static explicit operator LengthMeasure            (SizeSelect             value){return (LengthMeasure            )(value._SelectValue);}
 public               SizeSelect            (DescriptiveMeasure        _DescriptiveMeasure       ){IsNull=false;_SelectValue=_DescriptiveMeasure       ;_Type=_DescriptiveMeasure       .GetType();} public static explicit operator DescriptiveMeasure       (SizeSelect             value){return (DescriptiveMeasure       )(value._SelectValue);}
 public               SizeSelect            (NormalisedRatioMeasure    _NormalisedRatioMeasure   ){IsNull=false;_SelectValue=_NormalisedRatioMeasure   ;_Type=_NormalisedRatioMeasure   .GetType();} public static explicit operator NormalisedRatioMeasure   (SizeSelect             value){return (NormalisedRatioMeasure   )(value._SelectValue);}
 public               SizeSelect            (PositiveLengthMeasure     _PositiveLengthMeasure    ){IsNull=false;_SelectValue=_PositiveLengthMeasure    ;_Type=_PositiveLengthMeasure    .GetType();} public static explicit operator PositiveLengthMeasure    (SizeSelect             value){return (PositiveLengthMeasure    )(value._SelectValue);}
 public               SizeSelect            (PositiveRatioMeasure      _PositiveRatioMeasure     ){IsNull=false;_SelectValue=_PositiveRatioMeasure     ;_Type=_PositiveRatioMeasure     .GetType();} public static explicit operator PositiveRatioMeasure     (SizeSelect             value){return (PositiveRatioMeasure     )(value._SelectValue);}
+public               SizeSelect            (RatioMeasure              _RatioMeasure             ){IsNull=false;_SelectValue=_RatioMeasure             ;_Type=_RatioMeasure             .GetType();} public static explicit operator RatioMeasure             (SizeSelect             value){return (RatioMeasure             )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230416,TableId:-1)] public partial class SpecularHighlightSelect:SELECT{//------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspecularhighlightselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230416,TableId:-1,LayerId:33)] public partial class SpecularHighlightSelect:SELECT{//------------------------------------------------------------------
 public               SpecularHighlightSelect(){}
 public               SpecularHighlightSelect(SpecularExponent          _SpecularExponent         ){IsNull=false;_SelectValue=_SpecularExponent         ;_Type=_SpecularExponent         .GetType();} public static explicit operator SpecularExponent         (SpecularHighlightSelect value){return (SpecularExponent         )(value._SelectValue);}
 public               SpecularHighlightSelect(SpecularRoughness         _SpecularRoughness        ){IsNull=false;_SelectValue=_SpecularRoughness        ;_Type=_SpecularRoughness        .GetType();} public static explicit operator SpecularRoughness        (SpecularHighlightSelect value){return (SpecularRoughness        )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230417,TableId:-1)] public partial class StructuralActivityAssignmentSelect:SELECT{//-------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralactivityassignmentselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230417,TableId:-1,LayerId:20)] public partial class StructuralActivityAssignmentSelect:SELECT{//-------------------------------------------------------
 public               StructuralActivityAssignmentSelect(){}
 public               StructuralActivityAssignmentSelect(Beam                      _Beam                     ){IsNull=false;_SelectValue=_Beam                     ;_Type=_Beam                     .GetType();} public static explicit operator Beam                     (StructuralActivityAssignmentSelect value){return (Beam                     )(value._SelectValue);}
 public               StructuralActivityAssignmentSelect(BuildingElement           _BuildingElement          ){IsNull=false;_SelectValue=_BuildingElement          ;_Type=_BuildingElement          .GetType();} public static explicit operator BuildingElement          (StructuralActivityAssignmentSelect value){return (BuildingElement          )(value._SelectValue);}
@@ -655,7 +693,8 @@ public               StructuralActivityAssignmentSelect(DistributionChamberEleme
 public               StructuralActivityAssignmentSelect(DistributionControlElement _DistributionControlElement){IsNull=false;_SelectValue=_DistributionControlElement;_Type=_DistributionControlElement.GetType();} public static explicit operator DistributionControlElement(StructuralActivityAssignmentSelect value){return (DistributionControlElement)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230418,TableId:-1)] public partial class SurfaceOrFaceSurface:SELECT{//---------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfaceorfacesurface.htm
+[ifcSql(TypeGroupId:6,TypeId:230418,TableId:-1,LayerId:28)] public partial class SurfaceOrFaceSurface:SELECT{//---------------------------------------------------------------------
 public               SurfaceOrFaceSurface  (){}
 public               SurfaceOrFaceSurface  (BoundedSurface            _BoundedSurface           ){IsNull=false;_SelectValue=_BoundedSurface           ;_Type=_BoundedSurface           .GetType();} public static explicit operator BoundedSurface           (SurfaceOrFaceSurface   value){return (BoundedSurface           )(value._SelectValue);}
 public               SurfaceOrFaceSurface  (CurveBoundedPlane         _CurveBoundedPlane        ){IsNull=false;_SelectValue=_CurveBoundedPlane        ;_Type=_CurveBoundedPlane        .GetType();} public static explicit operator CurveBoundedPlane        (SurfaceOrFaceSurface   value){return (CurveBoundedPlane        )(value._SelectValue);}
@@ -670,7 +709,8 @@ public               SurfaceOrFaceSurface  (SurfaceOfRevolution       _SurfaceOf
 public               SurfaceOrFaceSurface  (SweptSurface              _SweptSurface             ){IsNull=false;_SelectValue=_SweptSurface             ;_Type=_SweptSurface             .GetType();} public static explicit operator SweptSurface             (SurfaceOrFaceSurface   value){return (SweptSurface             )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230419,TableId:-1)] public partial class SurfaceStyleElementSelect:SELECT{//----------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestyleelementselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230419,TableId:-1,LayerId:33)] public partial class SurfaceStyleElementSelect:SELECT{//----------------------------------------------------------------
 public               SurfaceStyleElementSelect(){}
 public               SurfaceStyleElementSelect(ExternallyDefinedSurfaceStyle _ExternallyDefinedSurfaceStyle){IsNull=false;_SelectValue=_ExternallyDefinedSurfaceStyle;_Type=_ExternallyDefinedSurfaceStyle.GetType();} public static explicit operator ExternallyDefinedSurfaceStyle(SurfaceStyleElementSelect value){return (ExternallyDefinedSurfaceStyle)(value._SelectValue);}
 public               SurfaceStyleElementSelect(SurfaceStyleLighting      _SurfaceStyleLighting     ){IsNull=false;_SelectValue=_SurfaceStyleLighting     ;_Type=_SurfaceStyleLighting     .GetType();} public static explicit operator SurfaceStyleLighting     (SurfaceStyleElementSelect value){return (SurfaceStyleLighting     )(value._SelectValue);}
@@ -680,7 +720,8 @@ public               SurfaceStyleElementSelect(SurfaceStyleShading       _Surfac
 public               SurfaceStyleElementSelect(SurfaceStyleWithTextures  _SurfaceStyleWithTextures ){IsNull=false;_SelectValue=_SurfaceStyleWithTextures ;_Type=_SurfaceStyleWithTextures .GetType();} public static explicit operator SurfaceStyleWithTextures (SurfaceStyleElementSelect value){return (SurfaceStyleWithTextures )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230420,TableId:-1)] public partial class SymbolStyleSelect:SELECT{//------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsymbolstyleselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230420,TableId:-1,LayerId:33)] public partial class SymbolStyleSelect:SELECT{//------------------------------------------------------------------------
 public               SymbolStyleSelect     (){}
 public               SymbolStyleSelect     (Colour                    _Colour                   ){IsNull=false;_SelectValue=_Colour                   ;_Type=_Colour                   .GetType();} public static explicit operator Colour                   (SymbolStyleSelect      value){return (Colour                   )(value._SelectValue);}
 public               SymbolStyleSelect     (ColourRgb                 _ColourRgb                ){IsNull=false;_SelectValue=_ColourRgb                ;_Type=_ColourRgb                .GetType();} public static explicit operator ColourRgb                (SymbolStyleSelect      value){return (ColourRgb                )(value._SelectValue);}
@@ -689,7 +730,8 @@ public               SymbolStyleSelect     (DraughtingPreDefinedColour _Draughti
 public               SymbolStyleSelect     (PreDefinedColour          _PreDefinedColour         ){IsNull=false;_SelectValue=_PreDefinedColour         ;_Type=_PreDefinedColour         .GetType();} public static explicit operator PreDefinedColour         (SymbolStyleSelect      value){return (PreDefinedColour         )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230421,TableId:-1)] public partial class TextFontSelect:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextfontselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230421,TableId:-1,LayerId:33)] public partial class TextFontSelect:SELECT{//---------------------------------------------------------------------------
 public               TextFontSelect        (){}
 public               TextFontSelect        (DraughtingPreDefinedTextFont _DraughtingPreDefinedTextFont){IsNull=false;_SelectValue=_DraughtingPreDefinedTextFont;_Type=_DraughtingPreDefinedTextFont.GetType();} public static explicit operator DraughtingPreDefinedTextFont(TextFontSelect         value){return (DraughtingPreDefinedTextFont)(value._SelectValue);}
 public               TextFontSelect        (ExternallyDefinedTextFont _ExternallyDefinedTextFont){IsNull=false;_SelectValue=_ExternallyDefinedTextFont;_Type=_ExternallyDefinedTextFont.GetType();} public static explicit operator ExternallyDefinedTextFont(TextFontSelect         value){return (ExternallyDefinedTextFont)(value._SelectValue);}
@@ -697,19 +739,22 @@ public               TextFontSelect        (PreDefinedTextFont        _PreDefine
 public               TextFontSelect        (TextStyleFontModel        _TextStyleFontModel       ){IsNull=false;_SelectValue=_TextStyleFontModel       ;_Type=_TextStyleFontModel       .GetType();} public static explicit operator TextStyleFontModel       (TextFontSelect         value){return (TextStyleFontModel       )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230422,TableId:-1)] public partial class TextStyleSelect:SELECT{//--------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstyleselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230422,TableId:-1,LayerId:33)] public partial class TextStyleSelect:SELECT{//--------------------------------------------------------------------------
 public               TextStyleSelect       (){}
 public               TextStyleSelect       (TextStyleTextModel        _TextStyleTextModel       ){IsNull=false;_SelectValue=_TextStyleTextModel       ;_Type=_TextStyleTextModel       .GetType();} public static explicit operator TextStyleTextModel       (TextStyleSelect        value){return (TextStyleTextModel       )(value._SelectValue);}
 public               TextStyleSelect       (TextStyleWithBoxCharacteristics _TextStyleWithBoxCharacteristics){IsNull=false;_SelectValue=_TextStyleWithBoxCharacteristics;_Type=_TextStyleWithBoxCharacteristics.GetType();} public static explicit operator TextStyleWithBoxCharacteristics(TextStyleSelect        value){return (TextStyleWithBoxCharacteristics)(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230423,TableId:-1)] public partial class TrimmingSelect:SELECT{//---------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctrimmingselect.htm
+[ifcSql(TypeGroupId:6,TypeId:230423,TableId:-1,LayerId:30)] public partial class TrimmingSelect:SELECT{//---------------------------------------------------------------------------
 public               TrimmingSelect        (){}
 public               TrimmingSelect        (ParameterValue            _ParameterValue           ){IsNull=false;_SelectValue=_ParameterValue           ;_Type=_ParameterValue           .GetType();} public static explicit operator ParameterValue           (TrimmingSelect         value){return (ParameterValue           )(value._SelectValue);}
 public               TrimmingSelect        (CartesianPoint            _CartesianPoint           ){IsNull=false;_SelectValue=_CartesianPoint           ;_Type=_CartesianPoint           .GetType();} public static explicit operator CartesianPoint           (TrimmingSelect         value){return (CartesianPoint           )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230424,TableId:-1)] public partial class Unit:SELECT{//-------------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcunit.htm
+[ifcSql(TypeGroupId:6,TypeId:230424,TableId:-1,LayerId:32)] public partial class Unit:SELECT{//-------------------------------------------------------------------------------------
 public               Unit                  (){}
 public               Unit                  (ContextDependentUnit      _ContextDependentUnit     ){IsNull=false;_SelectValue=_ContextDependentUnit     ;_Type=_ContextDependentUnit     .GetType();} public static explicit operator ContextDependentUnit     (Unit                   value){return (ContextDependentUnit     )(value._SelectValue);}
 public               Unit                  (ConversionBasedUnit       _ConversionBasedUnit      ){IsNull=false;_SelectValue=_ConversionBasedUnit      ;_Type=_ConversionBasedUnit      .GetType();} public static explicit operator ConversionBasedUnit      (Unit                   value){return (ConversionBasedUnit      )(value._SelectValue);}
@@ -719,7 +764,8 @@ public               Unit                  (NamedUnit                 _NamedUnit
 public               Unit                  (SIUnit                    _SIUnit                   ){IsNull=false;_SelectValue=_SIUnit                   ;_Type=_SIUnit                   .GetType();} public static explicit operator SIUnit                   (Unit                   value){return (SIUnit                   )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230425,TableId:-1)] public partial class Value:SELECT{//------------------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvalue.htm
+[ifcSql(TypeGroupId:6,TypeId:230425,TableId:-1,LayerId:32)] public partial class Value:SELECT{//------------------------------------------------------------------------------------
 public               Value                 (){}
 public               Value                 (Label                     _Label                    ){IsNull=false;_SelectValue=_Label                    ;_Type=_Label                    .GetType();} public static explicit operator Label                    (Value                  value){return (Label                    )(value._SelectValue);}
 public               Value                 (RatioMeasure              _RatioMeasure             ){IsNull=false;_SelectValue=_RatioMeasure             ;_Type=_RatioMeasure             .GetType();} public static explicit operator RatioMeasure             (Value                  value){return (RatioMeasure             )(value._SelectValue);}
@@ -824,7 +870,8 @@ public               Value                 (BoxAlignment              _BoxAlignm
 public               Value                 (ComplexNumber             _ComplexNumber            ){IsNull=false;_SelectValue=_ComplexNumber            ;_Type=_ComplexNumber            .GetType();} public static explicit operator ComplexNumber            (Value                  value){return (ComplexNumber            )(value._SelectValue);}
 }//---------------------------------------------------------------------------------------------------------------------
 
-[ifcSql(TypeGroupId:6,TypeId:230426,TableId:-1)] public partial class VectorOrDirection:SELECT{//------------------------------------------------------------------------
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvectorordirection.htm
+[ifcSql(TypeGroupId:6,TypeId:230426,TableId:-1,LayerId:30)] public partial class VectorOrDirection:SELECT{//------------------------------------------------------------------------
 public               VectorOrDirection     (){}
 public               VectorOrDirection     (Direction                 _Direction                ){IsNull=false;_SelectValue=_Direction                ;_Type=_Direction                .GetType();} public static explicit operator Direction                (VectorOrDirection      value){return (Direction                )(value._SelectValue);}
 public               VectorOrDirection     (Vector                    _Vector                   ){IsNull=false;_SelectValue=_Vector                   ;_Type=_Vector                   .GetType();} public static explicit operator Vector                   (VectorOrDirection      value){return (Vector                   )(value._SelectValue);}

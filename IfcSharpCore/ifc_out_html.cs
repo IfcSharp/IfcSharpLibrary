@@ -94,7 +94,11 @@ bool Display=false;foreach(string sx in InheritanceList) {if (Display) Args+="&#
 
 
 string s="\r\n<div class=\"line"+(Highlighted?"X":(ifc.EntityComment.HtmlCnt%4).ToString()) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
-+EntityClassName+"\" title=\"ifc"+ElementName
++EntityClassName+"\" "
+// hier noch Layernamen ermitteln und einfügen
+
++"onclick=\"EntityHelp('"+Layer.Name(this.LayerId())+"','"+ElementName+"')\" "
++"title=\"ifc"+ElementName
 +Args
 +"\">"+ElementName+"</span>(";
 
@@ -129,12 +133,13 @@ public               EntityComment(bool Highlighting){this.Highlighted=ENTITY.Hi
 
 public partial class Model{//==========================================================================================
 
-private static string FormattedHeaderLine(string line){return "<span class=\"header\">"+line+"</span>"+"<br/>";}
+private static string FormattedHeaderLine(string line,string attribs=""){return "<span class=\"header\""+attribs+">"+line+"</span>"+"<br/>";}
 
 public void ToHtmlFile()
 {
 StreamWriter sw=new StreamWriter(Header.Name+".ifc.html");
 //Console.WriteLine("Start ToHtmlFile");
+sw.WriteLine("<!-- "+Header.Name+".ifc.html"+" was created using IfcSharp (see https://github.com/IfcSharp) -->");
 sw.WriteLine("<html>");
 sw.WriteLine("<head>");
 sw.WriteLine("<title>ifc</title>");
@@ -177,6 +182,7 @@ sw.WriteLine("</style>");
 
 sw.WriteLine("</head>");
 sw.WriteLine("<body>");
+sw.WriteLine("<script src=\"help.js\"></script>");
 sw.WriteLine("<div class=\"global\">");
 
 
@@ -186,7 +192,13 @@ sw.WriteLine(FormattedHeaderLine("ISO-10303-21;"));
 sw.WriteLine(FormattedHeaderLine("HEADER;"));
 sw.WriteLine(FormattedHeaderLine("FILE_DESCRIPTION (('"+Header.ViewDefinition+"'), '2;1');"));
 sw.WriteLine(FormattedHeaderLine("FILE_NAME ('"+Header.Name+"', '"+NetSystem.String.Format("{0:s}",NetSystem.DateTime.Now)+"', ('"+Header.Author+"'), ('"+Header.Organization+"'), '"+ Header.PreprocessorVersion+"', '"+Header.OriginatingSystem+"', '"+Header.Authorization+"');"));
-sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"));
+sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"," title=\"Click to show schema documentation\" id=\"SpecificationBaseUrl\" href=\"https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML\" onclick=\"ShowHref()\" "));
+
+
+
+
+
+
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("DATA;"));
 
