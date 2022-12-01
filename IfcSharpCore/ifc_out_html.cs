@@ -189,21 +189,11 @@ if (JavaScript)
    }
 
 sw.WriteLine("<div class=\"global\">");
-
-
-//foreach (string s in Header) sw.WriteLine("<span class=\"header\">"+s+"</span>"+"<br/>");
-
 sw.WriteLine(FormattedHeaderLine("ISO-10303-21;"));
 sw.WriteLine(FormattedHeaderLine("HEADER;","  id=\"SpecificationBaseUrl\" href=\""+ifc.Specification.SpecificationBaseUrl+"/HTML\""));
 sw.WriteLine(FormattedHeaderLine("FILE_DESCRIPTION (('"+Header.ViewDefinition+"'), '2;1');"));
 sw.WriteLine(FormattedHeaderLine("FILE_NAME ('"+Header.Name+"', '"+NetSystem.String.Format("{0:s}",NetSystem.DateTime.Now)+"', ('"+Header.Author+"'), ('"+Header.Organization+"'), '"+ Header.PreprocessorVersion+"', '"+Header.OriginatingSystem+"', '"+Header.Authorization+"');"));
 sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"," title=\"Click to show schema documentation\" href=\"javascript:ShowHelp()\"));",true));
-
-
-
-
-
-
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("DATA;"));
 
@@ -212,7 +202,7 @@ foreach (ENTITY e in EntityList) sw.Write(e.ToHtml());
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("END-ISO-10303-21;"));
 
-sw.WriteLine("</div>"); // pre
+sw.WriteLine("</div>"); // class globl (pre)
 sw.WriteLine("</body>");
 sw.WriteLine("</html>");
 sw.Close();
