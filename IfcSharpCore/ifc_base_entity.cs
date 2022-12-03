@@ -70,7 +70,7 @@ public               ImageComment(string ImgFileName,int height=0,int width=0){A
                                                                                if (!NetSystem.IO.File.Exists(TargetFileName)) // insert and copy only first time if file not exist
                                                                                   {if (ImgFileName.Contains("http")) try{new NetSystem.Net.WebClient().DownloadFile(ImgFileName,TargetFileName);}catch(NetSystem.Exception e){Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
                                                                                    else {if (NetSystem.IO.File.Exists(ImgFileName)) NetSystem.IO.File.Copy(ImgFileName,TargetFileName); else Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
-                                                                                   this.CommentLine+="<img src=\""+TargetFileName+"\"";
+                                                                                   this.CommentLine+="<BR/><img src=\""+TargetFileName+"\"";
                                                                                    if (height>0) this.CommentLine+=" height=\""+height+"\"";
                                                                                    if (width >0) this.CommentLine+=" width=\""+width+"\"";
                                                                                    this.CommentLine+="/>";

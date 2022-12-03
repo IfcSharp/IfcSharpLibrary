@@ -502,7 +502,7 @@ namespace ifc {
             }
         }
 
-        public static Model FromStepFile(string filePath) {
+        public static Model FromStepFile(string filePath,bool AssignInverseElements=true) { // 2022-12-03 (bb) AssignInverseElements
             Log.Add($"Reading STEP file '{filePath}'", Log.Level.Info);
             Model model = new ifc.Model(filePath.Replace(".ifc", ""));
             try{model.Header = ParseHeaderData(filePath);}catch(Exception e){Log.Add(e.Message,Log.Level.Exception);} // 2022-10-16 (bb) added try/catch
@@ -522,6 +522,7 @@ namespace ifc {
             }
             sr.Close();
             model.AssignEntities();
+            if (AssignInverseElements) foreach (ifc.ENTITY e in  model.EntityList) e.AssignInverseElements();  // 2022-12-03 (bb) AssignInverseElements
             Log.Add($"Finished reading STEP file '{filePath}'.", Log.Level.Info);
             Log.Add($"Created {model.EntityList.Count} IFC Entities.", Log.Level.Info);
             return model;
