@@ -61,8 +61,10 @@ public string order;
 
 public partial class RowList<T> : TableBase where T : new(){//---------------------------------------------
 public               RowList(string order=""){this.order=order;}
-public override void SelectAll(string where=""){SqlCommand cmd = new SqlCommand("select * from "+TableName+" "+where+" "+order,tableSet.conn);
-                                                using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
+public override void SelectAll(string where=""){string sql="select * from "+TableName+" "+where+" "+order; // (bb) 20.05.2023 exception handling
+                                                SqlCommand cmd = new SqlCommand(sql,tableSet.conn);
+                                                try {using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}}
+                                                catch(Exception e) {ifc.Log.Add(e.Message+"\n"+sql,ifc.Log.Level.Exception);}
                                                 //((RowBase)(object)new T()).Load(this);
                                                }
 public override void Load   (){((RowBase)(object)new T()).Load(this);} // (bb) 30.10.2022 seperated load for serialsation
@@ -73,8 +75,7 @@ public override void BulkInsert(){using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
                                         {            bulkCopy.DestinationTableName = TableName; //Console.WriteLine("TableName="+TableName+": "+InsertString());
                                                      bulkCopy.WriteToServer(FilledDataTable()); // if (TableName=="[cp].[EntityAttributeOfString]") {bulkCopy.BatchSize=100000;bulkCopy.BulkCopyTimeout=3;} sometimes timeout, don't no why
                                         }
-}//.........................................................................................................................
-
+                                 }//.........................................................................................................................
 public DataTable FilledDataTable() {//............................................................
                                      DataTable table = new DataTable();
                                      Object rb = new T();((RowBase)rb).AddDataTableColumns(table); 
@@ -83,6 +84,7 @@ public DataTable FilledDataTable() {//..........................................
                                     }//............................................................
 
 }//------------------------------------------------------------------------------------------------
+
 
 public partial class SchemaBase{}//----------------------------------------------------------------
 
