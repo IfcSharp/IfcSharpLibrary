@@ -1,5 +1,6 @@
-// ifc_IFC2X3_generated_entity.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence)
+// ifc_IFC2X3_generated_entity.cs Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/blob/master/License.md)
 // ported from IFC-Model by buildingSMART International Ltd (see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/EXPRESS/IFC2X3_TC1.exp)
+// official documentation see https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML
 
 // CAUTION! THIS IS GENERATED CODE! DON'T MODIFY THIS FILE. THIS FILE WILL BE UPDATED WITH NEW VERSIONS.
 using System;
@@ -10,11 +11,63 @@ public sealed class Specification{
 public const int    SpecificationId=23;
 public const string SpecificationName="2.3.0.1 IFC2x3 TC1 2007-07";
 public const string SchemaName="IFC2X3";
-}
+public const string SpecificationBaseUrl="https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1";
+} // end of Specification
+
+public class Layer{public int LayerId;public string LayerName;
+public static string Name(int LayerId){foreach(Layer l in Layer.Layers) if (l.LayerId==LayerId) return l.LayerName; return "";}
+public static Layer[] Layers={
+new Layer{LayerId=-6,LayerName="facilitiesmgmtdomain"},
+new Layer{LayerId=-5,LayerName="materialpropertyresource"},
+new Layer{LayerId=-4,LayerName="presentationdimensioningresource"},
+new Layer{LayerId=-3,LayerName="presentationresource"},
+new Layer{LayerId=-2,LayerName="profilepropertyresource"},
+new Layer{LayerId=-1,LayerName="timeseriesresource"},
+new Layer{LayerId=0,LayerName="no Layer"},
+new Layer{LayerId=1,LayerName="ControlExtension"},
+new Layer{LayerId=2,LayerName="Kernel"},
+new Layer{LayerId=3,LayerName="ProcessExtension"},
+new Layer{LayerId=4,LayerName="ProductExtension"},
+new Layer{LayerId=5,LayerName="SharedBldgElements"},
+new Layer{LayerId=6,LayerName="SharedBldgServiceElements"},
+new Layer{LayerId=7,LayerName="SharedComponentElements"},
+new Layer{LayerId=8,LayerName="SharedFacilitiesElements"},
+new Layer{LayerId=10,LayerName="SharedMgmtElements"},
+new Layer{LayerId=11,LayerName="ArchitectureDomain"},
+new Layer{LayerId=12,LayerName="BuildingControlsDomain"},
+new Layer{LayerId=13,LayerName="ConstructionMgmtDomain"},
+new Layer{LayerId=14,LayerName="ElectricalDomain"},
+new Layer{LayerId=15,LayerName="HvacDomain"},
+new Layer{LayerId=16,LayerName="PlumbingFireProtectionDomain"},
+new Layer{LayerId=20,LayerName="StructuralAnalysisDomain"},
+new Layer{LayerId=21,LayerName="StructuralElementsDomain"},
+new Layer{LayerId=22,LayerName="ActorResource"},
+new Layer{LayerId=23,LayerName="ApprovalResource"},
+new Layer{LayerId=24,LayerName="ConstraintResource"},
+new Layer{LayerId=25,LayerName="CostResource"},
+new Layer{LayerId=26,LayerName="DateTimeResource"},
+new Layer{LayerId=27,LayerName="ExternalReferenceResource"},
+new Layer{LayerId=28,LayerName="GeometricConstraintResource"},
+new Layer{LayerId=29,LayerName="GeometricModelResource"},
+new Layer{LayerId=30,LayerName="GeometryResource"},
+new Layer{LayerId=31,LayerName="MaterialResource"},
+new Layer{LayerId=32,LayerName="MeasureResource"},
+new Layer{LayerId=33,LayerName="PresentationAppearanceResource"},
+new Layer{LayerId=34,LayerName="PresentationDefinitionResource"},
+new Layer{LayerId=35,LayerName="PresentationOrganizationResource"},
+new Layer{LayerId=36,LayerName="ProfileResource"},
+new Layer{LayerId=37,LayerName="PropertyResource"},
+new Layer{LayerId=38,LayerName="QuantityResource"},
+new Layer{LayerId=39,LayerName="RepresentationResource"},
+new Layer{LayerId=40,LayerName="StructuralLoadResource"},
+new Layer{LayerId=41,LayerName="TopologyResource"},
+new Layer{LayerId=42,LayerName="UtilityResource"},
+}; // end of Layers
+} // end of Layer
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifc_2dcompositecurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230427,TableId:3)] public partial class _2DCompositeCurve:CompositeCurve{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifc_2dcompositecurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230427,TableId:3,LayerId:30)] public partial class _2DCompositeCurve:CompositeCurve{//================================================================
 public               _2DCompositeCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Segments"><para>List1toUnbounded_CompositeCurveSegment</para></param>
@@ -24,8 +77,8 @@ public               _2DCompositeCurve(List1toUnbounded_CompositeCurveSegment Se
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcactionrequest.htm
-[ifcSql(TypeGroupId:5,TypeId:230428,TableId:3)] public partial class ActionRequest:Control{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcactionrequest.htm
+[ifcSql(TypeGroupId:5,TypeId:230428,TableId:3,LayerId:10)] public partial class ActionRequest:Control{//===========================================================================
 public               ActionRequest():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -40,8 +93,8 @@ public               ActionRequest(OwnerHistory _OwnerHistory,Identifier Request
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Occupant(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcactor.htm
-[ifcSql(TypeGroupId:5,TypeId:230429,TableId:3)] public partial class Actor:Object{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcactor.htm
+[ifcSql(TypeGroupId:5,TypeId:230429,TableId:3,LayerId: 2)] public partial class Actor:Object{//====================================================================================
 public               Actor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -58,8 +111,8 @@ public               Actor(OwnerHistory _OwnerHistory,ActorSelect TheActor,Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcactorrole.htm
-[ifcSql(TypeGroupId:5,TypeId:230430,TableId:3)] public partial class ActorRole:ENTITY{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcactorrole.htm
+[ifcSql(TypeGroupId:5,TypeId:230430,TableId:3,LayerId:22)] public partial class ActorRole:ENTITY{//================================================================================
 public               ActorRole():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Role"><para>RoleEnum</para></param>
@@ -73,8 +126,8 @@ public               ActorRole(RoleEnum Role,Label UserDefinedRole=null,Text Des
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcactuatortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230431,TableId:3)] public partial class ActuatorType:DistributionControlElementType{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcactuatortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230431,TableId:3,LayerId:12)] public partial class ActuatorType:DistributionControlElementType{//=====================================================
 public               ActuatorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -93,7 +146,8 @@ public               ActuatorType(OwnerHistory _OwnerHistory,ActuatorTypeEnum Pr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PostalAddress(...)</para><para>new ifc.TelecomAddress(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230432,TableId:3)] public partial class Address:ENTITY{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcaddress.htm
+[ifcSql(TypeGroupId:5,TypeId:230432,TableId:3,LayerId:22)] public partial class Address:ENTITY{//==================================================================================
 public               Address():base(){}// abstract
 [ifc(1,optional=true)] public AddressTypeEnum? Purpose; //ENUM
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -105,8 +159,8 @@ public               Address():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcairterminalboxtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230433,TableId:3)] public partial class AirTerminalBoxType:FlowControllerType{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcairterminalboxtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230433,TableId:3,LayerId:15)] public partial class AirTerminalBoxType:FlowControllerType{//===========================================================
 public               AirTerminalBoxType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -125,8 +179,8 @@ public               AirTerminalBoxType(OwnerHistory _OwnerHistory,AirTerminalBo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcairterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230434,TableId:3)] public partial class AirTerminalType:FlowTerminalType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcairterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230434,TableId:3,LayerId:15)] public partial class AirTerminalType:FlowTerminalType{//================================================================
 public               AirTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -145,8 +199,8 @@ public               AirTerminalType(OwnerHistory _OwnerHistory,AirTerminalTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcairtoairheatrecoverytype.htm
-[ifcSql(TypeGroupId:5,TypeId:230435,TableId:3)] public partial class AirToAirHeatRecoveryType:EnergyConversionDeviceType{//=============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcairtoairheatrecoverytype.htm
+[ifcSql(TypeGroupId:5,TypeId:230435,TableId:3,LayerId:15)] public partial class AirToAirHeatRecoveryType:EnergyConversionDeviceType{//=============================================
 public               AirToAirHeatRecoveryType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -165,8 +219,8 @@ public               AirToAirHeatRecoveryType(OwnerHistory _OwnerHistory,AirToAi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcalarmtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230436,TableId:3)] public partial class AlarmType:DistributionControlElementType{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcalarmtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230436,TableId:3,LayerId:12)] public partial class AlarmType:DistributionControlElementType{//========================================================
 public               AlarmType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -185,8 +239,8 @@ public               AlarmType(OwnerHistory _OwnerHistory,AlarmTypeEnum Predefin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcangulardimension.htm
-[ifcSql(TypeGroupId:5,TypeId:230437,TableId:3)] public partial class AngularDimension:DimensionCurveDirectedCallout{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcangulardimension.htm
+[ifcSql(TypeGroupId:5,TypeId:230437,TableId:3,LayerId:-4)] public partial class AngularDimension:DimensionCurveDirectedCallout{//==================================================
 public               AngularDimension():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -195,8 +249,8 @@ public               AngularDimension(Set1toUnbounded_DraughtingCalloutElement C
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotation.htm
-[ifcSql(TypeGroupId:5,TypeId:230438,TableId:3)] public partial class Annotation:Product{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotation.htm
+[ifcSql(TypeGroupId:5,TypeId:230438,TableId:3,LayerId: 4)] public partial class Annotation:Product{//==============================================================================
 public               Annotation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -213,8 +267,8 @@ public               Annotation(OwnerHistory _OwnerHistory,GloballyUniqueId Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DimensionCurve(...)</para><para>new ifc.ProjectionCurve(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationcurveoccurrence.htm
-[ifcSql(TypeGroupId:5,TypeId:230439,TableId:3)] public partial class AnnotationCurveOccurrence:AnnotationOccurrence{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationcurveoccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230439,TableId:3,LayerId:34)] public partial class AnnotationCurveOccurrence:AnnotationOccurrence{//==================================================
 public               AnnotationCurveOccurrence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -225,8 +279,8 @@ public               AnnotationCurveOccurrence(Set1toUnbounded_PresentationStyle
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationfillarea.htm
-[ifcSql(TypeGroupId:5,TypeId:230440,TableId:3)] public partial class AnnotationFillArea:GeometricRepresentationItem{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationfillarea.htm
+[ifcSql(TypeGroupId:5,TypeId:230440,TableId:3,LayerId:34)] public partial class AnnotationFillArea:GeometricRepresentationItem{//==================================================
 public               AnnotationFillArea():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="OuterBoundary"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -238,8 +292,8 @@ public               AnnotationFillArea(Curve OuterBoundary,Set1toUnbounded_Curv
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationfillareaoccurrence.htm
-[ifcSql(TypeGroupId:5,TypeId:230441,TableId:3)] public partial class AnnotationFillAreaOccurrence:AnnotationOccurrence{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationfillareaoccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230441,TableId:3,LayerId:34)] public partial class AnnotationFillAreaOccurrence:AnnotationOccurrence{//===============================================
 public               AnnotationFillAreaOccurrence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -254,13 +308,14 @@ public               AnnotationFillAreaOccurrence(Set1toUnbounded_PresentationSt
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AnnotationCurveOccurrence(...)</para><para>new ifc.DimensionCurve(...)</para><para>new ifc.ProjectionCurve(...)</para><para>new ifc.AnnotationFillAreaOccurrence(...)</para><para>new ifc.AnnotationSurfaceOccurrence(...)</para><para>new ifc.AnnotationSymbolOccurrence(...)</para><para>new ifc.AnnotationTextOccurrence(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230442,TableId:3)] public partial class AnnotationOccurrence:StyledItem{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationoccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230442,TableId:3,LayerId:34)] public partial class AnnotationOccurrence:StyledItem{//=================================================================
 public               AnnotationOccurrence():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationsurface.htm
-[ifcSql(TypeGroupId:5,TypeId:230443,TableId:3)] public partial class AnnotationSurface:GeometricRepresentationItem{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230443,TableId:3,LayerId:34)] public partial class AnnotationSurface:GeometricRepresentationItem{//===================================================
 public               AnnotationSurface():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item"><para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para></param>
@@ -274,8 +329,8 @@ public override void AssignInverseElements(){if (TextureCoordinates!=null) Textu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationsurfaceoccurrence.htm
-[ifcSql(TypeGroupId:5,TypeId:230444,TableId:3)] public partial class AnnotationSurfaceOccurrence:AnnotationOccurrence{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationsurfaceoccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230444,TableId:3,LayerId:34)] public partial class AnnotationSurfaceOccurrence:AnnotationOccurrence{//================================================
 public               AnnotationSurfaceOccurrence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -286,8 +341,8 @@ public               AnnotationSurfaceOccurrence(Set1toUnbounded_PresentationSty
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.TerminatorSymbol(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationsymboloccurrence.htm
-[ifcSql(TypeGroupId:5,TypeId:230445,TableId:3)] public partial class AnnotationSymbolOccurrence:AnnotationOccurrence{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationsymboloccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230445,TableId:3,LayerId:34)] public partial class AnnotationSymbolOccurrence:AnnotationOccurrence{//=================================================
 public               AnnotationSymbolOccurrence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -298,8 +353,8 @@ public               AnnotationSymbolOccurrence(Set1toUnbounded_PresentationStyl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcannotationtextoccurrence.htm
-[ifcSql(TypeGroupId:5,TypeId:230446,TableId:3)] public partial class AnnotationTextOccurrence:AnnotationOccurrence{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcannotationtextoccurrence.htm
+[ifcSql(TypeGroupId:5,TypeId:230446,TableId:3,LayerId:34)] public partial class AnnotationTextOccurrence:AnnotationOccurrence{//===================================================
 public               AnnotationTextOccurrence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -310,8 +365,8 @@ public               AnnotationTextOccurrence(Set1toUnbounded_PresentationStyleA
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcapplication.htm
-[ifcSql(TypeGroupId:5,TypeId:230447,TableId:3)] public partial class Application:ENTITY{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcapplication.htm
+[ifcSql(TypeGroupId:5,TypeId:230447,TableId:3,LayerId:42)] public partial class Application:ENTITY{//==============================================================================
 public               Application():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ApplicationDeveloper"><para>new ifc.Organization(...)</para></param>
@@ -327,7 +382,8 @@ public               Application(Organization ApplicationDeveloper,Label Version
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CostValue(...)</para><para>new ifc.EnvironmentalImpactValue(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230448,TableId:3)] public partial class AppliedValue:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcappliedvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230448,TableId:3,LayerId:25)] public partial class AppliedValue:ENTITY{//=============================================================================
 public               AppliedValue():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -344,8 +400,8 @@ public               AppliedValue():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcappliedvaluerelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230449,TableId:3)] public partial class AppliedValueRelationship:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcappliedvaluerelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230449,TableId:3,LayerId:25)] public partial class AppliedValueRelationship:ENTITY{//=================================================================
 public               AppliedValueRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ComponentOfTotal"><para>new ifc.CostValue(...)</para><para>new ifc.EnvironmentalImpactValue(...)</para></param>
@@ -366,8 +422,8 @@ public override void AssignInverseElements(){if (ComponentOfTotal!=null) {if (Co
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcapproval.htm
-[ifcSql(TypeGroupId:5,TypeId:230450,TableId:3)] public partial class Approval:ENTITY{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcapproval.htm
+[ifcSql(TypeGroupId:5,TypeId:230450,TableId:3,LayerId:23)] public partial class Approval:ENTITY{//=================================================================================
 public               Approval():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Description">[optional]<para>cast to (ifc.Text)...</para></param>
@@ -395,8 +451,8 @@ public               Approval(DateTimeSelect ApprovalDateTime,Label Name,Identif
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcapprovalactorrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230451,TableId:3)] public partial class ApprovalActorRelationship:ENTITY{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcapprovalactorrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230451,TableId:3,LayerId:23)] public partial class ApprovalActorRelationship:ENTITY{//================================================================
 public               ApprovalActorRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Actor"><para>new ifc.ActorSelect(new Organization(...))...</para><para>new ifc.ActorSelect(new Person(...))...</para><para>new ifc.ActorSelect(new PersonAndOrganization(...))...</para></param>
@@ -412,8 +468,8 @@ public override void AssignInverseElements(){if (_Approval!=null) {if (_Approval
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcapprovalpropertyrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230452,TableId:3)] public partial class ApprovalPropertyRelationship:ENTITY{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcapprovalpropertyrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230452,TableId:3,LayerId:23)] public partial class ApprovalPropertyRelationship:ENTITY{//=============================================================
 public               ApprovalPropertyRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ApprovedProperties"><para>Set1toUnbounded_Property</para></param>
@@ -425,8 +481,8 @@ public               ApprovalPropertyRelationship(Set1toUnbounded_Property Appro
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcapprovalrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230453,TableId:3)] public partial class ApprovalRelationship:ENTITY{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcapprovalrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230453,TableId:3,LayerId:23)] public partial class ApprovalRelationship:ENTITY{//=====================================================================
 public               ApprovalRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelatedApproval"><para>new ifc.Approval(...)</para></param>
@@ -445,8 +501,8 @@ public override void AssignInverseElements(){if (RelatedApproval!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcarbitraryclosedprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230454,TableId:3)] public partial class ArbitraryClosedProfileDef:ProfileDef{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcarbitraryclosedprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230454,TableId:3,LayerId:36)] public partial class ArbitraryClosedProfileDef:ProfileDef{//============================================================
 public               ArbitraryClosedProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -458,8 +514,8 @@ public               ArbitraryClosedProfileDef(ProfileTypeEnum ProfileType,Curve
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CenterLineProfileDef(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcarbitraryopenprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230455,TableId:3)] public partial class ArbitraryOpenProfileDef:ProfileDef{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcarbitraryopenprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230455,TableId:3,LayerId:36)] public partial class ArbitraryOpenProfileDef:ProfileDef{//==============================================================
 public               ArbitraryOpenProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -471,8 +527,8 @@ public               ArbitraryOpenProfileDef(ProfileTypeEnum ProfileType,Bounded
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcarbitraryprofiledefwithvoids.htm
-[ifcSql(TypeGroupId:5,TypeId:230456,TableId:3)] public partial class ArbitraryProfileDefWithVoids:ArbitraryClosedProfileDef{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcarbitraryprofiledefwithvoids.htm
+[ifcSql(TypeGroupId:5,TypeId:230456,TableId:3,LayerId:36)] public partial class ArbitraryProfileDefWithVoids:ArbitraryClosedProfileDef{//==========================================
 public               ArbitraryProfileDefWithVoids():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -485,8 +541,8 @@ public               ArbitraryProfileDefWithVoids(ProfileTypeEnum ProfileType,Cu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcasset.htm
-[ifcSql(TypeGroupId:5,TypeId:230457,TableId:3)] public partial class Asset:Group{//=====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcasset.htm
+[ifcSql(TypeGroupId:5,TypeId:230457,TableId:3,LayerId: 8)] public partial class Asset:Group{//=====================================================================================
 public               Asset():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -517,8 +573,8 @@ public               Asset(OwnerHistory _OwnerHistory,Identifier AssetID,CostVal
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcasymmetricishapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230458,TableId:3)] public partial class AsymmetricIShapeProfileDef:IShapeProfileDef{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcasymmetricishapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230458,TableId:3,LayerId:36)] public partial class AsymmetricIShapeProfileDef:IShapeProfileDef{//=====================================================
 public               AsymmetricIShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -542,8 +598,8 @@ public               AsymmetricIShapeProfileDef(ProfileTypeEnum ProfileType,Axis
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcaxis1placement.htm
-[ifcSql(TypeGroupId:5,TypeId:230459,TableId:3)] public partial class Axis1Placement:Placement{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcaxis1placement.htm
+[ifcSql(TypeGroupId:5,TypeId:230459,TableId:3,LayerId:30)] public partial class Axis1Placement:Placement{//========================================================================
 public               Axis1Placement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location"><para>new ifc.CartesianPoint(...)</para></param>
@@ -554,8 +610,8 @@ public               Axis1Placement(CartesianPoint Location,Direction Axis=null,
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcaxis2placement2d.htm
-[ifcSql(TypeGroupId:5,TypeId:230460,TableId:3)] public partial class Axis2Placement2D:Placement{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcaxis2placement2d.htm
+[ifcSql(TypeGroupId:5,TypeId:230460,TableId:3,LayerId:30)] public partial class Axis2Placement2D:Placement{//======================================================================
 public               Axis2Placement2D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location"><para>new ifc.CartesianPoint(...)</para></param>
@@ -566,8 +622,8 @@ public               Axis2Placement2D(CartesianPoint Location,Direction RefDirec
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcaxis2placement3d.htm
-[ifcSql(TypeGroupId:5,TypeId:230461,TableId:3)] public partial class Axis2Placement3D:Placement{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcaxis2placement3d.htm
+[ifcSql(TypeGroupId:5,TypeId:230461,TableId:3,LayerId:30)] public partial class Axis2Placement3D:Placement{//======================================================================
 public               Axis2Placement3D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location"><para>new ifc.CartesianPoint(...)</para></param>
@@ -580,7 +636,8 @@ public               Axis2Placement3D(CartesianPoint Location,Direction Axis=nul
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BezierCurve(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230462,TableId:3)] public partial class BSplineCurve:BoundedCurve{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbsplinecurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230462,TableId:3,LayerId:30)] public partial class BSplineCurve:BoundedCurve{//=======================================================================
 public               BSplineCurve():base(){}// abstract
 [ifc(1)] public INTEGER Degree; //BASETYPE
 [ifc(2)] public List2toUnbounded_CartesianPoint ControlPointsList; //ListType1d
@@ -590,8 +647,8 @@ public               BSplineCurve():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbeam.htm
-[ifcSql(TypeGroupId:5,TypeId:230463,TableId:3)] public partial class Beam:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbeam.htm
+[ifcSql(TypeGroupId:5,TypeId:230463,TableId:3,LayerId: 5)] public partial class Beam:BuildingElement{//============================================================================
 public               Beam():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -607,8 +664,8 @@ public               Beam(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbeamtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230464,TableId:3)] public partial class BeamType:BuildingElementType{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbeamtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230464,TableId:3,LayerId: 5)] public partial class BeamType:BuildingElementType{//====================================================================
 public               BeamType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -627,8 +684,8 @@ public               BeamType(OwnerHistory _OwnerHistory,BeamTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RationalBezierCurve(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbeziercurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230465,TableId:3)] public partial class BezierCurve:BSplineCurve{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbeziercurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230465,TableId:3,LayerId:30)] public partial class BezierCurve:BSplineCurve{//========================================================================
 public               BezierCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Degree"><para>INTEGER</para></param>
@@ -641,8 +698,8 @@ public               BezierCurve(INTEGER Degree,List2toUnbounded_CartesianPoint 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcblobtexture.htm
-[ifcSql(TypeGroupId:5,TypeId:230466,TableId:3)] public partial class BlobTexture:SurfaceTexture{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcblobtexture.htm
+[ifcSql(TypeGroupId:5,TypeId:230466,TableId:3,LayerId:33)] public partial class BlobTexture:SurfaceTexture{//======================================================================
 public               BlobTexture():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RepeatS"><para>BOOLEAN</para></param>
@@ -658,8 +715,8 @@ public               BlobTexture(BOOLEAN RepeatS,BOOLEAN RepeatT,SurfaceTextureE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcblock.htm
-[ifcSql(TypeGroupId:5,TypeId:230467,TableId:3)] public partial class Block:CsgPrimitive3D{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcblock.htm
+[ifcSql(TypeGroupId:5,TypeId:230467,TableId:3,LayerId:29)] public partial class Block:CsgPrimitive3D{//============================================================================
 public               Block():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -674,8 +731,8 @@ public               Block(Axis2Placement3D Position,PositiveLengthMeasure XLeng
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboilertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230468,TableId:3)] public partial class BoilerType:EnergyConversionDeviceType{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboilertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230468,TableId:3,LayerId:15)] public partial class BoilerType:EnergyConversionDeviceType{//===========================================================
 public               BoilerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -694,8 +751,8 @@ public               BoilerType(OwnerHistory _OwnerHistory,BoilerTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbooleanclippingresult.htm
-[ifcSql(TypeGroupId:5,TypeId:230469,TableId:3)] public partial class BooleanClippingResult:BooleanResult{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbooleanclippingresult.htm
+[ifcSql(TypeGroupId:5,TypeId:230469,TableId:3,LayerId:29)] public partial class BooleanClippingResult:BooleanResult{//=============================================================
 public               BooleanClippingResult():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Operator"><para>BooleanOperator</para></param>
@@ -706,8 +763,8 @@ public               BooleanClippingResult(BooleanOperator Operator,BooleanOpera
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BooleanClippingResult(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbooleanresult.htm
-[ifcSql(TypeGroupId:5,TypeId:230470,TableId:3)] public partial class BooleanResult:GeometricRepresentationItem{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbooleanresult.htm
+[ifcSql(TypeGroupId:5,TypeId:230470,TableId:3,LayerId:29)] public partial class BooleanResult:GeometricRepresentationItem{//=======================================================
 public               BooleanResult():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Operator"><para>BooleanOperator</para></param>
@@ -721,14 +778,15 @@ public               BooleanResult(BooleanOperator Operator,BooleanOperand First
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BoundaryEdgeCondition(...)</para><para>new ifc.BoundaryFaceCondition(...)</para><para>new ifc.BoundaryNodeCondition(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230471,TableId:3)] public partial class BoundaryCondition:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundarycondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230471,TableId:3,LayerId:40)] public partial class BoundaryCondition:ENTITY{//========================================================================
 public               BoundaryCondition():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundaryedgecondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230472,TableId:3)] public partial class BoundaryEdgeCondition:BoundaryCondition{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundaryedgecondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230472,TableId:3,LayerId:40)] public partial class BoundaryEdgeCondition:BoundaryCondition{//=========================================================
 public               BoundaryEdgeCondition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -749,8 +807,8 @@ public               BoundaryEdgeCondition(Label Name,ModulusOfLinearSubgradeRea
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundaryfacecondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230473,TableId:3)] public partial class BoundaryFaceCondition:BoundaryCondition{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundaryfacecondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230473,TableId:3,LayerId:40)] public partial class BoundaryFaceCondition:BoundaryCondition{//=========================================================
 public               BoundaryFaceCondition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -765,8 +823,8 @@ public               BoundaryFaceCondition(Label Name,ModulusOfSubgradeReactionM
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BoundaryNodeConditionWarping(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundarynodecondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230474,TableId:3)] public partial class BoundaryNodeCondition:BoundaryCondition{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundarynodecondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230474,TableId:3,LayerId:40)] public partial class BoundaryNodeCondition:BoundaryCondition{//=========================================================
 public               BoundaryNodeCondition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -787,8 +845,8 @@ public               BoundaryNodeCondition(Label Name,LinearStiffnessMeasure Lin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundarynodeconditionwarping.htm
-[ifcSql(TypeGroupId:5,TypeId:230475,TableId:3)] public partial class BoundaryNodeConditionWarping:BoundaryNodeCondition{//==============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundarynodeconditionwarping.htm
+[ifcSql(TypeGroupId:5,TypeId:230475,TableId:3,LayerId:40)] public partial class BoundaryNodeConditionWarping:BoundaryNodeCondition{//==============================================
 public               BoundaryNodeConditionWarping():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -805,20 +863,21 @@ public               BoundaryNodeConditionWarping(Label Name,LinearStiffnessMeas
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BSplineCurve(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230476,TableId:3)] public partial class BoundedCurve:Curve{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundedcurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230476,TableId:3,LayerId:30)] public partial class BoundedCurve:Curve{//==============================================================================
 public               BoundedCurve():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundedsurface.htm
-[ifcSql(TypeGroupId:5,TypeId:230477,TableId:3)] public partial class BoundedSurface:Surface{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundedsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230477,TableId:3,LayerId:30)] public partial class BoundedSurface:Surface{//==========================================================================
 public               BoundedSurface():base(){}
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboundingbox.htm
-[ifcSql(TypeGroupId:5,TypeId:230478,TableId:3)] public partial class BoundingBox:GeometricRepresentationItem{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboundingbox.htm
+[ifcSql(TypeGroupId:5,TypeId:230478,TableId:3,LayerId:29)] public partial class BoundingBox:GeometricRepresentationItem{//=========================================================
 public               BoundingBox():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Corner"><para>new ifc.CartesianPoint(...)</para></param>
@@ -834,8 +893,8 @@ public               BoundingBox(CartesianPoint Corner,PositiveLengthMeasure XDi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcboxedhalfspace.htm
-[ifcSql(TypeGroupId:5,TypeId:230479,TableId:3)] public partial class BoxedHalfSpace:HalfSpaceSolid{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcboxedhalfspace.htm
+[ifcSql(TypeGroupId:5,TypeId:230479,TableId:3,LayerId:29)] public partial class BoxedHalfSpace:HalfSpaceSolid{//===================================================================
 public               BoxedHalfSpace():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BaseSurface"><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.Plane(...)</para></param>
@@ -847,8 +906,8 @@ public               BoxedHalfSpace(Surface BaseSurface,BOOLEAN AgreementFlag,Bo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbuilding.htm
-[ifcSql(TypeGroupId:5,TypeId:230480,TableId:3)] public partial class Building:SpatialStructureElement{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuilding.htm
+[ifcSql(TypeGroupId:5,TypeId:230480,TableId:3,LayerId: 4)] public partial class Building:SpatialStructureElement{//================================================================
 public               Building():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -871,18 +930,20 @@ public               Building(OwnerHistory _OwnerHistory,ElementCompositionEnum 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Beam(...)</para><para>new ifc.BuildingElementComponent(...)</para><para>new ifc.BuildingElementProxy(...)</para><para>new ifc.Column(...)</para><para>new ifc.Covering(...)</para><para>new ifc.CurtainWall(...)</para><para>new ifc.Door(...)</para><para>new ifc.Footing(...)</para><para>new ifc.Member(...)</para><para>new ifc.Pile(...)</para><para>new ifc.Plate(...)</para><para>new ifc.Railing(...)</para><para>new ifc.Ramp(...)</para><para>new ifc.RampFlight(...)</para><para>new ifc.Roof(...)</para><para>new ifc.Slab(...)</para><para>new ifc.Stair(...)</para><para>new ifc.StairFlight(...)</para><para>new ifc.Wall(...)</para><para>new ifc.Window(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230481,TableId:3)] public partial class BuildingElement:Element{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230481,TableId:3,LayerId: 4)] public partial class BuildingElement:Element{//=========================================================================
 public               BuildingElement():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BuildingElementPart(...)</para><para>new ifc.ReinforcingElement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230482,TableId:3)] public partial class BuildingElementComponent:BuildingElement{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelementcomponent.htm
+[ifcSql(TypeGroupId:5,TypeId:230482,TableId:3,LayerId:21)] public partial class BuildingElementComponent:BuildingElement{//========================================================
 public               BuildingElementComponent():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbuildingelementpart.htm
-[ifcSql(TypeGroupId:5,TypeId:230483,TableId:3)] public partial class BuildingElementPart:BuildingElementComponent{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelementpart.htm
+[ifcSql(TypeGroupId:5,TypeId:230483,TableId:3,LayerId: 7)] public partial class BuildingElementPart:BuildingElementComponent{//====================================================
 public               BuildingElementPart():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -898,8 +959,8 @@ public               BuildingElementPart(OwnerHistory _OwnerHistory,GloballyUniq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbuildingelementproxy.htm
-[ifcSql(TypeGroupId:5,TypeId:230484,TableId:3)] public partial class BuildingElementProxy:BuildingElement{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelementproxy.htm
+[ifcSql(TypeGroupId:5,TypeId:230484,TableId:3,LayerId: 5)] public partial class BuildingElementProxy:BuildingElement{//============================================================
 public               BuildingElementProxy():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -917,8 +978,8 @@ public               BuildingElementProxy(OwnerHistory _OwnerHistory,GloballyUni
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbuildingelementproxytype.htm
-[ifcSql(TypeGroupId:5,TypeId:230485,TableId:3)] public partial class BuildingElementProxyType:BuildingElementType{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelementproxytype.htm
+[ifcSql(TypeGroupId:5,TypeId:230485,TableId:3,LayerId: 5)] public partial class BuildingElementProxyType:BuildingElementType{//====================================================
 public               BuildingElementProxyType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -937,13 +998,14 @@ public               BuildingElementProxyType(OwnerHistory _OwnerHistory,Buildin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BeamType(...)</para><para>new ifc.BuildingElementProxyType(...)</para><para>new ifc.ColumnType(...)</para><para>new ifc.CoveringType(...)</para><para>new ifc.CurtainWallType(...)</para><para>new ifc.MemberType(...)</para><para>new ifc.PlateType(...)</para><para>new ifc.RailingType(...)</para><para>new ifc.RampFlightType(...)</para><para>new ifc.SlabType(...)</para><para>new ifc.StairFlightType(...)</para><para>new ifc.WallType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230486,TableId:3)] public partial class BuildingElementType:ElementType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230486,TableId:3,LayerId: 4)] public partial class BuildingElementType:ElementType{//=================================================================
 public               BuildingElementType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcbuildingstorey.htm
-[ifcSql(TypeGroupId:5,TypeId:230487,TableId:3)] public partial class BuildingStorey:SpatialStructureElement{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcbuildingstorey.htm
+[ifcSql(TypeGroupId:5,TypeId:230487,TableId:3,LayerId: 4)] public partial class BuildingStorey:SpatialStructureElement{//==========================================================
 public               BuildingStorey():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -962,8 +1024,8 @@ public               BuildingStorey(OwnerHistory _OwnerHistory,ElementCompositio
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccshapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230488,TableId:3)] public partial class CShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccshapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230488,TableId:3,LayerId:36)] public partial class CShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               CShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -986,8 +1048,8 @@ public               CShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccablecarrierfittingtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230489,TableId:3)] public partial class CableCarrierFittingType:FlowFittingType{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccablecarrierfittingtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230489,TableId:3,LayerId:14)] public partial class CableCarrierFittingType:FlowFittingType{//=========================================================
 public               CableCarrierFittingType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1006,8 +1068,8 @@ public               CableCarrierFittingType(OwnerHistory _OwnerHistory,CableCar
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccablecarriersegmenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230490,TableId:3)] public partial class CableCarrierSegmentType:FlowSegmentType{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccablecarriersegmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230490,TableId:3,LayerId:14)] public partial class CableCarrierSegmentType:FlowSegmentType{//=========================================================
 public               CableCarrierSegmentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1026,8 +1088,8 @@ public               CableCarrierSegmentType(OwnerHistory _OwnerHistory,CableCar
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccablesegmenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230491,TableId:3)] public partial class CableSegmentType:FlowSegmentType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccablesegmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230491,TableId:3,LayerId:14)] public partial class CableSegmentType:FlowSegmentType{//================================================================
 public               CableSegmentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1046,8 +1108,8 @@ public               CableSegmentType(OwnerHistory _OwnerHistory,CableSegmentTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccalendardate.htm
-[ifcSql(TypeGroupId:5,TypeId:230492,TableId:3)] public partial class CalendarDate:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccalendardate.htm
+[ifcSql(TypeGroupId:5,TypeId:230492,TableId:3,LayerId:26)] public partial class CalendarDate:ENTITY{//=============================================================================
 public               CalendarDate():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DayComponent"><para>cast to (ifc.DayInMonthNumber)...</para></param>
@@ -1061,8 +1123,8 @@ public               CalendarDate(DayInMonthNumber DayComponent,MonthInYearNumbe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccartesianpoint.htm
-[ifcSql(TypeGroupId:5,TypeId:230493,TableId:3)] public partial class CartesianPoint:Point{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesianpoint.htm
+[ifcSql(TypeGroupId:5,TypeId:230493,TableId:3,LayerId:30)] public partial class CartesianPoint:Point{//============================================================================
 public               CartesianPoint():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Coordinates"><para>List1to3_LengthMeasure</para></param>
@@ -1072,7 +1134,8 @@ public               CartesianPoint(List1to3_LengthMeasure Coordinates,string En
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230494,TableId:3)] public partial class CartesianTransformationOperator:GeometricRepresentationItem{//=====================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesiantransformationoperator.htm
+[ifcSql(TypeGroupId:5,TypeId:230494,TableId:3,LayerId:30)] public partial class CartesianTransformationOperator:GeometricRepresentationItem{//=====================================
 public               CartesianTransformationOperator():base(){}// abstract
 [ifc(1,optional=true)] public Direction Axis1; //ENTITY
 [ifc(2,optional=true)] public Direction Axis2; //ENTITY
@@ -1081,8 +1144,8 @@ public               CartesianTransformationOperator():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccartesiantransformationoperator2d.htm
-[ifcSql(TypeGroupId:5,TypeId:230495,TableId:3)] public partial class CartesianTransformationOperator2D:CartesianTransformationOperator{//===============================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesiantransformationoperator2d.htm
+[ifcSql(TypeGroupId:5,TypeId:230495,TableId:3,LayerId:30)] public partial class CartesianTransformationOperator2D:CartesianTransformationOperator{//===============================
 public               CartesianTransformationOperator2D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Axis1">[optional]<para>new ifc.Direction(...)</para></param>
@@ -1094,8 +1157,8 @@ public               CartesianTransformationOperator2D(CartesianPoint LocalOrigi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccartesiantransformationoperator2dnonuniform.htm
-[ifcSql(TypeGroupId:5,TypeId:230496,TableId:3)] public partial class CartesianTransformationOperator2DnonUniform:CartesianTransformationOperator2D{//===================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesiantransformationoperator2dnonuniform.htm
+[ifcSql(TypeGroupId:5,TypeId:230496,TableId:3,LayerId:30)] public partial class CartesianTransformationOperator2DnonUniform:CartesianTransformationOperator2D{//===================
 public               CartesianTransformationOperator2DnonUniform():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Axis1">[optional]<para>new ifc.Direction(...)</para></param>
@@ -1109,8 +1172,8 @@ public               CartesianTransformationOperator2DnonUniform(CartesianPoint 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccartesiantransformationoperator3d.htm
-[ifcSql(TypeGroupId:5,TypeId:230497,TableId:3)] public partial class CartesianTransformationOperator3D:CartesianTransformationOperator{//===============================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesiantransformationoperator3d.htm
+[ifcSql(TypeGroupId:5,TypeId:230497,TableId:3,LayerId:30)] public partial class CartesianTransformationOperator3D:CartesianTransformationOperator{//===============================
 public               CartesianTransformationOperator3D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Axis1">[optional]<para>new ifc.Direction(...)</para></param>
@@ -1124,8 +1187,8 @@ public               CartesianTransformationOperator3D(CartesianPoint LocalOrigi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccartesiantransformationoperator3dnonuniform.htm
-[ifcSql(TypeGroupId:5,TypeId:230498,TableId:3)] public partial class CartesianTransformationOperator3DnonUniform:CartesianTransformationOperator3D{//===================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccartesiantransformationoperator3dnonuniform.htm
+[ifcSql(TypeGroupId:5,TypeId:230498,TableId:3,LayerId:30)] public partial class CartesianTransformationOperator3DnonUniform:CartesianTransformationOperator3D{//===================
 public               CartesianTransformationOperator3DnonUniform():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Axis1">[optional]<para>new ifc.Direction(...)</para></param>
@@ -1142,8 +1205,8 @@ public               CartesianTransformationOperator3DnonUniform(CartesianPoint 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccenterlineprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230499,TableId:3)] public partial class CenterLineProfileDef:ArbitraryOpenProfileDef{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccenterlineprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230499,TableId:3,LayerId:36)] public partial class CenterLineProfileDef:ArbitraryOpenProfileDef{//====================================================
 public               CenterLineProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -1156,8 +1219,8 @@ public               CenterLineProfileDef(ProfileTypeEnum ProfileType,BoundedCur
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcchamferedgefeature.htm
-[ifcSql(TypeGroupId:5,TypeId:230500,TableId:3)] public partial class ChamferEdgeFeature:EdgeFeature{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcchamferedgefeature.htm
+[ifcSql(TypeGroupId:5,TypeId:230500,TableId:3,LayerId: 7)] public partial class ChamferEdgeFeature:EdgeFeature{//==================================================================
 public               ChamferEdgeFeature():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1178,8 +1241,8 @@ public               ChamferEdgeFeature(OwnerHistory _OwnerHistory,GloballyUniqu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcchillertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230501,TableId:3)] public partial class ChillerType:EnergyConversionDeviceType{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcchillertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230501,TableId:3,LayerId:15)] public partial class ChillerType:EnergyConversionDeviceType{//==========================================================
 public               ChillerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1198,8 +1261,8 @@ public               ChillerType(OwnerHistory _OwnerHistory,ChillerTypeEnum Pred
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccircle.htm
-[ifcSql(TypeGroupId:5,TypeId:230502,TableId:3)] public partial class Circle:Conic{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccircle.htm
+[ifcSql(TypeGroupId:5,TypeId:230502,TableId:3,LayerId:30)] public partial class Circle:Conic{//====================================================================================
 public               Circle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement(new Axis2Placement2D(...))...</para><para>new ifc.Axis2Placement(new Axis2Placement3D(...))...</para></param>
@@ -1210,8 +1273,8 @@ public               Circle(Axis2Placement Position,PositiveLengthMeasure Radius
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccirclehollowprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230503,TableId:3)] public partial class CircleHollowProfileDef:CircleProfileDef{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccirclehollowprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230503,TableId:3,LayerId:36)] public partial class CircleHollowProfileDef:CircleProfileDef{//=========================================================
 public               CircleHollowProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -1225,8 +1288,8 @@ public               CircleHollowProfileDef(ProfileTypeEnum ProfileType,Axis2Pla
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CircleHollowProfileDef(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccircleprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230504,TableId:3)] public partial class CircleProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccircleprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230504,TableId:3,LayerId:36)] public partial class CircleProfileDef:ParameterizedProfileDef{//========================================================
 public               CircleProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -1239,8 +1302,8 @@ public               CircleProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassification.htm
-[ifcSql(TypeGroupId:5,TypeId:230505,TableId:3)] public partial class Classification:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassification.htm
+[ifcSql(TypeGroupId:5,TypeId:230505,TableId:3,LayerId:27)] public partial class Classification:ENTITY{//===========================================================================
 public               Classification():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Source"><para>cast to (ifc.Label)...</para></param>
@@ -1258,8 +1321,8 @@ public               Classification(Label Source,Label Edition,Label Name,Calend
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassificationitem.htm
-[ifcSql(TypeGroupId:5,TypeId:230506,TableId:3)] public partial class ClassificationItem:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationitem.htm
+[ifcSql(TypeGroupId:5,TypeId:230506,TableId:3,LayerId:27)] public partial class ClassificationItem:ENTITY{//=======================================================================
 public               ClassificationItem():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Notation"><para>new ifc.ClassificationNotationFacet(...)</para></param>
@@ -1279,8 +1342,8 @@ public override void AssignInverseElements(){if (ItemOf!=null) {if (ItemOf.Conta
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassificationitemrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230507,TableId:3)] public partial class ClassificationItemRelationship:ENTITY{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationitemrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230507,TableId:3,LayerId:27)] public partial class ClassificationItemRelationship:ENTITY{//===========================================================
 public               ClassificationItemRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelatingItem"><para>new ifc.ClassificationItem(...)</para></param>
@@ -1295,8 +1358,8 @@ public override void AssignInverseElements(){if (RelatingItem!=null) RelatingIte
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassificationnotation.htm
-[ifcSql(TypeGroupId:5,TypeId:230508,TableId:3)] public partial class ClassificationNotation:ENTITY{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationnotation.htm
+[ifcSql(TypeGroupId:5,TypeId:230508,TableId:3,LayerId:27)] public partial class ClassificationNotation:ENTITY{//===================================================================
 public               ClassificationNotation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="NotationFacets"><para>Set1toUnbounded_ClassificationNotationFacet</para></param>
@@ -1306,8 +1369,8 @@ public               ClassificationNotation(Set1toUnbounded_ClassificationNotati
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassificationnotationfacet.htm
-[ifcSql(TypeGroupId:5,TypeId:230509,TableId:3)] public partial class ClassificationNotationFacet:ENTITY{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationnotationfacet.htm
+[ifcSql(TypeGroupId:5,TypeId:230509,TableId:3,LayerId:27)] public partial class ClassificationNotationFacet:ENTITY{//==============================================================
 public               ClassificationNotationFacet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="NotationValue"><para>cast to (ifc.Label)...</para></param>
@@ -1317,8 +1380,8 @@ public               ClassificationNotationFacet(Label NotationValue,string EndO
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclassificationreference.htm
-[ifcSql(TypeGroupId:5,TypeId:230510,TableId:3)] public partial class ClassificationReference:ExternalReference{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclassificationreference.htm
+[ifcSql(TypeGroupId:5,TypeId:230510,TableId:3,LayerId:27)] public partial class ClassificationReference:ExternalReference{//=======================================================
 public               ClassificationReference():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -1331,8 +1394,8 @@ public               ClassificationReference(Label Location,Identifier ItemRefer
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcclosedshell.htm
-[ifcSql(TypeGroupId:5,TypeId:230511,TableId:3)] public partial class ClosedShell:ConnectedFaceSet{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcclosedshell.htm
+[ifcSql(TypeGroupId:5,TypeId:230511,TableId:3,LayerId:41)] public partial class ClosedShell:ConnectedFaceSet{//====================================================================
 public               ClosedShell():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="CfsFaces"><para>Set1toUnbounded_Face</para></param>
@@ -1341,8 +1404,8 @@ public               ClosedShell(Set1toUnbounded_Face CfsFaces,string EndOfLineC
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccoiltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230512,TableId:3)] public partial class CoilType:EnergyConversionDeviceType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccoiltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230512,TableId:3,LayerId:15)] public partial class CoilType:EnergyConversionDeviceType{//=============================================================
 public               CoilType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1361,8 +1424,8 @@ public               CoilType(OwnerHistory _OwnerHistory,CoilTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccolourrgb.htm
-[ifcSql(TypeGroupId:5,TypeId:230513,TableId:3)] public partial class ColourRgb:ColourSpecification{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolourrgb.htm
+[ifcSql(TypeGroupId:5,TypeId:230513,TableId:3,LayerId:33)] public partial class ColourRgb:ColourSpecification{//===================================================================
 public               ColourRgb():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -1377,14 +1440,15 @@ public               ColourRgb(NormalisedRatioMeasure Red,NormalisedRatioMeasure
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ColourRgb(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230514,TableId:3)] public partial class ColourSpecification:ENTITY{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolourspecification.htm
+[ifcSql(TypeGroupId:5,TypeId:230514,TableId:3,LayerId:33)] public partial class ColourSpecification:ENTITY{//======================================================================
 public               ColourSpecification():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccolumn.htm
-[ifcSql(TypeGroupId:5,TypeId:230515,TableId:3)] public partial class Column:BuildingElement{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolumn.htm
+[ifcSql(TypeGroupId:5,TypeId:230515,TableId:3,LayerId: 5)] public partial class Column:BuildingElement{//==========================================================================
 public               Column():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1400,8 +1464,8 @@ public               Column(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccolumntype.htm
-[ifcSql(TypeGroupId:5,TypeId:230516,TableId:3)] public partial class ColumnType:BuildingElementType{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccolumntype.htm
+[ifcSql(TypeGroupId:5,TypeId:230516,TableId:3,LayerId: 5)] public partial class ColumnType:BuildingElementType{//==================================================================
 public               ColumnType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1420,8 +1484,8 @@ public               ColumnType(OwnerHistory _OwnerHistory,ColumnTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccomplexproperty.htm
-[ifcSql(TypeGroupId:5,TypeId:230517,TableId:3)] public partial class ComplexProperty:Property{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccomplexproperty.htm
+[ifcSql(TypeGroupId:5,TypeId:230517,TableId:3,LayerId:37)] public partial class ComplexProperty:Property{//========================================================================
 public               ComplexProperty():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -1437,8 +1501,8 @@ public override void AssignInverseElements(){if (HasProperties!=null) foreach (P
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc._2DCompositeCurve(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccompositecurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230518,TableId:3)] public partial class CompositeCurve:BoundedCurve{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccompositecurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230518,TableId:3,LayerId:30)] public partial class CompositeCurve:BoundedCurve{//=====================================================================
 public               CompositeCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Segments"><para>List1toUnbounded_CompositeCurveSegment</para></param>
@@ -1450,8 +1514,8 @@ public               CompositeCurve(List1toUnbounded_CompositeCurveSegment Segme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccompositecurvesegment.htm
-[ifcSql(TypeGroupId:5,TypeId:230519,TableId:3)] public partial class CompositeCurveSegment:GeometricRepresentationItem{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccompositecurvesegment.htm
+[ifcSql(TypeGroupId:5,TypeId:230519,TableId:3,LayerId:30)] public partial class CompositeCurveSegment:GeometricRepresentationItem{//===============================================
 public               CompositeCurveSegment():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Transition"><para>TransitionCode</para></param>
@@ -1465,8 +1529,8 @@ public               CompositeCurveSegment(TransitionCode Transition,BOOLEAN Sam
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccompositeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230520,TableId:3)] public partial class CompositeProfileDef:ProfileDef{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccompositeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230520,TableId:3,LayerId:36)] public partial class CompositeProfileDef:ProfileDef{//==================================================================
 public               CompositeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -1480,8 +1544,8 @@ public               CompositeProfileDef(ProfileTypeEnum ProfileType,Set2toUnbou
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccompressortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230521,TableId:3)] public partial class CompressorType:FlowMovingDeviceType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccompressortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230521,TableId:3,LayerId:15)] public partial class CompressorType:FlowMovingDeviceType{//=============================================================
 public               CompressorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1500,8 +1564,8 @@ public               CompressorType(OwnerHistory _OwnerHistory,CompressorTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccondensertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230522,TableId:3)] public partial class CondenserType:EnergyConversionDeviceType{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccondensertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230522,TableId:3,LayerId:15)] public partial class CondenserType:EnergyConversionDeviceType{//========================================================
 public               CondenserType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1520,8 +1584,8 @@ public               CondenserType(OwnerHistory _OwnerHistory,CondenserTypeEnum 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230523,TableId:3)] public partial class Condition:Group{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230523,TableId:3,LayerId:-6)] public partial class Condition:Group{//=================================================================================
 public               Condition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1534,8 +1598,8 @@ public               Condition(OwnerHistory _OwnerHistory,GloballyUniqueId Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconditioncriterion.htm
-[ifcSql(TypeGroupId:5,TypeId:230524,TableId:3)] public partial class ConditionCriterion:Control{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconditioncriterion.htm
+[ifcSql(TypeGroupId:5,TypeId:230524,TableId:3,LayerId:-6)] public partial class ConditionCriterion:Control{//======================================================================
 public               ConditionCriterion():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1552,14 +1616,15 @@ public               ConditionCriterion(OwnerHistory _OwnerHistory,ConditionCrit
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230525,TableId:3)] public partial class Conic:Curve{//=====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconic.htm
+[ifcSql(TypeGroupId:5,TypeId:230525,TableId:3,LayerId:30)] public partial class Conic:Curve{//=====================================================================================
 public               Conic():base(){}// abstract
 [ifc(1)] public Axis2Placement Position; //SELECT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ClosedShell(...)</para><para>new ifc.OpenShell(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectedfaceset.htm
-[ifcSql(TypeGroupId:5,TypeId:230526,TableId:3)] public partial class ConnectedFaceSet:TopologicalRepresentationItem{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectedfaceset.htm
+[ifcSql(TypeGroupId:5,TypeId:230526,TableId:3,LayerId:41)] public partial class ConnectedFaceSet:TopologicalRepresentationItem{//==================================================
 public               ConnectedFaceSet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="CfsFaces"><para>Set1toUnbounded_Face</para></param>
@@ -1569,8 +1634,8 @@ public               ConnectedFaceSet(Set1toUnbounded_Face CfsFaces,string EndOf
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectioncurvegeometry.htm
-[ifcSql(TypeGroupId:5,TypeId:230527,TableId:3)] public partial class ConnectionCurveGeometry:ConnectionGeometry{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectioncurvegeometry.htm
+[ifcSql(TypeGroupId:5,TypeId:230527,TableId:3,LayerId:28)] public partial class ConnectionCurveGeometry:ConnectionGeometry{//======================================================
 public               ConnectionCurveGeometry():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="CurveOnRelatingElement"><para>new ifc.CurveOrEdgeCurve(new _2DCompositeCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new BSplineCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new BezierCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new BoundedCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new CompositeCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new EdgeCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new Polyline(...))...</para><para>new ifc.CurveOrEdgeCurve(new RationalBezierCurve(...))...</para><para>new ifc.CurveOrEdgeCurve(new TrimmedCurve(...))...</para></param>
@@ -1582,13 +1647,14 @@ public               ConnectionCurveGeometry(CurveOrEdgeCurve CurveOnRelatingEle
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ConnectionCurveGeometry(...)</para><para>new ifc.ConnectionPointGeometry(...)</para><para>new ifc.ConnectionPortGeometry(...)</para><para>new ifc.ConnectionSurfaceGeometry(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230528,TableId:3)] public partial class ConnectionGeometry:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectiongeometry.htm
+[ifcSql(TypeGroupId:5,TypeId:230528,TableId:3,LayerId:28)] public partial class ConnectionGeometry:ENTITY{//=======================================================================
 public               ConnectionGeometry():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectionpointeccentricity.htm
-[ifcSql(TypeGroupId:5,TypeId:230529,TableId:3)] public partial class ConnectionPointEccentricity:ConnectionPointGeometry{//=============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectionpointeccentricity.htm
+[ifcSql(TypeGroupId:5,TypeId:230529,TableId:3,LayerId:28)] public partial class ConnectionPointEccentricity:ConnectionPointGeometry{//=============================================
 public               ConnectionPointEccentricity():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="PointOnRelatingElement"><para>new ifc.PointOrVertexPoint(new CartesianPoint(...))...</para><para>new ifc.PointOrVertexPoint(new Point(...))...</para><para>new ifc.PointOrVertexPoint(new PointOnCurve(...))...</para><para>new ifc.PointOrVertexPoint(new PointOnSurface(...))...</para><para>new ifc.PointOrVertexPoint(new VertexPoint(...))...</para></param>
@@ -1604,8 +1670,8 @@ public               ConnectionPointEccentricity(PointOrVertexPoint PointOnRelat
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ConnectionPointEccentricity(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectionpointgeometry.htm
-[ifcSql(TypeGroupId:5,TypeId:230530,TableId:3)] public partial class ConnectionPointGeometry:ConnectionGeometry{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectionpointgeometry.htm
+[ifcSql(TypeGroupId:5,TypeId:230530,TableId:3,LayerId:28)] public partial class ConnectionPointGeometry:ConnectionGeometry{//======================================================
 public               ConnectionPointGeometry():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="PointOnRelatingElement"><para>new ifc.PointOrVertexPoint(new CartesianPoint(...))...</para><para>new ifc.PointOrVertexPoint(new Point(...))...</para><para>new ifc.PointOrVertexPoint(new PointOnCurve(...))...</para><para>new ifc.PointOrVertexPoint(new PointOnSurface(...))...</para><para>new ifc.PointOrVertexPoint(new VertexPoint(...))...</para></param>
@@ -1617,8 +1683,8 @@ public               ConnectionPointGeometry(PointOrVertexPoint PointOnRelatingE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectionportgeometry.htm
-[ifcSql(TypeGroupId:5,TypeId:230531,TableId:3)] public partial class ConnectionPortGeometry:ConnectionGeometry{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectionportgeometry.htm
+[ifcSql(TypeGroupId:5,TypeId:230531,TableId:3,LayerId:28)] public partial class ConnectionPortGeometry:ConnectionGeometry{//=======================================================
 public               ConnectionPortGeometry():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="LocationAtRelatingElement"><para>new ifc.Axis2Placement(new Axis2Placement2D(...))...</para><para>new ifc.Axis2Placement(new Axis2Placement3D(...))...</para></param>
@@ -1632,8 +1698,8 @@ public               ConnectionPortGeometry(Axis2Placement LocationAtRelatingEle
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconnectionsurfacegeometry.htm
-[ifcSql(TypeGroupId:5,TypeId:230532,TableId:3)] public partial class ConnectionSurfaceGeometry:ConnectionGeometry{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconnectionsurfacegeometry.htm
+[ifcSql(TypeGroupId:5,TypeId:230532,TableId:3,LayerId:28)] public partial class ConnectionSurfaceGeometry:ConnectionGeometry{//====================================================
 public               ConnectionSurfaceGeometry():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SurfaceOnRelatingElement"><para>new ifc.SurfaceOrFaceSurface(new BoundedSurface(...))...</para><para>new ifc.SurfaceOrFaceSurface(new CurveBoundedPlane(...))...</para><para>new ifc.SurfaceOrFaceSurface(new ElementarySurface(...))...</para><para>new ifc.SurfaceOrFaceSurface(new FaceBasedSurfaceModel(...))...</para><para>new ifc.SurfaceOrFaceSurface(new FaceSurface(...))...</para><para>new ifc.SurfaceOrFaceSurface(new Plane(...))...</para><para>new ifc.SurfaceOrFaceSurface(new RectangularTrimmedSurface(...))...</para><para>new ifc.SurfaceOrFaceSurface(new Surface(...))...</para><para>new ifc.SurfaceOrFaceSurface(new SurfaceOfLinearExtrusion(...))...</para><para>new ifc.SurfaceOrFaceSurface(new SurfaceOfRevolution(...))...</para><para>new ifc.SurfaceOrFaceSurface(new SweptSurface(...))...</para></param>
@@ -1645,7 +1711,8 @@ public               ConnectionSurfaceGeometry(SurfaceOrFaceSurface SurfaceOnRel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Metric(...)</para><para>new ifc.Objective(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230533,TableId:3)] public partial class Constraint:ENTITY{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstraint.htm
+[ifcSql(TypeGroupId:5,TypeId:230533,TableId:3,LayerId:24)] public partial class Constraint:ENTITY{//===============================================================================
 public               Constraint():base(){}// abstract
 [ifc(1)] public Label Name; //TYPE
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -1669,8 +1736,8 @@ public               Constraint():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstraintaggregationrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230534,TableId:3)] public partial class ConstraintAggregationRelationship:ENTITY{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstraintaggregationrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230534,TableId:3,LayerId:24)] public partial class ConstraintAggregationRelationship:ENTITY{//========================================================
 public               ConstraintAggregationRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -1691,8 +1758,8 @@ public override void AssignInverseElements(){if (RelatingConstraint!=null) {if (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstraintclassificationrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230535,TableId:3)] public partial class ConstraintClassificationRelationship:ENTITY{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstraintclassificationrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230535,TableId:3,LayerId:24)] public partial class ConstraintClassificationRelationship:ENTITY{//=====================================================
 public               ConstraintClassificationRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ClassifiedConstraint"><para>new ifc.Metric(...)</para><para>new ifc.Objective(...)</para></param>
@@ -1706,8 +1773,8 @@ public override void AssignInverseElements(){if (ClassifiedConstraint!=null) {if
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstraintrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230536,TableId:3)] public partial class ConstraintRelationship:ENTITY{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstraintrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230536,TableId:3,LayerId:24)] public partial class ConstraintRelationship:ENTITY{//===================================================================
 public               ConstraintRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -1726,8 +1793,8 @@ public override void AssignInverseElements(){if (RelatingConstraint!=null) {if (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstructionequipmentresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230537,TableId:3)] public partial class ConstructionEquipmentResource:ConstructionResource{//==============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstructionequipmentresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230537,TableId:3,LayerId:13)] public partial class ConstructionEquipmentResource:ConstructionResource{//==============================================
 public               ConstructionEquipmentResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1744,8 +1811,8 @@ public               ConstructionEquipmentResource(OwnerHistory _OwnerHistory,Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstructionmaterialresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230538,TableId:3)] public partial class ConstructionMaterialResource:ConstructionResource{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstructionmaterialresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230538,TableId:3,LayerId:13)] public partial class ConstructionMaterialResource:ConstructionResource{//===============================================
 public               ConstructionMaterialResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1766,8 +1833,8 @@ public               ConstructionMaterialResource(OwnerHistory _OwnerHistory,Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconstructionproductresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230539,TableId:3)] public partial class ConstructionProductResource:ConstructionResource{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstructionproductresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230539,TableId:3,LayerId:13)] public partial class ConstructionProductResource:ConstructionResource{//================================================
 public               ConstructionProductResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1784,7 +1851,8 @@ public               ConstructionProductResource(OwnerHistory _OwnerHistory,Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ConstructionEquipmentResource(...)</para><para>new ifc.ConstructionMaterialResource(...)</para><para>new ifc.ConstructionProductResource(...)</para><para>new ifc.CrewResource(...)</para><para>new ifc.LaborResource(...)</para><para>new ifc.SubContractResource(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230540,TableId:3)] public partial class ConstructionResource:Resource{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconstructionresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230540,TableId:3,LayerId:13)] public partial class ConstructionResource:Resource{//===================================================================
 public               ConstructionResource():base(){}// abstract
 [ifc(6,optional=true)] public Identifier ResourceIdentifier; //TYPE
 [ifc(7,optional=true)] public Label ResourceGroup; //TYPE
@@ -1793,8 +1861,8 @@ public               ConstructionResource():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccontextdependentunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230541,TableId:3)] public partial class ContextDependentUnit:NamedUnit{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccontextdependentunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230541,TableId:3,LayerId:32)] public partial class ContextDependentUnit:NamedUnit{//==================================================================
 public               ContextDependentUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Dimensions"><para>new ifc.DimensionalExponents(...)</para></param>
@@ -1806,15 +1874,16 @@ public               ContextDependentUnit(DimensionalExponents Dimensions,UnitEn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ActionRequest(...)</para><para>new ifc.ConditionCriterion(...)</para><para>new ifc.CostItem(...)</para><para>new ifc.CostSchedule(...)</para><para>new ifc.EquipmentStandard(...)</para><para>new ifc.FurnitureStandard(...)</para><para>new ifc.PerformanceHistory(...)</para><para>new ifc.Permit(...)</para><para>new ifc.ProjectOrder(...)</para><para>new ifc.ProjectOrderRecord(...)</para><para>new ifc.ScheduleTimeControl(...)</para><para>new ifc.ServiceLife(...)</para><para>new ifc.SpaceProgram(...)</para><para>new ifc.TimeSeriesSchedule(...)</para><para>new ifc.WorkControl(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230542,TableId:3)] public partial class Control:Object{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccontrol.htm
+[ifcSql(TypeGroupId:5,TypeId:230542,TableId:3,LayerId: 2)] public partial class Control:Object{//==================================================================================
 public               Control():base(){}// abstract
 /// <summary>INVERSE: Controls of RelAssignsToControl for RelatingControl</summary>
 [ifcInverse(For:"RelatingControl")] public LIST<RelAssignsToControl> Controls;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccontrollertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230543,TableId:3)] public partial class ControllerType:DistributionControlElementType{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccontrollertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230543,TableId:3,LayerId:12)] public partial class ControllerType:DistributionControlElementType{//===================================================
 public               ControllerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1833,8 +1902,8 @@ public               ControllerType(OwnerHistory _OwnerHistory,ControllerTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcconversionbasedunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230544,TableId:3)] public partial class ConversionBasedUnit:NamedUnit{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcconversionbasedunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230544,TableId:3,LayerId:32)] public partial class ConversionBasedUnit:NamedUnit{//===================================================================
 public               ConversionBasedUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Dimensions"><para>new ifc.DimensionalExponents(...)</para></param>
@@ -1848,8 +1917,8 @@ public               ConversionBasedUnit(DimensionalExponents Dimensions,UnitEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccooledbeamtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230545,TableId:3)] public partial class CooledBeamType:EnergyConversionDeviceType{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccooledbeamtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230545,TableId:3,LayerId:15)] public partial class CooledBeamType:EnergyConversionDeviceType{//=======================================================
 public               CooledBeamType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1868,8 +1937,8 @@ public               CooledBeamType(OwnerHistory _OwnerHistory,CooledBeamTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccoolingtowertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230546,TableId:3)] public partial class CoolingTowerType:EnergyConversionDeviceType{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccoolingtowertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230546,TableId:3,LayerId:15)] public partial class CoolingTowerType:EnergyConversionDeviceType{//=====================================================
 public               CoolingTowerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1888,8 +1957,8 @@ public               CoolingTowerType(OwnerHistory _OwnerHistory,CoolingTowerTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccoordinateduniversaltimeoffset.htm
-[ifcSql(TypeGroupId:5,TypeId:230547,TableId:3)] public partial class CoordinatedUniversalTimeOffset:ENTITY{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccoordinateduniversaltimeoffset.htm
+[ifcSql(TypeGroupId:5,TypeId:230547,TableId:3,LayerId:26)] public partial class CoordinatedUniversalTimeOffset:ENTITY{//===========================================================
 public               CoordinatedUniversalTimeOffset():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="HourOffset"><para>cast to (ifc.HourInDay)...</para></param>
@@ -1903,8 +1972,8 @@ public               CoordinatedUniversalTimeOffset(HourInDay HourOffset,AheadOr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccostitem.htm
-[ifcSql(TypeGroupId:5,TypeId:230548,TableId:3)] public partial class CostItem:Control{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccostitem.htm
+[ifcSql(TypeGroupId:5,TypeId:230548,TableId:3,LayerId:10)] public partial class CostItem:Control{//================================================================================
 public               CostItem():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1917,8 +1986,8 @@ public               CostItem(OwnerHistory _OwnerHistory,GloballyUniqueId Global
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccostschedule.htm
-[ifcSql(TypeGroupId:5,TypeId:230549,TableId:3)] public partial class CostSchedule:Control{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccostschedule.htm
+[ifcSql(TypeGroupId:5,TypeId:230549,TableId:3,LayerId:10)] public partial class CostSchedule:Control{//============================================================================
 public               CostSchedule():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1947,8 +2016,8 @@ public               CostSchedule(OwnerHistory _OwnerHistory,Identifier ID,CostS
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccostvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230550,TableId:3)] public partial class CostValue:AppliedValue{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccostvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230550,TableId:3,LayerId:25)] public partial class CostValue:AppliedValue{//==========================================================================
 public               CostValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -1966,8 +2035,8 @@ public               CostValue(Label CostType,Label Name=null,Text Description=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccovering.htm
-[ifcSql(TypeGroupId:5,TypeId:230551,TableId:3)] public partial class Covering:BuildingElement{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccovering.htm
+[ifcSql(TypeGroupId:5,TypeId:230551,TableId:3,LayerId: 5)] public partial class Covering:BuildingElement{//========================================================================
 public               Covering():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -1989,8 +2058,8 @@ public               Covering(OwnerHistory _OwnerHistory,GloballyUniqueId Global
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccoveringtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230552,TableId:3)] public partial class CoveringType:BuildingElementType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccoveringtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230552,TableId:3,LayerId: 5)] public partial class CoveringType:BuildingElementType{//================================================================
 public               CoveringType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2009,8 +2078,8 @@ public               CoveringType(OwnerHistory _OwnerHistory,CoveringTypeEnum Pr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccranerailashapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230553,TableId:3)] public partial class CraneRailAShapeProfileDef:ParameterizedProfileDef{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccranerailashapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230553,TableId:3,LayerId:36)] public partial class CraneRailAShapeProfileDef:ParameterizedProfileDef{//===============================================
 public               CraneRailAShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -2045,8 +2114,8 @@ public               CraneRailAShapeProfileDef(ProfileTypeEnum ProfileType,Axis2
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccranerailfshapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230554,TableId:3)] public partial class CraneRailFShapeProfileDef:ParameterizedProfileDef{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccranerailfshapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230554,TableId:3,LayerId:36)] public partial class CraneRailFShapeProfileDef:ParameterizedProfileDef{//===============================================
 public               CraneRailFShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -2075,8 +2144,8 @@ public               CraneRailFShapeProfileDef(ProfileTypeEnum ProfileType,Axis2
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccrewresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230555,TableId:3)] public partial class CrewResource:ConstructionResource{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccrewresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230555,TableId:3,LayerId:13)] public partial class CrewResource:ConstructionResource{//===============================================================
 public               CrewResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2093,14 +2162,15 @@ public               CrewResource(OwnerHistory _OwnerHistory,GloballyUniqueId Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230556,TableId:3)] public partial class CsgPrimitive3D:GeometricRepresentationItem{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccsgprimitive3d.htm
+[ifcSql(TypeGroupId:5,TypeId:230556,TableId:3,LayerId:29)] public partial class CsgPrimitive3D:GeometricRepresentationItem{//======================================================
 public               CsgPrimitive3D():base(){}// abstract
 [ifc(1)] public Axis2Placement3D Position; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccsgsolid.htm
-[ifcSql(TypeGroupId:5,TypeId:230557,TableId:3)] public partial class CsgSolid:SolidModel{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccsgsolid.htm
+[ifcSql(TypeGroupId:5,TypeId:230557,TableId:3,LayerId:29)] public partial class CsgSolid:SolidModel{//=============================================================================
 public               CsgSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TreeRootExpression"><para>new ifc.CsgSelect(new Block(...))...</para><para>new ifc.CsgSelect(new BooleanClippingResult(...))...</para><para>new ifc.CsgSelect(new BooleanResult(...))...</para><para>new ifc.CsgSelect(new CsgPrimitive3D(...))...</para><para>new ifc.CsgSelect(new RectangularPyramid(...))...</para><para>new ifc.CsgSelect(new RightCircularCone(...))...</para><para>new ifc.CsgSelect(new RightCircularCylinder(...))...</para><para>new ifc.CsgSelect(new Sphere(...))...</para></param>
@@ -2110,8 +2180,8 @@ public               CsgSolid(CsgSelect TreeRootExpression,string EndOfLineComme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurrencyrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230558,TableId:3)] public partial class CurrencyRelationship:ENTITY{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurrencyrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230558,TableId:3,LayerId:25)] public partial class CurrencyRelationship:ENTITY{//=====================================================================
 public               CurrencyRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelatingMonetaryUnit"><para>new ifc.MonetaryUnit(...)</para></param>
@@ -2129,8 +2199,8 @@ public               CurrencyRelationship(MonetaryUnit RelatingMonetaryUnit,Mone
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurtainwall.htm
-[ifcSql(TypeGroupId:5,TypeId:230559,TableId:3)] public partial class CurtainWall:BuildingElement{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurtainwall.htm
+[ifcSql(TypeGroupId:5,TypeId:230559,TableId:3,LayerId: 5)] public partial class CurtainWall:BuildingElement{//=====================================================================
 public               CurtainWall():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2146,8 +2216,8 @@ public               CurtainWall(OwnerHistory _OwnerHistory,GloballyUniqueId Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurtainwalltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230560,TableId:3)] public partial class CurtainWallType:BuildingElementType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurtainwalltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230560,TableId:3,LayerId: 5)] public partial class CurtainWallType:BuildingElementType{//=============================================================
 public               CurtainWallType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2166,13 +2236,14 @@ public               CurtainWallType(OwnerHistory _OwnerHistory,CurtainWallTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BoundedCurve(...)</para><para>new ifc.BSplineCurve(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Conic(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230561,TableId:3)] public partial class Curve:GeometricRepresentationItem{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230561,TableId:3,LayerId:30)] public partial class Curve:GeometricRepresentationItem{//===============================================================
 public               Curve():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurveboundedplane.htm
-[ifcSql(TypeGroupId:5,TypeId:230562,TableId:3)] public partial class CurveBoundedPlane:BoundedSurface{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurveboundedplane.htm
+[ifcSql(TypeGroupId:5,TypeId:230562,TableId:3,LayerId:30)] public partial class CurveBoundedPlane:BoundedSurface{//================================================================
 public               CurveBoundedPlane():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisSurface"><para>new ifc.Plane(...)</para></param>
@@ -2186,13 +2257,13 @@ public               CurveBoundedPlane(Plane BasisSurface,Curve OuterBoundary,Se
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurvestyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230563,TableId:3)] public partial class CurveStyle:PresentationStyle{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvestyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230563,TableId:3,LayerId:33)] public partial class CurveStyle:PresentationStyle{//====================================================================
 public               CurveStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
 /// <param name="CurveFont">[optional]<para>new ifc.CurveFontOrScaledCurveFontSelect(new CurveStyleFontSelect(...))...</para><para>new ifc.CurveFontOrScaledCurveFontSelect(new CurveStyleFont(...))...</para><para>new ifc.CurveFontOrScaledCurveFontSelect(new CurveStyleFontAndScaling(...))...</para><para>new ifc.CurveFontOrScaledCurveFontSelect(new DraughtingPreDefinedCurveFont(...))...</para><para>new ifc.CurveFontOrScaledCurveFontSelect(new PreDefinedCurveFont(...))...</para></param>
-/// <param name="CurveWidth">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="CurveWidth">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="CurveColour">[optional]<para>new ifc.Colour(new ColourRgb(...))...</para><para>new ifc.Colour(new ColourSpecification(...))...</para><para>new ifc.Colour(new DraughtingPreDefinedColour(...))...</para><para>new ifc.Colour(new PreDefinedColour(...))...</para></param>
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 public               CurveStyle(Label Name,CurveFontOrScaledCurveFontSelect CurveFont=null,SizeSelect CurveWidth=null,Colour CurveColour=null,string EndOfLineComment=null):base(){AddNext();this.Name=Name;this.CurveFont=CurveFont;this.CurveWidth=CurveWidth;this.CurveColour=CurveColour;this.EndOfLineComment=EndOfLineComment;}
@@ -2202,8 +2273,8 @@ public               CurveStyle(Label Name,CurveFontOrScaledCurveFontSelect Curv
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurvestylefont.htm
-[ifcSql(TypeGroupId:5,TypeId:230564,TableId:3)] public partial class CurveStyleFont:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvestylefont.htm
+[ifcSql(TypeGroupId:5,TypeId:230564,TableId:3,LayerId:33)] public partial class CurveStyleFont:ENTITY{//===========================================================================
 public               CurveStyleFont():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2215,8 +2286,8 @@ public               CurveStyleFont(List1toUnbounded_CurveStyleFontPattern Patte
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurvestylefontandscaling.htm
-[ifcSql(TypeGroupId:5,TypeId:230565,TableId:3)] public partial class CurveStyleFontAndScaling:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvestylefontandscaling.htm
+[ifcSql(TypeGroupId:5,TypeId:230565,TableId:3,LayerId:33)] public partial class CurveStyleFontAndScaling:ENTITY{//=================================================================
 public               CurveStyleFontAndScaling():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2230,8 +2301,8 @@ public               CurveStyleFontAndScaling(CurveStyleFontSelect CurveFont,Pos
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifccurvestylefontpattern.htm
-[ifcSql(TypeGroupId:5,TypeId:230566,TableId:3)] public partial class CurveStyleFontPattern:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifccurvestylefontpattern.htm
+[ifcSql(TypeGroupId:5,TypeId:230566,TableId:3,LayerId:33)] public partial class CurveStyleFontPattern:ENTITY{//====================================================================
 public               CurveStyleFontPattern():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="VisibleSegmentLength"><para>cast to (ifc.LengthMeasure)...</para></param>
@@ -2243,8 +2314,8 @@ public               CurveStyleFontPattern(LengthMeasure VisibleSegmentLength,Po
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdampertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230567,TableId:3)] public partial class DamperType:FlowControllerType{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdampertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230567,TableId:3,LayerId:15)] public partial class DamperType:FlowControllerType{//===================================================================
 public               DamperType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2263,8 +2334,8 @@ public               DamperType(OwnerHistory _OwnerHistory,DamperTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdateandtime.htm
-[ifcSql(TypeGroupId:5,TypeId:230568,TableId:3)] public partial class DateAndTime:ENTITY{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdateandtime.htm
+[ifcSql(TypeGroupId:5,TypeId:230568,TableId:3,LayerId:26)] public partial class DateAndTime:ENTITY{//==============================================================================
 public               DateAndTime():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DateComponent"><para>new ifc.CalendarDate(...)</para></param>
@@ -2276,8 +2347,8 @@ public               DateAndTime(CalendarDate DateComponent,LocalTime TimeCompon
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdefinedsymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:230569,TableId:3)] public partial class DefinedSymbol:GeometricRepresentationItem{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdefinedsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230569,TableId:3,LayerId:34)] public partial class DefinedSymbol:GeometricRepresentationItem{//=======================================================
 public               DefinedSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Definition"><para>new ifc.DefinedSymbolSelect(new ExternallyDefinedSymbol(...))...</para><para>new ifc.DefinedSymbolSelect(new PreDefinedDimensionSymbol(...))...</para><para>new ifc.DefinedSymbolSelect(new PreDefinedPointMarkerSymbol(...))...</para><para>new ifc.DefinedSymbolSelect(new PreDefinedSymbol(...))...</para><para>new ifc.DefinedSymbolSelect(new PreDefinedTerminatorSymbol(...))...</para></param>
@@ -2289,8 +2360,8 @@ public               DefinedSymbol(DefinedSymbolSelect Definition,CartesianTrans
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcderivedprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230570,TableId:3)] public partial class DerivedProfileDef:ProfileDef{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcderivedprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230570,TableId:3,LayerId:36)] public partial class DerivedProfileDef:ProfileDef{//====================================================================
 public               DerivedProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -2306,8 +2377,8 @@ public               DerivedProfileDef(ProfileTypeEnum ProfileType,ProfileDef Pa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcderivedunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230571,TableId:3)] public partial class DerivedUnit:ENTITY{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcderivedunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230571,TableId:3,LayerId:32)] public partial class DerivedUnit:ENTITY{//==============================================================================
 public               DerivedUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Elements"><para>Set1toUnbounded_DerivedUnitElement</para></param>
@@ -2321,8 +2392,8 @@ public               DerivedUnit(Set1toUnbounded_DerivedUnitElement Elements,Der
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcderivedunitelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230572,TableId:3)] public partial class DerivedUnitElement:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcderivedunitelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230572,TableId:3,LayerId:32)] public partial class DerivedUnitElement:ENTITY{//=======================================================================
 public               DerivedUnitElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Unit"><para>new ifc.ContextDependentUnit(...)</para><para>new ifc.ConversionBasedUnit(...)</para><para>new ifc.SIUnit(...)</para></param>
@@ -2334,8 +2405,8 @@ public               DerivedUnitElement(NamedUnit Unit,INTEGER Exponent,string E
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdiameterdimension.htm
-[ifcSql(TypeGroupId:5,TypeId:230573,TableId:3)] public partial class DiameterDimension:DimensionCurveDirectedCallout{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdiameterdimension.htm
+[ifcSql(TypeGroupId:5,TypeId:230573,TableId:3,LayerId:-4)] public partial class DiameterDimension:DimensionCurveDirectedCallout{//=================================================
 public               DiameterDimension():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -2344,8 +2415,8 @@ public               DiameterDimension(Set1toUnbounded_DraughtingCalloutElement 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensioncalloutrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230574,TableId:3)] public partial class DimensionCalloutRelationship:DraughtingCalloutRelationship{//======================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensioncalloutrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230574,TableId:3,LayerId:-4)] public partial class DimensionCalloutRelationship:DraughtingCalloutRelationship{//======================================
 public               DimensionCalloutRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2357,8 +2428,8 @@ public               DimensionCalloutRelationship(DraughtingCallout RelatingDrau
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensioncurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230575,TableId:3)] public partial class DimensionCurve:AnnotationCurveOccurrence{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensioncurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230575,TableId:3,LayerId:-4)] public partial class DimensionCurve:AnnotationCurveOccurrence{//========================================================
 public               DimensionCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -2371,8 +2442,8 @@ public               DimensionCurve(Set1toUnbounded_PresentationStyleAssignment 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensioncurvedirectedcallout.htm
-[ifcSql(TypeGroupId:5,TypeId:230576,TableId:3)] public partial class DimensionCurveDirectedCallout:DraughtingCallout{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensioncurvedirectedcallout.htm
+[ifcSql(TypeGroupId:5,TypeId:230576,TableId:3,LayerId:-4)] public partial class DimensionCurveDirectedCallout:DraughtingCallout{//=================================================
 public               DimensionCurveDirectedCallout():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -2381,8 +2452,8 @@ public               DimensionCurveDirectedCallout(Set1toUnbounded_DraughtingCal
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensioncurveterminator.htm
-[ifcSql(TypeGroupId:5,TypeId:230577,TableId:3)] public partial class DimensionCurveTerminator:TerminatorSymbol{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensioncurveterminator.htm
+[ifcSql(TypeGroupId:5,TypeId:230577,TableId:3,LayerId:-4)] public partial class DimensionCurveTerminator:TerminatorSymbol{//=======================================================
 public               DimensionCurveTerminator():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -2396,8 +2467,8 @@ public               DimensionCurveTerminator(Set1toUnbounded_PresentationStyleA
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensionpair.htm
-[ifcSql(TypeGroupId:5,TypeId:230578,TableId:3)] public partial class DimensionPair:DraughtingCalloutRelationship{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensionpair.htm
+[ifcSql(TypeGroupId:5,TypeId:230578,TableId:3,LayerId:-4)] public partial class DimensionPair:DraughtingCalloutRelationship{//=====================================================
 public               DimensionPair():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2409,8 +2480,8 @@ public               DimensionPair(DraughtingCallout RelatingDraughtingCallout,D
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdimensionalexponents.htm
-[ifcSql(TypeGroupId:5,TypeId:230579,TableId:3)] public partial class DimensionalExponents:ENTITY{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdimensionalexponents.htm
+[ifcSql(TypeGroupId:5,TypeId:230579,TableId:3,LayerId:32)] public partial class DimensionalExponents:ENTITY{//=====================================================================
 public               DimensionalExponents():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="LengthExponent"><para>INTEGER</para></param>
@@ -2432,8 +2503,8 @@ public               DimensionalExponents(INTEGER LengthExponent,INTEGER MassExp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdirection.htm
-[ifcSql(TypeGroupId:5,TypeId:230580,TableId:3)] public partial class Direction:GeometricRepresentationItem{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdirection.htm
+[ifcSql(TypeGroupId:5,TypeId:230580,TableId:3,LayerId:30)] public partial class Direction:GeometricRepresentationItem{//===========================================================
 public               Direction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DirectionRatios"><para>List2to3_double</para></param>
@@ -2443,8 +2514,8 @@ public               Direction(List2to3_double DirectionRatios,string EndOfLineC
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdiscreteaccessory.htm
-[ifcSql(TypeGroupId:5,TypeId:230581,TableId:3)] public partial class DiscreteAccessory:ElementComponent{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdiscreteaccessory.htm
+[ifcSql(TypeGroupId:5,TypeId:230581,TableId:3,LayerId: 7)] public partial class DiscreteAccessory:ElementComponent{//==============================================================
 public               DiscreteAccessory():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2460,8 +2531,8 @@ public               DiscreteAccessory(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.VibrationIsolatorType(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdiscreteaccessorytype.htm
-[ifcSql(TypeGroupId:5,TypeId:230582,TableId:3)] public partial class DiscreteAccessoryType:ElementComponentType{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdiscreteaccessorytype.htm
+[ifcSql(TypeGroupId:5,TypeId:230582,TableId:3,LayerId: 7)] public partial class DiscreteAccessoryType:ElementComponentType{//======================================================
 public               DiscreteAccessoryType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2478,8 +2549,8 @@ public               DiscreteAccessoryType(OwnerHistory _OwnerHistory,GloballyUn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionchamberelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230583,TableId:3)] public partial class DistributionChamberElement:DistributionFlowElement{//==============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionchamberelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230583,TableId:3,LayerId: 6)] public partial class DistributionChamberElement:DistributionFlowElement{//==============================================
 public               DistributionChamberElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2495,8 +2566,8 @@ public               DistributionChamberElement(OwnerHistory _OwnerHistory,Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionchamberelementtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230584,TableId:3)] public partial class DistributionChamberElementType:DistributionFlowElementType{//======================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionchamberelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230584,TableId:3,LayerId: 6)] public partial class DistributionChamberElementType:DistributionFlowElementType{//======================================
 public               DistributionChamberElementType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2515,8 +2586,8 @@ public               DistributionChamberElementType(OwnerHistory _OwnerHistory,D
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributioncontrolelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230585,TableId:3)] public partial class DistributionControlElement:DistributionElement{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributioncontrolelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230585,TableId:3,LayerId: 6)] public partial class DistributionControlElement:DistributionElement{//==================================================
 public               DistributionControlElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2536,13 +2607,14 @@ public               DistributionControlElement(OwnerHistory _OwnerHistory,Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ActuatorType(...)</para><para>new ifc.AlarmType(...)</para><para>new ifc.ControllerType(...)</para><para>new ifc.FlowInstrumentType(...)</para><para>new ifc.SensorType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230586,TableId:3)] public partial class DistributionControlElementType:DistributionElementType{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributioncontrolelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230586,TableId:3,LayerId: 6)] public partial class DistributionControlElementType:DistributionElementType{//==========================================
 public               DistributionControlElementType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DistributionControlElement(...)</para><para>new ifc.DistributionFlowElement(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230587,TableId:3)] public partial class DistributionElement:Element{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230587,TableId:3,LayerId: 4)] public partial class DistributionElement:Element{//=====================================================================
 public               DistributionElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2558,8 +2630,8 @@ public               DistributionElement(OwnerHistory _OwnerHistory,GloballyUniq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DistributionControlElementType(...)</para><para>new ifc.ActuatorType(...)</para><para>new ifc.AlarmType(...)</para><para>new ifc.ControllerType(...)</para><para>new ifc.FlowInstrumentType(...)</para><para>new ifc.SensorType(...)</para><para>new ifc.DistributionFlowElementType(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionelementtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230588,TableId:3)] public partial class DistributionElementType:ElementType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230588,TableId:3,LayerId: 4)] public partial class DistributionElementType:ElementType{//=============================================================
 public               DistributionElementType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2576,8 +2648,8 @@ public               DistributionElementType(OwnerHistory _OwnerHistory,Globally
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DistributionChamberElement(...)</para><para>new ifc.EnergyConversionDevice(...)</para><para>new ifc.FlowController(...)</para><para>new ifc.FlowFitting(...)</para><para>new ifc.FlowMovingDevice(...)</para><para>new ifc.FlowSegment(...)</para><para>new ifc.FlowStorageDevice(...)</para><para>new ifc.FlowTerminal(...)</para><para>new ifc.FlowTreatmentDevice(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionflowelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230589,TableId:3)] public partial class DistributionFlowElement:DistributionElement{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionflowelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230589,TableId:3,LayerId: 6)] public partial class DistributionFlowElement:DistributionElement{//=====================================================
 public               DistributionFlowElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2595,13 +2667,14 @@ public               DistributionFlowElement(OwnerHistory _OwnerHistory,Globally
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DistributionChamberElementType(...)</para><para>new ifc.EnergyConversionDeviceType(...)</para><para>new ifc.FlowControllerType(...)</para><para>new ifc.FlowFittingType(...)</para><para>new ifc.FlowMovingDeviceType(...)</para><para>new ifc.FlowSegmentType(...)</para><para>new ifc.FlowStorageDeviceType(...)</para><para>new ifc.FlowTerminalType(...)</para><para>new ifc.FlowTreatmentDeviceType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230590,TableId:3)] public partial class DistributionFlowElementType:DistributionElementType{//=============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionflowelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230590,TableId:3,LayerId: 6)] public partial class DistributionFlowElementType:DistributionElementType{//=============================================
 public               DistributionFlowElementType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdistributionport.htm
-[ifcSql(TypeGroupId:5,TypeId:230591,TableId:3)] public partial class DistributionPort:Port{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdistributionport.htm
+[ifcSql(TypeGroupId:5,TypeId:230591,TableId:3,LayerId: 6)] public partial class DistributionPort:Port{//===========================================================================
 public               DistributionPort():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2618,8 +2691,8 @@ public               DistributionPort(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdocumentelectronicformat.htm
-[ifcSql(TypeGroupId:5,TypeId:230592,TableId:3)] public partial class DocumentElectronicFormat:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdocumentelectronicformat.htm
+[ifcSql(TypeGroupId:5,TypeId:230592,TableId:3,LayerId:27)] public partial class DocumentElectronicFormat:ENTITY{//=================================================================
 public               DocumentElectronicFormat():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="FileExtension">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2633,8 +2706,8 @@ public               DocumentElectronicFormat(Label FileExtension,Label MimeCont
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdocumentinformation.htm
-[ifcSql(TypeGroupId:5,TypeId:230593,TableId:3)] public partial class DocumentInformation:ENTITY{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdocumentinformation.htm
+[ifcSql(TypeGroupId:5,TypeId:230593,TableId:3,LayerId:27)] public partial class DocumentInformation:ENTITY{//======================================================================
 public               DocumentInformation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DocumentId"><para>cast to (ifc.Identifier)...</para></param>
@@ -2682,8 +2755,8 @@ public override void AssignInverseElements(){if (DocumentReferences!=null) forea
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdocumentinformationrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230594,TableId:3)] public partial class DocumentInformationRelationship:ENTITY{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdocumentinformationrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230594,TableId:3,LayerId:27)] public partial class DocumentInformationRelationship:ENTITY{//==========================================================
 public               DocumentInformationRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelatingDocument"><para>new ifc.DocumentInformation(...)</para></param>
@@ -2700,8 +2773,8 @@ public override void AssignInverseElements(){if (RelatingDocument!=null) Relatin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdocumentreference.htm
-[ifcSql(TypeGroupId:5,TypeId:230595,TableId:3)] public partial class DocumentReference:ExternalReference{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdocumentreference.htm
+[ifcSql(TypeGroupId:5,TypeId:230595,TableId:3,LayerId:27)] public partial class DocumentReference:ExternalReference{//=============================================================
 public               DocumentReference():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2714,8 +2787,8 @@ public               DocumentReference(Label Location,Identifier ItemReference=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdoor.htm
-[ifcSql(TypeGroupId:5,TypeId:230596,TableId:3)] public partial class Door:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdoor.htm
+[ifcSql(TypeGroupId:5,TypeId:230596,TableId:3,LayerId: 5)] public partial class Door:BuildingElement{//============================================================================
 public               Door():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2735,8 +2808,8 @@ public               Door(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdoorliningproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230597,TableId:3)] public partial class DoorLiningProperties:PropertySetDefinition{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdoorliningproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230597,TableId:3,LayerId:11)] public partial class DoorLiningProperties:PropertySetDefinition{//======================================================
 public               DoorLiningProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2770,8 +2843,8 @@ public               DoorLiningProperties(OwnerHistory _OwnerHistory,GloballyUni
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdoorpanelproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230598,TableId:3)] public partial class DoorPanelProperties:PropertySetDefinition{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdoorpanelproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230598,TableId:3,LayerId:11)] public partial class DoorPanelProperties:PropertySetDefinition{//=======================================================
 public               DoorPanelProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2793,8 +2866,8 @@ public               DoorPanelProperties(OwnerHistory _OwnerHistory,DoorPanelOpe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdoorstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230599,TableId:3)] public partial class DoorStyle:TypeProduct{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdoorstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230599,TableId:3,LayerId:11)] public partial class DoorStyle:TypeProduct{//===========================================================================
 public               DoorStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2818,8 +2891,8 @@ public               DoorStyle(OwnerHistory _OwnerHistory,DoorStyleOperationEnum
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdraughtingcallout.htm
-[ifcSql(TypeGroupId:5,TypeId:230600,TableId:3)] public partial class DraughtingCallout:GeometricRepresentationItem{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingcallout.htm
+[ifcSql(TypeGroupId:5,TypeId:230600,TableId:3,LayerId:-4)] public partial class DraughtingCallout:GeometricRepresentationItem{//===================================================
 public               DraughtingCallout():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -2833,8 +2906,8 @@ public               DraughtingCallout(Set1toUnbounded_DraughtingCalloutElement 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DimensionCalloutRelationship(...)</para><para>new ifc.DimensionPair(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdraughtingcalloutrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230601,TableId:3)] public partial class DraughtingCalloutRelationship:ENTITY{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingcalloutrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230601,TableId:3,LayerId:-4)] public partial class DraughtingCalloutRelationship:ENTITY{//============================================================
 public               DraughtingCalloutRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -2853,8 +2926,8 @@ public override void AssignInverseElements(){if (RelatingDraughtingCallout!=null
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdraughtingpredefinedcolour.htm
-[ifcSql(TypeGroupId:5,TypeId:230602,TableId:3)] public partial class DraughtingPreDefinedColour:PreDefinedColour{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingpredefinedcolour.htm
+[ifcSql(TypeGroupId:5,TypeId:230602,TableId:3,LayerId:33)] public partial class DraughtingPreDefinedColour:PreDefinedColour{//=====================================================
 public               DraughtingPreDefinedColour():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -2863,8 +2936,8 @@ public               DraughtingPreDefinedColour(Label Name,string EndOfLineComme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdraughtingpredefinedcurvefont.htm
-[ifcSql(TypeGroupId:5,TypeId:230603,TableId:3)] public partial class DraughtingPreDefinedCurveFont:PreDefinedCurveFont{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingpredefinedcurvefont.htm
+[ifcSql(TypeGroupId:5,TypeId:230603,TableId:3,LayerId:33)] public partial class DraughtingPreDefinedCurveFont:PreDefinedCurveFont{//===============================================
 public               DraughtingPreDefinedCurveFont():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -2873,8 +2946,8 @@ public               DraughtingPreDefinedCurveFont(Label Name,string EndOfLineCo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcdraughtingpredefinedtextfont.htm
-[ifcSql(TypeGroupId:5,TypeId:230604,TableId:3)] public partial class DraughtingPreDefinedTextFont:PreDefinedTextFont{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcdraughtingpredefinedtextfont.htm
+[ifcSql(TypeGroupId:5,TypeId:230604,TableId:3,LayerId:-3)] public partial class DraughtingPreDefinedTextFont:PreDefinedTextFont{//=================================================
 public               DraughtingPreDefinedTextFont():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -2883,8 +2956,8 @@ public               DraughtingPreDefinedTextFont(Label Name,string EndOfLineCom
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcductfittingtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230605,TableId:3)] public partial class DuctFittingType:FlowFittingType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcductfittingtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230605,TableId:3,LayerId:15)] public partial class DuctFittingType:FlowFittingType{//=================================================================
 public               DuctFittingType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2903,8 +2976,8 @@ public               DuctFittingType(OwnerHistory _OwnerHistory,DuctFittingTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcductsegmenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230606,TableId:3)] public partial class DuctSegmentType:FlowSegmentType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcductsegmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230606,TableId:3,LayerId:15)] public partial class DuctSegmentType:FlowSegmentType{//=================================================================
 public               DuctSegmentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2923,8 +2996,8 @@ public               DuctSegmentType(OwnerHistory _OwnerHistory,DuctSegmentTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcductsilencertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230607,TableId:3)] public partial class DuctSilencerType:FlowTreatmentDeviceType{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcductsilencertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230607,TableId:3,LayerId:15)] public partial class DuctSilencerType:FlowTreatmentDeviceType{//========================================================
 public               DuctSilencerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -2943,8 +3016,8 @@ public               DuctSilencerType(OwnerHistory _OwnerHistory,DuctSilencerTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.EdgeCurve(...)</para><para>new ifc.OrientedEdge(...)</para><para>new ifc.Subedge(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcedge.htm
-[ifcSql(TypeGroupId:5,TypeId:230608,TableId:3)] public partial class Edge:TopologicalRepresentationItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcedge.htm
+[ifcSql(TypeGroupId:5,TypeId:230608,TableId:3,LayerId:41)] public partial class Edge:TopologicalRepresentationItem{//==============================================================
 public               Edge():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeStart"><para>new ifc.Vertex(...)</para><para>new ifc.VertexPoint(...)</para></param>
@@ -2956,8 +3029,8 @@ public               Edge(Vertex EdgeStart,Vertex EdgeEnd,string EndOfLineCommen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcedgecurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230609,TableId:3)] public partial class EdgeCurve:Edge{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcedgecurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230609,TableId:3,LayerId:41)] public partial class EdgeCurve:Edge{//==================================================================================
 public               EdgeCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeStart"><para>new ifc.Vertex(...)</para><para>new ifc.VertexPoint(...)</para></param>
@@ -2971,14 +3044,15 @@ public               EdgeCurve(Vertex EdgeStart,Vertex EdgeEnd,Curve EdgeGeometr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ChamferEdgeFeature(...)</para><para>new ifc.RoundedEdgeFeature(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230610,TableId:3)] public partial class EdgeFeature:FeatureElementSubtraction{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcedgefeature.htm
+[ifcSql(TypeGroupId:5,TypeId:230610,TableId:3,LayerId: 7)] public partial class EdgeFeature:FeatureElementSubtraction{//===========================================================
 public               EdgeFeature():base(){}// abstract
 [ifc(9,optional=true)] public PositiveLengthMeasure FeatureLength; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcedgeloop.htm
-[ifcSql(TypeGroupId:5,TypeId:230611,TableId:3)] public partial class EdgeLoop:Loop{//===================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcedgeloop.htm
+[ifcSql(TypeGroupId:5,TypeId:230611,TableId:3,LayerId:41)] public partial class EdgeLoop:Loop{//===================================================================================
 public               EdgeLoop():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeList"><para>List1toUnbounded_OrientedEdge</para></param>
@@ -2988,8 +3062,8 @@ public               EdgeLoop(List1toUnbounded_OrientedEdge EdgeList,string EndO
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricappliancetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230612,TableId:3)] public partial class ElectricApplianceType:FlowTerminalType{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricappliancetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230612,TableId:3,LayerId:14)] public partial class ElectricApplianceType:FlowTerminalType{//==========================================================
 public               ElectricApplianceType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3008,8 +3082,8 @@ public               ElectricApplianceType(OwnerHistory _OwnerHistory,ElectricAp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricdistributionpoint.htm
-[ifcSql(TypeGroupId:5,TypeId:230613,TableId:3)] public partial class ElectricDistributionPoint:FlowController{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricdistributionpoint.htm
+[ifcSql(TypeGroupId:5,TypeId:230613,TableId:3,LayerId:14)] public partial class ElectricDistributionPoint:FlowController{//========================================================
 public               ElectricDistributionPoint():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3029,8 +3103,8 @@ public               ElectricDistributionPoint(OwnerHistory _OwnerHistory,Electr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricflowstoragedevicetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230614,TableId:3)] public partial class ElectricFlowStorageDeviceType:FlowStorageDeviceType{//=============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricflowstoragedevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230614,TableId:3,LayerId:14)] public partial class ElectricFlowStorageDeviceType:FlowStorageDeviceType{//=============================================
 public               ElectricFlowStorageDeviceType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3049,8 +3123,8 @@ public               ElectricFlowStorageDeviceType(OwnerHistory _OwnerHistory,El
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricgeneratortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230615,TableId:3)] public partial class ElectricGeneratorType:EnergyConversionDeviceType{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricgeneratortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230615,TableId:3,LayerId:14)] public partial class ElectricGeneratorType:EnergyConversionDeviceType{//================================================
 public               ElectricGeneratorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3069,8 +3143,8 @@ public               ElectricGeneratorType(OwnerHistory _OwnerHistory,ElectricGe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricheatertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230616,TableId:3)] public partial class ElectricHeaterType:FlowTerminalType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricheatertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230616,TableId:3,LayerId:14)] public partial class ElectricHeaterType:FlowTerminalType{//=============================================================
 public               ElectricHeaterType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3089,8 +3163,8 @@ public               ElectricHeaterType(OwnerHistory _OwnerHistory,ElectricHeate
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricmotortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230617,TableId:3)] public partial class ElectricMotorType:EnergyConversionDeviceType{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricmotortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230617,TableId:3,LayerId:14)] public partial class ElectricMotorType:EnergyConversionDeviceType{//====================================================
 public               ElectricMotorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3109,8 +3183,8 @@ public               ElectricMotorType(OwnerHistory _OwnerHistory,ElectricMotorT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectrictimecontroltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230618,TableId:3)] public partial class ElectricTimeControlType:FlowControllerType{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectrictimecontroltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230618,TableId:3,LayerId:14)] public partial class ElectricTimeControlType:FlowControllerType{//======================================================
 public               ElectricTimeControlType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3129,8 +3203,8 @@ public               ElectricTimeControlType(OwnerHistory _OwnerHistory,Electric
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricalbaseproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230619,TableId:3)] public partial class ElectricalBaseProperties:EnergyProperties{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricalbaseproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230619,TableId:3,LayerId: 6)] public partial class ElectricalBaseProperties:EnergyProperties{//=======================================================
 public               ElectricalBaseProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3160,8 +3234,8 @@ public               ElectricalBaseProperties(OwnerHistory _OwnerHistory,Electri
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricalcircuit.htm
-[ifcSql(TypeGroupId:5,TypeId:230620,TableId:3)] public partial class ElectricalCircuit:System{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricalcircuit.htm
+[ifcSql(TypeGroupId:5,TypeId:230620,TableId:3,LayerId:14)] public partial class ElectricalCircuit:System{//========================================================================
 public               ElectricalCircuit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3174,8 +3248,8 @@ public               ElectricalCircuit(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelectricalelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230621,TableId:3)] public partial class ElectricalElement:Element{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelectricalelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230621,TableId:3,LayerId: 4)] public partial class ElectricalElement:Element{//=======================================================================
 public               ElectricalElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3191,7 +3265,8 @@ public               ElectricalElement(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BuildingElement(...)</para><para>new ifc.Beam(...)</para><para>new ifc.BuildingElementComponent(...)</para><para>new ifc.BuildingElementPart(...)</para><para>new ifc.ReinforcingElement(...)</para><para>new ifc.BuildingElementProxy(...)</para><para>new ifc.Column(...)</para><para>new ifc.Covering(...)</para><para>new ifc.CurtainWall(...)</para><para>new ifc.Door(...)</para><para>new ifc.Footing(...)</para><para>new ifc.Member(...)</para><para>new ifc.Pile(...)</para><para>new ifc.Plate(...)</para><para>new ifc.Railing(...)</para><para>new ifc.Ramp(...)</para><para>new ifc.RampFlight(...)</para><para>new ifc.Roof(...)</para><para>new ifc.Slab(...)</para><para>new ifc.Stair(...)</para><para>new ifc.StairFlight(...)</para><para>new ifc.Wall(...)</para><para>new ifc.Window(...)</para><para>new ifc.DistributionElement(...)</para><para>new ifc.DistributionControlElement(...)</para><para>new ifc.DistributionFlowElement(...)</para><para>new ifc.DistributionChamberElement(...)</para><para>new ifc.EnergyConversionDevice(...)</para><para>new ifc.FlowController(...)</para><para>new ifc.FlowFitting(...)</para><para>new ifc.FlowMovingDevice(...)</para><para>new ifc.FlowSegment(...)</para><para>new ifc.FlowStorageDevice(...)</para><para>new ifc.FlowTerminal(...)</para><para>new ifc.FlowTreatmentDevice(...)</para><para>new ifc.ElectricalElement(...)</para><para>new ifc.ElementAssembly(...)</para><para>new ifc.ElementComponent(...)</para><para>new ifc.EquipmentElement(...)</para><para>new ifc.FeatureElement(...)</para><para>new ifc.FurnishingElement(...)</para><para>new ifc.TransportElement(...)</para><para>new ifc.VirtualElement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230622,TableId:3)] public partial class Element:Product{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230622,TableId:3,LayerId: 4)] public partial class Element:Product{//=================================================================================
 public               Element():base(){}// abstract
 [ifc(8,optional=true)] public Identifier Tag; //TYPE
 /// <summary>INVERSE: ConnectedTo of RelConnectsElements for RelatingElement</summary>
@@ -3221,8 +3296,8 @@ public               Element():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelementassembly.htm
-[ifcSql(TypeGroupId:5,TypeId:230623,TableId:3)] public partial class ElementAssembly:Element{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementassembly.htm
+[ifcSql(TypeGroupId:5,TypeId:230623,TableId:3,LayerId: 4)] public partial class ElementAssembly:Element{//=========================================================================
 public               ElementAssembly():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3242,18 +3317,20 @@ public               ElementAssembly(OwnerHistory _OwnerHistory,ElementAssemblyT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DiscreteAccessory(...)</para><para>new ifc.Fastener(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230624,TableId:3)] public partial class ElementComponent:Element{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementcomponent.htm
+[ifcSql(TypeGroupId:5,TypeId:230624,TableId:3,LayerId: 7)] public partial class ElementComponent:Element{//========================================================================
 public               ElementComponent():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DiscreteAccessoryType(...)</para><para>new ifc.VibrationIsolatorType(...)</para><para>new ifc.FastenerType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230625,TableId:3)] public partial class ElementComponentType:ElementType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementcomponenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230625,TableId:3,LayerId: 7)] public partial class ElementComponentType:ElementType{//================================================================
 public               ElementComponentType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcelementquantity.htm
-[ifcSql(TypeGroupId:5,TypeId:230626,TableId:3)] public partial class ElementQuantity:PropertySetDefinition{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementquantity.htm
+[ifcSql(TypeGroupId:5,TypeId:230626,TableId:3,LayerId: 4)] public partial class ElementQuantity:PropertySetDefinition{//===========================================================
 public               ElementQuantity():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3269,20 +3346,22 @@ public               ElementQuantity(OwnerHistory _OwnerHistory,Set1toUnbounded_
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BuildingElementType(...)</para><para>new ifc.BeamType(...)</para><para>new ifc.BuildingElementProxyType(...)</para><para>new ifc.ColumnType(...)</para><para>new ifc.CoveringType(...)</para><para>new ifc.CurtainWallType(...)</para><para>new ifc.MemberType(...)</para><para>new ifc.PlateType(...)</para><para>new ifc.RailingType(...)</para><para>new ifc.RampFlightType(...)</para><para>new ifc.SlabType(...)</para><para>new ifc.StairFlightType(...)</para><para>new ifc.WallType(...)</para><para>new ifc.DistributionElementType(...)</para><para>new ifc.DistributionControlElementType(...)</para><para>new ifc.ActuatorType(...)</para><para>new ifc.AlarmType(...)</para><para>new ifc.ControllerType(...)</para><para>new ifc.FlowInstrumentType(...)</para><para>new ifc.SensorType(...)</para><para>new ifc.DistributionFlowElementType(...)</para><para>new ifc.DistributionChamberElementType(...)</para><para>new ifc.EnergyConversionDeviceType(...)</para><para>new ifc.FlowControllerType(...)</para><para>new ifc.FlowFittingType(...)</para><para>new ifc.FlowMovingDeviceType(...)</para><para>new ifc.FlowSegmentType(...)</para><para>new ifc.FlowStorageDeviceType(...)</para><para>new ifc.FlowTerminalType(...)</para><para>new ifc.FlowTreatmentDeviceType(...)</para><para>new ifc.ElementComponentType(...)</para><para>new ifc.DiscreteAccessoryType(...)</para><para>new ifc.VibrationIsolatorType(...)</para><para>new ifc.FastenerType(...)</para><para>new ifc.FurnishingElementType(...)</para><para>new ifc.SpatialStructureElementType(...)</para><para>new ifc.TransportElementType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230627,TableId:3)] public partial class ElementType:TypeProduct{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230627,TableId:3,LayerId: 4)] public partial class ElementType:TypeProduct{//=========================================================================
 public               ElementType():base(){}// abstract
 [ifc(9,optional=true)] public Label _ElementType; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Plane(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230628,TableId:3)] public partial class ElementarySurface:Surface{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcelementarysurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230628,TableId:3,LayerId:30)] public partial class ElementarySurface:Surface{//=======================================================================
 public               ElementarySurface():base(){}// abstract
 [ifc(1)] public Axis2Placement3D Position; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcellipse.htm
-[ifcSql(TypeGroupId:5,TypeId:230629,TableId:3)] public partial class Ellipse:Conic{//===================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcellipse.htm
+[ifcSql(TypeGroupId:5,TypeId:230629,TableId:3,LayerId:30)] public partial class Ellipse:Conic{//===================================================================================
 public               Ellipse():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement(new Axis2Placement2D(...))...</para><para>new ifc.Axis2Placement(new Axis2Placement3D(...))...</para></param>
@@ -3295,8 +3374,8 @@ public               Ellipse(Axis2Placement Position,PositiveLengthMeasure SemiA
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcellipseprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230630,TableId:3)] public partial class EllipseProfileDef:ParameterizedProfileDef{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcellipseprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230630,TableId:3,LayerId:36)] public partial class EllipseProfileDef:ParameterizedProfileDef{//=======================================================
 public               EllipseProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -3311,8 +3390,8 @@ public               EllipseProfileDef(ProfileTypeEnum ProfileType,Axis2Placemen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcenergyconversiondevice.htm
-[ifcSql(TypeGroupId:5,TypeId:230631,TableId:3)] public partial class EnergyConversionDevice:DistributionFlowElement{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcenergyconversiondevice.htm
+[ifcSql(TypeGroupId:5,TypeId:230631,TableId:3,LayerId: 6)] public partial class EnergyConversionDevice:DistributionFlowElement{//==================================================
 public               EnergyConversionDevice():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3328,13 +3407,14 @@ public               EnergyConversionDevice(OwnerHistory _OwnerHistory,GloballyU
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AirToAirHeatRecoveryType(...)</para><para>new ifc.BoilerType(...)</para><para>new ifc.ChillerType(...)</para><para>new ifc.CoilType(...)</para><para>new ifc.CondenserType(...)</para><para>new ifc.CooledBeamType(...)</para><para>new ifc.CoolingTowerType(...)</para><para>new ifc.ElectricGeneratorType(...)</para><para>new ifc.ElectricMotorType(...)</para><para>new ifc.EvaporativeCoolerType(...)</para><para>new ifc.EvaporatorType(...)</para><para>new ifc.HeatExchangerType(...)</para><para>new ifc.HumidifierType(...)</para><para>new ifc.MotorConnectionType(...)</para><para>new ifc.SpaceHeaterType(...)</para><para>new ifc.TransformerType(...)</para><para>new ifc.TubeBundleType(...)</para><para>new ifc.UnitaryEquipmentType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230632,TableId:3)] public partial class EnergyConversionDeviceType:DistributionFlowElementType{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcenergyconversiondevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230632,TableId:3,LayerId: 6)] public partial class EnergyConversionDeviceType:DistributionFlowElementType{//==========================================
 public               EnergyConversionDeviceType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ElectricalBaseProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcenergyproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230633,TableId:3)] public partial class EnergyProperties:PropertySetDefinition{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcenergyproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230633,TableId:3,LayerId: 6)] public partial class EnergyProperties:PropertySetDefinition{//==========================================================
 public               EnergyProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3350,8 +3430,8 @@ public               EnergyProperties(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcenvironmentalimpactvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230634,TableId:3)] public partial class EnvironmentalImpactValue:AppliedValue{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcenvironmentalimpactvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230634,TableId:3,LayerId:25)] public partial class EnvironmentalImpactValue:AppliedValue{//===========================================================
 public               EnvironmentalImpactValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3371,8 +3451,8 @@ public               EnvironmentalImpactValue(Label ImpactType,EnvironmentalImpa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcequipmentelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230635,TableId:3)] public partial class EquipmentElement:Element{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcequipmentelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230635,TableId:3,LayerId: 4)] public partial class EquipmentElement:Element{//========================================================================
 public               EquipmentElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3388,8 +3468,8 @@ public               EquipmentElement(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcequipmentstandard.htm
-[ifcSql(TypeGroupId:5,TypeId:230636,TableId:3)] public partial class EquipmentStandard:Control{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcequipmentstandard.htm
+[ifcSql(TypeGroupId:5,TypeId:230636,TableId:3,LayerId:-6)] public partial class EquipmentStandard:Control{//=======================================================================
 public               EquipmentStandard():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3402,8 +3482,8 @@ public               EquipmentStandard(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcevaporativecoolertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230637,TableId:3)] public partial class EvaporativeCoolerType:EnergyConversionDeviceType{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcevaporativecoolertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230637,TableId:3,LayerId:15)] public partial class EvaporativeCoolerType:EnergyConversionDeviceType{//================================================
 public               EvaporativeCoolerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3422,8 +3502,8 @@ public               EvaporativeCoolerType(OwnerHistory _OwnerHistory,Evaporativ
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcevaporatortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230638,TableId:3)] public partial class EvaporatorType:EnergyConversionDeviceType{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcevaporatortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230638,TableId:3,LayerId:15)] public partial class EvaporatorType:EnergyConversionDeviceType{//=======================================================
 public               EvaporatorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3442,8 +3522,8 @@ public               EvaporatorType(OwnerHistory _OwnerHistory,EvaporatorTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcextendedmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230639,TableId:3)] public partial class ExtendedMaterialProperties:MaterialProperties{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcextendedmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230639,TableId:3,LayerId:-5)] public partial class ExtendedMaterialProperties:MaterialProperties{//===================================================
 public               ExtendedMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -3458,7 +3538,8 @@ public               ExtendedMaterialProperties(Material _Material,Set1toUnbound
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ClassificationReference(...)</para><para>new ifc.DocumentReference(...)</para><para>new ifc.ExternallyDefinedHatchStyle(...)</para><para>new ifc.ExternallyDefinedSurfaceStyle(...)</para><para>new ifc.ExternallyDefinedSymbol(...)</para><para>new ifc.ExternallyDefinedTextFont(...)</para><para>new ifc.LibraryReference(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230640,TableId:3)] public partial class ExternalReference:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcexternalreference.htm
+[ifcSql(TypeGroupId:5,TypeId:230640,TableId:3,LayerId:27)] public partial class ExternalReference:ENTITY{//========================================================================
 public               ExternalReference():base(){}// abstract
 [ifc(1,optional=true)] public Label Location; //TYPE
 [ifc(2,optional=true)] public Identifier ItemReference; //TYPE
@@ -3466,8 +3547,8 @@ public               ExternalReference():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcexternallydefinedhatchstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230641,TableId:3)] public partial class ExternallyDefinedHatchStyle:ExternalReference{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcexternallydefinedhatchstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230641,TableId:3,LayerId:33)] public partial class ExternallyDefinedHatchStyle:ExternalReference{//===================================================
 public               ExternallyDefinedHatchStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3478,8 +3559,8 @@ public               ExternallyDefinedHatchStyle(Label Location,Identifier ItemR
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcexternallydefinedsurfacestyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230642,TableId:3)] public partial class ExternallyDefinedSurfaceStyle:ExternalReference{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcexternallydefinedsurfacestyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230642,TableId:3,LayerId:33)] public partial class ExternallyDefinedSurfaceStyle:ExternalReference{//=================================================
 public               ExternallyDefinedSurfaceStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3490,8 +3571,8 @@ public               ExternallyDefinedSurfaceStyle(Label Location,Identifier Ite
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcexternallydefinedsymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:230643,TableId:3)] public partial class ExternallyDefinedSymbol:ExternalReference{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcexternallydefinedsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230643,TableId:3,LayerId:34)] public partial class ExternallyDefinedSymbol:ExternalReference{//=======================================================
 public               ExternallyDefinedSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3502,8 +3583,8 @@ public               ExternallyDefinedSymbol(Label Location,Identifier ItemRefer
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcexternallydefinedtextfont.htm
-[ifcSql(TypeGroupId:5,TypeId:230644,TableId:3)] public partial class ExternallyDefinedTextFont:ExternalReference{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcexternallydefinedtextfont.htm
+[ifcSql(TypeGroupId:5,TypeId:230644,TableId:3,LayerId:33)] public partial class ExternallyDefinedTextFont:ExternalReference{//=====================================================
 public               ExternallyDefinedTextFont():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3514,8 +3595,8 @@ public               ExternallyDefinedTextFont(Label Location,Identifier ItemRef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcextrudedareasolid.htm
-[ifcSql(TypeGroupId:5,TypeId:230645,TableId:3)] public partial class ExtrudedAreaSolid:SweptAreaSolid{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcextrudedareasolid.htm
+[ifcSql(TypeGroupId:5,TypeId:230645,TableId:3,LayerId:29)] public partial class ExtrudedAreaSolid:SweptAreaSolid{//================================================================
 public               ExtrudedAreaSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SweptArea"><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></param>
@@ -3529,8 +3610,8 @@ public               ExtrudedAreaSolid(ProfileDef SweptArea,Axis2Placement3D Pos
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FaceSurface(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcface.htm
-[ifcSql(TypeGroupId:5,TypeId:230646,TableId:3)] public partial class Face:TopologicalRepresentationItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcface.htm
+[ifcSql(TypeGroupId:5,TypeId:230646,TableId:3,LayerId:41)] public partial class Face:TopologicalRepresentationItem{//==============================================================
 public               Face():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Bounds"><para>Set1toUnbounded_FaceBound</para></param>
@@ -3540,8 +3621,8 @@ public               Face(Set1toUnbounded_FaceBound Bounds,string EndOfLineComme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfacebasedsurfacemodel.htm
-[ifcSql(TypeGroupId:5,TypeId:230647,TableId:3)] public partial class FaceBasedSurfaceModel:GeometricRepresentationItem{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfacebasedsurfacemodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230647,TableId:3,LayerId:29)] public partial class FaceBasedSurfaceModel:GeometricRepresentationItem{//===============================================
 public               FaceBasedSurfaceModel():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="FbsmFaces"><para>Set1toUnbounded_ConnectedFaceSet</para></param>
@@ -3551,8 +3632,8 @@ public               FaceBasedSurfaceModel(Set1toUnbounded_ConnectedFaceSet Fbsm
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FaceOuterBound(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfacebound.htm
-[ifcSql(TypeGroupId:5,TypeId:230648,TableId:3)] public partial class FaceBound:TopologicalRepresentationItem{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfacebound.htm
+[ifcSql(TypeGroupId:5,TypeId:230648,TableId:3,LayerId:41)] public partial class FaceBound:TopologicalRepresentationItem{//=========================================================
 public               FaceBound():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Bound"><para>new ifc.Loop(...)</para><para>new ifc.EdgeLoop(...)</para><para>new ifc.PolyLoop(...)</para><para>new ifc.VertexLoop(...)</para></param>
@@ -3564,8 +3645,8 @@ public               FaceBound(Loop Bound,BOOLEAN Orientation,string EndOfLineCo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfaceouterbound.htm
-[ifcSql(TypeGroupId:5,TypeId:230649,TableId:3)] public partial class FaceOuterBound:FaceBound{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfaceouterbound.htm
+[ifcSql(TypeGroupId:5,TypeId:230649,TableId:3,LayerId:41)] public partial class FaceOuterBound:FaceBound{//========================================================================
 public               FaceOuterBound():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Bound"><para>new ifc.Loop(...)</para><para>new ifc.EdgeLoop(...)</para><para>new ifc.PolyLoop(...)</para><para>new ifc.VertexLoop(...)</para></param>
@@ -3575,8 +3656,8 @@ public               FaceOuterBound(Loop Bound,BOOLEAN Orientation,string EndOfL
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfacesurface.htm
-[ifcSql(TypeGroupId:5,TypeId:230650,TableId:3)] public partial class FaceSurface:Face{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfacesurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230650,TableId:3,LayerId:41)] public partial class FaceSurface:Face{//================================================================================
 public               FaceSurface():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Bounds"><para>Set1toUnbounded_FaceBound</para></param>
@@ -3589,8 +3670,8 @@ public               FaceSurface(Set1toUnbounded_FaceBound Bounds,Surface _FaceS
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfacetedbrep.htm
-[ifcSql(TypeGroupId:5,TypeId:230651,TableId:3)] public partial class FacetedBrep:ManifoldSolidBrep{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfacetedbrep.htm
+[ifcSql(TypeGroupId:5,TypeId:230651,TableId:3,LayerId:29)] public partial class FacetedBrep:ManifoldSolidBrep{//===================================================================
 public               FacetedBrep():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Outer"><para>new ifc.ClosedShell(...)</para></param>
@@ -3599,8 +3680,8 @@ public               FacetedBrep(ClosedShell Outer,string EndOfLineComment=null)
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfacetedbrepwithvoids.htm
-[ifcSql(TypeGroupId:5,TypeId:230652,TableId:3)] public partial class FacetedBrepWithVoids:ManifoldSolidBrep{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfacetedbrepwithvoids.htm
+[ifcSql(TypeGroupId:5,TypeId:230652,TableId:3,LayerId:29)] public partial class FacetedBrepWithVoids:ManifoldSolidBrep{//==========================================================
 public               FacetedBrepWithVoids():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Outer"><para>new ifc.ClosedShell(...)</para></param>
@@ -3611,8 +3692,8 @@ public               FacetedBrepWithVoids(ClosedShell Outer,Set1toUnbounded_Clos
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfailureconnectioncondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230653,TableId:3)] public partial class FailureConnectionCondition:StructuralConnectionCondition{//========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfailureconnectioncondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230653,TableId:3,LayerId:40)] public partial class FailureConnectionCondition:StructuralConnectionCondition{//========================================
 public               FailureConnectionCondition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3633,8 +3714,8 @@ public               FailureConnectionCondition(Label Name,ForceMeasure TensionF
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfantype.htm
-[ifcSql(TypeGroupId:5,TypeId:230654,TableId:3)] public partial class FanType:FlowMovingDeviceType{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfantype.htm
+[ifcSql(TypeGroupId:5,TypeId:230654,TableId:3,LayerId:15)] public partial class FanType:FlowMovingDeviceType{//====================================================================
 public               FanType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3653,8 +3734,8 @@ public               FanType(OwnerHistory _OwnerHistory,FanTypeEnum PredefinedTy
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.MechanicalFastener(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfastener.htm
-[ifcSql(TypeGroupId:5,TypeId:230655,TableId:3)] public partial class Fastener:ElementComponent{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfastener.htm
+[ifcSql(TypeGroupId:5,TypeId:230655,TableId:3,LayerId: 7)] public partial class Fastener:ElementComponent{//=======================================================================
 public               Fastener():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3670,8 +3751,8 @@ public               Fastener(OwnerHistory _OwnerHistory,GloballyUniqueId Global
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.MechanicalFastenerType(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfastenertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230656,TableId:3)] public partial class FastenerType:ElementComponentType{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfastenertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230656,TableId:3,LayerId: 7)] public partial class FastenerType:ElementComponentType{//===============================================================
 public               FastenerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3688,27 +3769,30 @@ public               FastenerType(OwnerHistory _OwnerHistory,GloballyUniqueId Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FeatureElementAddition(...)</para><para>new ifc.FeatureElementSubtraction(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230657,TableId:3)] public partial class FeatureElement:Element{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfeatureelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230657,TableId:3,LayerId: 4)] public partial class FeatureElement:Element{//==========================================================================
 public               FeatureElement():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ProjectionElement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230658,TableId:3)] public partial class FeatureElementAddition:FeatureElement{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfeatureelementaddition.htm
+[ifcSql(TypeGroupId:5,TypeId:230658,TableId:3,LayerId: 4)] public partial class FeatureElementAddition:FeatureElement{//===========================================================
 public               FeatureElementAddition():base(){}// abstract
 /// <summary>INVERSE: ProjectsElements of RelProjectsElement for RelatedFeatureElement</summary>
 [ifcInverse(For:"RelatedFeatureElement")] public RelProjectsElement ProjectsElements;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.EdgeFeature(...)</para><para>new ifc.ChamferEdgeFeature(...)</para><para>new ifc.RoundedEdgeFeature(...)</para><para>new ifc.OpeningElement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230659,TableId:3)] public partial class FeatureElementSubtraction:FeatureElement{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfeatureelementsubtraction.htm
+[ifcSql(TypeGroupId:5,TypeId:230659,TableId:3,LayerId: 4)] public partial class FeatureElementSubtraction:FeatureElement{//========================================================
 public               FeatureElementSubtraction():base(){}// abstract
 /// <summary>INVERSE: VoidsElements of RelVoidsElement for RelatedOpeningElement</summary>
 [ifcInverse(For:"RelatedOpeningElement")] public RelVoidsElement VoidsElements;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfillareastyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230660,TableId:3)] public partial class FillAreaStyle:PresentationStyle{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillareastyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230660,TableId:3,LayerId:33)] public partial class FillAreaStyle:PresentationStyle{//=================================================================
 public               FillAreaStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -3719,8 +3803,8 @@ public               FillAreaStyle(Set1toUnbounded_FillStyleSelect FillStyles,La
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfillareastylehatching.htm
-[ifcSql(TypeGroupId:5,TypeId:230661,TableId:3)] public partial class FillAreaStyleHatching:GeometricRepresentationItem{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillareastylehatching.htm
+[ifcSql(TypeGroupId:5,TypeId:230661,TableId:3,LayerId:33)] public partial class FillAreaStyleHatching:GeometricRepresentationItem{//===============================================
 public               FillAreaStyleHatching():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="HatchLineAppearance"><para>new ifc.CurveStyle(...)</para></param>
@@ -3738,8 +3822,8 @@ public               FillAreaStyleHatching(CurveStyle HatchLineAppearance,HatchL
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfillareastyletilesymbolwithstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230662,TableId:3)] public partial class FillAreaStyleTileSymbolWithStyle:GeometricRepresentationItem{//====================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillareastyletilesymbolwithstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230662,TableId:3,LayerId:33)] public partial class FillAreaStyleTileSymbolWithStyle:GeometricRepresentationItem{//====================================
 public               FillAreaStyleTileSymbolWithStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Symbol"><para>new ifc.AnnotationSymbolOccurrence(...)</para><para>new ifc.TerminatorSymbol(...)</para></param>
@@ -3749,8 +3833,8 @@ public               FillAreaStyleTileSymbolWithStyle(AnnotationSymbolOccurrence
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfillareastyletiles.htm
-[ifcSql(TypeGroupId:5,TypeId:230663,TableId:3)] public partial class FillAreaStyleTiles:GeometricRepresentationItem{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfillareastyletiles.htm
+[ifcSql(TypeGroupId:5,TypeId:230663,TableId:3,LayerId:33)] public partial class FillAreaStyleTiles:GeometricRepresentationItem{//==================================================
 public               FillAreaStyleTiles():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TilingPattern"><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para></param>
@@ -3764,8 +3848,8 @@ public               FillAreaStyleTiles(OneDirectionRepeatFactor TilingPattern,S
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfiltertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230664,TableId:3)] public partial class FilterType:FlowTreatmentDeviceType{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfiltertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230664,TableId:3,LayerId:15)] public partial class FilterType:FlowTreatmentDeviceType{//==============================================================
 public               FilterType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3784,8 +3868,8 @@ public               FilterType(OwnerHistory _OwnerHistory,FilterTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfiresuppressionterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230665,TableId:3)] public partial class FireSuppressionTerminalType:FlowTerminalType{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfiresuppressionterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230665,TableId:3,LayerId:16)] public partial class FireSuppressionTerminalType:FlowTerminalType{//====================================================
 public               FireSuppressionTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3804,8 +3888,8 @@ public               FireSuppressionTerminalType(OwnerHistory _OwnerHistory,Fire
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ElectricDistributionPoint(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowcontroller.htm
-[ifcSql(TypeGroupId:5,TypeId:230666,TableId:3)] public partial class FlowController:DistributionFlowElement{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowcontroller.htm
+[ifcSql(TypeGroupId:5,TypeId:230666,TableId:3,LayerId: 6)] public partial class FlowController:DistributionFlowElement{//==========================================================
 public               FlowController():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3821,13 +3905,14 @@ public               FlowController(OwnerHistory _OwnerHistory,GloballyUniqueId 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AirTerminalBoxType(...)</para><para>new ifc.DamperType(...)</para><para>new ifc.ElectricTimeControlType(...)</para><para>new ifc.FlowMeterType(...)</para><para>new ifc.ProtectiveDeviceType(...)</para><para>new ifc.SwitchingDeviceType(...)</para><para>new ifc.ValveType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230667,TableId:3)] public partial class FlowControllerType:DistributionFlowElementType{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowcontrollertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230667,TableId:3,LayerId: 6)] public partial class FlowControllerType:DistributionFlowElementType{//==================================================
 public               FlowControllerType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowfitting.htm
-[ifcSql(TypeGroupId:5,TypeId:230668,TableId:3)] public partial class FlowFitting:DistributionFlowElement{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowfitting.htm
+[ifcSql(TypeGroupId:5,TypeId:230668,TableId:3,LayerId: 6)] public partial class FlowFitting:DistributionFlowElement{//=============================================================
 public               FlowFitting():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3843,13 +3928,14 @@ public               FlowFitting(OwnerHistory _OwnerHistory,GloballyUniqueId Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CableCarrierFittingType(...)</para><para>new ifc.DuctFittingType(...)</para><para>new ifc.JunctionBoxType(...)</para><para>new ifc.PipeFittingType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230669,TableId:3)] public partial class FlowFittingType:DistributionFlowElementType{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowfittingtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230669,TableId:3,LayerId: 6)] public partial class FlowFittingType:DistributionFlowElementType{//=====================================================
 public               FlowFittingType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowinstrumenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230670,TableId:3)] public partial class FlowInstrumentType:DistributionControlElementType{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowinstrumenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230670,TableId:3,LayerId:12)] public partial class FlowInstrumentType:DistributionControlElementType{//===============================================
 public               FlowInstrumentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3868,8 +3954,8 @@ public               FlowInstrumentType(OwnerHistory _OwnerHistory,FlowInstrumen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowmetertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230671,TableId:3)] public partial class FlowMeterType:FlowControllerType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowmetertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230671,TableId:3,LayerId:15)] public partial class FlowMeterType:FlowControllerType{//================================================================
 public               FlowMeterType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3888,8 +3974,8 @@ public               FlowMeterType(OwnerHistory _OwnerHistory,FlowMeterTypeEnum 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowmovingdevice.htm
-[ifcSql(TypeGroupId:5,TypeId:230672,TableId:3)] public partial class FlowMovingDevice:DistributionFlowElement{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowmovingdevice.htm
+[ifcSql(TypeGroupId:5,TypeId:230672,TableId:3,LayerId: 6)] public partial class FlowMovingDevice:DistributionFlowElement{//========================================================
 public               FlowMovingDevice():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3905,13 +3991,14 @@ public               FlowMovingDevice(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CompressorType(...)</para><para>new ifc.FanType(...)</para><para>new ifc.PumpType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230673,TableId:3)] public partial class FlowMovingDeviceType:DistributionFlowElementType{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowmovingdevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230673,TableId:3,LayerId: 6)] public partial class FlowMovingDeviceType:DistributionFlowElementType{//================================================
 public               FlowMovingDeviceType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowsegment.htm
-[ifcSql(TypeGroupId:5,TypeId:230674,TableId:3)] public partial class FlowSegment:DistributionFlowElement{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowsegment.htm
+[ifcSql(TypeGroupId:5,TypeId:230674,TableId:3,LayerId: 6)] public partial class FlowSegment:DistributionFlowElement{//=============================================================
 public               FlowSegment():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3927,13 +4014,14 @@ public               FlowSegment(OwnerHistory _OwnerHistory,GloballyUniqueId Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CableCarrierSegmentType(...)</para><para>new ifc.CableSegmentType(...)</para><para>new ifc.DuctSegmentType(...)</para><para>new ifc.PipeSegmentType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230675,TableId:3)] public partial class FlowSegmentType:DistributionFlowElementType{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowsegmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230675,TableId:3,LayerId: 6)] public partial class FlowSegmentType:DistributionFlowElementType{//=====================================================
 public               FlowSegmentType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowstoragedevice.htm
-[ifcSql(TypeGroupId:5,TypeId:230676,TableId:3)] public partial class FlowStorageDevice:DistributionFlowElement{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowstoragedevice.htm
+[ifcSql(TypeGroupId:5,TypeId:230676,TableId:3,LayerId: 6)] public partial class FlowStorageDevice:DistributionFlowElement{//=======================================================
 public               FlowStorageDevice():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3949,13 +4037,14 @@ public               FlowStorageDevice(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ElectricFlowStorageDeviceType(...)</para><para>new ifc.TankType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230677,TableId:3)] public partial class FlowStorageDeviceType:DistributionFlowElementType{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowstoragedevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230677,TableId:3,LayerId: 6)] public partial class FlowStorageDeviceType:DistributionFlowElementType{//===============================================
 public               FlowStorageDeviceType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowterminal.htm
-[ifcSql(TypeGroupId:5,TypeId:230678,TableId:3)] public partial class FlowTerminal:DistributionFlowElement{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowterminal.htm
+[ifcSql(TypeGroupId:5,TypeId:230678,TableId:3,LayerId: 6)] public partial class FlowTerminal:DistributionFlowElement{//============================================================
 public               FlowTerminal():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3971,13 +4060,14 @@ public               FlowTerminal(OwnerHistory _OwnerHistory,GloballyUniqueId Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AirTerminalType(...)</para><para>new ifc.ElectricApplianceType(...)</para><para>new ifc.ElectricHeaterType(...)</para><para>new ifc.FireSuppressionTerminalType(...)</para><para>new ifc.GasTerminalType(...)</para><para>new ifc.LampType(...)</para><para>new ifc.LightFixtureType(...)</para><para>new ifc.OutletType(...)</para><para>new ifc.SanitaryTerminalType(...)</para><para>new ifc.StackTerminalType(...)</para><para>new ifc.WasteTerminalType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230679,TableId:3)] public partial class FlowTerminalType:DistributionFlowElementType{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230679,TableId:3,LayerId: 6)] public partial class FlowTerminalType:DistributionFlowElementType{//====================================================
 public               FlowTerminalType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcflowtreatmentdevice.htm
-[ifcSql(TypeGroupId:5,TypeId:230680,TableId:3)] public partial class FlowTreatmentDevice:DistributionFlowElement{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowtreatmentdevice.htm
+[ifcSql(TypeGroupId:5,TypeId:230680,TableId:3,LayerId: 6)] public partial class FlowTreatmentDevice:DistributionFlowElement{//=====================================================
 public               FlowTreatmentDevice():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -3993,13 +4083,14 @@ public               FlowTreatmentDevice(OwnerHistory _OwnerHistory,GloballyUniq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DuctSilencerType(...)</para><para>new ifc.FilterType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230681,TableId:3)] public partial class FlowTreatmentDeviceType:DistributionFlowElementType{//=============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcflowtreatmentdevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230681,TableId:3,LayerId: 6)] public partial class FlowTreatmentDeviceType:DistributionFlowElementType{//=============================================
 public               FlowTreatmentDeviceType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfluidflowproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230682,TableId:3)] public partial class FluidFlowProperties:PropertySetDefinition{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfluidflowproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230682,TableId:3,LayerId: 6)] public partial class FluidFlowProperties:PropertySetDefinition{//=======================================================
 public               FluidFlowProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4041,8 +4132,8 @@ public               FluidFlowProperties(OwnerHistory _OwnerHistory,PropertySour
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfooting.htm
-[ifcSql(TypeGroupId:5,TypeId:230683,TableId:3)] public partial class Footing:BuildingElement{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfooting.htm
+[ifcSql(TypeGroupId:5,TypeId:230683,TableId:3,LayerId:21)] public partial class Footing:BuildingElement{//=========================================================================
 public               Footing():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4060,8 +4151,8 @@ public               Footing(OwnerHistory _OwnerHistory,FootingTypeEnum Predefin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfuelproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230684,TableId:3)] public partial class FuelProperties:MaterialProperties{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfuelproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230684,TableId:3,LayerId:-5)] public partial class FuelProperties:MaterialProperties{//===============================================================
 public               FuelProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -4078,8 +4169,8 @@ public               FuelProperties(Material _Material,ThermodynamicTemperatureM
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfurnishingelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230685,TableId:3)] public partial class FurnishingElement:Element{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfurnishingelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230685,TableId:3,LayerId: 4)] public partial class FurnishingElement:Element{//=======================================================================
 public               FurnishingElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4095,8 +4186,8 @@ public               FurnishingElement(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FurnitureType(...)</para><para>new ifc.SystemFurnitureElementType(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfurnishingelementtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230686,TableId:3)] public partial class FurnishingElementType:ElementType{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfurnishingelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230686,TableId:3,LayerId: 4)] public partial class FurnishingElementType:ElementType{//===============================================================
 public               FurnishingElementType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4113,8 +4204,8 @@ public               FurnishingElementType(OwnerHistory _OwnerHistory,GloballyUn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfurniturestandard.htm
-[ifcSql(TypeGroupId:5,TypeId:230687,TableId:3)] public partial class FurnitureStandard:Control{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfurniturestandard.htm
+[ifcSql(TypeGroupId:5,TypeId:230687,TableId:3,LayerId:-6)] public partial class FurnitureStandard:Control{//=======================================================================
 public               FurnitureStandard():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4127,8 +4218,8 @@ public               FurnitureStandard(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcfurnituretype.htm
-[ifcSql(TypeGroupId:5,TypeId:230688,TableId:3)] public partial class FurnitureType:FurnishingElementType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcfurnituretype.htm
+[ifcSql(TypeGroupId:5,TypeId:230688,TableId:3,LayerId: 8)] public partial class FurnitureType:FurnishingElementType{//=============================================================
 public               FurnitureType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4147,8 +4238,8 @@ public               FurnitureType(OwnerHistory _OwnerHistory,AssemblyPlaceEnum 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgasterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230689,TableId:3)] public partial class GasTerminalType:FlowTerminalType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgasterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230689,TableId:3,LayerId:15)] public partial class GasTerminalType:FlowTerminalType{//================================================================
 public               GasTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4167,8 +4258,8 @@ public               GasTerminalType(OwnerHistory _OwnerHistory,GasTerminalTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeneralmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230690,TableId:3)] public partial class GeneralMaterialProperties:MaterialProperties{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeneralmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230690,TableId:3,LayerId:-5)] public partial class GeneralMaterialProperties:MaterialProperties{//====================================================
 public               GeneralMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -4183,8 +4274,8 @@ public               GeneralMaterialProperties(Material _Material,MolecularWeigh
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralProfileProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeneralprofileproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230691,TableId:3)] public partial class GeneralProfileProperties:ProfileProperties{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeneralprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230691,TableId:3,LayerId:-2)] public partial class GeneralProfileProperties:ProfileProperties{//======================================================
 public               GeneralProfileProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileName">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4204,8 +4295,8 @@ public               GeneralProfileProperties(Label ProfileName,ProfileDef Profi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeometriccurveset.htm
-[ifcSql(TypeGroupId:5,TypeId:230692,TableId:3)] public partial class GeometricCurveSet:GeometricSet{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometriccurveset.htm
+[ifcSql(TypeGroupId:5,TypeId:230692,TableId:3,LayerId:29)] public partial class GeometricCurveSet:GeometricSet{//==================================================================
 public               GeometricCurveSet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Elements"><para>Set1toUnbounded_GeometricSetSelect</para></param>
@@ -4214,8 +4305,8 @@ public               GeometricCurveSet(Set1toUnbounded_GeometricSetSelect Elemen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GeometricRepresentationSubContext(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeometricrepresentationcontext.htm
-[ifcSql(TypeGroupId:5,TypeId:230693,TableId:3)] public partial class GeometricRepresentationContext:RepresentationContext{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometricrepresentationcontext.htm
+[ifcSql(TypeGroupId:5,TypeId:230693,TableId:3,LayerId:39)] public partial class GeometricRepresentationContext:RepresentationContext{//============================================
 public               GeometricRepresentationContext():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextIdentifier">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4235,13 +4326,14 @@ public               GeometricRepresentationContext(DimensionCount CoordinateSpa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.CsgPrimitive3D(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.Curve(...)</para><para>new ifc.BoundedCurve(...)</para><para>new ifc.BSplineCurve(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Conic(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.LightSource(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.Placement(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.Point(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.SolidModel(...)</para><para>new ifc.Surface(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230694,TableId:3)] public partial class GeometricRepresentationItem:RepresentationItem{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometricrepresentationitem.htm
+[ifcSql(TypeGroupId:5,TypeId:230694,TableId:3,LayerId:30)] public partial class GeometricRepresentationItem:RepresentationItem{//==================================================
 public               GeometricRepresentationItem():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeometricrepresentationsubcontext.htm
-[ifcSql(TypeGroupId:5,TypeId:230695,TableId:3)] public partial class GeometricRepresentationSubContext:GeometricRepresentationContext{//================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometricrepresentationsubcontext.htm
+[ifcSql(TypeGroupId:5,TypeId:230695,TableId:3,LayerId:39)] public partial class GeometricRepresentationSubContext:GeometricRepresentationContext{//================================
 public               GeometricRepresentationSubContext():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextIdentifier">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4265,8 +4357,8 @@ public override void AssignInverseElements(){if (ParentContext!=null) {if (Paren
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GeometricCurveSet(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgeometricset.htm
-[ifcSql(TypeGroupId:5,TypeId:230696,TableId:3)] public partial class GeometricSet:GeometricRepresentationItem{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgeometricset.htm
+[ifcSql(TypeGroupId:5,TypeId:230696,TableId:3,LayerId:29)] public partial class GeometricSet:GeometricRepresentationItem{//========================================================
 public               GeometricSet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Elements"><para>Set1toUnbounded_GeometricSetSelect</para></param>
@@ -4276,8 +4368,8 @@ public               GeometricSet(Set1toUnbounded_GeometricSetSelect Elements,st
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgrid.htm
-[ifcSql(TypeGroupId:5,TypeId:230697,TableId:3)] public partial class Grid:Product{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgrid.htm
+[ifcSql(TypeGroupId:5,TypeId:230697,TableId:3,LayerId: 4)] public partial class Grid:Product{//====================================================================================
 public               Grid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4304,8 +4396,8 @@ public override void AssignInverseElements(){if (UAxes!=null) foreach (GridAxis 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgridaxis.htm
-[ifcSql(TypeGroupId:5,TypeId:230698,TableId:3)] public partial class GridAxis:ENTITY{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgridaxis.htm
+[ifcSql(TypeGroupId:5,TypeId:230698,TableId:3,LayerId:28)] public partial class GridAxis:ENTITY{//=================================================================================
 public               GridAxis():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="AxisTag">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4327,8 +4419,8 @@ public               GridAxis(Curve AxisCurve,Boolean SameSense,Label AxisTag=nu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgridplacement.htm
-[ifcSql(TypeGroupId:5,TypeId:230699,TableId:3)] public partial class GridPlacement:ObjectPlacement{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgridplacement.htm
+[ifcSql(TypeGroupId:5,TypeId:230699,TableId:3,LayerId:28)] public partial class GridPlacement:ObjectPlacement{//===================================================================
 public               GridPlacement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="PlacementLocation"><para>new ifc.VirtualGridIntersection(...)</para></param>
@@ -4340,8 +4432,8 @@ public               GridPlacement(VirtualGridIntersection PlacementLocation,Vir
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Asset(...)</para><para>new ifc.Condition(...)</para><para>new ifc.Inventory(...)</para><para>new ifc.StructuralLoadGroup(...)</para><para>new ifc.StructuralResultGroup(...)</para><para>new ifc.System(...)</para><para>new ifc.Zone(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcgroup.htm
-[ifcSql(TypeGroupId:5,TypeId:230700,TableId:3)] public partial class Group:Object{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcgroup.htm
+[ifcSql(TypeGroupId:5,TypeId:230700,TableId:3,LayerId: 2)] public partial class Group:Object{//====================================================================================
 public               Group():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4356,8 +4448,8 @@ public               Group(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifchalfspacesolid.htm
-[ifcSql(TypeGroupId:5,TypeId:230701,TableId:3)] public partial class HalfSpaceSolid:GeometricRepresentationItem{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifchalfspacesolid.htm
+[ifcSql(TypeGroupId:5,TypeId:230701,TableId:3,LayerId:29)] public partial class HalfSpaceSolid:GeometricRepresentationItem{//======================================================
 public               HalfSpaceSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BaseSurface"><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.Plane(...)</para></param>
@@ -4369,8 +4461,8 @@ public               HalfSpaceSolid(Surface BaseSurface,BOOLEAN AgreementFlag,st
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcheatexchangertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230702,TableId:3)] public partial class HeatExchangerType:EnergyConversionDeviceType{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcheatexchangertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230702,TableId:3,LayerId:15)] public partial class HeatExchangerType:EnergyConversionDeviceType{//====================================================
 public               HeatExchangerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4389,8 +4481,8 @@ public               HeatExchangerType(OwnerHistory _OwnerHistory,HeatExchangerT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifchumidifiertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230703,TableId:3)] public partial class HumidifierType:EnergyConversionDeviceType{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifchumidifiertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230703,TableId:3,LayerId:15)] public partial class HumidifierType:EnergyConversionDeviceType{//=======================================================
 public               HumidifierType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4409,8 +4501,8 @@ public               HumidifierType(OwnerHistory _OwnerHistory,HumidifierTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifchygroscopicmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230704,TableId:3)] public partial class HygroscopicMaterialProperties:MaterialProperties{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifchygroscopicmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230704,TableId:3,LayerId:-5)] public partial class HygroscopicMaterialProperties:MaterialProperties{//================================================
 public               HygroscopicMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -4429,8 +4521,8 @@ public               HygroscopicMaterialProperties(Material _Material,PositiveRa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcishapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230705,TableId:3)] public partial class IShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcishapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230705,TableId:3,LayerId:36)] public partial class IShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               IShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -4451,8 +4543,8 @@ public               IShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcimagetexture.htm
-[ifcSql(TypeGroupId:5,TypeId:230706,TableId:3)] public partial class ImageTexture:SurfaceTexture{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcimagetexture.htm
+[ifcSql(TypeGroupId:5,TypeId:230706,TableId:3,LayerId:33)] public partial class ImageTexture:SurfaceTexture{//=====================================================================
 public               ImageTexture():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RepeatS"><para>BOOLEAN</para></param>
@@ -4466,8 +4558,8 @@ public               ImageTexture(BOOLEAN RepeatS,BOOLEAN RepeatT,SurfaceTexture
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcinventory.htm
-[ifcSql(TypeGroupId:5,TypeId:230707,TableId:3)] public partial class Inventory:Group{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcinventory.htm
+[ifcSql(TypeGroupId:5,TypeId:230707,TableId:3,LayerId: 8)] public partial class Inventory:Group{//=================================================================================
 public               Inventory():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4492,8 +4584,8 @@ public               Inventory(OwnerHistory _OwnerHistory,InventoryTypeEnum Inve
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcirregulartimeseries.htm
-[ifcSql(TypeGroupId:5,TypeId:230708,TableId:3)] public partial class IrregularTimeSeries:TimeSeries{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcirregulartimeseries.htm
+[ifcSql(TypeGroupId:5,TypeId:230708,TableId:3,LayerId:-1)] public partial class IrregularTimeSeries:TimeSeries{//==================================================================
 public               IrregularTimeSeries():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -4511,8 +4603,8 @@ public               IrregularTimeSeries(Label Name,DateTimeSelect StartTime,Dat
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcirregulartimeseriesvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230709,TableId:3)] public partial class IrregularTimeSeriesValue:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcirregulartimeseriesvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230709,TableId:3,LayerId:-1)] public partial class IrregularTimeSeriesValue:ENTITY{//=================================================================
 public               IrregularTimeSeriesValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TimeStamp"><para>new ifc.DateTimeSelect(new CalendarDate(...))...</para><para>new ifc.DateTimeSelect(new DateAndTime(...))...</para><para>new ifc.DateTimeSelect(new LocalTime(...))...</para></param>
@@ -4524,8 +4616,8 @@ public               IrregularTimeSeriesValue(DateTimeSelect TimeStamp,List1toUn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcjunctionboxtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230710,TableId:3)] public partial class JunctionBoxType:FlowFittingType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcjunctionboxtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230710,TableId:3,LayerId:14)] public partial class JunctionBoxType:FlowFittingType{//=================================================================
 public               JunctionBoxType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4544,8 +4636,8 @@ public               JunctionBoxType(OwnerHistory _OwnerHistory,JunctionBoxTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclshapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230711,TableId:3)] public partial class LShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclshapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230711,TableId:3,LayerId:36)] public partial class LShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               LShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -4572,8 +4664,8 @@ public               LShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclaborresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230712,TableId:3)] public partial class LaborResource:ConstructionResource{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclaborresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230712,TableId:3,LayerId:13)] public partial class LaborResource:ConstructionResource{//==============================================================
 public               LaborResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4592,8 +4684,8 @@ public               LaborResource(OwnerHistory _OwnerHistory,GloballyUniqueId G
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclamptype.htm
-[ifcSql(TypeGroupId:5,TypeId:230713,TableId:3)] public partial class LampType:FlowTerminalType{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclamptype.htm
+[ifcSql(TypeGroupId:5,TypeId:230713,TableId:3,LayerId:14)] public partial class LampType:FlowTerminalType{//=======================================================================
 public               LampType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4612,8 +4704,8 @@ public               LampType(OwnerHistory _OwnerHistory,LampTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclibraryinformation.htm
-[ifcSql(TypeGroupId:5,TypeId:230714,TableId:3)] public partial class LibraryInformation:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclibraryinformation.htm
+[ifcSql(TypeGroupId:5,TypeId:230714,TableId:3,LayerId:27)] public partial class LibraryInformation:ENTITY{//=======================================================================
 public               LibraryInformation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -4633,8 +4725,8 @@ public override void AssignInverseElements(){if (_LibraryReference!=null) foreac
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclibraryreference.htm
-[ifcSql(TypeGroupId:5,TypeId:230715,TableId:3)] public partial class LibraryReference:ExternalReference{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclibraryreference.htm
+[ifcSql(TypeGroupId:5,TypeId:230715,TableId:3,LayerId:27)] public partial class LibraryReference:ExternalReference{//==============================================================
 public               LibraryReference():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Location">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4647,8 +4739,8 @@ public               LibraryReference(Label Location,Identifier ItemReference=nu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightdistributiondata.htm
-[ifcSql(TypeGroupId:5,TypeId:230716,TableId:3)] public partial class LightDistributionData:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightdistributiondata.htm
+[ifcSql(TypeGroupId:5,TypeId:230716,TableId:3,LayerId:35)] public partial class LightDistributionData:ENTITY{//====================================================================
 public               LightDistributionData():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="MainPlaneAngle"><para>cast to (ifc.PlaneAngleMeasure)...</para></param>
@@ -4662,8 +4754,8 @@ public               LightDistributionData(PlaneAngleMeasure MainPlaneAngle,List
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightfixturetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230717,TableId:3)] public partial class LightFixtureType:FlowTerminalType{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightfixturetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230717,TableId:3,LayerId:14)] public partial class LightFixtureType:FlowTerminalType{//===============================================================
 public               LightFixtureType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -4682,8 +4774,8 @@ public               LightFixtureType(OwnerHistory _OwnerHistory,LightFixtureTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightintensitydistribution.htm
-[ifcSql(TypeGroupId:5,TypeId:230718,TableId:3)] public partial class LightIntensityDistribution:ENTITY{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightintensitydistribution.htm
+[ifcSql(TypeGroupId:5,TypeId:230718,TableId:3,LayerId:35)] public partial class LightIntensityDistribution:ENTITY{//===============================================================
 public               LightIntensityDistribution():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="LightDistributionCurve"><para>LightDistributionCurveEnum</para></param>
@@ -4695,7 +4787,8 @@ public               LightIntensityDistribution(LightDistributionCurveEnum Light
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230719,TableId:3)] public partial class LightSource:GeometricRepresentationItem{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsource.htm
+[ifcSql(TypeGroupId:5,TypeId:230719,TableId:3,LayerId:35)] public partial class LightSource:GeometricRepresentationItem{//=========================================================
 public               LightSource():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 [ifc(2)] public ColourRgb LightColour; //ENTITY
@@ -4704,8 +4797,8 @@ public               LightSource():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightsourceambient.htm
-[ifcSql(TypeGroupId:5,TypeId:230720,TableId:3)] public partial class LightSourceAmbient:LightSource{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsourceambient.htm
+[ifcSql(TypeGroupId:5,TypeId:230720,TableId:3,LayerId:35)] public partial class LightSourceAmbient:LightSource{//==================================================================
 public               LightSourceAmbient():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4717,8 +4810,8 @@ public               LightSourceAmbient(ColourRgb LightColour,Label Name=null,No
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightsourcedirectional.htm
-[ifcSql(TypeGroupId:5,TypeId:230721,TableId:3)] public partial class LightSourceDirectional:LightSource{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsourcedirectional.htm
+[ifcSql(TypeGroupId:5,TypeId:230721,TableId:3,LayerId:35)] public partial class LightSourceDirectional:LightSource{//==============================================================
 public               LightSourceDirectional():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4732,8 +4825,8 @@ public               LightSourceDirectional(ColourRgb LightColour,Direction Orie
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightsourcegoniometric.htm
-[ifcSql(TypeGroupId:5,TypeId:230722,TableId:3)] public partial class LightSourceGoniometric:LightSource{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsourcegoniometric.htm
+[ifcSql(TypeGroupId:5,TypeId:230722,TableId:3,LayerId:35)] public partial class LightSourceGoniometric:LightSource{//==============================================================
 public               LightSourceGoniometric():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4757,8 +4850,8 @@ public               LightSourceGoniometric(ColourRgb LightColour,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.LightSourceSpot(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightsourcepositional.htm
-[ifcSql(TypeGroupId:5,TypeId:230723,TableId:3)] public partial class LightSourcePositional:LightSource{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsourcepositional.htm
+[ifcSql(TypeGroupId:5,TypeId:230723,TableId:3,LayerId:35)] public partial class LightSourcePositional:LightSource{//===============================================================
 public               LightSourcePositional():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4780,8 +4873,8 @@ public               LightSourcePositional(ColourRgb LightColour,CartesianPoint 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclightsourcespot.htm
-[ifcSql(TypeGroupId:5,TypeId:230724,TableId:3)] public partial class LightSourceSpot:LightSourcePositional{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclightsourcespot.htm
+[ifcSql(TypeGroupId:5,TypeId:230724,TableId:3,LayerId:35)] public partial class LightSourceSpot:LightSourcePositional{//===========================================================
 public               LightSourceSpot():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4806,8 +4899,8 @@ public               LightSourceSpot(ColourRgb LightColour,CartesianPoint Positi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcline.htm
-[ifcSql(TypeGroupId:5,TypeId:230725,TableId:3)] public partial class Line:Curve{//======================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcline.htm
+[ifcSql(TypeGroupId:5,TypeId:230725,TableId:3,LayerId:30)] public partial class Line:Curve{//======================================================================================
 public               Line():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Pnt"><para>new ifc.CartesianPoint(...)</para></param>
@@ -4819,8 +4912,8 @@ public               Line(CartesianPoint Pnt,Vector Dir,string EndOfLineComment=
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclineardimension.htm
-[ifcSql(TypeGroupId:5,TypeId:230726,TableId:3)] public partial class LinearDimension:DimensionCurveDirectedCallout{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclineardimension.htm
+[ifcSql(TypeGroupId:5,TypeId:230726,TableId:3,LayerId:-4)] public partial class LinearDimension:DimensionCurveDirectedCallout{//===================================================
 public               LinearDimension():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -4829,8 +4922,8 @@ public               LinearDimension(Set1toUnbounded_DraughtingCalloutElement Co
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclocalplacement.htm
-[ifcSql(TypeGroupId:5,TypeId:230727,TableId:3)] public partial class LocalPlacement:ObjectPlacement{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclocalplacement.htm
+[ifcSql(TypeGroupId:5,TypeId:230727,TableId:3,LayerId:28)] public partial class LocalPlacement:ObjectPlacement{//==================================================================
 public               LocalPlacement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="PlacementRelTo">[optional]<para>new ifc.GridPlacement(...)</para><para>new ifc.LocalPlacement(...)</para></param>
@@ -4844,8 +4937,8 @@ public override void AssignInverseElements(){if (PlacementRelTo!=null) {if (Plac
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifclocaltime.htm
-[ifcSql(TypeGroupId:5,TypeId:230728,TableId:3)] public partial class LocalTime:ENTITY{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifclocaltime.htm
+[ifcSql(TypeGroupId:5,TypeId:230728,TableId:3,LayerId:26)] public partial class LocalTime:ENTITY{//================================================================================
 public               LocalTime():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="HourComponent"><para>cast to (ifc.HourInDay)...</para></param>
@@ -4863,21 +4956,22 @@ public               LocalTime(HourInDay HourComponent,MinuteInHour MinuteCompon
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.EdgeLoop(...)</para><para>new ifc.PolyLoop(...)</para><para>new ifc.VertexLoop(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcloop.htm
-[ifcSql(TypeGroupId:5,TypeId:230729,TableId:3)] public partial class Loop:TopologicalRepresentationItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcloop.htm
+[ifcSql(TypeGroupId:5,TypeId:230729,TableId:3,LayerId:41)] public partial class Loop:TopologicalRepresentationItem{//==============================================================
 public               Loop():base(){}
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FacetedBrep(...)</para><para>new ifc.FacetedBrepWithVoids(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230730,TableId:3)] public partial class ManifoldSolidBrep:SolidModel{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmanifoldsolidbrep.htm
+[ifcSql(TypeGroupId:5,TypeId:230730,TableId:3,LayerId:29)] public partial class ManifoldSolidBrep:SolidModel{//====================================================================
 public               ManifoldSolidBrep():base(){}// abstract
 [ifc(1)] public ClosedShell Outer; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmappeditem.htm
-[ifcSql(TypeGroupId:5,TypeId:230731,TableId:3)] public partial class MappedItem:RepresentationItem{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmappeditem.htm
+[ifcSql(TypeGroupId:5,TypeId:230731,TableId:3,LayerId:30)] public partial class MappedItem:RepresentationItem{//===================================================================
 public               MappedItem():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="MappingSource"><para>new ifc.RepresentationMap(...)</para></param>
@@ -4891,8 +4985,8 @@ public override void AssignInverseElements(){if (MappingSource!=null) {if (Mappi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmaterial.htm
-[ifcSql(TypeGroupId:5,TypeId:230732,TableId:3)] public partial class Material:ENTITY{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmaterial.htm
+[ifcSql(TypeGroupId:5,TypeId:230732,TableId:3,LayerId:31)] public partial class Material:ENTITY{//=================================================================================
 public               Material():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -4906,8 +5000,8 @@ public               Material(Label Name,string EndOfLineComment=null):base(){Ad
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmaterialclassificationrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230733,TableId:3)] public partial class MaterialClassificationRelationship:ENTITY{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmaterialclassificationrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230733,TableId:3,LayerId:31)] public partial class MaterialClassificationRelationship:ENTITY{//=======================================================
 public               MaterialClassificationRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="MaterialClassifications"><para>Set1toUnbounded_ClassificationNotationSelect</para></param>
@@ -4921,8 +5015,8 @@ public override void AssignInverseElements(){if (ClassifiedMaterial!=null) Class
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmaterialdefinitionrepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:230734,TableId:3)] public partial class MaterialDefinitionRepresentation:ProductRepresentation{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmaterialdefinitionrepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:230734,TableId:3,LayerId:39)] public partial class MaterialDefinitionRepresentation:ProductRepresentation{//==========================================
 public               MaterialDefinitionRepresentation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -4937,8 +5031,8 @@ public override void AssignInverseElements(){if (RepresentedMaterial!=null) Repr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmateriallayer.htm
-[ifcSql(TypeGroupId:5,TypeId:230735,TableId:3)] public partial class MaterialLayer:ENTITY{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmateriallayer.htm
+[ifcSql(TypeGroupId:5,TypeId:230735,TableId:3,LayerId:31)] public partial class MaterialLayer:ENTITY{//============================================================================
 public               MaterialLayer():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material">[optional]<para>new ifc.Material(...)</para></param>
@@ -4954,8 +5048,8 @@ public               MaterialLayer(PositiveLengthMeasure LayerThickness,Material
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmateriallayerset.htm
-[ifcSql(TypeGroupId:5,TypeId:230736,TableId:3)] public partial class MaterialLayerSet:ENTITY{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmateriallayerset.htm
+[ifcSql(TypeGroupId:5,TypeId:230736,TableId:3,LayerId:31)] public partial class MaterialLayerSet:ENTITY{//=========================================================================
 public               MaterialLayerSet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="MaterialLayers"><para>List1toUnbounded_MaterialLayer</para></param>
@@ -4969,8 +5063,8 @@ public override void AssignInverseElements(){if (MaterialLayers!=null) foreach (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmateriallayersetusage.htm
-[ifcSql(TypeGroupId:5,TypeId:230737,TableId:3)] public partial class MaterialLayerSetUsage:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmateriallayersetusage.htm
+[ifcSql(TypeGroupId:5,TypeId:230737,TableId:3,LayerId:31)] public partial class MaterialLayerSetUsage:ENTITY{//====================================================================
 public               MaterialLayerSetUsage():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ForLayerSet"><para>new ifc.MaterialLayerSet(...)</para></param>
@@ -4986,8 +5080,8 @@ public               MaterialLayerSetUsage(MaterialLayerSet ForLayerSet,LayerSet
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmateriallist.htm
-[ifcSql(TypeGroupId:5,TypeId:230738,TableId:3)] public partial class MaterialList:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmateriallist.htm
+[ifcSql(TypeGroupId:5,TypeId:230738,TableId:3,LayerId:31)] public partial class MaterialList:ENTITY{//=============================================================================
 public               MaterialList():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Materials"><para>List1toUnbounded_Material</para></param>
@@ -4997,14 +5091,15 @@ public               MaterialList(List1toUnbounded_Material Materials,string End
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ExtendedMaterialProperties(...)</para><para>new ifc.FuelProperties(...)</para><para>new ifc.GeneralMaterialProperties(...)</para><para>new ifc.HygroscopicMaterialProperties(...)</para><para>new ifc.MechanicalMaterialProperties(...)</para><para>new ifc.OpticalMaterialProperties(...)</para><para>new ifc.ProductsOfCombustionProperties(...)</para><para>new ifc.ThermalMaterialProperties(...)</para><para>new ifc.WaterProperties(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230739,TableId:3)] public partial class MaterialProperties:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230739,TableId:3,LayerId:31)] public partial class MaterialProperties:ENTITY{//=======================================================================
 public               MaterialProperties():base(){}// abstract
 [ifc(1)] public Material _Material; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmeasurewithunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230740,TableId:3)] public partial class MeasureWithUnit:ENTITY{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmeasurewithunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230740,TableId:3,LayerId:32)] public partial class MeasureWithUnit:ENTITY{//==========================================================================
 public               MeasureWithUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ValueComponent"><para>new ifc.Value(new Label(...))...</para><para>new ifc.Value(new RatioMeasure(...))...</para><para>new ifc.Value(new LengthMeasure(...))...</para><para>new ifc.Value(new PlaneAngleMeasure(...))...</para><para>new ifc.Value(new AbsorbedDoseMeasure(...))...</para><para>new ifc.Value(new AccelerationMeasure(...))...</para><para>new ifc.Value(new WarpingConstantMeasure(...))...</para><para>new ifc.Value(new WarpingMomentMeasure(...))...</para><para>new ifc.Value(new DerivedMeasureValue(...))...</para><para>new ifc.Value(new MeasureValue(...))...</para><para>new ifc.Value(new SimpleValue(...))...</para><para>new ifc.Value(new TimeMeasure(...))...</para><para>new ifc.Value(new TimeStamp(...))...</para><para>new ifc.Value(new TorqueMeasure(...))...</para><para>new ifc.Value(new VaporPermeabilityMeasure(...))...</para><para>new ifc.Value(new VolumeMeasure(...))...</para><para>new ifc.Value(new VolumetricFlowRateMeasure(...))...</para><para>new ifc.Value(new ThermalAdmittanceMeasure(...))...</para><para>new ifc.Value(new ThermalConductivityMeasure(...))...</para><para>... (and more [truncated]) ...</para></param>
@@ -5016,8 +5111,8 @@ public               MeasureWithUnit(Value ValueComponent,Unit UnitComponent,str
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmechanicalconcretematerialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230741,TableId:3)] public partial class MechanicalConcreteMaterialProperties:MechanicalMaterialProperties{//===============================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmechanicalconcretematerialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230741,TableId:3,LayerId:-5)] public partial class MechanicalConcreteMaterialProperties:MechanicalMaterialProperties{//===============================
 public               MechanicalConcreteMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -5043,8 +5138,8 @@ public               MechanicalConcreteMaterialProperties(Material _Material,Dyn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmechanicalfastener.htm
-[ifcSql(TypeGroupId:5,TypeId:230742,TableId:3)] public partial class MechanicalFastener:Fastener{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmechanicalfastener.htm
+[ifcSql(TypeGroupId:5,TypeId:230742,TableId:3,LayerId: 7)] public partial class MechanicalFastener:Fastener{//=====================================================================
 public               MechanicalFastener():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5064,8 +5159,8 @@ public               MechanicalFastener(OwnerHistory _OwnerHistory,GloballyUniqu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmechanicalfastenertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230743,TableId:3)] public partial class MechanicalFastenerType:FastenerType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmechanicalfastenertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230743,TableId:3,LayerId: 7)] public partial class MechanicalFastenerType:FastenerType{//=============================================================
 public               MechanicalFastenerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5082,8 +5177,8 @@ public               MechanicalFastenerType(OwnerHistory _OwnerHistory,GloballyU
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.MechanicalConcreteMaterialProperties(...)</para><para>new ifc.MechanicalSteelMaterialProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmechanicalmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230744,TableId:3)] public partial class MechanicalMaterialProperties:MaterialProperties{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmechanicalmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230744,TableId:3,LayerId:-5)] public partial class MechanicalMaterialProperties:MaterialProperties{//=================================================
 public               MechanicalMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -5102,8 +5197,8 @@ public               MechanicalMaterialProperties(Material _Material,DynamicVisc
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmechanicalsteelmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230745,TableId:3)] public partial class MechanicalSteelMaterialProperties:MechanicalMaterialProperties{//==================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmechanicalsteelmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230745,TableId:3,LayerId:-5)] public partial class MechanicalSteelMaterialProperties:MechanicalMaterialProperties{//==================================
 public               MechanicalSteelMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -5131,8 +5226,8 @@ public               MechanicalSteelMaterialProperties(Material _Material,Dynami
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmember.htm
-[ifcSql(TypeGroupId:5,TypeId:230746,TableId:3)] public partial class Member:BuildingElement{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmember.htm
+[ifcSql(TypeGroupId:5,TypeId:230746,TableId:3,LayerId: 5)] public partial class Member:BuildingElement{//==========================================================================
 public               Member():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5148,8 +5243,8 @@ public               Member(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmembertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230747,TableId:3)] public partial class MemberType:BuildingElementType{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmembertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230747,TableId:3,LayerId: 5)] public partial class MemberType:BuildingElementType{//==================================================================
 public               MemberType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5168,8 +5263,8 @@ public               MemberType(OwnerHistory _OwnerHistory,MemberTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmetric.htm
-[ifcSql(TypeGroupId:5,TypeId:230748,TableId:3)] public partial class Metric:Constraint{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmetric.htm
+[ifcSql(TypeGroupId:5,TypeId:230748,TableId:3,LayerId:24)] public partial class Metric:Constraint{//===============================================================================
 public               Metric():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -5190,8 +5285,8 @@ public               Metric(Label Name,ConstraintEnum ConstraintGrade,BenchmarkE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmonetaryunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230749,TableId:3)] public partial class MonetaryUnit:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmonetaryunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230749,TableId:3,LayerId:32)] public partial class MonetaryUnit:ENTITY{//=============================================================================
 public               MonetaryUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Currency"><para>CurrencyEnum</para></param>
@@ -5201,8 +5296,8 @@ public               MonetaryUnit(CurrencyEnum Currency,string EndOfLineComment=
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmotorconnectiontype.htm
-[ifcSql(TypeGroupId:5,TypeId:230750,TableId:3)] public partial class MotorConnectionType:EnergyConversionDeviceType{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmotorconnectiontype.htm
+[ifcSql(TypeGroupId:5,TypeId:230750,TableId:3,LayerId:14)] public partial class MotorConnectionType:EnergyConversionDeviceType{//==================================================
 public               MotorConnectionType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5221,8 +5316,8 @@ public               MotorConnectionType(OwnerHistory _OwnerHistory,MotorConnect
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcmove.htm
-[ifcSql(TypeGroupId:5,TypeId:230751,TableId:3)] public partial class Move:Task{//=======================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcmove.htm
+[ifcSql(TypeGroupId:5,TypeId:230751,TableId:3,LayerId:-6)] public partial class Move:Task{//=======================================================================================
 public               Move():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5246,14 +5341,16 @@ public               Move(OwnerHistory _OwnerHistory,Identifier TaskId,BOOLEAN I
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ContextDependentUnit(...)</para><para>new ifc.ConversionBasedUnit(...)</para><para>new ifc.SIUnit(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230752,TableId:3)] public partial class NamedUnit:ENTITY{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcnamedunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230752,TableId:3,LayerId:32)] public partial class NamedUnit:ENTITY{//================================================================================
 public               NamedUnit():base(){}// abstract
 [ifc(1,derived=true)] public DimensionalExponents Dimensions; //ENTITY
 [ifc(2)] public UnitEnum UnitType; //ENUM
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Actor(...)</para><para>new ifc.Occupant(...)</para><para>new ifc.Control(...)</para><para>new ifc.ActionRequest(...)</para><para>new ifc.ConditionCriterion(...)</para><para>new ifc.CostItem(...)</para><para>new ifc.CostSchedule(...)</para><para>new ifc.EquipmentStandard(...)</para><para>new ifc.FurnitureStandard(...)</para><para>new ifc.PerformanceHistory(...)</para><para>new ifc.Permit(...)</para><para>new ifc.ProjectOrder(...)</para><para>new ifc.ProjectOrderRecord(...)</para><para>new ifc.ScheduleTimeControl(...)</para><para>new ifc.ServiceLife(...)</para><para>new ifc.SpaceProgram(...)</para><para>new ifc.TimeSeriesSchedule(...)</para><para>new ifc.WorkControl(...)</para><para>new ifc.Group(...)</para><para>new ifc.Asset(...)</para><para>new ifc.Condition(...)</para><para>new ifc.Inventory(...)</para><para>new ifc.StructuralLoadGroup(...)</para><para>new ifc.StructuralResultGroup(...)</para><para>new ifc.System(...)</para><para>new ifc.Zone(...)</para><para>new ifc.Process(...)</para><para>new ifc.Product(...)</para><para>new ifc.Project(...)</para><para>new ifc.Resource(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230753,TableId:3)] public partial class Object:ObjectDefinition{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcobject.htm
+[ifcSql(TypeGroupId:5,TypeId:230753,TableId:3,LayerId: 2)] public partial class Object:ObjectDefinition{//=========================================================================
 public               Object():base(){}// abstract
 [ifc(5,optional=true)] public Label ObjectType; //TYPE
 /// <summary>INVERSE: IsDefinedBy of RelDefines for RelatedObjects</summary>
@@ -5261,7 +5358,8 @@ public               Object():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Object(...)</para><para>new ifc.Actor(...)</para><para>new ifc.Occupant(...)</para><para>new ifc.Control(...)</para><para>new ifc.ActionRequest(...)</para><para>new ifc.ConditionCriterion(...)</para><para>new ifc.CostItem(...)</para><para>new ifc.CostSchedule(...)</para><para>new ifc.EquipmentStandard(...)</para><para>new ifc.FurnitureStandard(...)</para><para>new ifc.PerformanceHistory(...)</para><para>new ifc.Permit(...)</para><para>new ifc.ProjectOrder(...)</para><para>new ifc.ProjectOrderRecord(...)</para><para>new ifc.ScheduleTimeControl(...)</para><para>new ifc.ServiceLife(...)</para><para>new ifc.SpaceProgram(...)</para><para>new ifc.TimeSeriesSchedule(...)</para><para>new ifc.WorkControl(...)</para><para>new ifc.Group(...)</para><para>new ifc.Asset(...)</para><para>new ifc.Condition(...)</para><para>new ifc.Inventory(...)</para><para>new ifc.StructuralLoadGroup(...)</para><para>new ifc.StructuralResultGroup(...)</para><para>new ifc.System(...)</para><para>new ifc.Zone(...)</para><para>new ifc.Process(...)</para><para>new ifc.Product(...)</para><para>new ifc.Project(...)</para><para>new ifc.Resource(...)</para><para>new ifc.TypeObject(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230754,TableId:3)] public partial class ObjectDefinition:Root{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcobjectdefinition.htm
+[ifcSql(TypeGroupId:5,TypeId:230754,TableId:3,LayerId: 2)] public partial class ObjectDefinition:Root{//===========================================================================
 public               ObjectDefinition():base(){}// abstract
 /// <summary>INVERSE: HasAssignments of RelAssigns for RelatedObjects</summary>
 [ifcInverse(For:"RelatedObjects")] public LIST<RelAssigns> HasAssignments;
@@ -5274,7 +5372,8 @@ public               ObjectDefinition():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GridPlacement(...)</para><para>new ifc.LocalPlacement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230755,TableId:3)] public partial class ObjectPlacement:ENTITY{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcobjectplacement.htm
+[ifcSql(TypeGroupId:5,TypeId:230755,TableId:3,LayerId:28)] public partial class ObjectPlacement:ENTITY{//==========================================================================
 public               ObjectPlacement():base(){}// abstract
 /// <summary>INVERSE: ReferencedByPlacements of LocalPlacement for PlacementRelTo</summary>
 [ifcInverse(For:"PlacementRelTo")] public LIST<LocalPlacement> ReferencedByPlacements;
@@ -5283,8 +5382,8 @@ public               ObjectPlacement():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcobjective.htm
-[ifcSql(TypeGroupId:5,TypeId:230756,TableId:3)] public partial class Objective:Constraint{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcobjective.htm
+[ifcSql(TypeGroupId:5,TypeId:230756,TableId:3,LayerId:24)] public partial class Objective:Constraint{//============================================================================
 public               Objective():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -5307,8 +5406,8 @@ public               Objective(Label Name,ConstraintEnum ConstraintGrade,Objecti
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcoccupant.htm
-[ifcSql(TypeGroupId:5,TypeId:230757,TableId:3)] public partial class Occupant:Actor{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcoccupant.htm
+[ifcSql(TypeGroupId:5,TypeId:230757,TableId:3,LayerId: 8)] public partial class Occupant:Actor{//==================================================================================
 public               Occupant():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5324,8 +5423,8 @@ public               Occupant(OwnerHistory _OwnerHistory,ActorSelect TheActor,Oc
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcoffsetcurve2d.htm
-[ifcSql(TypeGroupId:5,TypeId:230758,TableId:3)] public partial class OffsetCurve2D:Curve{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcoffsetcurve2d.htm
+[ifcSql(TypeGroupId:5,TypeId:230758,TableId:3,LayerId:30)] public partial class OffsetCurve2D:Curve{//=============================================================================
 public               OffsetCurve2D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisCurve"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -5339,8 +5438,8 @@ public               OffsetCurve2D(Curve BasisCurve,LengthMeasure Distance,LOGIC
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcoffsetcurve3d.htm
-[ifcSql(TypeGroupId:5,TypeId:230759,TableId:3)] public partial class OffsetCurve3D:Curve{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcoffsetcurve3d.htm
+[ifcSql(TypeGroupId:5,TypeId:230759,TableId:3,LayerId:30)] public partial class OffsetCurve3D:Curve{//=============================================================================
 public               OffsetCurve3D():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisCurve"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -5356,8 +5455,8 @@ public               OffsetCurve3D(Curve BasisCurve,LengthMeasure Distance,LOGIC
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.TwoDirectionRepeatFactor(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifconedirectionrepeatfactor.htm
-[ifcSql(TypeGroupId:5,TypeId:230760,TableId:3)] public partial class OneDirectionRepeatFactor:GeometricRepresentationItem{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifconedirectionrepeatfactor.htm
+[ifcSql(TypeGroupId:5,TypeId:230760,TableId:3,LayerId:33)] public partial class OneDirectionRepeatFactor:GeometricRepresentationItem{//============================================
 public               OneDirectionRepeatFactor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RepeatFactor"><para>new ifc.Vector(...)</para></param>
@@ -5367,8 +5466,8 @@ public               OneDirectionRepeatFactor(Vector RepeatFactor,string EndOfLi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcopenshell.htm
-[ifcSql(TypeGroupId:5,TypeId:230761,TableId:3)] public partial class OpenShell:ConnectedFaceSet{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcopenshell.htm
+[ifcSql(TypeGroupId:5,TypeId:230761,TableId:3,LayerId:41)] public partial class OpenShell:ConnectedFaceSet{//======================================================================
 public               OpenShell():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="CfsFaces"><para>Set1toUnbounded_Face</para></param>
@@ -5377,8 +5476,8 @@ public               OpenShell(Set1toUnbounded_Face CfsFaces,string EndOfLineCom
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcopeningelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230762,TableId:3)] public partial class OpeningElement:FeatureElementSubtraction{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcopeningelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230762,TableId:3,LayerId: 4)] public partial class OpeningElement:FeatureElementSubtraction{//========================================================
 public               OpeningElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5396,8 +5495,8 @@ public               OpeningElement(OwnerHistory _OwnerHistory,GloballyUniqueId 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcopticalmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230763,TableId:3)] public partial class OpticalMaterialProperties:MaterialProperties{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcopticalmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230763,TableId:3,LayerId:-5)] public partial class OpticalMaterialProperties:MaterialProperties{//====================================================
 public               OpticalMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -5424,8 +5523,8 @@ public               OpticalMaterialProperties(Material _Material,PositiveRatioM
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcorderaction.htm
-[ifcSql(TypeGroupId:5,TypeId:230764,TableId:3)] public partial class OrderAction:Task{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcorderaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230764,TableId:3,LayerId:-6)] public partial class OrderAction:Task{//================================================================================
 public               OrderAction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5445,8 +5544,8 @@ public               OrderAction(OwnerHistory _OwnerHistory,Identifier TaskId,BO
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcorganization.htm
-[ifcSql(TypeGroupId:5,TypeId:230765,TableId:3)] public partial class Organization:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcorganization.htm
+[ifcSql(TypeGroupId:5,TypeId:230765,TableId:3,LayerId:22)] public partial class Organization:ENTITY{//=============================================================================
 public               Organization():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Id">[optional]<para>cast to (ifc.Identifier)...</para></param>
@@ -5472,8 +5571,8 @@ public override void AssignInverseElements(){if (Addresses!=null) foreach (Addre
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcorganizationrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230766,TableId:3)] public partial class OrganizationRelationship:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcorganizationrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230766,TableId:3,LayerId:22)] public partial class OrganizationRelationship:ENTITY{//=================================================================
 public               OrganizationRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -5492,8 +5591,8 @@ public override void AssignInverseElements(){if (RelatingOrganization!=null) {if
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcorientededge.htm
-[ifcSql(TypeGroupId:5,TypeId:230767,TableId:3)] public partial class OrientedEdge:Edge{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcorientededge.htm
+[ifcSql(TypeGroupId:5,TypeId:230767,TableId:3,LayerId:41)] public partial class OrientedEdge:Edge{//===============================================================================
 public               OrientedEdge():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeStart"><para>new ifc.Vertex(...)</para><para>new ifc.VertexPoint(...)</para></param>
@@ -5507,8 +5606,8 @@ public               OrientedEdge(Vertex EdgeStart,Vertex EdgeEnd,Edge EdgeEleme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcoutlettype.htm
-[ifcSql(TypeGroupId:5,TypeId:230768,TableId:3)] public partial class OutletType:FlowTerminalType{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcoutlettype.htm
+[ifcSql(TypeGroupId:5,TypeId:230768,TableId:3,LayerId:14)] public partial class OutletType:FlowTerminalType{//=====================================================================
 public               OutletType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5527,8 +5626,8 @@ public               OutletType(OwnerHistory _OwnerHistory,OutletTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcownerhistory.htm
-[ifcSql(TypeGroupId:5,TypeId:230769,TableId:3)] public partial class OwnerHistory:ENTITY{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcownerhistory.htm
+[ifcSql(TypeGroupId:5,TypeId:230769,TableId:3,LayerId:42)] public partial class OwnerHistory:ENTITY{//=============================================================================
 public               OwnerHistory():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="OwningUser"><para>new ifc.PersonAndOrganization(...)</para></param>
@@ -5552,14 +5651,15 @@ public               OwnerHistory(PersonAndOrganization OwningUser,Application O
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230770,TableId:3)] public partial class ParameterizedProfileDef:ProfileDef{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcparameterizedprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230770,TableId:3,LayerId:36)] public partial class ParameterizedProfileDef:ProfileDef{//==============================================================
 public               ParameterizedProfileDef():base(){}// abstract
 [ifc(3)] public Axis2Placement2D Position; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpath.htm
-[ifcSql(TypeGroupId:5,TypeId:230771,TableId:3)] public partial class Path:TopologicalRepresentationItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpath.htm
+[ifcSql(TypeGroupId:5,TypeId:230771,TableId:3,LayerId:41)] public partial class Path:TopologicalRepresentationItem{//==============================================================
 public               Path():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeList"><para>List1toUnboundedUnique_OrientedEdge</para></param>
@@ -5569,8 +5669,8 @@ public               Path(List1toUnboundedUnique_OrientedEdge EdgeList,string En
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcperformancehistory.htm
-[ifcSql(TypeGroupId:5,TypeId:230772,TableId:3)] public partial class PerformanceHistory:Control{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcperformancehistory.htm
+[ifcSql(TypeGroupId:5,TypeId:230772,TableId:3,LayerId: 1)] public partial class PerformanceHistory:Control{//======================================================================
 public               PerformanceHistory():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5585,8 +5685,8 @@ public               PerformanceHistory(OwnerHistory _OwnerHistory,Label LifeCyc
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpermeablecoveringproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230773,TableId:3)] public partial class PermeableCoveringProperties:PropertySetDefinition{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpermeablecoveringproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230773,TableId:3,LayerId:11)] public partial class PermeableCoveringProperties:PropertySetDefinition{//===============================================
 public               PermeableCoveringProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5608,8 +5708,8 @@ public               PermeableCoveringProperties(OwnerHistory _OwnerHistory,Perm
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpermit.htm
-[ifcSql(TypeGroupId:5,TypeId:230774,TableId:3)] public partial class Permit:Control{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpermit.htm
+[ifcSql(TypeGroupId:5,TypeId:230774,TableId:3,LayerId:10)] public partial class Permit:Control{//==================================================================================
 public               Permit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5624,8 +5724,8 @@ public               Permit(OwnerHistory _OwnerHistory,Identifier PermitID,Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcperson.htm
-[ifcSql(TypeGroupId:5,TypeId:230775,TableId:3)] public partial class Person:ENTITY{//===================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcperson.htm
+[ifcSql(TypeGroupId:5,TypeId:230775,TableId:3,LayerId:22)] public partial class Person:ENTITY{//===================================================================================
 public               Person():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Id">[optional]<para>cast to (ifc.Identifier)...</para></param>
@@ -5653,8 +5753,8 @@ public override void AssignInverseElements(){if (Addresses!=null) foreach (Addre
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpersonandorganization.htm
-[ifcSql(TypeGroupId:5,TypeId:230776,TableId:3)] public partial class PersonAndOrganization:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpersonandorganization.htm
+[ifcSql(TypeGroupId:5,TypeId:230776,TableId:3,LayerId:22)] public partial class PersonAndOrganization:ENTITY{//====================================================================
 public               PersonAndOrganization():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ThePerson"><para>new ifc.Person(...)</para></param>
@@ -5671,8 +5771,8 @@ public override void AssignInverseElements(){if (TheOrganization!=null) {if (The
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcphysicalcomplexquantity.htm
-[ifcSql(TypeGroupId:5,TypeId:230777,TableId:3)] public partial class PhysicalComplexQuantity:PhysicalQuantity{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcphysicalcomplexquantity.htm
+[ifcSql(TypeGroupId:5,TypeId:230777,TableId:3,LayerId:38)] public partial class PhysicalComplexQuantity:PhysicalQuantity{//========================================================
 public               PhysicalComplexQuantity():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -5692,7 +5792,8 @@ public override void AssignInverseElements(){if (HasQuantities!=null) foreach (P
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PhysicalComplexQuantity(...)</para><para>new ifc.PhysicalSimpleQuantity(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230778,TableId:3)] public partial class PhysicalQuantity:ENTITY{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcphysicalquantity.htm
+[ifcSql(TypeGroupId:5,TypeId:230778,TableId:3,LayerId:38)] public partial class PhysicalQuantity:ENTITY{//=========================================================================
 public               PhysicalQuantity():base(){}// abstract
 [ifc(1)] public Label Name; //TYPE
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -5701,14 +5802,15 @@ public               PhysicalQuantity():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.QuantityArea(...)</para><para>new ifc.QuantityCount(...)</para><para>new ifc.QuantityLength(...)</para><para>new ifc.QuantityTime(...)</para><para>new ifc.QuantityVolume(...)</para><para>new ifc.QuantityWeight(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230779,TableId:3)] public partial class PhysicalSimpleQuantity:PhysicalQuantity{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcphysicalsimplequantity.htm
+[ifcSql(TypeGroupId:5,TypeId:230779,TableId:3,LayerId:38)] public partial class PhysicalSimpleQuantity:PhysicalQuantity{//=========================================================
 public               PhysicalSimpleQuantity():base(){}// abstract
 [ifc(3,optional=true)] public NamedUnit Unit; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpile.htm
-[ifcSql(TypeGroupId:5,TypeId:230780,TableId:3)] public partial class Pile:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpile.htm
+[ifcSql(TypeGroupId:5,TypeId:230780,TableId:3,LayerId:21)] public partial class Pile:BuildingElement{//============================================================================
 public               Pile():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5728,8 +5830,8 @@ public               Pile(OwnerHistory _OwnerHistory,PileTypeEnum PredefinedType
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpipefittingtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230781,TableId:3)] public partial class PipeFittingType:FlowFittingType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpipefittingtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230781,TableId:3,LayerId:15)] public partial class PipeFittingType:FlowFittingType{//=================================================================
 public               PipeFittingType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5748,8 +5850,8 @@ public               PipeFittingType(OwnerHistory _OwnerHistory,PipeFittingTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpipesegmenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230782,TableId:3)] public partial class PipeSegmentType:FlowSegmentType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpipesegmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230782,TableId:3,LayerId:15)] public partial class PipeSegmentType:FlowSegmentType{//=================================================================
 public               PipeSegmentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5768,8 +5870,8 @@ public               PipeSegmentType(OwnerHistory _OwnerHistory,PipeSegmentTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpixeltexture.htm
-[ifcSql(TypeGroupId:5,TypeId:230783,TableId:3)] public partial class PixelTexture:SurfaceTexture{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpixeltexture.htm
+[ifcSql(TypeGroupId:5,TypeId:230783,TableId:3,LayerId:33)] public partial class PixelTexture:SurfaceTexture{//=====================================================================
 public               PixelTexture():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RepeatS"><para>BOOLEAN</para></param>
@@ -5789,14 +5891,15 @@ public               PixelTexture(BOOLEAN RepeatS,BOOLEAN RepeatT,SurfaceTexture
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230784,TableId:3)] public partial class Placement:GeometricRepresentationItem{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplacement.htm
+[ifcSql(TypeGroupId:5,TypeId:230784,TableId:3,LayerId:30)] public partial class Placement:GeometricRepresentationItem{//===========================================================
 public               Placement():base(){}// abstract
 [ifc(1)] public CartesianPoint Location; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcplanarbox.htm
-[ifcSql(TypeGroupId:5,TypeId:230785,TableId:3)] public partial class PlanarBox:PlanarExtent{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplanarbox.htm
+[ifcSql(TypeGroupId:5,TypeId:230785,TableId:3,LayerId:34)] public partial class PlanarBox:PlanarExtent{//==========================================================================
 public               PlanarBox():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SizeInX"><para>cast to (ifc.LengthMeasure)...</para></param>
@@ -5808,8 +5911,8 @@ public               PlanarBox(LengthMeasure SizeInX,LengthMeasure SizeInY,Axis2
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PlanarBox(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcplanarextent.htm
-[ifcSql(TypeGroupId:5,TypeId:230786,TableId:3)] public partial class PlanarExtent:GeometricRepresentationItem{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplanarextent.htm
+[ifcSql(TypeGroupId:5,TypeId:230786,TableId:3,LayerId:34)] public partial class PlanarExtent:GeometricRepresentationItem{//========================================================
 public               PlanarExtent():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SizeInX"><para>cast to (ifc.LengthMeasure)...</para></param>
@@ -5821,8 +5924,8 @@ public               PlanarExtent(LengthMeasure SizeInX,LengthMeasure SizeInY,st
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcplane.htm
-[ifcSql(TypeGroupId:5,TypeId:230787,TableId:3)] public partial class Plane:ElementarySurface{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplane.htm
+[ifcSql(TypeGroupId:5,TypeId:230787,TableId:3,LayerId:30)] public partial class Plane:ElementarySurface{//=========================================================================
 public               Plane():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -5831,8 +5934,8 @@ public               Plane(Axis2Placement3D Position,string EndOfLineComment=nul
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcplate.htm
-[ifcSql(TypeGroupId:5,TypeId:230788,TableId:3)] public partial class Plate:BuildingElement{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplate.htm
+[ifcSql(TypeGroupId:5,TypeId:230788,TableId:3,LayerId: 5)] public partial class Plate:BuildingElement{//===========================================================================
 public               Plate():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5848,8 +5951,8 @@ public               Plate(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcplatetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230789,TableId:3)] public partial class PlateType:BuildingElementType{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcplatetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230789,TableId:3,LayerId: 5)] public partial class PlateType:BuildingElementType{//===================================================================
 public               PlateType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -5868,13 +5971,14 @@ public               PlateType(OwnerHistory _OwnerHistory,PlateTypeEnum Predefin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230790,TableId:3)] public partial class Point:GeometricRepresentationItem{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpoint.htm
+[ifcSql(TypeGroupId:5,TypeId:230790,TableId:3,LayerId:30)] public partial class Point:GeometricRepresentationItem{//===============================================================
 public               Point():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpointoncurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230791,TableId:3)] public partial class PointOnCurve:Point{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpointoncurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230791,TableId:3,LayerId:30)] public partial class PointOnCurve:Point{//==============================================================================
 public               PointOnCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisCurve"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -5886,8 +5990,8 @@ public               PointOnCurve(Curve BasisCurve,ParameterValue PointParameter
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpointonsurface.htm
-[ifcSql(TypeGroupId:5,TypeId:230792,TableId:3)] public partial class PointOnSurface:Point{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpointonsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230792,TableId:3,LayerId:30)] public partial class PointOnSurface:Point{//============================================================================
 public               PointOnSurface():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisSurface"><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.Plane(...)</para></param>
@@ -5901,8 +6005,8 @@ public               PointOnSurface(Surface BasisSurface,ParameterValue PointPar
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpolyloop.htm
-[ifcSql(TypeGroupId:5,TypeId:230793,TableId:3)] public partial class PolyLoop:Loop{//===================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpolyloop.htm
+[ifcSql(TypeGroupId:5,TypeId:230793,TableId:3,LayerId:41)] public partial class PolyLoop:Loop{//===================================================================================
 public               PolyLoop():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Polygon"><para>List3toUnboundedUnique_CartesianPoint</para></param>
@@ -5912,8 +6016,8 @@ public               PolyLoop(List3toUnboundedUnique_CartesianPoint Polygon,stri
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpolygonalboundedhalfspace.htm
-[ifcSql(TypeGroupId:5,TypeId:230794,TableId:3)] public partial class PolygonalBoundedHalfSpace:HalfSpaceSolid{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpolygonalboundedhalfspace.htm
+[ifcSql(TypeGroupId:5,TypeId:230794,TableId:3,LayerId:29)] public partial class PolygonalBoundedHalfSpace:HalfSpaceSolid{//========================================================
 public               PolygonalBoundedHalfSpace():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BaseSurface"><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.Plane(...)</para></param>
@@ -5927,8 +6031,8 @@ public               PolygonalBoundedHalfSpace(Surface BaseSurface,BOOLEAN Agree
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpolyline.htm
-[ifcSql(TypeGroupId:5,TypeId:230795,TableId:3)] public partial class Polyline:BoundedCurve{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpolyline.htm
+[ifcSql(TypeGroupId:5,TypeId:230795,TableId:3,LayerId:30)] public partial class Polyline:BoundedCurve{//===========================================================================
 public               Polyline():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Points"><para>List2toUnbounded_CartesianPoint</para></param>
@@ -5938,7 +6042,8 @@ public               Polyline(List2toUnbounded_CartesianPoint Points,string EndO
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DistributionPort(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230796,TableId:3)] public partial class Port:Product{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcport.htm
+[ifcSql(TypeGroupId:5,TypeId:230796,TableId:3,LayerId: 4)] public partial class Port:Product{//====================================================================================
 public               Port():base(){}// abstract
 /// <summary>INVERSE: ContainedIn of RelConnectsPortToElement for RelatingPort</summary>
 [ifcInverse(For:"RelatingPort")] public RelConnectsPortToElement ContainedIn;
@@ -5949,8 +6054,8 @@ public               Port():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpostaladdress.htm
-[ifcSql(TypeGroupId:5,TypeId:230797,TableId:3)] public partial class PostalAddress:Address{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpostaladdress.htm
+[ifcSql(TypeGroupId:5,TypeId:230797,TableId:3,LayerId:22)] public partial class PostalAddress:Address{//===========================================================================
 public               PostalAddress():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Purpose">[optional]<para>AddressTypeEnum</para></param>
@@ -5975,18 +6080,20 @@ public               PostalAddress(AddressTypeEnum Purpose,Text Description=null
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DraughtingPreDefinedColour(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230798,TableId:3)] public partial class PreDefinedColour:PreDefinedItem{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedcolour.htm
+[ifcSql(TypeGroupId:5,TypeId:230798,TableId:3,LayerId:33)] public partial class PreDefinedColour:PreDefinedItem{//=================================================================
 public               PreDefinedColour():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DraughtingPreDefinedCurveFont(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230799,TableId:3)] public partial class PreDefinedCurveFont:PreDefinedItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedcurvefont.htm
+[ifcSql(TypeGroupId:5,TypeId:230799,TableId:3,LayerId:33)] public partial class PreDefinedCurveFont:PreDefinedItem{//==============================================================
 public               PreDefinedCurveFont():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpredefineddimensionsymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:230800,TableId:3)] public partial class PreDefinedDimensionSymbol:PreDefinedSymbol{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefineddimensionsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230800,TableId:3,LayerId:-4)] public partial class PreDefinedDimensionSymbol:PreDefinedSymbol{//======================================================
 public               PreDefinedDimensionSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -5995,14 +6102,15 @@ public               PreDefinedDimensionSymbol(Label Name,string EndOfLineCommen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PreDefinedColour(...)</para><para>new ifc.DraughtingPreDefinedColour(...)</para><para>new ifc.PreDefinedCurveFont(...)</para><para>new ifc.DraughtingPreDefinedCurveFont(...)</para><para>new ifc.PreDefinedSymbol(...)</para><para>new ifc.PreDefinedTextFont(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230801,TableId:3)] public partial class PreDefinedItem:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefineditem.htm
+[ifcSql(TypeGroupId:5,TypeId:230801,TableId:3,LayerId:33)] public partial class PreDefinedItem:ENTITY{//===========================================================================
 public               PreDefinedItem():base(){}// abstract
 [ifc(1)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpredefinedpointmarkersymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:230802,TableId:3)] public partial class PreDefinedPointMarkerSymbol:PreDefinedSymbol{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedpointmarkersymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230802,TableId:3,LayerId:-4)] public partial class PreDefinedPointMarkerSymbol:PreDefinedSymbol{//====================================================
 public               PreDefinedPointMarkerSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6011,13 +6119,14 @@ public               PreDefinedPointMarkerSymbol(Label Name,string EndOfLineComm
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PreDefinedDimensionSymbol(...)</para><para>new ifc.PreDefinedPointMarkerSymbol(...)</para><para>new ifc.PreDefinedTerminatorSymbol(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230803,TableId:3)] public partial class PreDefinedSymbol:PreDefinedItem{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230803,TableId:3,LayerId:34)] public partial class PreDefinedSymbol:PreDefinedItem{//=================================================================
 public               PreDefinedSymbol():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpredefinedterminatorsymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:230804,TableId:3)] public partial class PreDefinedTerminatorSymbol:PreDefinedSymbol{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedterminatorsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:230804,TableId:3,LayerId:-4)] public partial class PreDefinedTerminatorSymbol:PreDefinedSymbol{//=====================================================
 public               PreDefinedTerminatorSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6026,13 +6135,14 @@ public               PreDefinedTerminatorSymbol(Label Name,string EndOfLineComme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DraughtingPreDefinedTextFont(...)</para><para>new ifc.TextStyleFontModel(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230805,TableId:3)] public partial class PreDefinedTextFont:PreDefinedItem{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpredefinedtextfont.htm
+[ifcSql(TypeGroupId:5,TypeId:230805,TableId:3,LayerId:33)] public partial class PreDefinedTextFont:PreDefinedItem{//===============================================================
 public               PreDefinedTextFont():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PresentationLayerWithStyle(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpresentationlayerassignment.htm
-[ifcSql(TypeGroupId:5,TypeId:230806,TableId:3)] public partial class PresentationLayerAssignment:ENTITY{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpresentationlayerassignment.htm
+[ifcSql(TypeGroupId:5,TypeId:230806,TableId:3,LayerId:35)] public partial class PresentationLayerAssignment:ENTITY{//==============================================================
 public               PresentationLayerAssignment():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6051,8 +6161,8 @@ public override void AssignInverseElements(){if (AssignedItems!=null) foreach (L
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpresentationlayerwithstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:230807,TableId:3)] public partial class PresentationLayerWithStyle:PresentationLayerAssignment{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpresentationlayerwithstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230807,TableId:3,LayerId:35)] public partial class PresentationLayerWithStyle:PresentationLayerAssignment{//==========================================
 public               PresentationLayerWithStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6072,14 +6182,15 @@ public               PresentationLayerWithStyle(Label Name,Set1toUnbounded_Layer
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CurveStyle(...)</para><para>new ifc.FillAreaStyle(...)</para><para>new ifc.SurfaceStyle(...)</para><para>new ifc.SymbolStyle(...)</para><para>new ifc.TextStyle(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230808,TableId:3)] public partial class PresentationStyle:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpresentationstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:230808,TableId:3,LayerId:33)] public partial class PresentationStyle:ENTITY{//========================================================================
 public               PresentationStyle():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpresentationstyleassignment.htm
-[ifcSql(TypeGroupId:5,TypeId:230809,TableId:3)] public partial class PresentationStyleAssignment:ENTITY{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpresentationstyleassignment.htm
+[ifcSql(TypeGroupId:5,TypeId:230809,TableId:3,LayerId:33)] public partial class PresentationStyleAssignment:ENTITY{//==============================================================
 public               PresentationStyleAssignment():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Styles"><para>Set1toUnbounded_PresentationStyleSelect</para></param>
@@ -6089,8 +6200,8 @@ public               PresentationStyleAssignment(Set1toUnbounded_PresentationSty
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprocedure.htm
-[ifcSql(TypeGroupId:5,TypeId:230810,TableId:3)] public partial class Procedure:Process{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprocedure.htm
+[ifcSql(TypeGroupId:5,TypeId:230810,TableId:3,LayerId: 3)] public partial class Procedure:Process{//===============================================================================
 public               Procedure():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6109,7 +6220,8 @@ public               Procedure(OwnerHistory _OwnerHistory,Identifier ProcedureID
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Procedure(...)</para><para>new ifc.Task(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230811,TableId:3)] public partial class Process:Object{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprocess.htm
+[ifcSql(TypeGroupId:5,TypeId:230811,TableId:3,LayerId: 2)] public partial class Process:Object{//==================================================================================
 public               Process():base(){}// abstract
 /// <summary>INVERSE: OperatesOn of RelAssignsToProcess for RelatingProcess</summary>
 [ifcInverse(For:"RelatingProcess")] public LIST<RelAssignsToProcess> OperatesOn;
@@ -6120,7 +6232,8 @@ public               Process():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Annotation(...)</para><para>new ifc.Element(...)</para><para>new ifc.BuildingElement(...)</para><para>new ifc.Beam(...)</para><para>new ifc.BuildingElementComponent(...)</para><para>new ifc.BuildingElementPart(...)</para><para>new ifc.ReinforcingElement(...)</para><para>new ifc.BuildingElementProxy(...)</para><para>new ifc.Column(...)</para><para>new ifc.Covering(...)</para><para>new ifc.CurtainWall(...)</para><para>new ifc.Door(...)</para><para>new ifc.Footing(...)</para><para>new ifc.Member(...)</para><para>new ifc.Pile(...)</para><para>new ifc.Plate(...)</para><para>new ifc.Railing(...)</para><para>new ifc.Ramp(...)</para><para>new ifc.RampFlight(...)</para><para>new ifc.Roof(...)</para><para>new ifc.Slab(...)</para><para>new ifc.Stair(...)</para><para>new ifc.StairFlight(...)</para><para>new ifc.Wall(...)</para><para>new ifc.Window(...)</para><para>new ifc.DistributionElement(...)</para><para>new ifc.DistributionControlElement(...)</para><para>new ifc.DistributionFlowElement(...)</para><para>new ifc.DistributionChamberElement(...)</para><para>new ifc.EnergyConversionDevice(...)</para><para>new ifc.FlowController(...)</para><para>new ifc.ElectricDistributionPoint(...)</para><para>new ifc.FlowFitting(...)</para><para>new ifc.FlowMovingDevice(...)</para><para>new ifc.FlowSegment(...)</para><para>new ifc.FlowStorageDevice(...)</para><para>new ifc.FlowTerminal(...)</para><para>new ifc.FlowTreatmentDevice(...)</para><para>new ifc.ElectricalElement(...)</para><para>new ifc.ElementAssembly(...)</para><para>new ifc.ElementComponent(...)</para><para>new ifc.DiscreteAccessory(...)</para><para>new ifc.Fastener(...)</para><para>new ifc.MechanicalFastener(...)</para><para>new ifc.EquipmentElement(...)</para><para>new ifc.FeatureElement(...)</para><para>new ifc.FeatureElementAddition(...)</para><para>new ifc.ProjectionElement(...)</para><para>new ifc.FeatureElementSubtraction(...)</para><para>new ifc.EdgeFeature(...)</para><para>new ifc.ChamferEdgeFeature(...)</para><para>new ifc.RoundedEdgeFeature(...)</para><para>new ifc.OpeningElement(...)</para><para>new ifc.FurnishingElement(...)</para><para>new ifc.TransportElement(...)</para><para>new ifc.VirtualElement(...)</para><para>new ifc.Grid(...)</para><para>new ifc.Port(...)</para><para>new ifc.DistributionPort(...)</para><para>new ifc.Proxy(...)</para><para>new ifc.SpatialStructureElement(...)</para><para>new ifc.StructuralActivity(...)</para><para>new ifc.StructuralItem(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230812,TableId:3)] public partial class Product:Object{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproduct.htm
+[ifcSql(TypeGroupId:5,TypeId:230812,TableId:3,LayerId: 2)] public partial class Product:Object{//==================================================================================
 public               Product():base(){}// abstract
 [ifc(6,optional=true)] public ObjectPlacement _ObjectPlacement; //ENTITY
 [ifc(7,optional=true)] public ProductRepresentation _Representation; //ENTITY
@@ -6132,8 +6245,8 @@ public override void AssignInverseElements(){if (_ObjectPlacement!=null) _Object
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcproductdefinitionshape.htm
-[ifcSql(TypeGroupId:5,TypeId:230813,TableId:3)] public partial class ProductDefinitionShape:ProductRepresentation{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproductdefinitionshape.htm
+[ifcSql(TypeGroupId:5,TypeId:230813,TableId:3,LayerId:39)] public partial class ProductDefinitionShape:ProductRepresentation{//====================================================
 public               ProductDefinitionShape():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -6148,8 +6261,8 @@ public               ProductDefinitionShape(List1toUnbounded_Representation Repr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.MaterialDefinitionRepresentation(...)</para><para>new ifc.ProductDefinitionShape(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcproductrepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:230814,TableId:3)] public partial class ProductRepresentation:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproductrepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:230814,TableId:3,LayerId:39)] public partial class ProductRepresentation:ENTITY{//====================================================================
 public               ProductRepresentation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -6165,8 +6278,8 @@ public override void AssignInverseElements(){if (Representations!=null) foreach 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcproductsofcombustionproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230815,TableId:3)] public partial class ProductsOfCombustionProperties:MaterialProperties{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproductsofcombustionproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230815,TableId:3,LayerId:-5)] public partial class ProductsOfCombustionProperties:MaterialProperties{//===============================================
 public               ProductsOfCombustionProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -6183,22 +6296,24 @@ public               ProductsOfCombustionProperties(Material _Material,SpecificH
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.ParameterizedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230816,TableId:3)] public partial class ProfileDef:ENTITY{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230816,TableId:3,LayerId:36)] public partial class ProfileDef:ENTITY{//===============================================================================
 public               ProfileDef():base(){}// abstract
 [ifc(1)] public ProfileTypeEnum ProfileType; //ENUM
 [ifc(2,optional=true)] public Label ProfileName; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GeneralProfileProperties(...)</para><para>new ifc.StructuralProfileProperties(...)</para><para>new ifc.RibPlateProfileProperties(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230817,TableId:3)] public partial class ProfileProperties:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230817,TableId:3,LayerId:36)] public partial class ProfileProperties:ENTITY{//========================================================================
 public               ProfileProperties():base(){}// abstract
 [ifc(1,optional=true)] public Label ProfileName; //TYPE
 [ifc(2,optional=true)] public ProfileDef ProfileDefinition; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcproject.htm
-[ifcSql(TypeGroupId:5,TypeId:230818,TableId:3)] public partial class Project:Object{//==================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproject.htm
+[ifcSql(TypeGroupId:5,TypeId:230818,TableId:3,LayerId: 2)] public partial class Project:Object{//==================================================================================
 public               Project():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6219,8 +6334,8 @@ public               Project(OwnerHistory _OwnerHistory,Set1toUnbounded_Represen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprojectorder.htm
-[ifcSql(TypeGroupId:5,TypeId:230819,TableId:3)] public partial class ProjectOrder:Control{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprojectorder.htm
+[ifcSql(TypeGroupId:5,TypeId:230819,TableId:3,LayerId:10)] public partial class ProjectOrder:Control{//============================================================================
 public               ProjectOrder():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6239,8 +6354,8 @@ public               ProjectOrder(OwnerHistory _OwnerHistory,Identifier ID,Proje
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprojectorderrecord.htm
-[ifcSql(TypeGroupId:5,TypeId:230820,TableId:3)] public partial class ProjectOrderRecord:Control{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprojectorderrecord.htm
+[ifcSql(TypeGroupId:5,TypeId:230820,TableId:3,LayerId:10)] public partial class ProjectOrderRecord:Control{//======================================================================
 public               ProjectOrderRecord():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6257,8 +6372,8 @@ public               ProjectOrderRecord(OwnerHistory _OwnerHistory,List1toUnboun
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprojectioncurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230821,TableId:3)] public partial class ProjectionCurve:AnnotationCurveOccurrence{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprojectioncurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230821,TableId:3,LayerId:-4)] public partial class ProjectionCurve:AnnotationCurveOccurrence{//=======================================================
 public               ProjectionCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -6269,8 +6384,8 @@ public               ProjectionCurve(Set1toUnbounded_PresentationStyleAssignment
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprojectionelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230822,TableId:3)] public partial class ProjectionElement:FeatureElementAddition{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprojectionelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230822,TableId:3,LayerId: 4)] public partial class ProjectionElement:FeatureElementAddition{//========================================================
 public               ProjectionElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6286,7 +6401,8 @@ public               ProjectionElement(OwnerHistory _OwnerHistory,GloballyUnique
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ComplexProperty(...)</para><para>new ifc.SimpleProperty(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230823,TableId:3)] public partial class Property:ENTITY{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproperty.htm
+[ifcSql(TypeGroupId:5,TypeId:230823,TableId:3,LayerId:37)] public partial class Property:ENTITY{//=================================================================================
 public               Property():base(){}// abstract
 [ifc(1)] public Identifier Name; //TYPE
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -6299,8 +6415,8 @@ public               Property():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyboundedvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230824,TableId:3)] public partial class PropertyBoundedValue:SimpleProperty{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyboundedvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230824,TableId:3,LayerId:37)] public partial class PropertyBoundedValue:SimpleProperty{//=============================================================
 public               PropertyBoundedValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6316,8 +6432,8 @@ public               PropertyBoundedValue(Identifier Name,Text Description=null,
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyconstraintrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230825,TableId:3)] public partial class PropertyConstraintRelationship:ENTITY{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyconstraintrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230825,TableId:3,LayerId:24)] public partial class PropertyConstraintRelationship:ENTITY{//===========================================================
 public               PropertyConstraintRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelatingConstraint"><para>new ifc.Metric(...)</para><para>new ifc.Objective(...)</para></param>
@@ -6335,15 +6451,16 @@ public override void AssignInverseElements(){if (RelatingConstraint!=null) {if (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PropertySetDefinition(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230826,TableId:3)] public partial class PropertyDefinition:Root{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertydefinition.htm
+[ifcSql(TypeGroupId:5,TypeId:230826,TableId:3,LayerId: 2)] public partial class PropertyDefinition:Root{//=========================================================================
 public               PropertyDefinition():base(){}// abstract
 /// <summary>INVERSE: HasAssociations of RelAssociates for RelatedObjects</summary>
 [ifcInverse(For:"RelatedObjects")] public LIST<RelAssociates> HasAssociations;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertydependencyrelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:230827,TableId:3)] public partial class PropertyDependencyRelationship:ENTITY{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertydependencyrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230827,TableId:3,LayerId:37)] public partial class PropertyDependencyRelationship:ENTITY{//===========================================================
 public               PropertyDependencyRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DependingProperty"><para>new ifc.ComplexProperty(...)</para></param>
@@ -6364,8 +6481,8 @@ public override void AssignInverseElements(){if (DependingProperty!=null) {if (D
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyenumeratedvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230828,TableId:3)] public partial class PropertyEnumeratedValue:SimpleProperty{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyenumeratedvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230828,TableId:3,LayerId:37)] public partial class PropertyEnumeratedValue:SimpleProperty{//==========================================================
 public               PropertyEnumeratedValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6379,8 +6496,8 @@ public               PropertyEnumeratedValue(Identifier Name,List1toUnbounded_Va
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyenumeration.htm
-[ifcSql(TypeGroupId:5,TypeId:230829,TableId:3)] public partial class PropertyEnumeration:ENTITY{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyenumeration.htm
+[ifcSql(TypeGroupId:5,TypeId:230829,TableId:3,LayerId:37)] public partial class PropertyEnumeration:ENTITY{//======================================================================
 public               PropertyEnumeration():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6394,8 +6511,8 @@ public               PropertyEnumeration(Label Name,List1toUnboundedUnique_Value
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertylistvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230830,TableId:3)] public partial class PropertyListValue:SimpleProperty{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertylistvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230830,TableId:3,LayerId:37)] public partial class PropertyListValue:SimpleProperty{//================================================================
 public               PropertyListValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6409,8 +6526,8 @@ public               PropertyListValue(Identifier Name,List1toUnbounded_Value Li
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyreferencevalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230831,TableId:3)] public partial class PropertyReferenceValue:SimpleProperty{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyreferencevalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230831,TableId:3,LayerId:37)] public partial class PropertyReferenceValue:SimpleProperty{//===========================================================
 public               PropertyReferenceValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6424,8 +6541,8 @@ public               PropertyReferenceValue(Identifier Name,ObjectReferenceSelec
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertyset.htm
-[ifcSql(TypeGroupId:5,TypeId:230832,TableId:3)] public partial class PropertySet:PropertySetDefinition{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertyset.htm
+[ifcSql(TypeGroupId:5,TypeId:230832,TableId:3,LayerId: 2)] public partial class PropertySet:PropertySetDefinition{//===============================================================
 public               PropertySet():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6439,7 +6556,8 @@ public               PropertySet(OwnerHistory _OwnerHistory,Set1toUnbounded_Prop
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DoorLiningProperties(...)</para><para>new ifc.DoorPanelProperties(...)</para><para>new ifc.ElementQuantity(...)</para><para>new ifc.EnergyProperties(...)</para><para>new ifc.ElectricalBaseProperties(...)</para><para>new ifc.FluidFlowProperties(...)</para><para>new ifc.PermeableCoveringProperties(...)</para><para>new ifc.PropertySet(...)</para><para>new ifc.ReinforcementDefinitionProperties(...)</para><para>new ifc.ServiceLifeFactor(...)</para><para>new ifc.SoundProperties(...)</para><para>new ifc.SoundValue(...)</para><para>new ifc.SpaceThermalLoadProperties(...)</para><para>new ifc.WindowLiningProperties(...)</para><para>new ifc.WindowPanelProperties(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230833,TableId:3)] public partial class PropertySetDefinition:PropertyDefinition{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertysetdefinition.htm
+[ifcSql(TypeGroupId:5,TypeId:230833,TableId:3,LayerId: 2)] public partial class PropertySetDefinition:PropertyDefinition{//========================================================
 public               PropertySetDefinition():base(){}// abstract
 /// <summary>INVERSE: PropertyDefinitionOf of RelDefinesByProperties for RelatingPropertyDefinition</summary>
 [ifcInverse(For:"RelatingPropertyDefinition")] public RelDefinesByProperties PropertyDefinitionOf;
@@ -6448,8 +6566,8 @@ public               PropertySetDefinition():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertysinglevalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230834,TableId:3)] public partial class PropertySingleValue:SimpleProperty{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertysinglevalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230834,TableId:3,LayerId:37)] public partial class PropertySingleValue:SimpleProperty{//==============================================================
 public               PropertySingleValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6463,8 +6581,8 @@ public               PropertySingleValue(Identifier Name,Text Description=null,V
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpropertytablevalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230835,TableId:3)] public partial class PropertyTableValue:SimpleProperty{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpropertytablevalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230835,TableId:3,LayerId:37)] public partial class PropertyTableValue:SimpleProperty{//===============================================================
 public               PropertyTableValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Identifier)...</para></param>
@@ -6484,8 +6602,8 @@ public               PropertyTableValue(Identifier Name,List1toUnboundedUnique_V
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcprotectivedevicetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230836,TableId:3)] public partial class ProtectiveDeviceType:FlowControllerType{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcprotectivedevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230836,TableId:3,LayerId:14)] public partial class ProtectiveDeviceType:FlowControllerType{//=========================================================
 public               ProtectiveDeviceType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6504,8 +6622,8 @@ public               ProtectiveDeviceType(OwnerHistory _OwnerHistory,ProtectiveD
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcproxy.htm
-[ifcSql(TypeGroupId:5,TypeId:230837,TableId:3)] public partial class Proxy:Product{//===================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcproxy.htm
+[ifcSql(TypeGroupId:5,TypeId:230837,TableId:3,LayerId: 2)] public partial class Proxy:Product{//===================================================================================
 public               Proxy():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6524,8 +6642,8 @@ public               Proxy(OwnerHistory _OwnerHistory,ObjectTypeEnum ProxyType,G
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcpumptype.htm
-[ifcSql(TypeGroupId:5,TypeId:230838,TableId:3)] public partial class PumpType:FlowMovingDeviceType{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcpumptype.htm
+[ifcSql(TypeGroupId:5,TypeId:230838,TableId:3,LayerId:15)] public partial class PumpType:FlowMovingDeviceType{//===================================================================
 public               PumpType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6544,8 +6662,8 @@ public               PumpType(OwnerHistory _OwnerHistory,PumpTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantityarea.htm
-[ifcSql(TypeGroupId:5,TypeId:230839,TableId:3)] public partial class QuantityArea:PhysicalSimpleQuantity{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantityarea.htm
+[ifcSql(TypeGroupId:5,TypeId:230839,TableId:3,LayerId:38)] public partial class QuantityArea:PhysicalSimpleQuantity{//=============================================================
 public               QuantityArea():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6558,8 +6676,8 @@ public               QuantityArea(Label Name,AreaMeasure AreaValue,Text Descript
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantitycount.htm
-[ifcSql(TypeGroupId:5,TypeId:230840,TableId:3)] public partial class QuantityCount:PhysicalSimpleQuantity{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantitycount.htm
+[ifcSql(TypeGroupId:5,TypeId:230840,TableId:3,LayerId:38)] public partial class QuantityCount:PhysicalSimpleQuantity{//============================================================
 public               QuantityCount():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6572,8 +6690,8 @@ public               QuantityCount(Label Name,CountMeasure CountValue,Text Descr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantitylength.htm
-[ifcSql(TypeGroupId:5,TypeId:230841,TableId:3)] public partial class QuantityLength:PhysicalSimpleQuantity{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantitylength.htm
+[ifcSql(TypeGroupId:5,TypeId:230841,TableId:3,LayerId:38)] public partial class QuantityLength:PhysicalSimpleQuantity{//===========================================================
 public               QuantityLength():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6586,8 +6704,8 @@ public               QuantityLength(Label Name,LengthMeasure LengthValue,Text De
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantitytime.htm
-[ifcSql(TypeGroupId:5,TypeId:230842,TableId:3)] public partial class QuantityTime:PhysicalSimpleQuantity{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantitytime.htm
+[ifcSql(TypeGroupId:5,TypeId:230842,TableId:3,LayerId:38)] public partial class QuantityTime:PhysicalSimpleQuantity{//=============================================================
 public               QuantityTime():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6600,8 +6718,8 @@ public               QuantityTime(Label Name,TimeMeasure TimeValue,Text Descript
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantityvolume.htm
-[ifcSql(TypeGroupId:5,TypeId:230843,TableId:3)] public partial class QuantityVolume:PhysicalSimpleQuantity{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantityvolume.htm
+[ifcSql(TypeGroupId:5,TypeId:230843,TableId:3,LayerId:38)] public partial class QuantityVolume:PhysicalSimpleQuantity{//===========================================================
 public               QuantityVolume():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6614,8 +6732,8 @@ public               QuantityVolume(Label Name,VolumeMeasure VolumeValue,Text De
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcquantityweight.htm
-[ifcSql(TypeGroupId:5,TypeId:230844,TableId:3)] public partial class QuantityWeight:PhysicalSimpleQuantity{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcquantityweight.htm
+[ifcSql(TypeGroupId:5,TypeId:230844,TableId:3,LayerId:38)] public partial class QuantityWeight:PhysicalSimpleQuantity{//===========================================================
 public               QuantityWeight():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6628,8 +6746,8 @@ public               QuantityWeight(Label Name,MassMeasure WeightValue,Text Desc
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcradiusdimension.htm
-[ifcSql(TypeGroupId:5,TypeId:230845,TableId:3)] public partial class RadiusDimension:DimensionCurveDirectedCallout{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcradiusdimension.htm
+[ifcSql(TypeGroupId:5,TypeId:230845,TableId:3,LayerId:-4)] public partial class RadiusDimension:DimensionCurveDirectedCallout{//===================================================
 public               RadiusDimension():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -6638,8 +6756,8 @@ public               RadiusDimension(Set1toUnbounded_DraughtingCalloutElement Co
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrailing.htm
-[ifcSql(TypeGroupId:5,TypeId:230846,TableId:3)] public partial class Railing:BuildingElement{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrailing.htm
+[ifcSql(TypeGroupId:5,TypeId:230846,TableId:3,LayerId: 5)] public partial class Railing:BuildingElement{//=========================================================================
 public               Railing():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6657,8 +6775,8 @@ public               Railing(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrailingtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230847,TableId:3)] public partial class RailingType:BuildingElementType{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrailingtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230847,TableId:3,LayerId: 5)] public partial class RailingType:BuildingElementType{//=================================================================
 public               RailingType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6677,8 +6795,8 @@ public               RailingType(OwnerHistory _OwnerHistory,RailingTypeEnum Pred
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcramp.htm
-[ifcSql(TypeGroupId:5,TypeId:230848,TableId:3)] public partial class Ramp:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcramp.htm
+[ifcSql(TypeGroupId:5,TypeId:230848,TableId:3,LayerId: 5)] public partial class Ramp:BuildingElement{//============================================================================
 public               Ramp():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6696,8 +6814,8 @@ public               Ramp(OwnerHistory _OwnerHistory,RampTypeEnum ShapeType,Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrampflight.htm
-[ifcSql(TypeGroupId:5,TypeId:230849,TableId:3)] public partial class RampFlight:BuildingElement{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrampflight.htm
+[ifcSql(TypeGroupId:5,TypeId:230849,TableId:3,LayerId: 5)] public partial class RampFlight:BuildingElement{//======================================================================
 public               RampFlight():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6713,8 +6831,8 @@ public               RampFlight(OwnerHistory _OwnerHistory,GloballyUniqueId Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrampflighttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230850,TableId:3)] public partial class RampFlightType:BuildingElementType{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrampflighttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230850,TableId:3,LayerId: 5)] public partial class RampFlightType:BuildingElementType{//==============================================================
 public               RampFlightType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6733,8 +6851,8 @@ public               RampFlightType(OwnerHistory _OwnerHistory,RampFlightTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrationalbeziercurve.htm
-[ifcSql(TypeGroupId:5,TypeId:230851,TableId:3)] public partial class RationalBezierCurve:BezierCurve{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrationalbeziercurve.htm
+[ifcSql(TypeGroupId:5,TypeId:230851,TableId:3,LayerId:30)] public partial class RationalBezierCurve:BezierCurve{//=================================================================
 public               RationalBezierCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Degree"><para>INTEGER</para></param>
@@ -6749,8 +6867,8 @@ public               RationalBezierCurve(INTEGER Degree,List2toUnbounded_Cartesi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrectanglehollowprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230852,TableId:3)] public partial class RectangleHollowProfileDef:RectangleProfileDef{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrectanglehollowprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230852,TableId:3,LayerId:36)] public partial class RectangleHollowProfileDef:RectangleProfileDef{//===================================================
 public               RectangleHollowProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -6769,8 +6887,8 @@ public               RectangleHollowProfileDef(ProfileTypeEnum ProfileType,Axis2
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RectangleHollowProfileDef(...)</para><para>new ifc.RoundedRectangleProfileDef(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrectangleprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230853,TableId:3)] public partial class RectangleProfileDef:ParameterizedProfileDef{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrectangleprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230853,TableId:3,LayerId:36)] public partial class RectangleProfileDef:ParameterizedProfileDef{//=====================================================
 public               RectangleProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -6785,8 +6903,8 @@ public               RectangleProfileDef(ProfileTypeEnum ProfileType,Axis2Placem
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrectangularpyramid.htm
-[ifcSql(TypeGroupId:5,TypeId:230854,TableId:3)] public partial class RectangularPyramid:CsgPrimitive3D{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrectangularpyramid.htm
+[ifcSql(TypeGroupId:5,TypeId:230854,TableId:3,LayerId:29)] public partial class RectangularPyramid:CsgPrimitive3D{//===============================================================
 public               RectangularPyramid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -6801,8 +6919,8 @@ public               RectangularPyramid(Axis2Placement3D Position,PositiveLength
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrectangulartrimmedsurface.htm
-[ifcSql(TypeGroupId:5,TypeId:230855,TableId:3)] public partial class RectangularTrimmedSurface:BoundedSurface{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrectangulartrimmedsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:230855,TableId:3,LayerId:30)] public partial class RectangularTrimmedSurface:BoundedSurface{//========================================================
 public               RectangularTrimmedSurface():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisSurface"><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.Plane(...)</para></param>
@@ -6824,8 +6942,8 @@ public               RectangularTrimmedSurface(Surface BasisSurface,ParameterVal
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreferencesvaluedocument.htm
-[ifcSql(TypeGroupId:5,TypeId:230856,TableId:3)] public partial class ReferencesValueDocument:ENTITY{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreferencesvaluedocument.htm
+[ifcSql(TypeGroupId:5,TypeId:230856,TableId:3,LayerId:25)] public partial class ReferencesValueDocument:ENTITY{//==================================================================
 public               ReferencesValueDocument():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ReferencedDocument"><para>new ifc.DocumentSelect(new DocumentInformation(...))...</para><para>new ifc.DocumentSelect(new DocumentReference(...))...</para></param>
@@ -6843,8 +6961,8 @@ public override void AssignInverseElements(){if (ReferencingValues!=null) foreac
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcregulartimeseries.htm
-[ifcSql(TypeGroupId:5,TypeId:230857,TableId:3)] public partial class RegularTimeSeries:TimeSeries{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcregulartimeseries.htm
+[ifcSql(TypeGroupId:5,TypeId:230857,TableId:3,LayerId:26)] public partial class RegularTimeSeries:TimeSeries{//====================================================================
 public               RegularTimeSeries():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -6864,8 +6982,8 @@ public               RegularTimeSeries(Label Name,DateTimeSelect StartTime,DateT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreinforcementbarproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230858,TableId:3)] public partial class ReinforcementBarProperties:ENTITY{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreinforcementbarproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230858,TableId:3,LayerId:36)] public partial class ReinforcementBarProperties:ENTITY{//===============================================================
 public               ReinforcementBarProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TotalCrossSectionArea"><para>cast to (ifc.AreaMeasure)...</para></param>
@@ -6885,8 +7003,8 @@ public               ReinforcementBarProperties(AreaMeasure TotalCrossSectionAre
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreinforcementdefinitionproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230859,TableId:3)] public partial class ReinforcementDefinitionProperties:PropertySetDefinition{//=========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreinforcementdefinitionproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230859,TableId:3,LayerId:21)] public partial class ReinforcementDefinitionProperties:PropertySetDefinition{//=========================================
 public               ReinforcementDefinitionProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6902,8 +7020,8 @@ public               ReinforcementDefinitionProperties(OwnerHistory _OwnerHistor
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreinforcingbar.htm
-[ifcSql(TypeGroupId:5,TypeId:230860,TableId:3)] public partial class ReinforcingBar:ReinforcingElement{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreinforcingbar.htm
+[ifcSql(TypeGroupId:5,TypeId:230860,TableId:3,LayerId:21)] public partial class ReinforcingBar:ReinforcingElement{//===============================================================
 public               ReinforcingBar():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6930,14 +7048,15 @@ public               ReinforcingBar(OwnerHistory _OwnerHistory,PositiveLengthMea
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ReinforcingBar(...)</para><para>new ifc.ReinforcingMesh(...)</para><para>new ifc.Tendon(...)</para><para>new ifc.TendonAnchor(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230861,TableId:3)] public partial class ReinforcingElement:BuildingElementComponent{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreinforcingelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230861,TableId:3,LayerId:21)] public partial class ReinforcingElement:BuildingElementComponent{//=====================================================
 public               ReinforcingElement():base(){}// abstract
 [ifc(9,optional=true)] public Label SteelGrade; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreinforcingmesh.htm
-[ifcSql(TypeGroupId:5,TypeId:230862,TableId:3)] public partial class ReinforcingMesh:ReinforcingElement{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreinforcingmesh.htm
+[ifcSql(TypeGroupId:5,TypeId:230862,TableId:3,LayerId:21)] public partial class ReinforcingMesh:ReinforcingElement{//==============================================================
 public               ReinforcingMesh():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6970,8 +7089,8 @@ public               ReinforcingMesh(OwnerHistory _OwnerHistory,PositiveLengthMe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelaggregates.htm
-[ifcSql(TypeGroupId:5,TypeId:230863,TableId:3)] public partial class RelAggregates:RelDecomposes{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelaggregates.htm
+[ifcSql(TypeGroupId:5,TypeId:230863,TableId:3,LayerId: 2)] public partial class RelAggregates:RelDecomposes{//=====================================================================
 public               RelAggregates():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -6985,7 +7104,8 @@ public               RelAggregates(OwnerHistory _OwnerHistory,ObjectDefinition R
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelAssignsToActor(...)</para><para>new ifc.RelAssignsToControl(...)</para><para>new ifc.RelAssignsToGroup(...)</para><para>new ifc.RelAssignsToProcess(...)</para><para>new ifc.RelAssignsToProduct(...)</para><para>new ifc.RelAssignsToResource(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230864,TableId:3)] public partial class RelAssigns:Relationship{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassigns.htm
+[ifcSql(TypeGroupId:5,TypeId:230864,TableId:3,LayerId: 2)] public partial class RelAssigns:Relationship{//=========================================================================
 public               RelAssigns():base(){}// abstract
 [ifc(5)] public Set1toUnbounded_ObjectDefinition RelatedObjects; //ListType1d
 [ifc(6,optional=true)] public ObjectTypeEnum? RelatedObjectsType; //ENUM
@@ -6994,8 +7114,8 @@ public override void AssignInverseElements(){if (RelatedObjects!=null) foreach (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstasks.htm
-[ifcSql(TypeGroupId:5,TypeId:230865,TableId:3)] public partial class RelAssignsTasks:RelAssignsToControl{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstasks.htm
+[ifcSql(TypeGroupId:5,TypeId:230865,TableId:3,LayerId: 3)] public partial class RelAssignsTasks:RelAssignsToControl{//=============================================================
 public               RelAssignsTasks():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7014,8 +7134,8 @@ public override void AssignInverseElements(){if (TimeForTask!=null) TimeForTask.
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelOccupiesSpaces(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstoactor.htm
-[ifcSql(TypeGroupId:5,TypeId:230866,TableId:3)] public partial class RelAssignsToActor:RelAssigns{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstoactor.htm
+[ifcSql(TypeGroupId:5,TypeId:230866,TableId:3,LayerId: 2)] public partial class RelAssignsToActor:RelAssigns{//====================================================================
 public               RelAssignsToActor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7035,8 +7155,8 @@ public override void AssignInverseElements(){if (RelatingActor!=null) {if (Relat
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelAssignsTasks(...)</para><para>new ifc.RelAssignsToProjectOrder(...)</para><para>new ifc.RelSchedulesCostItems(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstocontrol.htm
-[ifcSql(TypeGroupId:5,TypeId:230867,TableId:3)] public partial class RelAssignsToControl:RelAssigns{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstocontrol.htm
+[ifcSql(TypeGroupId:5,TypeId:230867,TableId:3,LayerId: 2)] public partial class RelAssignsToControl:RelAssigns{//==================================================================
 public               RelAssignsToControl():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7054,8 +7174,8 @@ public override void AssignInverseElements(){if (RelatingControl!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstogroup.htm
-[ifcSql(TypeGroupId:5,TypeId:230868,TableId:3)] public partial class RelAssignsToGroup:RelAssigns{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstogroup.htm
+[ifcSql(TypeGroupId:5,TypeId:230868,TableId:3,LayerId: 2)] public partial class RelAssignsToGroup:RelAssigns{//====================================================================
 public               RelAssignsToGroup():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7073,8 +7193,8 @@ public override void AssignInverseElements(){if (RelatingGroup!=null) RelatingGr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstoprocess.htm
-[ifcSql(TypeGroupId:5,TypeId:230869,TableId:3)] public partial class RelAssignsToProcess:RelAssigns{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstoprocess.htm
+[ifcSql(TypeGroupId:5,TypeId:230869,TableId:3,LayerId: 2)] public partial class RelAssignsToProcess:RelAssigns{//==================================================================
 public               RelAssignsToProcess():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7094,8 +7214,8 @@ public override void AssignInverseElements(){if (RelatingProcess!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstoproduct.htm
-[ifcSql(TypeGroupId:5,TypeId:230870,TableId:3)] public partial class RelAssignsToProduct:RelAssigns{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstoproduct.htm
+[ifcSql(TypeGroupId:5,TypeId:230870,TableId:3,LayerId: 2)] public partial class RelAssignsToProduct:RelAssigns{//==================================================================
 public               RelAssignsToProduct():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7113,8 +7233,8 @@ public override void AssignInverseElements(){if (RelatingProduct!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstoprojectorder.htm
-[ifcSql(TypeGroupId:5,TypeId:230871,TableId:3)] public partial class RelAssignsToProjectOrder:RelAssignsToControl{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstoprojectorder.htm
+[ifcSql(TypeGroupId:5,TypeId:230871,TableId:3,LayerId:10)] public partial class RelAssignsToProjectOrder:RelAssignsToControl{//====================================================
 public               RelAssignsToProjectOrder():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7129,8 +7249,8 @@ public               RelAssignsToProjectOrder(OwnerHistory _OwnerHistory,Set1toU
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassignstoresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230872,TableId:3)] public partial class RelAssignsToResource:RelAssigns{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassignstoresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230872,TableId:3,LayerId: 2)] public partial class RelAssignsToResource:RelAssigns{//=================================================================
 public               RelAssignsToResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7148,8 +7268,8 @@ public override void AssignInverseElements(){if (RelatingResource!=null) {if (Re
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelAssociatesAppliedValue(...)</para><para>new ifc.RelAssociatesApproval(...)</para><para>new ifc.RelAssociatesClassification(...)</para><para>new ifc.RelAssociatesConstraint(...)</para><para>new ifc.RelAssociatesDocument(...)</para><para>new ifc.RelAssociatesLibrary(...)</para><para>new ifc.RelAssociatesMaterial(...)</para><para>new ifc.RelAssociatesProfileProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociates.htm
-[ifcSql(TypeGroupId:5,TypeId:230873,TableId:3)] public partial class RelAssociates:Relationship{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociates.htm
+[ifcSql(TypeGroupId:5,TypeId:230873,TableId:3,LayerId: 2)] public partial class RelAssociates:Relationship{//======================================================================
 public               RelAssociates():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7166,8 +7286,8 @@ public override void AssignInverseElements(){if (RelatedObjects!=null) foreach (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesappliedvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230874,TableId:3)] public partial class RelAssociatesAppliedValue:RelAssociates{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesappliedvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230874,TableId:3,LayerId:10)] public partial class RelAssociatesAppliedValue:RelAssociates{//=========================================================
 public               RelAssociatesAppliedValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7182,8 +7302,8 @@ public               RelAssociatesAppliedValue(OwnerHistory _OwnerHistory,Set1to
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesapproval.htm
-[ifcSql(TypeGroupId:5,TypeId:230875,TableId:3)] public partial class RelAssociatesApproval:RelAssociates{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesapproval.htm
+[ifcSql(TypeGroupId:5,TypeId:230875,TableId:3,LayerId: 1)] public partial class RelAssociatesApproval:RelAssociates{//=============================================================
 public               RelAssociatesApproval():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7198,8 +7318,8 @@ public               RelAssociatesApproval(OwnerHistory _OwnerHistory,Set1toUnbo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesclassification.htm
-[ifcSql(TypeGroupId:5,TypeId:230876,TableId:3)] public partial class RelAssociatesClassification:RelAssociates{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesclassification.htm
+[ifcSql(TypeGroupId:5,TypeId:230876,TableId:3,LayerId: 2)] public partial class RelAssociatesClassification:RelAssociates{//=======================================================
 public               RelAssociatesClassification():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7214,8 +7334,8 @@ public               RelAssociatesClassification(OwnerHistory _OwnerHistory,Set1
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesconstraint.htm
-[ifcSql(TypeGroupId:5,TypeId:230877,TableId:3)] public partial class RelAssociatesConstraint:RelAssociates{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesconstraint.htm
+[ifcSql(TypeGroupId:5,TypeId:230877,TableId:3,LayerId: 1)] public partial class RelAssociatesConstraint:RelAssociates{//===========================================================
 public               RelAssociatesConstraint():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7232,8 +7352,8 @@ public               RelAssociatesConstraint(OwnerHistory _OwnerHistory,Set1toUn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesdocument.htm
-[ifcSql(TypeGroupId:5,TypeId:230878,TableId:3)] public partial class RelAssociatesDocument:RelAssociates{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesdocument.htm
+[ifcSql(TypeGroupId:5,TypeId:230878,TableId:3,LayerId: 2)] public partial class RelAssociatesDocument:RelAssociates{//=============================================================
 public               RelAssociatesDocument():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7248,8 +7368,8 @@ public               RelAssociatesDocument(OwnerHistory _OwnerHistory,Set1toUnbo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociateslibrary.htm
-[ifcSql(TypeGroupId:5,TypeId:230879,TableId:3)] public partial class RelAssociatesLibrary:RelAssociates{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociateslibrary.htm
+[ifcSql(TypeGroupId:5,TypeId:230879,TableId:3,LayerId: 2)] public partial class RelAssociatesLibrary:RelAssociates{//==============================================================
 public               RelAssociatesLibrary():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7264,8 +7384,8 @@ public               RelAssociatesLibrary(OwnerHistory _OwnerHistory,Set1toUnbou
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesmaterial.htm
-[ifcSql(TypeGroupId:5,TypeId:230880,TableId:3)] public partial class RelAssociatesMaterial:RelAssociates{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesmaterial.htm
+[ifcSql(TypeGroupId:5,TypeId:230880,TableId:3,LayerId: 4)] public partial class RelAssociatesMaterial:RelAssociates{//=============================================================
 public               RelAssociatesMaterial():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7280,8 +7400,8 @@ public               RelAssociatesMaterial(OwnerHistory _OwnerHistory,Set1toUnbo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelassociatesprofileproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230881,TableId:3)] public partial class RelAssociatesProfileProperties:RelAssociates{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelassociatesprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230881,TableId:3,LayerId:20)] public partial class RelAssociatesProfileProperties:RelAssociates{//====================================================
 public               RelAssociatesProfileProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7300,13 +7420,14 @@ public               RelAssociatesProfileProperties(OwnerHistory _OwnerHistory,S
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelConnectsElements(...)</para><para>new ifc.RelConnectsPortToElement(...)</para><para>new ifc.RelConnectsPorts(...)</para><para>new ifc.RelConnectsStructuralActivity(...)</para><para>new ifc.RelConnectsStructuralElement(...)</para><para>new ifc.RelConnectsStructuralMember(...)</para><para>new ifc.RelContainedInSpatialStructure(...)</para><para>new ifc.RelCoversBldgElements(...)</para><para>new ifc.RelCoversSpaces(...)</para><para>new ifc.RelFillsElement(...)</para><para>new ifc.RelFlowControlElements(...)</para><para>new ifc.RelInteractionRequirements(...)</para><para>new ifc.RelProjectsElement(...)</para><para>new ifc.RelReferencedInSpatialStructure(...)</para><para>new ifc.RelSequence(...)</para><para>new ifc.RelServicesBuildings(...)</para><para>new ifc.RelSpaceBoundary(...)</para><para>new ifc.RelVoidsElement(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230882,TableId:3)] public partial class RelConnects:Relationship{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnects.htm
+[ifcSql(TypeGroupId:5,TypeId:230882,TableId:3,LayerId: 2)] public partial class RelConnects:Relationship{//========================================================================
 public               RelConnects():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelConnectsPathElements(...)</para><para>new ifc.RelConnectsWithRealizingElements(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectselements.htm
-[ifcSql(TypeGroupId:5,TypeId:230883,TableId:3)] public partial class RelConnectsElements:RelConnects{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectselements.htm
+[ifcSql(TypeGroupId:5,TypeId:230883,TableId:3,LayerId: 4)] public partial class RelConnectsElements:RelConnects{//=================================================================
 public               RelConnectsElements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7327,8 +7448,8 @@ public override void AssignInverseElements(){if (RelatingElement!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectspathelements.htm
-[ifcSql(TypeGroupId:5,TypeId:230884,TableId:3)] public partial class RelConnectsPathElements:RelConnectsElements{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectspathelements.htm
+[ifcSql(TypeGroupId:5,TypeId:230884,TableId:3,LayerId: 5)] public partial class RelConnectsPathElements:RelConnectsElements{//=====================================================
 public               RelConnectsPathElements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7351,8 +7472,8 @@ public               RelConnectsPathElements(OwnerHistory _OwnerHistory,Element 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectsporttoelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230885,TableId:3)] public partial class RelConnectsPortToElement:RelConnects{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectsporttoelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230885,TableId:3,LayerId: 4)] public partial class RelConnectsPortToElement:RelConnects{//============================================================
 public               RelConnectsPortToElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7371,8 +7492,8 @@ public override void AssignInverseElements(){if (RelatedElement!=null) {if (Rela
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectsports.htm
-[ifcSql(TypeGroupId:5,TypeId:230886,TableId:3)] public partial class RelConnectsPorts:RelConnects{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectsports.htm
+[ifcSql(TypeGroupId:5,TypeId:230886,TableId:3,LayerId: 4)] public partial class RelConnectsPorts:RelConnects{//====================================================================
 public               RelConnectsPorts():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7393,8 +7514,8 @@ public override void AssignInverseElements(){if (RelatingPort!=null) RelatingPor
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectsstructuralactivity.htm
-[ifcSql(TypeGroupId:5,TypeId:230887,TableId:3)] public partial class RelConnectsStructuralActivity:RelConnects{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectsstructuralactivity.htm
+[ifcSql(TypeGroupId:5,TypeId:230887,TableId:3,LayerId:20)] public partial class RelConnectsStructuralActivity:RelConnects{//=======================================================
 public               RelConnectsStructuralActivity():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7413,8 +7534,8 @@ public override void AssignInverseElements(){if (RelatedStructuralActivity!=null
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectsstructuralelement.htm
-[ifcSql(TypeGroupId:5,TypeId:230888,TableId:3)] public partial class RelConnectsStructuralElement:RelConnects{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectsstructuralelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230888,TableId:3,LayerId:20)] public partial class RelConnectsStructuralElement:RelConnects{//========================================================
 public               RelConnectsStructuralElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7433,8 +7554,8 @@ public override void AssignInverseElements(){if (RelatedStructuralMember!=null) 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelConnectsWithEccentricity(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectsstructuralmember.htm
-[ifcSql(TypeGroupId:5,TypeId:230889,TableId:3)] public partial class RelConnectsStructuralMember:RelConnects{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectsstructuralmember.htm
+[ifcSql(TypeGroupId:5,TypeId:230889,TableId:3,LayerId:20)] public partial class RelConnectsStructuralMember:RelConnects{//=========================================================
 public               RelConnectsStructuralMember():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7461,8 +7582,8 @@ public override void AssignInverseElements(){if (RelatingStructuralMember!=null)
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectswitheccentricity.htm
-[ifcSql(TypeGroupId:5,TypeId:230890,TableId:3)] public partial class RelConnectsWithEccentricity:RelConnectsStructuralMember{//=========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectswitheccentricity.htm
+[ifcSql(TypeGroupId:5,TypeId:230890,TableId:3,LayerId:20)] public partial class RelConnectsWithEccentricity:RelConnectsStructuralMember{//=========================================
 public               RelConnectsWithEccentricity():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7482,8 +7603,8 @@ public               RelConnectsWithEccentricity(OwnerHistory _OwnerHistory,Stru
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelconnectswithrealizingelements.htm
-[ifcSql(TypeGroupId:5,TypeId:230891,TableId:3)] public partial class RelConnectsWithRealizingElements:RelConnectsElements{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelconnectswithrealizingelements.htm
+[ifcSql(TypeGroupId:5,TypeId:230891,TableId:3,LayerId: 4)] public partial class RelConnectsWithRealizingElements:RelConnectsElements{//============================================
 public               RelConnectsWithRealizingElements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7504,8 +7625,8 @@ public override void AssignInverseElements(){if (RealizingElements!=null) foreac
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelcontainedinspatialstructure.htm
-[ifcSql(TypeGroupId:5,TypeId:230892,TableId:3)] public partial class RelContainedInSpatialStructure:RelConnects{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelcontainedinspatialstructure.htm
+[ifcSql(TypeGroupId:5,TypeId:230892,TableId:3,LayerId: 4)] public partial class RelContainedInSpatialStructure:RelConnects{//======================================================
 public               RelContainedInSpatialStructure():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7526,8 +7647,8 @@ public override void AssignInverseElements(){if (RelatedElements!=null) foreach 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelcoversbldgelements.htm
-[ifcSql(TypeGroupId:5,TypeId:230893,TableId:3)] public partial class RelCoversBldgElements:RelConnects{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelcoversbldgelements.htm
+[ifcSql(TypeGroupId:5,TypeId:230893,TableId:3,LayerId: 5)] public partial class RelCoversBldgElements:RelConnects{//===============================================================
 public               RelCoversBldgElements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7546,8 +7667,8 @@ public override void AssignInverseElements(){if (RelatingBuildingElement!=null) 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelcoversspaces.htm
-[ifcSql(TypeGroupId:5,TypeId:230894,TableId:3)] public partial class RelCoversSpaces:RelConnects{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelcoversspaces.htm
+[ifcSql(TypeGroupId:5,TypeId:230894,TableId:3,LayerId: 5)] public partial class RelCoversSpaces:RelConnects{//=====================================================================
 public               RelCoversSpaces():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7566,7 +7687,8 @@ public override void AssignInverseElements(){if (RelatedCoverings!=null) foreach
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelAggregates(...)</para><para>new ifc.RelNests(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230895,TableId:3)] public partial class RelDecomposes:Relationship{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreldecomposes.htm
+[ifcSql(TypeGroupId:5,TypeId:230895,TableId:3,LayerId: 2)] public partial class RelDecomposes:Relationship{//======================================================================
 public               RelDecomposes():base(){}// abstract
 [ifc(5)] public ObjectDefinition RelatingObject; //ENTITY
 [ifc(6)] public Set1toUnbounded_ObjectDefinition RelatedObjects; //ListType1d
@@ -7576,7 +7698,8 @@ public override void AssignInverseElements(){if (RelatingObject!=null) {if (Rela
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelDefinesByProperties(...)</para><para>new ifc.RelDefinesByType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230896,TableId:3)] public partial class RelDefines:Relationship{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreldefines.htm
+[ifcSql(TypeGroupId:5,TypeId:230896,TableId:3,LayerId: 2)] public partial class RelDefines:Relationship{//=========================================================================
 public               RelDefines():base(){}// abstract
 [ifc(5)] public Set1toUnbounded_Object RelatedObjects; //ListType1d
 public override void AssignInverseElements(){if (RelatedObjects!=null) foreach (Object __Object in RelatedObjects) if (__Object is Object) {if (((Object)__Object).IsDefinedBy==null) ((Object)__Object).IsDefinedBy=new LIST<RelDefines>();((Object)__Object).IsDefinedBy.Add(this);}
@@ -7584,8 +7707,8 @@ public override void AssignInverseElements(){if (RelatedObjects!=null) foreach (
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelOverridesProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreldefinesbyproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230897,TableId:3)] public partial class RelDefinesByProperties:RelDefines{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreldefinesbyproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230897,TableId:3,LayerId: 2)] public partial class RelDefinesByProperties:RelDefines{//===============================================================
 public               RelDefinesByProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7602,8 +7725,8 @@ public override void AssignInverseElements(){if (RelatingPropertyDefinition!=nul
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreldefinesbytype.htm
-[ifcSql(TypeGroupId:5,TypeId:230898,TableId:3)] public partial class RelDefinesByType:RelDefines{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreldefinesbytype.htm
+[ifcSql(TypeGroupId:5,TypeId:230898,TableId:3,LayerId: 2)] public partial class RelDefinesByType:RelDefines{//=====================================================================
 public               RelDefinesByType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7620,8 +7743,8 @@ public override void AssignInverseElements(){if (RelatingType!=null) RelatingTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelfillselement.htm
-[ifcSql(TypeGroupId:5,TypeId:230899,TableId:3)] public partial class RelFillsElement:RelConnects{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelfillselement.htm
+[ifcSql(TypeGroupId:5,TypeId:230899,TableId:3,LayerId: 4)] public partial class RelFillsElement:RelConnects{//=====================================================================
 public               RelFillsElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7640,8 +7763,8 @@ public override void AssignInverseElements(){if (RelatingOpeningElement!=null) {
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelflowcontrolelements.htm
-[ifcSql(TypeGroupId:5,TypeId:230900,TableId:3)] public partial class RelFlowControlElements:RelConnects{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelflowcontrolelements.htm
+[ifcSql(TypeGroupId:5,TypeId:230900,TableId:3,LayerId: 6)] public partial class RelFlowControlElements:RelConnects{//==============================================================
 public               RelFlowControlElements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7660,8 +7783,8 @@ public override void AssignInverseElements(){if (RelatedControlElements!=null) f
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelinteractionrequirements.htm
-[ifcSql(TypeGroupId:5,TypeId:230901,TableId:3)] public partial class RelInteractionRequirements:RelConnects{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelinteractionrequirements.htm
+[ifcSql(TypeGroupId:5,TypeId:230901,TableId:3,LayerId:11)] public partial class RelInteractionRequirements:RelConnects{//==========================================================
 public               RelInteractionRequirements():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7686,8 +7809,8 @@ public override void AssignInverseElements(){if (RelatedSpaceProgram!=null) {if 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelnests.htm
-[ifcSql(TypeGroupId:5,TypeId:230902,TableId:3)] public partial class RelNests:RelDecomposes{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelnests.htm
+[ifcSql(TypeGroupId:5,TypeId:230902,TableId:3,LayerId: 2)] public partial class RelNests:RelDecomposes{//==========================================================================
 public               RelNests():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7701,8 +7824,8 @@ public               RelNests(OwnerHistory _OwnerHistory,ObjectDefinition Relati
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreloccupiesspaces.htm
-[ifcSql(TypeGroupId:5,TypeId:230903,TableId:3)] public partial class RelOccupiesSpaces:RelAssignsToActor{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreloccupiesspaces.htm
+[ifcSql(TypeGroupId:5,TypeId:230903,TableId:3,LayerId: 8)] public partial class RelOccupiesSpaces:RelAssignsToActor{//=============================================================
 public               RelOccupiesSpaces():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7718,8 +7841,8 @@ public               RelOccupiesSpaces(OwnerHistory _OwnerHistory,Set1toUnbounde
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcreloverridesproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230904,TableId:3)] public partial class RelOverridesProperties:RelDefinesByProperties{//===================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcreloverridesproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230904,TableId:3,LayerId: 2)] public partial class RelOverridesProperties:RelDefinesByProperties{//===================================================
 public               RelOverridesProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7735,8 +7858,8 @@ public               RelOverridesProperties(OwnerHistory _OwnerHistory,Set1toUnb
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelprojectselement.htm
-[ifcSql(TypeGroupId:5,TypeId:230905,TableId:3)] public partial class RelProjectsElement:RelConnects{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelprojectselement.htm
+[ifcSql(TypeGroupId:5,TypeId:230905,TableId:3,LayerId: 4)] public partial class RelProjectsElement:RelConnects{//==================================================================
 public               RelProjectsElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7755,8 +7878,8 @@ public override void AssignInverseElements(){if (RelatingElement!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelreferencedinspatialstructure.htm
-[ifcSql(TypeGroupId:5,TypeId:230906,TableId:3)] public partial class RelReferencedInSpatialStructure:RelConnects{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelreferencedinspatialstructure.htm
+[ifcSql(TypeGroupId:5,TypeId:230906,TableId:3,LayerId: 4)] public partial class RelReferencedInSpatialStructure:RelConnects{//=====================================================
 public               RelReferencedInSpatialStructure():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7775,8 +7898,8 @@ public override void AssignInverseElements(){if (RelatedElements!=null) foreach 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelschedulescostitems.htm
-[ifcSql(TypeGroupId:5,TypeId:230907,TableId:3)] public partial class RelSchedulesCostItems:RelAssignsToControl{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelschedulescostitems.htm
+[ifcSql(TypeGroupId:5,TypeId:230907,TableId:3,LayerId:10)] public partial class RelSchedulesCostItems:RelAssignsToControl{//=======================================================
 public               RelSchedulesCostItems():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7791,8 +7914,8 @@ public               RelSchedulesCostItems(OwnerHistory _OwnerHistory,Set1toUnbo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelsequence.htm
-[ifcSql(TypeGroupId:5,TypeId:230908,TableId:3)] public partial class RelSequence:RelConnects{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelsequence.htm
+[ifcSql(TypeGroupId:5,TypeId:230908,TableId:3,LayerId: 3)] public partial class RelSequence:RelConnects{//=========================================================================
 public               RelSequence():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7815,8 +7938,8 @@ public override void AssignInverseElements(){if (RelatingProcess!=null) {if (Rel
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelservicesbuildings.htm
-[ifcSql(TypeGroupId:5,TypeId:230909,TableId:3)] public partial class RelServicesBuildings:RelConnects{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelservicesbuildings.htm
+[ifcSql(TypeGroupId:5,TypeId:230909,TableId:3,LayerId: 4)] public partial class RelServicesBuildings:RelConnects{//================================================================
 public               RelServicesBuildings():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7835,8 +7958,8 @@ public override void AssignInverseElements(){if (RelatedBuildings!=null) foreach
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelspaceboundary.htm
-[ifcSql(TypeGroupId:5,TypeId:230910,TableId:3)] public partial class RelSpaceBoundary:RelConnects{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelspaceboundary.htm
+[ifcSql(TypeGroupId:5,TypeId:230910,TableId:3,LayerId: 4)] public partial class RelSpaceBoundary:RelConnects{//====================================================================
 public               RelSpaceBoundary():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7861,8 +7984,8 @@ public override void AssignInverseElements(){if (RelatingSpace!=null) {if (Relat
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelvoidselement.htm
-[ifcSql(TypeGroupId:5,TypeId:230911,TableId:3)] public partial class RelVoidsElement:RelConnects{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelvoidselement.htm
+[ifcSql(TypeGroupId:5,TypeId:230911,TableId:3,LayerId: 4)] public partial class RelVoidsElement:RelConnects{//=====================================================================
 public               RelVoidsElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -7881,13 +8004,14 @@ public override void AssignInverseElements(){if (RelatingBuildingElement!=null) 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.RelAssigns(...)</para><para>new ifc.RelAssignsToActor(...)</para><para>new ifc.RelOccupiesSpaces(...)</para><para>new ifc.RelAssignsToControl(...)</para><para>new ifc.RelAssignsTasks(...)</para><para>new ifc.RelAssignsToProjectOrder(...)</para><para>new ifc.RelSchedulesCostItems(...)</para><para>new ifc.RelAssignsToGroup(...)</para><para>new ifc.RelAssignsToProcess(...)</para><para>new ifc.RelAssignsToProduct(...)</para><para>new ifc.RelAssignsToResource(...)</para><para>new ifc.RelAssociates(...)</para><para>new ifc.RelAssociatesAppliedValue(...)</para><para>new ifc.RelAssociatesApproval(...)</para><para>new ifc.RelAssociatesClassification(...)</para><para>new ifc.RelAssociatesConstraint(...)</para><para>new ifc.RelAssociatesDocument(...)</para><para>new ifc.RelAssociatesLibrary(...)</para><para>new ifc.RelAssociatesMaterial(...)</para><para>new ifc.RelAssociatesProfileProperties(...)</para><para>new ifc.RelConnects(...)</para><para>new ifc.RelConnectsElements(...)</para><para>new ifc.RelConnectsPathElements(...)</para><para>new ifc.RelConnectsWithRealizingElements(...)</para><para>new ifc.RelConnectsPortToElement(...)</para><para>new ifc.RelConnectsPorts(...)</para><para>new ifc.RelConnectsStructuralActivity(...)</para><para>new ifc.RelConnectsStructuralElement(...)</para><para>new ifc.RelConnectsStructuralMember(...)</para><para>new ifc.RelConnectsWithEccentricity(...)</para><para>new ifc.RelContainedInSpatialStructure(...)</para><para>new ifc.RelCoversBldgElements(...)</para><para>new ifc.RelCoversSpaces(...)</para><para>new ifc.RelFillsElement(...)</para><para>new ifc.RelFlowControlElements(...)</para><para>new ifc.RelInteractionRequirements(...)</para><para>new ifc.RelProjectsElement(...)</para><para>new ifc.RelReferencedInSpatialStructure(...)</para><para>new ifc.RelSequence(...)</para><para>new ifc.RelServicesBuildings(...)</para><para>new ifc.RelSpaceBoundary(...)</para><para>new ifc.RelVoidsElement(...)</para><para>new ifc.RelDecomposes(...)</para><para>new ifc.RelAggregates(...)</para><para>new ifc.RelNests(...)</para><para>new ifc.RelDefines(...)</para><para>new ifc.RelDefinesByProperties(...)</para><para>new ifc.RelOverridesProperties(...)</para><para>new ifc.RelDefinesByType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230912,TableId:3)] public partial class Relationship:Root{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:230912,TableId:3,LayerId: 2)] public partial class Relationship:Root{//===============================================================================
 public               Relationship():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrelaxation.htm
-[ifcSql(TypeGroupId:5,TypeId:230913,TableId:3)] public partial class Relaxation:ENTITY{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrelaxation.htm
+[ifcSql(TypeGroupId:5,TypeId:230913,TableId:3,LayerId:-5)] public partial class Relaxation:ENTITY{//===============================================================================
 public               Relaxation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RelaxationValue"><para>cast to (ifc.NormalisedRatioMeasure)...</para></param>
@@ -7899,8 +8023,8 @@ public               Relaxation(NormalisedRatioMeasure RelaxationValue,Normalise
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ShapeModel(...)</para><para>new ifc.StyleModel(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:230914,TableId:3)] public partial class Representation:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:230914,TableId:3,LayerId:39)] public partial class Representation:ENTITY{//===========================================================================
 public               Representation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextOfItems"><para>new ifc.RepresentationContext(...)</para><para>new ifc.GeometricRepresentationContext(...)</para><para>new ifc.GeometricRepresentationSubContext(...)</para></param>
@@ -7924,8 +8048,8 @@ public override void AssignInverseElements(){if (ContextOfItems!=null) {if (Cont
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GeometricRepresentationContext(...)</para><para>new ifc.GeometricRepresentationSubContext(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrepresentationcontext.htm
-[ifcSql(TypeGroupId:5,TypeId:230915,TableId:3)] public partial class RepresentationContext:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrepresentationcontext.htm
+[ifcSql(TypeGroupId:5,TypeId:230915,TableId:3,LayerId:39)] public partial class RepresentationContext:ENTITY{//====================================================================
 public               RepresentationContext():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextIdentifier">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -7939,7 +8063,8 @@ public               RepresentationContext(Label ContextIdentifier,Label Context
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.GeometricRepresentationItem(...)</para><para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.CsgPrimitive3D(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.Curve(...)</para><para>new ifc.BoundedCurve(...)</para><para>new ifc.BSplineCurve(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Conic(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSource(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Placement(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.Point(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.SolidModel(...)</para><para>new ifc.Surface(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para><para>new ifc.TopologicalRepresentationItem(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230916,TableId:3)] public partial class RepresentationItem:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrepresentationitem.htm
+[ifcSql(TypeGroupId:5,TypeId:230916,TableId:3,LayerId:30)] public partial class RepresentationItem:ENTITY{//=======================================================================
 public               RepresentationItem():base(){}// abstract
 /// <summary>INVERSE: LayerAssignments of PresentationLayerAssignment for AssignedItems</summary>
 [ifcInverse(For:"AssignedItems")] public LIST<PresentationLayerAssignment> LayerAssignments;
@@ -7948,8 +8073,8 @@ public               RepresentationItem():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrepresentationmap.htm
-[ifcSql(TypeGroupId:5,TypeId:230917,TableId:3)] public partial class RepresentationMap:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrepresentationmap.htm
+[ifcSql(TypeGroupId:5,TypeId:230917,TableId:3,LayerId:30)] public partial class RepresentationMap:ENTITY{//========================================================================
 public               RepresentationMap():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="MappingOrigin"><para>new ifc.Axis2Placement(new Axis2Placement2D(...))...</para><para>new ifc.Axis2Placement(new Axis2Placement3D(...))...</para></param>
@@ -7965,15 +8090,16 @@ public override void AssignInverseElements(){if (MappedRepresentation!=null) Map
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ConstructionResource(...)</para><para>new ifc.ConstructionEquipmentResource(...)</para><para>new ifc.ConstructionMaterialResource(...)</para><para>new ifc.ConstructionProductResource(...)</para><para>new ifc.CrewResource(...)</para><para>new ifc.LaborResource(...)</para><para>new ifc.SubContractResource(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230918,TableId:3)] public partial class Resource:Object{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230918,TableId:3,LayerId: 2)] public partial class Resource:Object{//=================================================================================
 public               Resource():base(){}// abstract
 /// <summary>INVERSE: ResourceOf of RelAssignsToResource for RelatingResource</summary>
 [ifcInverse(For:"RelatingResource")] public LIST<RelAssignsToResource> ResourceOf;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrevolvedareasolid.htm
-[ifcSql(TypeGroupId:5,TypeId:230919,TableId:3)] public partial class RevolvedAreaSolid:SweptAreaSolid{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrevolvedareasolid.htm
+[ifcSql(TypeGroupId:5,TypeId:230919,TableId:3,LayerId:29)] public partial class RevolvedAreaSolid:SweptAreaSolid{//================================================================
 public               RevolvedAreaSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SweptArea"><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></param>
@@ -7987,8 +8113,8 @@ public               RevolvedAreaSolid(ProfileDef SweptArea,Axis2Placement3D Pos
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcribplateprofileproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230920,TableId:3)] public partial class RibPlateProfileProperties:ProfileProperties{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcribplateprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230920,TableId:3,LayerId:-2)] public partial class RibPlateProfileProperties:ProfileProperties{//=====================================================
 public               RibPlateProfileProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileName">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8008,8 +8134,8 @@ public               RibPlateProfileProperties(RibPlateDirectionEnum _Direction,
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrightcircularcone.htm
-[ifcSql(TypeGroupId:5,TypeId:230921,TableId:3)] public partial class RightCircularCone:CsgPrimitive3D{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrightcircularcone.htm
+[ifcSql(TypeGroupId:5,TypeId:230921,TableId:3,LayerId:29)] public partial class RightCircularCone:CsgPrimitive3D{//================================================================
 public               RightCircularCone():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -8022,8 +8148,8 @@ public               RightCircularCone(Axis2Placement3D Position,PositiveLengthM
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcrightcircularcylinder.htm
-[ifcSql(TypeGroupId:5,TypeId:230922,TableId:3)] public partial class RightCircularCylinder:CsgPrimitive3D{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcrightcircularcylinder.htm
+[ifcSql(TypeGroupId:5,TypeId:230922,TableId:3,LayerId:29)] public partial class RightCircularCylinder:CsgPrimitive3D{//============================================================
 public               RightCircularCylinder():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -8036,8 +8162,8 @@ public               RightCircularCylinder(Axis2Placement3D Position,PositiveLen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcroof.htm
-[ifcSql(TypeGroupId:5,TypeId:230923,TableId:3)] public partial class Roof:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcroof.htm
+[ifcSql(TypeGroupId:5,TypeId:230923,TableId:3,LayerId: 5)] public partial class Roof:BuildingElement{//============================================================================
 public               Roof():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8055,7 +8181,8 @@ public               Roof(OwnerHistory _OwnerHistory,RoofTypeEnum ShapeType,Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ObjectDefinition(...)</para><para>new ifc.Object(...)</para><para>new ifc.Actor(...)</para><para>new ifc.Occupant(...)</para><para>new ifc.Control(...)</para><para>new ifc.ActionRequest(...)</para><para>new ifc.ConditionCriterion(...)</para><para>new ifc.CostItem(...)</para><para>new ifc.CostSchedule(...)</para><para>new ifc.EquipmentStandard(...)</para><para>new ifc.FurnitureStandard(...)</para><para>new ifc.PerformanceHistory(...)</para><para>new ifc.Permit(...)</para><para>new ifc.ProjectOrder(...)</para><para>new ifc.ProjectOrderRecord(...)</para><para>new ifc.ScheduleTimeControl(...)</para><para>new ifc.ServiceLife(...)</para><para>new ifc.SpaceProgram(...)</para><para>new ifc.TimeSeriesSchedule(...)</para><para>new ifc.WorkControl(...)</para><para>new ifc.Group(...)</para><para>new ifc.Asset(...)</para><para>new ifc.Condition(...)</para><para>new ifc.Inventory(...)</para><para>new ifc.StructuralLoadGroup(...)</para><para>new ifc.StructuralResultGroup(...)</para><para>new ifc.System(...)</para><para>new ifc.Zone(...)</para><para>new ifc.Process(...)</para><para>new ifc.Procedure(...)</para><para>new ifc.Task(...)</para><para>new ifc.Product(...)</para><para>new ifc.Annotation(...)</para><para>new ifc.Element(...)</para><para>new ifc.BuildingElement(...)</para><para>new ifc.Beam(...)</para><para>new ifc.BuildingElementComponent(...)</para><para>new ifc.BuildingElementPart(...)</para><para>new ifc.ReinforcingElement(...)</para><para>new ifc.ReinforcingBar(...)</para><para>new ifc.ReinforcingMesh(...)</para><para>new ifc.Tendon(...)</para><para>new ifc.TendonAnchor(...)</para><para>new ifc.BuildingElementProxy(...)</para><para>new ifc.Column(...)</para><para>new ifc.Covering(...)</para><para>new ifc.CurtainWall(...)</para><para>new ifc.Door(...)</para><para>new ifc.Footing(...)</para><para>new ifc.Member(...)</para><para>new ifc.Pile(...)</para><para>new ifc.Plate(...)</para><para>new ifc.Railing(...)</para><para>new ifc.Ramp(...)</para><para>new ifc.RampFlight(...)</para><para>new ifc.Roof(...)</para><para>new ifc.Slab(...)</para><para>new ifc.Stair(...)</para><para>new ifc.StairFlight(...)</para><para>new ifc.Wall(...)</para><para>new ifc.Window(...)</para><para>new ifc.DistributionElement(...)</para><para>new ifc.DistributionControlElement(...)</para><para>new ifc.DistributionFlowElement(...)</para><para>new ifc.DistributionChamberElement(...)</para><para>new ifc.EnergyConversionDevice(...)</para><para>new ifc.FlowController(...)</para><para>new ifc.ElectricDistributionPoint(...)</para><para>new ifc.FlowFitting(...)</para><para>new ifc.FlowMovingDevice(...)</para><para>new ifc.FlowSegment(...)</para><para>new ifc.FlowStorageDevice(...)</para><para>new ifc.FlowTerminal(...)</para><para>new ifc.FlowTreatmentDevice(...)</para><para>new ifc.ElectricalElement(...)</para><para>new ifc.ElementAssembly(...)</para><para>new ifc.ElementComponent(...)</para><para>new ifc.DiscreteAccessory(...)</para><para>new ifc.Fastener(...)</para><para>new ifc.MechanicalFastener(...)</para><para>new ifc.EquipmentElement(...)</para><para>new ifc.FeatureElement(...)</para><para>new ifc.FeatureElementAddition(...)</para><para>new ifc.ProjectionElement(...)</para><para>new ifc.FeatureElementSubtraction(...)</para><para>new ifc.EdgeFeature(...)</para><para>new ifc.ChamferEdgeFeature(...)</para><para>new ifc.RoundedEdgeFeature(...)</para><para>new ifc.OpeningElement(...)</para><para>new ifc.FurnishingElement(...)</para><para>new ifc.TransportElement(...)</para><para>new ifc.VirtualElement(...)</para><para>new ifc.Grid(...)</para><para>new ifc.Port(...)</para><para>new ifc.DistributionPort(...)</para><para>new ifc.Proxy(...)</para><para>new ifc.SpatialStructureElement(...)</para><para>new ifc.StructuralActivity(...)</para><para>new ifc.StructuralItem(...)</para><para>new ifc.Project(...)</para><para>new ifc.Resource(...)</para><para>new ifc.ConstructionResource(...)</para><para>new ifc.ConstructionEquipmentResource(...)</para><para>new ifc.ConstructionMaterialResource(...)</para><para>new ifc.ConstructionProductResource(...)</para><para>new ifc.CrewResource(...)</para><para>new ifc.LaborResource(...)</para><para>new ifc.SubContractResource(...)</para><para>new ifc.TypeObject(...)</para><para>new ifc.PropertyDefinition(...)</para><para>new ifc.PropertySetDefinition(...)</para><para>new ifc.DoorLiningProperties(...)</para><para>new ifc.DoorPanelProperties(...)</para><para>new ifc.ElementQuantity(...)</para><para>new ifc.EnergyProperties(...)</para><para>new ifc.ElectricalBaseProperties(...)</para><para>new ifc.FluidFlowProperties(...)</para><para>new ifc.PermeableCoveringProperties(...)</para><para>new ifc.PropertySet(...)</para><para>new ifc.ReinforcementDefinitionProperties(...)</para><para>new ifc.ServiceLifeFactor(...)</para><para>new ifc.SoundProperties(...)</para><para>new ifc.SoundValue(...)</para><para>new ifc.SpaceThermalLoadProperties(...)</para><para>new ifc.WindowLiningProperties(...)</para><para>new ifc.WindowPanelProperties(...)</para><para>new ifc.Relationship(...)</para><para>new ifc.RelAssigns(...)</para><para>new ifc.RelAssignsToActor(...)</para><para>new ifc.RelOccupiesSpaces(...)</para><para>new ifc.RelAssignsToControl(...)</para><para>new ifc.RelAssignsTasks(...)</para><para>new ifc.RelAssignsToProjectOrder(...)</para><para>new ifc.RelSchedulesCostItems(...)</para><para>new ifc.RelAssignsToGroup(...)</para><para>new ifc.RelAssignsToProcess(...)</para><para>new ifc.RelAssignsToProduct(...)</para><para>new ifc.RelAssignsToResource(...)</para><para>new ifc.RelAssociates(...)</para><para>new ifc.RelAssociatesAppliedValue(...)</para><para>new ifc.RelAssociatesApproval(...)</para><para>new ifc.RelAssociatesClassification(...)</para><para>new ifc.RelAssociatesConstraint(...)</para><para>new ifc.RelAssociatesDocument(...)</para><para>new ifc.RelAssociatesLibrary(...)</para><para>new ifc.RelAssociatesMaterial(...)</para><para>new ifc.RelAssociatesProfileProperties(...)</para><para>new ifc.RelConnects(...)</para><para>new ifc.RelConnectsElements(...)</para><para>new ifc.RelConnectsPathElements(...)</para><para>new ifc.RelConnectsWithRealizingElements(...)</para><para>new ifc.RelConnectsPortToElement(...)</para><para>new ifc.RelConnectsPorts(...)</para><para>new ifc.RelConnectsStructuralActivity(...)</para><para>new ifc.RelConnectsStructuralElement(...)</para><para>new ifc.RelConnectsStructuralMember(...)</para><para>new ifc.RelConnectsWithEccentricity(...)</para><para>new ifc.RelContainedInSpatialStructure(...)</para><para>new ifc.RelCoversBldgElements(...)</para><para>new ifc.RelCoversSpaces(...)</para><para>new ifc.RelFillsElement(...)</para><para>new ifc.RelFlowControlElements(...)</para><para>new ifc.RelInteractionRequirements(...)</para><para>new ifc.RelProjectsElement(...)</para><para>new ifc.RelReferencedInSpatialStructure(...)</para><para>new ifc.RelSequence(...)</para><para>new ifc.RelServicesBuildings(...)</para><para>new ifc.RelSpaceBoundary(...)</para><para>new ifc.RelVoidsElement(...)</para><para>new ifc.RelDecomposes(...)</para><para>new ifc.RelAggregates(...)</para><para>new ifc.RelNests(...)</para><para>new ifc.RelDefines(...)</para><para>new ifc.RelDefinesByProperties(...)</para><para>new ifc.RelOverridesProperties(...)</para><para>new ifc.RelDefinesByType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230924,TableId:3)] public partial class Root:ENTITY{//=====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcroot.htm
+[ifcSql(TypeGroupId:5,TypeId:230924,TableId:3,LayerId: 2)] public partial class Root:ENTITY{//=====================================================================================
 public               Root():base(){}// abstract
 [ifc(1)] public GloballyUniqueId GlobalId; //TYPE
 [ifc(2)] public OwnerHistory _OwnerHistory; //ENTITY
@@ -8064,8 +8191,8 @@ public               Root():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcroundededgefeature.htm
-[ifcSql(TypeGroupId:5,TypeId:230925,TableId:3)] public partial class RoundedEdgeFeature:EdgeFeature{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcroundededgefeature.htm
+[ifcSql(TypeGroupId:5,TypeId:230925,TableId:3,LayerId: 7)] public partial class RoundedEdgeFeature:EdgeFeature{//==================================================================
 public               RoundedEdgeFeature():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8084,8 +8211,8 @@ public               RoundedEdgeFeature(OwnerHistory _OwnerHistory,GloballyUniqu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcroundedrectangleprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:230926,TableId:3)] public partial class RoundedRectangleProfileDef:RectangleProfileDef{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcroundedrectangleprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:230926,TableId:3,LayerId:36)] public partial class RoundedRectangleProfileDef:RectangleProfileDef{//==================================================
 public               RoundedRectangleProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -8100,8 +8227,8 @@ public               RoundedRectangleProfileDef(ProfileTypeEnum ProfileType,Axis
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsiunit.htm
-[ifcSql(TypeGroupId:5,TypeId:230927,TableId:3)] public partial class SIUnit:NamedUnit{//================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsiunit.htm
+[ifcSql(TypeGroupId:5,TypeId:230927,TableId:3,LayerId:32)] public partial class SIUnit:NamedUnit{//================================================================================
 public               SIUnit():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Dimensions"><para>new ifc.DimensionalExponents(...)</para></param>
@@ -8115,8 +8242,8 @@ public               SIUnit(DimensionalExponents Dimensions,UnitEnum UnitType,SI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsanitaryterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230928,TableId:3)] public partial class SanitaryTerminalType:FlowTerminalType{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsanitaryterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230928,TableId:3,LayerId:16)] public partial class SanitaryTerminalType:FlowTerminalType{//===========================================================
 public               SanitaryTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8135,8 +8262,8 @@ public               SanitaryTerminalType(OwnerHistory _OwnerHistory,SanitaryTer
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcscheduletimecontrol.htm
-[ifcSql(TypeGroupId:5,TypeId:230929,TableId:3)] public partial class ScheduleTimeControl:Control{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcscheduletimecontrol.htm
+[ifcSql(TypeGroupId:5,TypeId:230929,TableId:3,LayerId: 3)] public partial class ScheduleTimeControl:Control{//=====================================================================
 public               ScheduleTimeControl():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8187,8 +8314,8 @@ public               ScheduleTimeControl(OwnerHistory _OwnerHistory,GloballyUniq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsectionproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230930,TableId:3)] public partial class SectionProperties:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsectionproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230930,TableId:3,LayerId:36)] public partial class SectionProperties:ENTITY{//========================================================================
 public               SectionProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SectionType"><para>SectionTypeEnum</para></param>
@@ -8202,8 +8329,8 @@ public               SectionProperties(SectionTypeEnum SectionType,ProfileDef St
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsectionreinforcementproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230931,TableId:3)] public partial class SectionReinforcementProperties:ENTITY{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsectionreinforcementproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230931,TableId:3,LayerId:36)] public partial class SectionReinforcementProperties:ENTITY{//===========================================================
 public               SectionReinforcementProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="LongitudinalStartPosition"><para>cast to (ifc.LengthMeasure)...</para></param>
@@ -8223,8 +8350,8 @@ public               SectionReinforcementProperties(LengthMeasure LongitudinalSt
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsectionedspine.htm
-[ifcSql(TypeGroupId:5,TypeId:230932,TableId:3)] public partial class SectionedSpine:GeometricRepresentationItem{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsectionedspine.htm
+[ifcSql(TypeGroupId:5,TypeId:230932,TableId:3,LayerId:29)] public partial class SectionedSpine:GeometricRepresentationItem{//======================================================
 public               SectionedSpine():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SpineCurve"><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para></param>
@@ -8238,8 +8365,8 @@ public               SectionedSpine(CompositeCurve SpineCurve,List2toUnbounded_P
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsensortype.htm
-[ifcSql(TypeGroupId:5,TypeId:230933,TableId:3)] public partial class SensorType:DistributionControlElementType{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsensortype.htm
+[ifcSql(TypeGroupId:5,TypeId:230933,TableId:3,LayerId:12)] public partial class SensorType:DistributionControlElementType{//=======================================================
 public               SensorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8258,8 +8385,8 @@ public               SensorType(OwnerHistory _OwnerHistory,SensorTypeEnum Predef
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcservicelife.htm
-[ifcSql(TypeGroupId:5,TypeId:230934,TableId:3)] public partial class ServiceLife:Control{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcservicelife.htm
+[ifcSql(TypeGroupId:5,TypeId:230934,TableId:3,LayerId: 8)] public partial class ServiceLife:Control{//=============================================================================
 public               ServiceLife():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8276,8 +8403,8 @@ public               ServiceLife(OwnerHistory _OwnerHistory,ServiceLifeTypeEnum 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcservicelifefactor.htm
-[ifcSql(TypeGroupId:5,TypeId:230935,TableId:3)] public partial class ServiceLifeFactor:PropertySetDefinition{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcservicelifefactor.htm
+[ifcSql(TypeGroupId:5,TypeId:230935,TableId:3,LayerId: 8)] public partial class ServiceLifeFactor:PropertySetDefinition{//=========================================================
 public               ServiceLifeFactor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8297,8 +8424,8 @@ public               ServiceLifeFactor(OwnerHistory _OwnerHistory,ServiceLifeFac
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcshapeaspect.htm
-[ifcSql(TypeGroupId:5,TypeId:230936,TableId:3)] public partial class ShapeAspect:ENTITY{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcshapeaspect.htm
+[ifcSql(TypeGroupId:5,TypeId:230936,TableId:3,LayerId:39)] public partial class ShapeAspect:ENTITY{//==============================================================================
 public               ShapeAspect():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ShapeRepresentations"><para>List1toUnbounded_ShapeModel</para></param>
@@ -8319,15 +8446,16 @@ public override void AssignInverseElements(){if (ShapeRepresentations!=null) for
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ShapeRepresentation(...)</para><para>new ifc.TopologyRepresentation(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230937,TableId:3)] public partial class ShapeModel:Representation{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcshapemodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230937,TableId:3,LayerId:39)] public partial class ShapeModel:Representation{//=======================================================================
 public               ShapeModel():base(){}// abstract
 /// <summary>INVERSE: OfShapeAspect of ShapeAspect for ShapeRepresentations</summary>
 [ifcInverse(For:"ShapeRepresentations")] public ShapeAspect OfShapeAspect;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcshaperepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:230938,TableId:3)] public partial class ShapeRepresentation:ShapeModel{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcshaperepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:230938,TableId:3,LayerId:39)] public partial class ShapeRepresentation:ShapeModel{//==================================================================
 public               ShapeRepresentation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextOfItems"><para>new ifc.RepresentationContext(...)</para><para>new ifc.GeometricRepresentationContext(...)</para><para>new ifc.GeometricRepresentationSubContext(...)</para></param>
@@ -8339,8 +8467,8 @@ public               ShapeRepresentation(RepresentationContext ContextOfItems,Se
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcshellbasedsurfacemodel.htm
-[ifcSql(TypeGroupId:5,TypeId:230939,TableId:3)] public partial class ShellBasedSurfaceModel:GeometricRepresentationItem{//==============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcshellbasedsurfacemodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230939,TableId:3,LayerId:29)] public partial class ShellBasedSurfaceModel:GeometricRepresentationItem{//==============================================
 public               ShellBasedSurfaceModel():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SbsmBoundary"><para>Set1toUnbounded_Shell</para></param>
@@ -8350,13 +8478,14 @@ public               ShellBasedSurfaceModel(Set1toUnbounded_Shell SbsmBoundary,s
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.PropertyBoundedValue(...)</para><para>new ifc.PropertyEnumeratedValue(...)</para><para>new ifc.PropertyListValue(...)</para><para>new ifc.PropertyReferenceValue(...)</para><para>new ifc.PropertySingleValue(...)</para><para>new ifc.PropertyTableValue(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230940,TableId:3)] public partial class SimpleProperty:Property{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsimpleproperty.htm
+[ifcSql(TypeGroupId:5,TypeId:230940,TableId:3,LayerId:37)] public partial class SimpleProperty:Property{//=========================================================================
 public               SimpleProperty():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsite.htm
-[ifcSql(TypeGroupId:5,TypeId:230941,TableId:3)] public partial class Site:SpatialStructureElement{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsite.htm
+[ifcSql(TypeGroupId:5,TypeId:230941,TableId:3,LayerId: 4)] public partial class Site:SpatialStructureElement{//====================================================================
 public               Site():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8383,8 +8512,8 @@ public               Site(OwnerHistory _OwnerHistory,ElementCompositionEnum Comp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcslab.htm
-[ifcSql(TypeGroupId:5,TypeId:230942,TableId:3)] public partial class Slab:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcslab.htm
+[ifcSql(TypeGroupId:5,TypeId:230942,TableId:3,LayerId: 5)] public partial class Slab:BuildingElement{//============================================================================
 public               Slab():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8402,8 +8531,8 @@ public               Slab(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcslabtype.htm
-[ifcSql(TypeGroupId:5,TypeId:230943,TableId:3)] public partial class SlabType:BuildingElementType{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcslabtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230943,TableId:3,LayerId: 5)] public partial class SlabType:BuildingElementType{//====================================================================
 public               SlabType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8422,8 +8551,8 @@ public               SlabType(OwnerHistory _OwnerHistory,SlabTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcslippageconnectioncondition.htm
-[ifcSql(TypeGroupId:5,TypeId:230944,TableId:3)] public partial class SlippageConnectionCondition:StructuralConnectionCondition{//=======================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcslippageconnectioncondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230944,TableId:3,LayerId:40)] public partial class SlippageConnectionCondition:StructuralConnectionCondition{//=======================================
 public               SlippageConnectionCondition():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8438,13 +8567,14 @@ public               SlippageConnectionCondition(Label Name,LengthMeasure Slippa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.CsgSolid(...)</para><para>new ifc.ManifoldSolidBrep(...)</para><para>new ifc.FacetedBrep(...)</para><para>new ifc.FacetedBrepWithVoids(...)</para><para>new ifc.SweptAreaSolid(...)</para><para>new ifc.SweptDiskSolid(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230945,TableId:3)] public partial class SolidModel:GeometricRepresentationItem{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsolidmodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230945,TableId:3,LayerId:29)] public partial class SolidModel:GeometricRepresentationItem{//==========================================================
 public               SolidModel():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsoundproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230946,TableId:3)] public partial class SoundProperties:PropertySetDefinition{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsoundproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230946,TableId:3,LayerId: 6)] public partial class SoundProperties:PropertySetDefinition{//===========================================================
 public               SoundProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8462,8 +8592,8 @@ public               SoundProperties(OwnerHistory _OwnerHistory,Boolean IsAttenu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsoundvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:230947,TableId:3)] public partial class SoundValue:PropertySetDefinition{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsoundvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:230947,TableId:3,LayerId: 6)] public partial class SoundValue:PropertySetDefinition{//================================================================
 public               SoundValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8481,8 +8611,8 @@ public               SoundValue(OwnerHistory _OwnerHistory,FrequencyMeasure Freq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcspace.htm
-[ifcSql(TypeGroupId:5,TypeId:230948,TableId:3)] public partial class Space:SpatialStructureElement{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspace.htm
+[ifcSql(TypeGroupId:5,TypeId:230948,TableId:3,LayerId: 4)] public partial class Space:SpatialStructureElement{//===================================================================
 public               Space():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8507,8 +8637,8 @@ public               Space(OwnerHistory _OwnerHistory,ElementCompositionEnum Com
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcspaceheatertype.htm
-[ifcSql(TypeGroupId:5,TypeId:230949,TableId:3)] public partial class SpaceHeaterType:EnergyConversionDeviceType{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspaceheatertype.htm
+[ifcSql(TypeGroupId:5,TypeId:230949,TableId:3,LayerId:15)] public partial class SpaceHeaterType:EnergyConversionDeviceType{//======================================================
 public               SpaceHeaterType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8527,8 +8657,8 @@ public               SpaceHeaterType(OwnerHistory _OwnerHistory,SpaceHeaterTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcspaceprogram.htm
-[ifcSql(TypeGroupId:5,TypeId:230950,TableId:3)] public partial class SpaceProgram:Control{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspaceprogram.htm
+[ifcSql(TypeGroupId:5,TypeId:230950,TableId:3,LayerId:11)] public partial class SpaceProgram:Control{//============================================================================
 public               SpaceProgram():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8555,8 +8685,8 @@ public               SpaceProgram(OwnerHistory _OwnerHistory,Identifier SpacePro
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcspacethermalloadproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230951,TableId:3)] public partial class SpaceThermalLoadProperties:PropertySetDefinition{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspacethermalloadproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230951,TableId:3,LayerId: 6)] public partial class SpaceThermalLoadProperties:PropertySetDefinition{//================================================
 public               SpaceThermalLoadProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8588,8 +8718,8 @@ public               SpaceThermalLoadProperties(OwnerHistory _OwnerHistory,Therm
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcspacetype.htm
-[ifcSql(TypeGroupId:5,TypeId:230952,TableId:3)] public partial class SpaceType:SpatialStructureElementType{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspacetype.htm
+[ifcSql(TypeGroupId:5,TypeId:230952,TableId:3,LayerId: 4)] public partial class SpaceType:SpatialStructureElementType{//===========================================================
 public               SpaceType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8608,7 +8738,8 @@ public               SpaceType(OwnerHistory _OwnerHistory,SpaceTypeEnum Predefin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Building(...)</para><para>new ifc.BuildingStorey(...)</para><para>new ifc.Site(...)</para><para>new ifc.Space(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230953,TableId:3)] public partial class SpatialStructureElement:Product{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspatialstructureelement.htm
+[ifcSql(TypeGroupId:5,TypeId:230953,TableId:3,LayerId: 4)] public partial class SpatialStructureElement:Product{//=================================================================
 public               SpatialStructureElement():base(){}// abstract
 [ifc(8,optional=true)] public Label LongName; //TYPE
 [ifc(9)] public ElementCompositionEnum CompositionType; //ENUM
@@ -8621,13 +8752,14 @@ public               SpatialStructureElement():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.SpaceType(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230954,TableId:3)] public partial class SpatialStructureElementType:ElementType{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcspatialstructureelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:230954,TableId:3,LayerId: 4)] public partial class SpatialStructureElementType:ElementType{//=========================================================
 public               SpatialStructureElementType():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsphere.htm
-[ifcSql(TypeGroupId:5,TypeId:230955,TableId:3)] public partial class Sphere:CsgPrimitive3D{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsphere.htm
+[ifcSql(TypeGroupId:5,TypeId:230955,TableId:3,LayerId:29)] public partial class Sphere:CsgPrimitive3D{//===========================================================================
 public               Sphere():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Position"><para>new ifc.Axis2Placement3D(...)</para></param>
@@ -8638,8 +8770,8 @@ public               Sphere(Axis2Placement3D Position,PositiveLengthMeasure Radi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstackterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:230956,TableId:3)] public partial class StackTerminalType:FlowTerminalType{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstackterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:230956,TableId:3,LayerId:16)] public partial class StackTerminalType:FlowTerminalType{//==============================================================
 public               StackTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8658,8 +8790,8 @@ public               StackTerminalType(OwnerHistory _OwnerHistory,StackTerminalT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstair.htm
-[ifcSql(TypeGroupId:5,TypeId:230957,TableId:3)] public partial class Stair:BuildingElement{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstair.htm
+[ifcSql(TypeGroupId:5,TypeId:230957,TableId:3,LayerId: 5)] public partial class Stair:BuildingElement{//===========================================================================
 public               Stair():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8677,8 +8809,8 @@ public               Stair(OwnerHistory _OwnerHistory,StairTypeEnum ShapeType,Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstairflight.htm
-[ifcSql(TypeGroupId:5,TypeId:230958,TableId:3)] public partial class StairFlight:BuildingElement{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstairflight.htm
+[ifcSql(TypeGroupId:5,TypeId:230958,TableId:3,LayerId: 5)] public partial class StairFlight:BuildingElement{//=====================================================================
 public               StairFlight():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8702,8 +8834,8 @@ public               StairFlight(OwnerHistory _OwnerHistory,GloballyUniqueId Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstairflighttype.htm
-[ifcSql(TypeGroupId:5,TypeId:230959,TableId:3)] public partial class StairFlightType:BuildingElementType{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstairflighttype.htm
+[ifcSql(TypeGroupId:5,TypeId:230959,TableId:3,LayerId: 5)] public partial class StairFlightType:BuildingElementType{//=============================================================
 public               StairFlightType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8722,7 +8854,8 @@ public               StairFlightType(OwnerHistory _OwnerHistory,StairFlightTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLinearAction(...)</para><para>new ifc.StructuralPlanarAction(...)</para><para>new ifc.StructuralPointAction(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230960,TableId:3)] public partial class StructuralAction:StructuralActivity{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230960,TableId:3,LayerId:20)] public partial class StructuralAction:StructuralActivity{//=============================================================
 public               StructuralAction():base(){}// abstract
 [ifc(10)] public BOOLEAN DestabilizingLoad; //BASETYPE
 [ifc(11,optional=true)] public StructuralReaction CausedBy; //ENTITY
@@ -8731,7 +8864,8 @@ public override void AssignInverseElements(){if (CausedBy!=null) {if (CausedBy.C
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralAction(...)</para><para>new ifc.StructuralLinearAction(...)</para><para>new ifc.StructuralPlanarAction(...)</para><para>new ifc.StructuralPointAction(...)</para><para>new ifc.StructuralReaction(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230961,TableId:3)] public partial class StructuralActivity:Product{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralactivity.htm
+[ifcSql(TypeGroupId:5,TypeId:230961,TableId:3,LayerId:20)] public partial class StructuralActivity:Product{//======================================================================
 public               StructuralActivity():base(){}// abstract
 [ifc(8)] public StructuralLoad AppliedLoad; //ENTITY
 [ifc(9)] public GlobalOrLocalEnum GlobalOrLocal; //ENUM
@@ -8740,8 +8874,8 @@ public               StructuralActivity():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralanalysismodel.htm
-[ifcSql(TypeGroupId:5,TypeId:230962,TableId:3)] public partial class StructuralAnalysisModel:System{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralanalysismodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230962,TableId:3,LayerId:20)] public partial class StructuralAnalysisModel:System{//==================================================================
 public               StructuralAnalysisModel():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8765,7 +8899,8 @@ public override void AssignInverseElements(){if (HasResults!=null) foreach (Stru
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralCurveConnection(...)</para><para>new ifc.StructuralPointConnection(...)</para><para>new ifc.StructuralSurfaceConnection(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230963,TableId:3)] public partial class StructuralConnection:StructuralItem{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralconnection.htm
+[ifcSql(TypeGroupId:5,TypeId:230963,TableId:3,LayerId:20)] public partial class StructuralConnection:StructuralItem{//=============================================================
 public               StructuralConnection():base(){}// abstract
 [ifc(8,optional=true)] public BoundaryCondition AppliedCondition; //ENTITY
 /// <summary>INVERSE: ConnectsStructuralMembers of RelConnectsStructuralMember for RelatedStructuralConnection</summary>
@@ -8773,14 +8908,15 @@ public               StructuralConnection():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.FailureConnectionCondition(...)</para><para>new ifc.SlippageConnectionCondition(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230964,TableId:3)] public partial class StructuralConnectionCondition:ENTITY{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralconnectioncondition.htm
+[ifcSql(TypeGroupId:5,TypeId:230964,TableId:3,LayerId:40)] public partial class StructuralConnectionCondition:ENTITY{//============================================================
 public               StructuralConnectionCondition():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralcurveconnection.htm
-[ifcSql(TypeGroupId:5,TypeId:230965,TableId:3)] public partial class StructuralCurveConnection:StructuralConnection{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralcurveconnection.htm
+[ifcSql(TypeGroupId:5,TypeId:230965,TableId:3,LayerId:20)] public partial class StructuralCurveConnection:StructuralConnection{//==================================================
 public               StructuralCurveConnection():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8796,8 +8932,8 @@ public               StructuralCurveConnection(OwnerHistory _OwnerHistory,Global
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralCurveMemberVarying(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralcurvemember.htm
-[ifcSql(TypeGroupId:5,TypeId:230966,TableId:3)] public partial class StructuralCurveMember:StructuralMember{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralcurvemember.htm
+[ifcSql(TypeGroupId:5,TypeId:230966,TableId:3,LayerId:20)] public partial class StructuralCurveMember:StructuralMember{//==========================================================
 public               StructuralCurveMember():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8814,8 +8950,8 @@ public               StructuralCurveMember(OwnerHistory _OwnerHistory,Structural
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralcurvemembervarying.htm
-[ifcSql(TypeGroupId:5,TypeId:230967,TableId:3)] public partial class StructuralCurveMemberVarying:StructuralCurveMember{//==============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralcurvemembervarying.htm
+[ifcSql(TypeGroupId:5,TypeId:230967,TableId:3,LayerId:20)] public partial class StructuralCurveMemberVarying:StructuralCurveMember{//==============================================
 public               StructuralCurveMemberVarying():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8831,15 +8967,16 @@ public               StructuralCurveMemberVarying(OwnerHistory _OwnerHistory,Str
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralConnection(...)</para><para>new ifc.StructuralCurveConnection(...)</para><para>new ifc.StructuralPointConnection(...)</para><para>new ifc.StructuralSurfaceConnection(...)</para><para>new ifc.StructuralMember(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230968,TableId:3)] public partial class StructuralItem:Product{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralitem.htm
+[ifcSql(TypeGroupId:5,TypeId:230968,TableId:3,LayerId:20)] public partial class StructuralItem:Product{//==========================================================================
 public               StructuralItem():base(){}// abstract
 /// <summary>INVERSE: AssignedStructuralActivity of RelConnectsStructuralActivity for RelatingElement</summary>
 [ifcInverse(For:"RelatingElement")] public LIST<RelConnectsStructuralActivity> AssignedStructuralActivity;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLinearActionVarying(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructurallinearaction.htm
-[ifcSql(TypeGroupId:5,TypeId:230969,TableId:3)] public partial class StructuralLinearAction:StructuralAction{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructurallinearaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230969,TableId:3,LayerId:20)] public partial class StructuralLinearAction:StructuralAction{//=========================================================
 public               StructuralLinearAction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8860,8 +8997,8 @@ public               StructuralLinearAction(OwnerHistory _OwnerHistory,Structura
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructurallinearactionvarying.htm
-[ifcSql(TypeGroupId:5,TypeId:230970,TableId:3)] public partial class StructuralLinearActionVarying:StructuralLinearAction{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructurallinearactionvarying.htm
+[ifcSql(TypeGroupId:5,TypeId:230970,TableId:3,LayerId:20)] public partial class StructuralLinearActionVarying:StructuralLinearAction{//============================================
 public               StructuralLinearActionVarying():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8885,14 +9022,15 @@ public               StructuralLinearActionVarying(OwnerHistory _OwnerHistory,St
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLoadStatic(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230971,TableId:3)] public partial class StructuralLoad:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralload.htm
+[ifcSql(TypeGroupId:5,TypeId:230971,TableId:3,LayerId:40)] public partial class StructuralLoad:ENTITY{//===========================================================================
 public               StructuralLoad():base(){}// abstract
 [ifc(1,optional=true)] public Label Name; //TYPE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadgroup.htm
-[ifcSql(TypeGroupId:5,TypeId:230972,TableId:3)] public partial class StructuralLoadGroup:Group{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadgroup.htm
+[ifcSql(TypeGroupId:5,TypeId:230972,TableId:3,LayerId:20)] public partial class StructuralLoadGroup:Group{//=======================================================================
 public               StructuralLoadGroup():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -8919,8 +9057,8 @@ public               StructuralLoadGroup(OwnerHistory _OwnerHistory,LoadGroupTyp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadlinearforce.htm
-[ifcSql(TypeGroupId:5,TypeId:230973,TableId:3)] public partial class StructuralLoadLinearForce:StructuralLoadStatic{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadlinearforce.htm
+[ifcSql(TypeGroupId:5,TypeId:230973,TableId:3,LayerId:40)] public partial class StructuralLoadLinearForce:StructuralLoadStatic{//==================================================
 public               StructuralLoadLinearForce():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8941,8 +9079,8 @@ public               StructuralLoadLinearForce(Label Name,LinearForceMeasure Lin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadplanarforce.htm
-[ifcSql(TypeGroupId:5,TypeId:230974,TableId:3)] public partial class StructuralLoadPlanarForce:StructuralLoadStatic{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadplanarforce.htm
+[ifcSql(TypeGroupId:5,TypeId:230974,TableId:3,LayerId:40)] public partial class StructuralLoadPlanarForce:StructuralLoadStatic{//==================================================
 public               StructuralLoadPlanarForce():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8957,8 +9095,8 @@ public               StructuralLoadPlanarForce(Label Name,PlanarForceMeasure Pla
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLoadSingleDisplacementDistortion(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadsingledisplacement.htm
-[ifcSql(TypeGroupId:5,TypeId:230975,TableId:3)] public partial class StructuralLoadSingleDisplacement:StructuralLoadStatic{//===========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadsingledisplacement.htm
+[ifcSql(TypeGroupId:5,TypeId:230975,TableId:3,LayerId:40)] public partial class StructuralLoadSingleDisplacement:StructuralLoadStatic{//===========================================
 public               StructuralLoadSingleDisplacement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8979,8 +9117,8 @@ public               StructuralLoadSingleDisplacement(Label Name,LengthMeasure D
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadsingledisplacementdistortion.htm
-[ifcSql(TypeGroupId:5,TypeId:230976,TableId:3)] public partial class StructuralLoadSingleDisplacementDistortion:StructuralLoadSingleDisplacement{//=====================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadsingledisplacementdistortion.htm
+[ifcSql(TypeGroupId:5,TypeId:230976,TableId:3,LayerId:40)] public partial class StructuralLoadSingleDisplacementDistortion:StructuralLoadSingleDisplacement{//=====================
 public               StructuralLoadSingleDisplacementDistortion():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -8997,8 +9135,8 @@ public               StructuralLoadSingleDisplacementDistortion(Label Name,Lengt
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLoadSingleForceWarping(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadsingleforce.htm
-[ifcSql(TypeGroupId:5,TypeId:230977,TableId:3)] public partial class StructuralLoadSingleForce:StructuralLoadStatic{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadsingleforce.htm
+[ifcSql(TypeGroupId:5,TypeId:230977,TableId:3,LayerId:40)] public partial class StructuralLoadSingleForce:StructuralLoadStatic{//==================================================
 public               StructuralLoadSingleForce():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9019,8 +9157,8 @@ public               StructuralLoadSingleForce(Label Name,ForceMeasure ForceX=nu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadsingleforcewarping.htm
-[ifcSql(TypeGroupId:5,TypeId:230978,TableId:3)] public partial class StructuralLoadSingleForceWarping:StructuralLoadSingleForce{//======================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadsingleforcewarping.htm
+[ifcSql(TypeGroupId:5,TypeId:230978,TableId:3,LayerId:40)] public partial class StructuralLoadSingleForceWarping:StructuralLoadSingleForce{//======================================
 public               StructuralLoadSingleForceWarping():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9037,13 +9175,14 @@ public               StructuralLoadSingleForceWarping(Label Name,ForceMeasure Fo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralLoadLinearForce(...)</para><para>new ifc.StructuralLoadPlanarForce(...)</para><para>new ifc.StructuralLoadSingleDisplacement(...)</para><para>new ifc.StructuralLoadSingleDisplacementDistortion(...)</para><para>new ifc.StructuralLoadSingleForce(...)</para><para>new ifc.StructuralLoadSingleForceWarping(...)</para><para>new ifc.StructuralLoadTemperature(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230979,TableId:3)] public partial class StructuralLoadStatic:StructuralLoad{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadstatic.htm
+[ifcSql(TypeGroupId:5,TypeId:230979,TableId:3,LayerId:40)] public partial class StructuralLoadStatic:StructuralLoad{//=============================================================
 public               StructuralLoadStatic():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralloadtemperature.htm
-[ifcSql(TypeGroupId:5,TypeId:230980,TableId:3)] public partial class StructuralLoadTemperature:StructuralLoadStatic{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralloadtemperature.htm
+[ifcSql(TypeGroupId:5,TypeId:230980,TableId:3,LayerId:40)] public partial class StructuralLoadTemperature:StructuralLoadStatic{//==================================================
 public               StructuralLoadTemperature():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9058,7 +9197,8 @@ public               StructuralLoadTemperature(Label Name,ThermodynamicTemperatu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralCurveMember(...)</para><para>new ifc.StructuralCurveMemberVarying(...)</para><para>new ifc.StructuralSurfaceMember(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230981,TableId:3)] public partial class StructuralMember:StructuralItem{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralmember.htm
+[ifcSql(TypeGroupId:5,TypeId:230981,TableId:3,LayerId:20)] public partial class StructuralMember:StructuralItem{//=================================================================
 public               StructuralMember():base(){}// abstract
 /// <summary>INVERSE: ReferencesElement of RelConnectsStructuralElement for RelatedStructuralMember</summary>
 [ifcInverse(For:"RelatedStructuralMember")] public LIST<RelConnectsStructuralElement> ReferencesElement;
@@ -9067,8 +9207,8 @@ public               StructuralMember():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralPlanarActionVarying(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralplanaraction.htm
-[ifcSql(TypeGroupId:5,TypeId:230982,TableId:3)] public partial class StructuralPlanarAction:StructuralAction{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralplanaraction.htm
+[ifcSql(TypeGroupId:5,TypeId:230982,TableId:3,LayerId:20)] public partial class StructuralPlanarAction:StructuralAction{//=========================================================
 public               StructuralPlanarAction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9089,8 +9229,8 @@ public               StructuralPlanarAction(OwnerHistory _OwnerHistory,Structura
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralplanaractionvarying.htm
-[ifcSql(TypeGroupId:5,TypeId:230983,TableId:3)] public partial class StructuralPlanarActionVarying:StructuralPlanarAction{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralplanaractionvarying.htm
+[ifcSql(TypeGroupId:5,TypeId:230983,TableId:3,LayerId:20)] public partial class StructuralPlanarActionVarying:StructuralPlanarAction{//============================================
 public               StructuralPlanarActionVarying():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9114,8 +9254,8 @@ public               StructuralPlanarActionVarying(OwnerHistory _OwnerHistory,St
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralpointaction.htm
-[ifcSql(TypeGroupId:5,TypeId:230984,TableId:3)] public partial class StructuralPointAction:StructuralAction{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralpointaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230984,TableId:3,LayerId:20)] public partial class StructuralPointAction:StructuralAction{//==========================================================
 public               StructuralPointAction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9134,8 +9274,8 @@ public               StructuralPointAction(OwnerHistory _OwnerHistory,Structural
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralpointconnection.htm
-[ifcSql(TypeGroupId:5,TypeId:230985,TableId:3)] public partial class StructuralPointConnection:StructuralConnection{//==================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralpointconnection.htm
+[ifcSql(TypeGroupId:5,TypeId:230985,TableId:3,LayerId:20)] public partial class StructuralPointConnection:StructuralConnection{//==================================================
 public               StructuralPointConnection():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9151,8 +9291,8 @@ public               StructuralPointConnection(OwnerHistory _OwnerHistory,Global
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralpointreaction.htm
-[ifcSql(TypeGroupId:5,TypeId:230986,TableId:3)] public partial class StructuralPointReaction:StructuralReaction{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralpointreaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230986,TableId:3,LayerId:20)] public partial class StructuralPointReaction:StructuralReaction{//======================================================
 public               StructuralPointReaction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9169,8 +9309,8 @@ public               StructuralPointReaction(OwnerHistory _OwnerHistory,Structur
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralSteelProfileProperties(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralprofileproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230987,TableId:3)] public partial class StructuralProfileProperties:GeneralProfileProperties{//============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230987,TableId:3,LayerId:-2)] public partial class StructuralProfileProperties:GeneralProfileProperties{//============================================
 public               StructuralProfileProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileName">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9217,15 +9357,16 @@ public               StructuralProfileProperties(Label ProfileName,ProfileDef Pr
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralPointReaction(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230988,TableId:3)] public partial class StructuralReaction:StructuralActivity{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralreaction.htm
+[ifcSql(TypeGroupId:5,TypeId:230988,TableId:3,LayerId:20)] public partial class StructuralReaction:StructuralActivity{//===========================================================
 public               StructuralReaction():base(){}// abstract
 /// <summary>INVERSE: Causes of StructuralAction for CausedBy</summary>
 [ifcInverse(For:"CausedBy")] public LIST<StructuralAction> Causes;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralresultgroup.htm
-[ifcSql(TypeGroupId:5,TypeId:230989,TableId:3)] public partial class StructuralResultGroup:Group{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralresultgroup.htm
+[ifcSql(TypeGroupId:5,TypeId:230989,TableId:3,LayerId:20)] public partial class StructuralResultGroup:Group{//=====================================================================
 public               StructuralResultGroup():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9248,8 +9389,8 @@ public override void AssignInverseElements(){if (ResultForLoadGroup!=null) Resul
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralsteelprofileproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:230990,TableId:3)] public partial class StructuralSteelProfileProperties:StructuralProfileProperties{//====================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralsteelprofileproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:230990,TableId:3,LayerId:-2)] public partial class StructuralSteelProfileProperties:StructuralProfileProperties{//====================================
 public               StructuralSteelProfileProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileName">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9288,8 +9429,8 @@ public               StructuralSteelProfileProperties(Label ProfileName,ProfileD
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralsurfaceconnection.htm
-[ifcSql(TypeGroupId:5,TypeId:230991,TableId:3)] public partial class StructuralSurfaceConnection:StructuralConnection{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralsurfaceconnection.htm
+[ifcSql(TypeGroupId:5,TypeId:230991,TableId:3,LayerId:20)] public partial class StructuralSurfaceConnection:StructuralConnection{//================================================
 public               StructuralSurfaceConnection():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9305,8 +9446,8 @@ public               StructuralSurfaceConnection(OwnerHistory _OwnerHistory,Glob
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StructuralSurfaceMemberVarying(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralsurfacemember.htm
-[ifcSql(TypeGroupId:5,TypeId:230992,TableId:3)] public partial class StructuralSurfaceMember:StructuralMember{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralsurfacemember.htm
+[ifcSql(TypeGroupId:5,TypeId:230992,TableId:3,LayerId:20)] public partial class StructuralSurfaceMember:StructuralMember{//========================================================
 public               StructuralSurfaceMember():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9325,8 +9466,8 @@ public               StructuralSurfaceMember(OwnerHistory _OwnerHistory,Structur
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructuralsurfacemembervarying.htm
-[ifcSql(TypeGroupId:5,TypeId:230993,TableId:3)] public partial class StructuralSurfaceMemberVarying:StructuralSurfaceMember{//==========================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructuralsurfacemembervarying.htm
+[ifcSql(TypeGroupId:5,TypeId:230993,TableId:3,LayerId:20)] public partial class StructuralSurfaceMemberVarying:StructuralSurfaceMember{//==========================================
 public               StructuralSurfaceMemberVarying():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9347,8 +9488,8 @@ public               StructuralSurfaceMemberVarying(OwnerHistory _OwnerHistory,S
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstructureddimensioncallout.htm
-[ifcSql(TypeGroupId:5,TypeId:230994,TableId:3)] public partial class StructuredDimensionCallout:DraughtingCallout{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstructureddimensioncallout.htm
+[ifcSql(TypeGroupId:5,TypeId:230994,TableId:3,LayerId:-4)] public partial class StructuredDimensionCallout:DraughtingCallout{//====================================================
 public               StructuredDimensionCallout():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Contents"><para>Set1toUnbounded_DraughtingCalloutElement</para></param>
@@ -9357,13 +9498,14 @@ public               StructuredDimensionCallout(Set1toUnbounded_DraughtingCallou
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.StyledRepresentation(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:230995,TableId:3)] public partial class StyleModel:Representation{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstylemodel.htm
+[ifcSql(TypeGroupId:5,TypeId:230995,TableId:3,LayerId:39)] public partial class StyleModel:Representation{//=======================================================================
 public               StyleModel():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.AnnotationOccurrence(...)</para><para>new ifc.AnnotationCurveOccurrence(...)</para><para>new ifc.DimensionCurve(...)</para><para>new ifc.ProjectionCurve(...)</para><para>new ifc.AnnotationFillAreaOccurrence(...)</para><para>new ifc.AnnotationSurfaceOccurrence(...)</para><para>new ifc.AnnotationSymbolOccurrence(...)</para><para>new ifc.TerminatorSymbol(...)</para><para>new ifc.AnnotationTextOccurrence(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstyleditem.htm
-[ifcSql(TypeGroupId:5,TypeId:230996,TableId:3)] public partial class StyledItem:RepresentationItem{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstyleditem.htm
+[ifcSql(TypeGroupId:5,TypeId:230996,TableId:3,LayerId:33)] public partial class StyledItem:RepresentationItem{//===================================================================
 public               StyledItem():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -9379,8 +9521,8 @@ public override void AssignInverseElements(){if (Item!=null) Item.StyledByItem=t
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcstyledrepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:230997,TableId:3)] public partial class StyledRepresentation:StyleModel{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcstyledrepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:230997,TableId:3,LayerId:39)] public partial class StyledRepresentation:StyleModel{//=================================================================
 public               StyledRepresentation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextOfItems"><para>new ifc.RepresentationContext(...)</para><para>new ifc.GeometricRepresentationContext(...)</para><para>new ifc.GeometricRepresentationSubContext(...)</para></param>
@@ -9392,8 +9534,8 @@ public               StyledRepresentation(RepresentationContext ContextOfItems,S
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsubcontractresource.htm
-[ifcSql(TypeGroupId:5,TypeId:230998,TableId:3)] public partial class SubContractResource:ConstructionResource{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsubcontractresource.htm
+[ifcSql(TypeGroupId:5,TypeId:230998,TableId:3,LayerId:13)] public partial class SubContractResource:ConstructionResource{//========================================================
 public               SubContractResource():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9414,8 +9556,8 @@ public               SubContractResource(OwnerHistory _OwnerHistory,GloballyUniq
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsubedge.htm
-[ifcSql(TypeGroupId:5,TypeId:230999,TableId:3)] public partial class Subedge:Edge{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsubedge.htm
+[ifcSql(TypeGroupId:5,TypeId:230999,TableId:3,LayerId:41)] public partial class Subedge:Edge{//====================================================================================
 public               Subedge():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="EdgeStart"><para>new ifc.Vertex(...)</para><para>new ifc.VertexPoint(...)</para></param>
@@ -9427,13 +9569,14 @@ public               Subedge(Vertex EdgeStart,Vertex EdgeEnd,Edge ParentEdge,str
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BoundedSurface(...)</para><para>new ifc.CurveBoundedPlane(...)</para><para>new ifc.RectangularTrimmedSurface(...)</para><para>new ifc.ElementarySurface(...)</para><para>new ifc.Plane(...)</para><para>new ifc.SweptSurface(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231000,TableId:3)] public partial class Surface:GeometricRepresentationItem{//=============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:231000,TableId:3,LayerId:30)] public partial class Surface:GeometricRepresentationItem{//=============================================================
 public               Surface():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacecurvesweptareasolid.htm
-[ifcSql(TypeGroupId:5,TypeId:231001,TableId:3)] public partial class SurfaceCurveSweptAreaSolid:SweptAreaSolid{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacecurvesweptareasolid.htm
+[ifcSql(TypeGroupId:5,TypeId:231001,TableId:3,LayerId:29)] public partial class SurfaceCurveSweptAreaSolid:SweptAreaSolid{//=======================================================
 public               SurfaceCurveSweptAreaSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SweptArea"><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></param>
@@ -9451,8 +9594,8 @@ public               SurfaceCurveSweptAreaSolid(ProfileDef SweptArea,Axis2Placem
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfaceoflinearextrusion.htm
-[ifcSql(TypeGroupId:5,TypeId:231002,TableId:3)] public partial class SurfaceOfLinearExtrusion:SweptSurface{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfaceoflinearextrusion.htm
+[ifcSql(TypeGroupId:5,TypeId:231002,TableId:3,LayerId:30)] public partial class SurfaceOfLinearExtrusion:SweptSurface{//===========================================================
 public               SurfaceOfLinearExtrusion():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SweptCurve"><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></param>
@@ -9466,8 +9609,8 @@ public               SurfaceOfLinearExtrusion(ProfileDef SweptCurve,Axis2Placeme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfaceofrevolution.htm
-[ifcSql(TypeGroupId:5,TypeId:231003,TableId:3)] public partial class SurfaceOfRevolution:SweptSurface{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfaceofrevolution.htm
+[ifcSql(TypeGroupId:5,TypeId:231003,TableId:3,LayerId:30)] public partial class SurfaceOfRevolution:SweptSurface{//================================================================
 public               SurfaceOfRevolution():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SweptCurve"><para>new ifc.ArbitraryClosedProfileDef(...)</para><para>new ifc.ArbitraryProfileDefWithVoids(...)</para><para>new ifc.ArbitraryOpenProfileDef(...)</para><para>new ifc.CenterLineProfileDef(...)</para><para>new ifc.CompositeProfileDef(...)</para><para>new ifc.DerivedProfileDef(...)</para><para>new ifc.CShapeProfileDef(...)</para><para>new ifc.CircleProfileDef(...)</para><para>new ifc.CircleHollowProfileDef(...)</para><para>new ifc.CraneRailAShapeProfileDef(...)</para><para>new ifc.CraneRailFShapeProfileDef(...)</para><para>new ifc.EllipseProfileDef(...)</para><para>new ifc.IShapeProfileDef(...)</para><para>new ifc.AsymmetricIShapeProfileDef(...)</para><para>new ifc.LShapeProfileDef(...)</para><para>new ifc.RectangleProfileDef(...)</para><para>new ifc.TShapeProfileDef(...)</para><para>new ifc.TrapeziumProfileDef(...)</para><para>new ifc.UShapeProfileDef(...)</para><para>new ifc.ZShapeProfileDef(...)</para></param>
@@ -9479,8 +9622,8 @@ public               SurfaceOfRevolution(ProfileDef SweptCurve,Axis2Placement3D 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestyle.htm
-[ifcSql(TypeGroupId:5,TypeId:231004,TableId:3)] public partial class SurfaceStyle:PresentationStyle{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestyle.htm
+[ifcSql(TypeGroupId:5,TypeId:231004,TableId:3,LayerId:33)] public partial class SurfaceStyle:PresentationStyle{//==================================================================
 public               SurfaceStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9493,8 +9636,8 @@ public               SurfaceStyle(SurfaceSide Side,Set1to5_SurfaceStyleElementSe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestylelighting.htm
-[ifcSql(TypeGroupId:5,TypeId:231005,TableId:3)] public partial class SurfaceStyleLighting:ENTITY{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestylelighting.htm
+[ifcSql(TypeGroupId:5,TypeId:231005,TableId:3,LayerId:33)] public partial class SurfaceStyleLighting:ENTITY{//=====================================================================
 public               SurfaceStyleLighting():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="DiffuseTransmissionColour"><para>new ifc.ColourRgb(...)</para></param>
@@ -9510,8 +9653,8 @@ public               SurfaceStyleLighting(ColourRgb DiffuseTransmissionColour,Co
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestylerefraction.htm
-[ifcSql(TypeGroupId:5,TypeId:231006,TableId:3)] public partial class SurfaceStyleRefraction:ENTITY{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestylerefraction.htm
+[ifcSql(TypeGroupId:5,TypeId:231006,TableId:3,LayerId:33)] public partial class SurfaceStyleRefraction:ENTITY{//===================================================================
 public               SurfaceStyleRefraction():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RefractionIndex">[optional]<para>cast to (ifc.Real)...</para></param>
@@ -9523,8 +9666,8 @@ public               SurfaceStyleRefraction(Real RefractionIndex,Real Dispersion
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestylerendering.htm
-[ifcSql(TypeGroupId:5,TypeId:231007,TableId:3)] public partial class SurfaceStyleRendering:SurfaceStyleShading{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestylerendering.htm
+[ifcSql(TypeGroupId:5,TypeId:231007,TableId:3,LayerId:33)] public partial class SurfaceStyleRendering:SurfaceStyleShading{//=======================================================
 public               SurfaceStyleRendering():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SurfaceColour"><para>new ifc.ColourRgb(...)</para></param>
@@ -9549,8 +9692,8 @@ public               SurfaceStyleRendering(ColourRgb SurfaceColour,ReflectanceMe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.SurfaceStyleRendering(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestyleshading.htm
-[ifcSql(TypeGroupId:5,TypeId:231008,TableId:3)] public partial class SurfaceStyleShading:ENTITY{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestyleshading.htm
+[ifcSql(TypeGroupId:5,TypeId:231008,TableId:3,LayerId:33)] public partial class SurfaceStyleShading:ENTITY{//======================================================================
 public               SurfaceStyleShading():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="SurfaceColour"><para>new ifc.ColourRgb(...)</para></param>
@@ -9560,8 +9703,8 @@ public               SurfaceStyleShading(ColourRgb SurfaceColour,string EndOfLin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsurfacestylewithtextures.htm
-[ifcSql(TypeGroupId:5,TypeId:231009,TableId:3)] public partial class SurfaceStyleWithTextures:ENTITY{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacestylewithtextures.htm
+[ifcSql(TypeGroupId:5,TypeId:231009,TableId:3,LayerId:33)] public partial class SurfaceStyleWithTextures:ENTITY{//=================================================================
 public               SurfaceStyleWithTextures():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Textures"><para>List1toUnbounded_SurfaceTexture</para></param>
@@ -9571,7 +9714,8 @@ public               SurfaceStyleWithTextures(List1toUnbounded_SurfaceTexture Te
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.BlobTexture(...)</para><para>new ifc.ImageTexture(...)</para><para>new ifc.PixelTexture(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231010,TableId:3)] public partial class SurfaceTexture:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsurfacetexture.htm
+[ifcSql(TypeGroupId:5,TypeId:231010,TableId:3,LayerId:33)] public partial class SurfaceTexture:ENTITY{//===========================================================================
 public               SurfaceTexture():base(){}// abstract
 [ifc(1)] public BOOLEAN RepeatS; //BASETYPE
 [ifc(2)] public BOOLEAN RepeatT; //BASETYPE
@@ -9580,15 +9724,16 @@ public               SurfaceTexture():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ExtrudedAreaSolid(...)</para><para>new ifc.RevolvedAreaSolid(...)</para><para>new ifc.SurfaceCurveSweptAreaSolid(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231011,TableId:3)] public partial class SweptAreaSolid:SolidModel{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsweptareasolid.htm
+[ifcSql(TypeGroupId:5,TypeId:231011,TableId:3,LayerId:29)] public partial class SweptAreaSolid:SolidModel{//=======================================================================
 public               SweptAreaSolid():base(){}// abstract
 [ifc(1)] public ProfileDef SweptArea; //ENTITY
 [ifc(2)] public Axis2Placement3D Position; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsweptdisksolid.htm
-[ifcSql(TypeGroupId:5,TypeId:231012,TableId:3)] public partial class SweptDiskSolid:SolidModel{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsweptdisksolid.htm
+[ifcSql(TypeGroupId:5,TypeId:231012,TableId:3,LayerId:29)] public partial class SweptDiskSolid:SolidModel{//=======================================================================
 public               SweptDiskSolid():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Directrix"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -9606,15 +9751,16 @@ public               SweptDiskSolid(Curve Directrix,PositiveLengthMeasure Radius
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.SurfaceOfLinearExtrusion(...)</para><para>new ifc.SurfaceOfRevolution(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231013,TableId:3)] public partial class SweptSurface:Surface{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsweptsurface.htm
+[ifcSql(TypeGroupId:5,TypeId:231013,TableId:3,LayerId:30)] public partial class SweptSurface:Surface{//============================================================================
 public               SweptSurface():base(){}// abstract
 [ifc(1)] public ProfileDef SweptCurve; //ENTITY
 [ifc(2)] public Axis2Placement3D Position; //ENTITY
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcswitchingdevicetype.htm
-[ifcSql(TypeGroupId:5,TypeId:231014,TableId:3)] public partial class SwitchingDeviceType:FlowControllerType{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcswitchingdevicetype.htm
+[ifcSql(TypeGroupId:5,TypeId:231014,TableId:3,LayerId:14)] public partial class SwitchingDeviceType:FlowControllerType{//==========================================================
 public               SwitchingDeviceType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9633,8 +9779,8 @@ public               SwitchingDeviceType(OwnerHistory _OwnerHistory,SwitchingDev
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsymbolstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:231015,TableId:3)] public partial class SymbolStyle:PresentationStyle{//===================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsymbolstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:231015,TableId:3,LayerId:33)] public partial class SymbolStyle:PresentationStyle{//===================================================================
 public               SymbolStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9645,8 +9791,8 @@ public               SymbolStyle(SymbolStyleSelect StyleOfSymbol,Label Name=null
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ElectricalCircuit(...)</para><para>new ifc.StructuralAnalysisModel(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsystem.htm
-[ifcSql(TypeGroupId:5,TypeId:231016,TableId:3)] public partial class System:Group{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsystem.htm
+[ifcSql(TypeGroupId:5,TypeId:231016,TableId:3,LayerId: 4)] public partial class System:Group{//====================================================================================
 public               System():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9661,8 +9807,8 @@ public               System(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcsystemfurnitureelementtype.htm
-[ifcSql(TypeGroupId:5,TypeId:231017,TableId:3)] public partial class SystemFurnitureElementType:FurnishingElementType{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcsystemfurnitureelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:231017,TableId:3,LayerId: 8)] public partial class SystemFurnitureElementType:FurnishingElementType{//================================================
 public               SystemFurnitureElementType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9679,8 +9825,8 @@ public               SystemFurnitureElementType(OwnerHistory _OwnerHistory,Globa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctshapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:231018,TableId:3)] public partial class TShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctshapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:231018,TableId:3,LayerId:36)] public partial class TShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               TShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -9711,8 +9857,8 @@ public               TShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctable.htm
-[ifcSql(TypeGroupId:5,TypeId:231019,TableId:3)] public partial class Table:ENTITY{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctable.htm
+[ifcSql(TypeGroupId:5,TypeId:231019,TableId:3,LayerId:42)] public partial class Table:ENTITY{//====================================================================================
 public               Table():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>STRING</para></param>
@@ -9726,8 +9872,8 @@ public override void AssignInverseElements(){if (Rows!=null) foreach (TableRow _
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctablerow.htm
-[ifcSql(TypeGroupId:5,TypeId:231020,TableId:3)] public partial class TableRow:ENTITY{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctablerow.htm
+[ifcSql(TypeGroupId:5,TypeId:231020,TableId:3,LayerId:42)] public partial class TableRow:ENTITY{//=================================================================================
 public               TableRow():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RowCells"><para>List1toUnbounded_Value</para></param>
@@ -9741,8 +9887,8 @@ public               TableRow(List1toUnbounded_Value RowCells,BOOLEAN IsHeading,
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctanktype.htm
-[ifcSql(TypeGroupId:5,TypeId:231021,TableId:3)] public partial class TankType:FlowStorageDeviceType{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctanktype.htm
+[ifcSql(TypeGroupId:5,TypeId:231021,TableId:3,LayerId:15)] public partial class TankType:FlowStorageDeviceType{//==================================================================
 public               TankType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9761,8 +9907,8 @@ public               TankType(OwnerHistory _OwnerHistory,TankTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.Move(...)</para><para>new ifc.OrderAction(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctask.htm
-[ifcSql(TypeGroupId:5,TypeId:231022,TableId:3)] public partial class Task:Process{//====================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctask.htm
+[ifcSql(TypeGroupId:5,TypeId:231022,TableId:3,LayerId: 3)] public partial class Task:Process{//====================================================================================
 public               Task():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9785,8 +9931,8 @@ public               Task(OwnerHistory _OwnerHistory,Identifier TaskId,BOOLEAN I
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctelecomaddress.htm
-[ifcSql(TypeGroupId:5,TypeId:231023,TableId:3)] public partial class TelecomAddress:Address{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctelecomaddress.htm
+[ifcSql(TypeGroupId:5,TypeId:231023,TableId:3,LayerId:22)] public partial class TelecomAddress:Address{//==========================================================================
 public               TelecomAddress():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Purpose">[optional]<para>AddressTypeEnum</para></param>
@@ -9807,8 +9953,8 @@ public               TelecomAddress(AddressTypeEnum Purpose,Text Description=nul
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctendon.htm
-[ifcSql(TypeGroupId:5,TypeId:231024,TableId:3)] public partial class Tendon:ReinforcingElement{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctendon.htm
+[ifcSql(TypeGroupId:5,TypeId:231024,TableId:3,LayerId:21)] public partial class Tendon:ReinforcingElement{//=======================================================================
 public               Tendon():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9841,8 +9987,8 @@ public               Tendon(OwnerHistory _OwnerHistory,TendonTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctendonanchor.htm
-[ifcSql(TypeGroupId:5,TypeId:231025,TableId:3)] public partial class TendonAnchor:ReinforcingElement{//=================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctendonanchor.htm
+[ifcSql(TypeGroupId:5,TypeId:231025,TableId:3,LayerId:21)] public partial class TendonAnchor:ReinforcingElement{//=================================================================
 public               TendonAnchor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -9859,8 +10005,8 @@ public               TendonAnchor(OwnerHistory _OwnerHistory,GloballyUniqueId Gl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DimensionCurveTerminator(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcterminatorsymbol.htm
-[ifcSql(TypeGroupId:5,TypeId:231026,TableId:3)] public partial class TerminatorSymbol:AnnotationSymbolOccurrence{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcterminatorsymbol.htm
+[ifcSql(TypeGroupId:5,TypeId:231026,TableId:3,LayerId:-4)] public partial class TerminatorSymbol:AnnotationSymbolOccurrence{//=====================================================
 public               TerminatorSymbol():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Item">[optional]<para>new ifc.AnnotationFillArea(...)</para><para>new ifc.AnnotationSurface(...)</para><para>new ifc.BooleanResult(...)</para><para>new ifc.BooleanClippingResult(...)</para><para>new ifc.BoundingBox(...)</para><para>new ifc.CartesianTransformationOperator2D(...)</para><para>new ifc.CartesianTransformationOperator2DnonUniform(...)</para><para>new ifc.CartesianTransformationOperator3D(...)</para><para>new ifc.CartesianTransformationOperator3DnonUniform(...)</para><para>new ifc.CompositeCurveSegment(...)</para><para>new ifc.Block(...)</para><para>new ifc.RectangularPyramid(...)</para><para>new ifc.RightCircularCone(...)</para><para>new ifc.RightCircularCylinder(...)</para><para>new ifc.Sphere(...)</para><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para><para>new ifc.DefinedSymbol(...)</para><para>new ifc.Direction(...)</para><para>new ifc.DraughtingCallout(...)</para><para>new ifc.DimensionCurveDirectedCallout(...)</para><para>new ifc.AngularDimension(...)</para><para>new ifc.DiameterDimension(...)</para><para>new ifc.LinearDimension(...)</para><para>new ifc.RadiusDimension(...)</para><para>new ifc.StructuredDimensionCallout(...)</para><para>new ifc.FaceBasedSurfaceModel(...)</para><para>new ifc.FillAreaStyleHatching(...)</para><para>new ifc.FillAreaStyleTileSymbolWithStyle(...)</para><para>new ifc.FillAreaStyleTiles(...)</para><para>new ifc.GeometricSet(...)</para><para>new ifc.GeometricCurveSet(...)</para><para>new ifc.HalfSpaceSolid(...)</para><para>new ifc.BoxedHalfSpace(...)</para><para>new ifc.PolygonalBoundedHalfSpace(...)</para><para>new ifc.LightSourceAmbient(...)</para><para>new ifc.LightSourceDirectional(...)</para><para>new ifc.LightSourceGoniometric(...)</para><para>new ifc.LightSourcePositional(...)</para><para>new ifc.LightSourceSpot(...)</para><para>new ifc.OneDirectionRepeatFactor(...)</para><para>new ifc.TwoDirectionRepeatFactor(...)</para><para>new ifc.Axis1Placement(...)</para><para>new ifc.Axis2Placement2D(...)</para><para>new ifc.Axis2Placement3D(...)</para><para>new ifc.PlanarExtent(...)</para><para>new ifc.PlanarBox(...)</para><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para><para>new ifc.SectionedSpine(...)</para><para>new ifc.ShellBasedSurfaceModel(...)</para><para>new ifc.TextLiteral(...)</para><para>new ifc.Vector(...)</para><para>new ifc.MappedItem(...)</para><para>new ifc.StyledItem(...)</para></param>
@@ -9875,8 +10021,8 @@ public override void AssignInverseElements(){if (AnnotatedCurve!=null) if (Annot
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.TextLiteralWithExtent(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextliteral.htm
-[ifcSql(TypeGroupId:5,TypeId:231027,TableId:3)] public partial class TextLiteral:GeometricRepresentationItem{//=========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextliteral.htm
+[ifcSql(TypeGroupId:5,TypeId:231027,TableId:3,LayerId:34)] public partial class TextLiteral:GeometricRepresentationItem{//=========================================================
 public               TextLiteral():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Literal"><para>cast to (ifc.PresentableText)...</para></param>
@@ -9890,8 +10036,8 @@ public               TextLiteral(PresentableText Literal,Axis2Placement _Placeme
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextliteralwithextent.htm
-[ifcSql(TypeGroupId:5,TypeId:231028,TableId:3)] public partial class TextLiteralWithExtent:TextLiteral{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextliteralwithextent.htm
+[ifcSql(TypeGroupId:5,TypeId:231028,TableId:3,LayerId:34)] public partial class TextLiteralWithExtent:TextLiteral{//===============================================================
 public               TextLiteralWithExtent():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Literal"><para>cast to (ifc.PresentableText)...</para></param>
@@ -9906,8 +10052,8 @@ public               TextLiteralWithExtent(PresentableText Literal,Axis2Placemen
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:231029,TableId:3)] public partial class TextStyle:PresentationStyle{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:231029,TableId:3,LayerId:33)] public partial class TextStyle:PresentationStyle{//=====================================================================
 public               TextStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name">[optional]<para>cast to (ifc.Label)...</para></param>
@@ -9922,8 +10068,8 @@ public               TextStyle(TextFontSelect TextFontStyle,Label Name=null,Char
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextstylefontmodel.htm
-[ifcSql(TypeGroupId:5,TypeId:231030,TableId:3)] public partial class TextStyleFontModel:PreDefinedTextFont{//===========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstylefontmodel.htm
+[ifcSql(TypeGroupId:5,TypeId:231030,TableId:3,LayerId:33)] public partial class TextStyleFontModel:PreDefinedTextFont{//===========================================================
 public               TextStyleFontModel():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Name"><para>cast to (ifc.Label)...</para></param>
@@ -9931,7 +10077,7 @@ public               TextStyleFontModel():base(){}
 /// <param name="FontStyle">[optional]<para>cast to (ifc.FontStyle)...</para></param>
 /// <param name="FontVariant">[optional]<para>cast to (ifc.FontVariant)...</para></param>
 /// <param name="FontWeight">[optional]<para>cast to (ifc.FontWeight)...</para></param>
-/// <param name="FontSize"><para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="FontSize"><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 public               TextStyleFontModel(Label Name,SizeSelect FontSize,List1toUnbounded_TextFontName FontFamily=null,FontStyle FontStyle=null,FontVariant FontVariant=null,FontWeight FontWeight=null,string EndOfLineComment=null):base(){AddNext();this.Name=Name;this.FontSize=FontSize;this.FontFamily=FontFamily;this.FontStyle=FontStyle;this.FontVariant=FontVariant;this.FontWeight=FontWeight;this.EndOfLineComment=EndOfLineComment;}
 [ifc(2,optional=true)] public List1toUnbounded_TextFontName FontFamily; //ListType1d
@@ -9942,8 +10088,8 @@ public               TextStyleFontModel(Label Name,SizeSelect FontSize,List1toUn
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextstylefordefinedfont.htm
-[ifcSql(TypeGroupId:5,TypeId:231031,TableId:3)] public partial class TextStyleForDefinedFont:ENTITY{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstylefordefinedfont.htm
+[ifcSql(TypeGroupId:5,TypeId:231031,TableId:3,LayerId:33)] public partial class TextStyleForDefinedFont:ENTITY{//==================================================================
 public               TextStyleForDefinedFont():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Colour"><para>new ifc.Colour(new ColourRgb(...))...</para><para>new ifc.Colour(new ColourSpecification(...))...</para><para>new ifc.Colour(new DraughtingPreDefinedColour(...))...</para><para>new ifc.Colour(new PreDefinedColour(...))...</para></param>
@@ -9955,17 +10101,17 @@ public               TextStyleForDefinedFont(Colour Colour,Colour BackgroundColo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextstyletextmodel.htm
-[ifcSql(TypeGroupId:5,TypeId:231032,TableId:3)] public partial class TextStyleTextModel:ENTITY{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstyletextmodel.htm
+[ifcSql(TypeGroupId:5,TypeId:231032,TableId:3,LayerId:33)] public partial class TextStyleTextModel:ENTITY{//=======================================================================
 public               TextStyleTextModel():base(){}
 /// <summary>Possible Entries:</summary>
-/// <param name="TextIndent">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="TextIndent">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="TextAlign">[optional]<para>cast to (ifc.TextAlignment)...</para></param>
 /// <param name="TextDecoration">[optional]<para>cast to (ifc.TextDecoration)...</para></param>
-/// <param name="LetterSpacing">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
-/// <param name="WordSpacing">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="LetterSpacing">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
+/// <param name="WordSpacing">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="TextTransform">[optional]<para>cast to (ifc.TextTransformation)...</para></param>
-/// <param name="LineHeight">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="LineHeight">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 public               TextStyleTextModel(SizeSelect TextIndent,TextAlignment TextAlign=null,TextDecoration TextDecoration=null,SizeSelect LetterSpacing=null,SizeSelect WordSpacing=null,TextTransformation TextTransform=null,SizeSelect LineHeight=null,string EndOfLineComment=null):base(){AddNext();this.TextIndent=TextIndent;this.TextAlign=TextAlign;this.TextDecoration=TextDecoration;this.LetterSpacing=LetterSpacing;this.WordSpacing=WordSpacing;this.TextTransform=TextTransform;this.LineHeight=LineHeight;this.EndOfLineComment=EndOfLineComment;}
 [ifc(1)] public SizeSelect TextIndent; //SELECT
@@ -9978,15 +10124,15 @@ public               TextStyleTextModel(SizeSelect TextIndent,TextAlignment Text
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctextstylewithboxcharacteristics.htm
-[ifcSql(TypeGroupId:5,TypeId:231033,TableId:3)] public partial class TextStyleWithBoxCharacteristics:ENTITY{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctextstylewithboxcharacteristics.htm
+[ifcSql(TypeGroupId:5,TypeId:231033,TableId:3,LayerId:33)] public partial class TextStyleWithBoxCharacteristics:ENTITY{//==========================================================
 public               TextStyleWithBoxCharacteristics():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BoxHeight">[optional]<para>cast to (ifc.PositiveLengthMeasure)...</para></param>
 /// <param name="BoxWidth">[optional]<para>cast to (ifc.PositiveLengthMeasure)...</para></param>
 /// <param name="BoxSlantAngle">[optional]<para>cast to (ifc.PlaneAngleMeasure)...</para></param>
 /// <param name="BoxRotateAngle">[optional]<para>cast to (ifc.PlaneAngleMeasure)...</para></param>
-/// <param name="CharacterSpacing">[optional]<para>new ifc.SizeSelect(new RatioMeasure(...))...</para><para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para></param>
+/// <param name="CharacterSpacing">[optional]<para>new ifc.SizeSelect(new LengthMeasure(...))...</para><para>new ifc.SizeSelect(new DescriptiveMeasure(...))...</para><para>new ifc.SizeSelect(new NormalisedRatioMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveLengthMeasure(...))...</para><para>new ifc.SizeSelect(new PositiveRatioMeasure(...))...</para><para>new ifc.SizeSelect(new RatioMeasure(...))...</para></param>
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 public               TextStyleWithBoxCharacteristics(PositiveLengthMeasure BoxHeight,PositiveLengthMeasure BoxWidth=null,PlaneAngleMeasure BoxSlantAngle=null,PlaneAngleMeasure BoxRotateAngle=null,SizeSelect CharacterSpacing=null,string EndOfLineComment=null):base(){AddNext();this.BoxHeight=BoxHeight;this.BoxWidth=BoxWidth;this.BoxSlantAngle=BoxSlantAngle;this.BoxRotateAngle=BoxRotateAngle;this.CharacterSpacing=CharacterSpacing;this.EndOfLineComment=EndOfLineComment;}
 [ifc(1)] public PositiveLengthMeasure BoxHeight; //TYPE
@@ -9997,15 +10143,16 @@ public               TextStyleWithBoxCharacteristics(PositiveLengthMeasure BoxHe
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.TextureCoordinateGenerator(...)</para><para>new ifc.TextureMap(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231034,TableId:3)] public partial class TextureCoordinate:ENTITY{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctexturecoordinate.htm
+[ifcSql(TypeGroupId:5,TypeId:231034,TableId:3,LayerId:33)] public partial class TextureCoordinate:ENTITY{//========================================================================
 public               TextureCoordinate():base(){}// abstract
 /// <summary>INVERSE: AnnotatedSurface of AnnotationSurface for TextureCoordinates</summary>
 [ifcInverse(For:"TextureCoordinates")] public AnnotationSurface AnnotatedSurface;
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctexturecoordinategenerator.htm
-[ifcSql(TypeGroupId:5,TypeId:231035,TableId:3)] public partial class TextureCoordinateGenerator:TextureCoordinate{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctexturecoordinategenerator.htm
+[ifcSql(TypeGroupId:5,TypeId:231035,TableId:3,LayerId:33)] public partial class TextureCoordinateGenerator:TextureCoordinate{//====================================================
 public               TextureCoordinateGenerator():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Mode"><para>cast to (ifc.Label)...</para></param>
@@ -10017,8 +10164,8 @@ public               TextureCoordinateGenerator(Label Mode,List1toUnbounded_Simp
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctexturemap.htm
-[ifcSql(TypeGroupId:5,TypeId:231036,TableId:3)] public partial class TextureMap:TextureCoordinate{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctexturemap.htm
+[ifcSql(TypeGroupId:5,TypeId:231036,TableId:3,LayerId:33)] public partial class TextureMap:TextureCoordinate{//====================================================================
 public               TextureMap():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TextureMaps"><para>Set1toUnbounded_VertexBasedTextureMap</para></param>
@@ -10028,8 +10175,8 @@ public               TextureMap(Set1toUnbounded_VertexBasedTextureMap TextureMap
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctexturevertex.htm
-[ifcSql(TypeGroupId:5,TypeId:231037,TableId:3)] public partial class TextureVertex:ENTITY{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctexturevertex.htm
+[ifcSql(TypeGroupId:5,TypeId:231037,TableId:3,LayerId:33)] public partial class TextureVertex:ENTITY{//============================================================================
 public               TextureVertex():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Coordinates"><para>List2to2_ParameterValue</para></param>
@@ -10039,8 +10186,8 @@ public               TextureVertex(List2to2_ParameterValue Coordinates,string En
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcthermalmaterialproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:231038,TableId:3)] public partial class ThermalMaterialProperties:MaterialProperties{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcthermalmaterialproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:231038,TableId:3,LayerId:-5)] public partial class ThermalMaterialProperties:MaterialProperties{//====================================================
 public               ThermalMaterialProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -10057,7 +10204,8 @@ public               ThermalMaterialProperties(Material _Material,SpecificHeatCa
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.IrregularTimeSeries(...)</para><para>new ifc.RegularTimeSeries(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231039,TableId:3)] public partial class TimeSeries:ENTITY{//===============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctimeseries.htm
+[ifcSql(TypeGroupId:5,TypeId:231039,TableId:3,LayerId:26)] public partial class TimeSeries:ENTITY{//===============================================================================
 public               TimeSeries():base(){}// abstract
 [ifc(1)] public Label Name; //TYPE
 [ifc(2,optional=true)] public Text Description; //TYPE
@@ -10072,8 +10220,8 @@ public               TimeSeries():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctimeseriesreferencerelationship.htm
-[ifcSql(TypeGroupId:5,TypeId:231040,TableId:3)] public partial class TimeSeriesReferenceRelationship:ENTITY{//==========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctimeseriesreferencerelationship.htm
+[ifcSql(TypeGroupId:5,TypeId:231040,TableId:3,LayerId:-1)] public partial class TimeSeriesReferenceRelationship:ENTITY{//==========================================================
 public               TimeSeriesReferenceRelationship():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ReferencedTimeSeries"><para>new ifc.IrregularTimeSeries(...)</para><para>new ifc.RegularTimeSeries(...)</para></param>
@@ -10087,8 +10235,8 @@ public override void AssignInverseElements(){if (ReferencedTimeSeries!=null) Ref
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctimeseriesschedule.htm
-[ifcSql(TypeGroupId:5,TypeId:231041,TableId:3)] public partial class TimeSeriesSchedule:Control{//======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctimeseriesschedule.htm
+[ifcSql(TypeGroupId:5,TypeId:231041,TableId:3,LayerId: 1)] public partial class TimeSeriesSchedule:Control{//======================================================================
 public               TimeSeriesSchedule():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10107,8 +10255,8 @@ public               TimeSeriesSchedule(OwnerHistory _OwnerHistory,TimeSeriesSch
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctimeseriesvalue.htm
-[ifcSql(TypeGroupId:5,TypeId:231042,TableId:3)] public partial class TimeSeriesValue:ENTITY{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctimeseriesvalue.htm
+[ifcSql(TypeGroupId:5,TypeId:231042,TableId:3,LayerId:26)] public partial class TimeSeriesValue:ENTITY{//==========================================================================
 public               TimeSeriesValue():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ListValues"><para>List1toUnbounded_Value</para></param>
@@ -10118,13 +10266,14 @@ public               TimeSeriesValue(List1toUnbounded_Value ListValues,string En
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.ConnectedFaceSet(...)</para><para>new ifc.ClosedShell(...)</para><para>new ifc.OpenShell(...)</para><para>new ifc.Edge(...)</para><para>new ifc.EdgeCurve(...)</para><para>new ifc.OrientedEdge(...)</para><para>new ifc.Subedge(...)</para><para>new ifc.Face(...)</para><para>new ifc.FaceSurface(...)</para><para>new ifc.FaceBound(...)</para><para>new ifc.FaceOuterBound(...)</para><para>new ifc.Loop(...)</para><para>new ifc.EdgeLoop(...)</para><para>new ifc.PolyLoop(...)</para><para>new ifc.VertexLoop(...)</para><para>new ifc.Path(...)</para><para>new ifc.Vertex(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231043,TableId:3)] public partial class TopologicalRepresentationItem:RepresentationItem{//================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctopologicalrepresentationitem.htm
+[ifcSql(TypeGroupId:5,TypeId:231043,TableId:3,LayerId:41)] public partial class TopologicalRepresentationItem:RepresentationItem{//================================================
 public               TopologicalRepresentationItem():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctopologyrepresentation.htm
-[ifcSql(TypeGroupId:5,TypeId:231044,TableId:3)] public partial class TopologyRepresentation:ShapeModel{//===============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctopologyrepresentation.htm
+[ifcSql(TypeGroupId:5,TypeId:231044,TableId:3,LayerId:39)] public partial class TopologyRepresentation:ShapeModel{//===============================================================
 public               TopologyRepresentation():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ContextOfItems"><para>new ifc.RepresentationContext(...)</para><para>new ifc.GeometricRepresentationContext(...)</para><para>new ifc.GeometricRepresentationSubContext(...)</para></param>
@@ -10136,8 +10285,8 @@ public               TopologyRepresentation(RepresentationContext ContextOfItems
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctransformertype.htm
-[ifcSql(TypeGroupId:5,TypeId:231045,TableId:3)] public partial class TransformerType:EnergyConversionDeviceType{//======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctransformertype.htm
+[ifcSql(TypeGroupId:5,TypeId:231045,TableId:3,LayerId:14)] public partial class TransformerType:EnergyConversionDeviceType{//======================================================
 public               TransformerType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10156,8 +10305,8 @@ public               TransformerType(OwnerHistory _OwnerHistory,TransformerTypeE
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctransportelement.htm
-[ifcSql(TypeGroupId:5,TypeId:231046,TableId:3)] public partial class TransportElement:Element{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctransportelement.htm
+[ifcSql(TypeGroupId:5,TypeId:231046,TableId:3,LayerId: 4)] public partial class TransportElement:Element{//========================================================================
 public               TransportElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10179,8 +10328,8 @@ public               TransportElement(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctransportelementtype.htm
-[ifcSql(TypeGroupId:5,TypeId:231047,TableId:3)] public partial class TransportElementType:ElementType{//================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctransportelementtype.htm
+[ifcSql(TypeGroupId:5,TypeId:231047,TableId:3,LayerId: 4)] public partial class TransportElementType:ElementType{//================================================================
 public               TransportElementType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10199,8 +10348,8 @@ public               TransportElementType(OwnerHistory _OwnerHistory,TransportEl
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctrapeziumprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:231048,TableId:3)] public partial class TrapeziumProfileDef:ParameterizedProfileDef{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctrapeziumprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:231048,TableId:3,LayerId:36)] public partial class TrapeziumProfileDef:ParameterizedProfileDef{//=====================================================
 public               TrapeziumProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -10219,8 +10368,8 @@ public               TrapeziumProfileDef(ProfileTypeEnum ProfileType,Axis2Placem
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctrimmedcurve.htm
-[ifcSql(TypeGroupId:5,TypeId:231049,TableId:3)] public partial class TrimmedCurve:BoundedCurve{//=======================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctrimmedcurve.htm
+[ifcSql(TypeGroupId:5,TypeId:231049,TableId:3,LayerId:30)] public partial class TrimmedCurve:BoundedCurve{//=======================================================================
 public               TrimmedCurve():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="BasisCurve"><para>new ifc.BezierCurve(...)</para><para>new ifc.RationalBezierCurve(...)</para><para>new ifc.CompositeCurve(...)</para><para>new ifc._2DCompositeCurve(...)</para><para>new ifc.Polyline(...)</para><para>new ifc.TrimmedCurve(...)</para><para>new ifc.Circle(...)</para><para>new ifc.Ellipse(...)</para><para>new ifc.Line(...)</para><para>new ifc.OffsetCurve2D(...)</para><para>new ifc.OffsetCurve3D(...)</para></param>
@@ -10238,8 +10387,8 @@ public               TrimmedCurve(Curve BasisCurve,Set1to2_TrimmingSelect Trim1,
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctubebundletype.htm
-[ifcSql(TypeGroupId:5,TypeId:231050,TableId:3)] public partial class TubeBundleType:EnergyConversionDeviceType{//=======================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctubebundletype.htm
+[ifcSql(TypeGroupId:5,TypeId:231050,TableId:3,LayerId:15)] public partial class TubeBundleType:EnergyConversionDeviceType{//=======================================================
 public               TubeBundleType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10258,8 +10407,8 @@ public               TubeBundleType(OwnerHistory _OwnerHistory,TubeBundleTypeEnu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctwodirectionrepeatfactor.htm
-[ifcSql(TypeGroupId:5,TypeId:231051,TableId:3)] public partial class TwoDirectionRepeatFactor:OneDirectionRepeatFactor{//===============================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctwodirectionrepeatfactor.htm
+[ifcSql(TypeGroupId:5,TypeId:231051,TableId:3,LayerId:33)] public partial class TwoDirectionRepeatFactor:OneDirectionRepeatFactor{//===============================================
 public               TwoDirectionRepeatFactor():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="RepeatFactor"><para>new ifc.Vector(...)</para></param>
@@ -10270,8 +10419,8 @@ public               TwoDirectionRepeatFactor(Vector RepeatFactor,Vector SecondR
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.TypeProduct(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctypeobject.htm
-[ifcSql(TypeGroupId:5,TypeId:231052,TableId:3)] public partial class TypeObject:ObjectDefinition{//=====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctypeobject.htm
+[ifcSql(TypeGroupId:5,TypeId:231052,TableId:3,LayerId: 2)] public partial class TypeObject:ObjectDefinition{//=====================================================================
 public               TypeObject():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10291,8 +10440,8 @@ public override void AssignInverseElements(){if (HasPropertySets!=null) foreach 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.DoorStyle(...)</para><para>new ifc.ElementType(...)</para><para>new ifc.BuildingElementType(...)</para><para>new ifc.BeamType(...)</para><para>new ifc.BuildingElementProxyType(...)</para><para>new ifc.ColumnType(...)</para><para>new ifc.CoveringType(...)</para><para>new ifc.CurtainWallType(...)</para><para>new ifc.MemberType(...)</para><para>new ifc.PlateType(...)</para><para>new ifc.RailingType(...)</para><para>new ifc.RampFlightType(...)</para><para>new ifc.SlabType(...)</para><para>new ifc.StairFlightType(...)</para><para>new ifc.WallType(...)</para><para>new ifc.DistributionElementType(...)</para><para>new ifc.DistributionControlElementType(...)</para><para>new ifc.ActuatorType(...)</para><para>new ifc.AlarmType(...)</para><para>new ifc.ControllerType(...)</para><para>new ifc.FlowInstrumentType(...)</para><para>new ifc.SensorType(...)</para><para>new ifc.DistributionFlowElementType(...)</para><para>new ifc.DistributionChamberElementType(...)</para><para>new ifc.EnergyConversionDeviceType(...)</para><para>new ifc.AirToAirHeatRecoveryType(...)</para><para>new ifc.BoilerType(...)</para><para>new ifc.ChillerType(...)</para><para>new ifc.CoilType(...)</para><para>new ifc.CondenserType(...)</para><para>new ifc.CooledBeamType(...)</para><para>new ifc.CoolingTowerType(...)</para><para>new ifc.ElectricGeneratorType(...)</para><para>new ifc.ElectricMotorType(...)</para><para>new ifc.EvaporativeCoolerType(...)</para><para>new ifc.EvaporatorType(...)</para><para>new ifc.HeatExchangerType(...)</para><para>new ifc.HumidifierType(...)</para><para>new ifc.MotorConnectionType(...)</para><para>new ifc.SpaceHeaterType(...)</para><para>new ifc.TransformerType(...)</para><para>new ifc.TubeBundleType(...)</para><para>new ifc.UnitaryEquipmentType(...)</para><para>new ifc.FlowControllerType(...)</para><para>new ifc.AirTerminalBoxType(...)</para><para>new ifc.DamperType(...)</para><para>new ifc.ElectricTimeControlType(...)</para><para>new ifc.FlowMeterType(...)</para><para>new ifc.ProtectiveDeviceType(...)</para><para>new ifc.SwitchingDeviceType(...)</para><para>new ifc.ValveType(...)</para><para>new ifc.FlowFittingType(...)</para><para>new ifc.CableCarrierFittingType(...)</para><para>new ifc.DuctFittingType(...)</para><para>new ifc.JunctionBoxType(...)</para><para>new ifc.PipeFittingType(...)</para><para>new ifc.FlowMovingDeviceType(...)</para><para>new ifc.CompressorType(...)</para><para>new ifc.FanType(...)</para><para>new ifc.PumpType(...)</para><para>new ifc.FlowSegmentType(...)</para><para>new ifc.CableCarrierSegmentType(...)</para><para>new ifc.CableSegmentType(...)</para><para>new ifc.DuctSegmentType(...)</para><para>new ifc.PipeSegmentType(...)</para><para>new ifc.FlowStorageDeviceType(...)</para><para>new ifc.ElectricFlowStorageDeviceType(...)</para><para>new ifc.TankType(...)</para><para>new ifc.FlowTerminalType(...)</para><para>new ifc.AirTerminalType(...)</para><para>new ifc.ElectricApplianceType(...)</para><para>new ifc.ElectricHeaterType(...)</para><para>new ifc.FireSuppressionTerminalType(...)</para><para>new ifc.GasTerminalType(...)</para><para>new ifc.LampType(...)</para><para>new ifc.LightFixtureType(...)</para><para>new ifc.OutletType(...)</para><para>new ifc.SanitaryTerminalType(...)</para><para>new ifc.StackTerminalType(...)</para><para>new ifc.WasteTerminalType(...)</para><para>new ifc.FlowTreatmentDeviceType(...)</para><para>new ifc.DuctSilencerType(...)</para><para>new ifc.FilterType(...)</para><para>new ifc.ElementComponentType(...)</para><para>new ifc.DiscreteAccessoryType(...)</para><para>new ifc.VibrationIsolatorType(...)</para><para>new ifc.FastenerType(...)</para><para>new ifc.MechanicalFastenerType(...)</para><para>new ifc.FurnishingElementType(...)</para><para>new ifc.FurnitureType(...)</para><para>new ifc.SystemFurnitureElementType(...)</para><para>new ifc.SpatialStructureElementType(...)</para><para>new ifc.SpaceType(...)</para><para>new ifc.TransportElementType(...)</para><para>new ifc.WindowStyle(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifctypeproduct.htm
-[ifcSql(TypeGroupId:5,TypeId:231053,TableId:3)] public partial class TypeProduct:TypeObject{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifctypeproduct.htm
+[ifcSql(TypeGroupId:5,TypeId:231053,TableId:3,LayerId: 2)] public partial class TypeProduct:TypeObject{//==========================================================================
 public               TypeProduct():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10310,8 +10459,8 @@ public               TypeProduct(OwnerHistory _OwnerHistory,GloballyUniqueId Glo
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcushapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:231054,TableId:3)] public partial class UShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcushapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:231054,TableId:3,LayerId:36)] public partial class UShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               UShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -10338,8 +10487,8 @@ public               UShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcunitassignment.htm
-[ifcSql(TypeGroupId:5,TypeId:231055,TableId:3)] public partial class UnitAssignment:ENTITY{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcunitassignment.htm
+[ifcSql(TypeGroupId:5,TypeId:231055,TableId:3,LayerId:32)] public partial class UnitAssignment:ENTITY{//===========================================================================
 public               UnitAssignment():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Units"><para>Set1toUnbounded_Unit</para></param>
@@ -10349,8 +10498,8 @@ public               UnitAssignment(Set1toUnbounded_Unit Units,string EndOfLineC
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcunitaryequipmenttype.htm
-[ifcSql(TypeGroupId:5,TypeId:231056,TableId:3)] public partial class UnitaryEquipmentType:EnergyConversionDeviceType{//=================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcunitaryequipmenttype.htm
+[ifcSql(TypeGroupId:5,TypeId:231056,TableId:3,LayerId:15)] public partial class UnitaryEquipmentType:EnergyConversionDeviceType{//=================================================
 public               UnitaryEquipmentType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10369,8 +10518,8 @@ public               UnitaryEquipmentType(OwnerHistory _OwnerHistory,UnitaryEqui
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvalvetype.htm
-[ifcSql(TypeGroupId:5,TypeId:231057,TableId:3)] public partial class ValveType:FlowControllerType{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvalvetype.htm
+[ifcSql(TypeGroupId:5,TypeId:231057,TableId:3,LayerId:15)] public partial class ValveType:FlowControllerType{//====================================================================
 public               ValveType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10389,8 +10538,8 @@ public               ValveType(OwnerHistory _OwnerHistory,ValveTypeEnum Predefin
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvector.htm
-[ifcSql(TypeGroupId:5,TypeId:231058,TableId:3)] public partial class Vector:GeometricRepresentationItem{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvector.htm
+[ifcSql(TypeGroupId:5,TypeId:231058,TableId:3,LayerId:30)] public partial class Vector:GeometricRepresentationItem{//==============================================================
 public               Vector():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="Orientation"><para>new ifc.Direction(...)</para></param>
@@ -10402,15 +10551,15 @@ public               Vector(Direction Orientation,LengthMeasure Magnitude,string
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.VertexPoint(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvertex.htm
-[ifcSql(TypeGroupId:5,TypeId:231059,TableId:3)] public partial class Vertex:TopologicalRepresentationItem{//============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvertex.htm
+[ifcSql(TypeGroupId:5,TypeId:231059,TableId:3,LayerId:41)] public partial class Vertex:TopologicalRepresentationItem{//============================================================
 public               Vertex():base(){}
 /// <param name="EndOfLineComment">[optional]<para>string</para></param>
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvertexbasedtexturemap.htm
-[ifcSql(TypeGroupId:5,TypeId:231060,TableId:3)] public partial class VertexBasedTextureMap:ENTITY{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvertexbasedtexturemap.htm
+[ifcSql(TypeGroupId:5,TypeId:231060,TableId:3,LayerId:34)] public partial class VertexBasedTextureMap:ENTITY{//====================================================================
 public               VertexBasedTextureMap():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="TextureVertices"><para>List3toUnbounded_TextureVertex</para></param>
@@ -10422,8 +10571,8 @@ public               VertexBasedTextureMap(List3toUnbounded_TextureVertex Textur
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvertexloop.htm
-[ifcSql(TypeGroupId:5,TypeId:231061,TableId:3)] public partial class VertexLoop:Loop{//=================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvertexloop.htm
+[ifcSql(TypeGroupId:5,TypeId:231061,TableId:3,LayerId:41)] public partial class VertexLoop:Loop{//=================================================================================
 public               VertexLoop():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="LoopVertex"><para>new ifc.Vertex(...)</para><para>new ifc.VertexPoint(...)</para></param>
@@ -10433,8 +10582,8 @@ public               VertexLoop(Vertex LoopVertex,string EndOfLineComment=null):
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvertexpoint.htm
-[ifcSql(TypeGroupId:5,TypeId:231062,TableId:3)] public partial class VertexPoint:Vertex{//==============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvertexpoint.htm
+[ifcSql(TypeGroupId:5,TypeId:231062,TableId:3,LayerId:41)] public partial class VertexPoint:Vertex{//==============================================================================
 public               VertexPoint():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="VertexGeometry"><para>new ifc.CartesianPoint(...)</para><para>new ifc.PointOnCurve(...)</para><para>new ifc.PointOnSurface(...)</para></param>
@@ -10444,8 +10593,8 @@ public               VertexPoint(Point VertexGeometry,string EndOfLineComment=nu
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvibrationisolatortype.htm
-[ifcSql(TypeGroupId:5,TypeId:231063,TableId:3)] public partial class VibrationIsolatorType:DiscreteAccessoryType{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvibrationisolatortype.htm
+[ifcSql(TypeGroupId:5,TypeId:231063,TableId:3,LayerId:15)] public partial class VibrationIsolatorType:DiscreteAccessoryType{//=====================================================
 public               VibrationIsolatorType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10464,8 +10613,8 @@ public               VibrationIsolatorType(OwnerHistory _OwnerHistory,VibrationI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvirtualelement.htm
-[ifcSql(TypeGroupId:5,TypeId:231064,TableId:3)] public partial class VirtualElement:Element{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvirtualelement.htm
+[ifcSql(TypeGroupId:5,TypeId:231064,TableId:3,LayerId: 4)] public partial class VirtualElement:Element{//==========================================================================
 public               VirtualElement():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10481,8 +10630,8 @@ public               VirtualElement(OwnerHistory _OwnerHistory,GloballyUniqueId 
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcvirtualgridintersection.htm
-[ifcSql(TypeGroupId:5,TypeId:231065,TableId:3)] public partial class VirtualGridIntersection:ENTITY{//==================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcvirtualgridintersection.htm
+[ifcSql(TypeGroupId:5,TypeId:231065,TableId:3,LayerId:28)] public partial class VirtualGridIntersection:ENTITY{//==================================================================
 public               VirtualGridIntersection():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="IntersectingAxes"><para>List2to2Unique_GridAxis</para></param>
@@ -10496,8 +10645,8 @@ public override void AssignInverseElements(){if (IntersectingAxes!=null) foreach
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.WallStandardCase(...)</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwall.htm
-[ifcSql(TypeGroupId:5,TypeId:231066,TableId:3)] public partial class Wall:BuildingElement{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwall.htm
+[ifcSql(TypeGroupId:5,TypeId:231066,TableId:3,LayerId: 5)] public partial class Wall:BuildingElement{//============================================================================
 public               Wall():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10513,8 +10662,8 @@ public               Wall(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId=n
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwallstandardcase.htm
-[ifcSql(TypeGroupId:5,TypeId:231067,TableId:3)] public partial class WallStandardCase:Wall{//===========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwallstandardcase.htm
+[ifcSql(TypeGroupId:5,TypeId:231067,TableId:3,LayerId: 5)] public partial class WallStandardCase:Wall{//===========================================================================
 public               WallStandardCase():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10530,8 +10679,8 @@ public               WallStandardCase(OwnerHistory _OwnerHistory,GloballyUniqueI
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwalltype.htm
-[ifcSql(TypeGroupId:5,TypeId:231068,TableId:3)] public partial class WallType:BuildingElementType{//====================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwalltype.htm
+[ifcSql(TypeGroupId:5,TypeId:231068,TableId:3,LayerId: 5)] public partial class WallType:BuildingElementType{//====================================================================
 public               WallType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10550,8 +10699,8 @@ public               WallType(OwnerHistory _OwnerHistory,WallTypeEnum Predefined
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwasteterminaltype.htm
-[ifcSql(TypeGroupId:5,TypeId:231069,TableId:3)] public partial class WasteTerminalType:FlowTerminalType{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwasteterminaltype.htm
+[ifcSql(TypeGroupId:5,TypeId:231069,TableId:3,LayerId:16)] public partial class WasteTerminalType:FlowTerminalType{//==============================================================
 public               WasteTerminalType():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10570,8 +10719,8 @@ public               WasteTerminalType(OwnerHistory _OwnerHistory,WasteTerminalT
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwaterproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:231070,TableId:3)] public partial class WaterProperties:MaterialProperties{//==============================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwaterproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:231070,TableId:3,LayerId:-5)] public partial class WaterProperties:MaterialProperties{//==============================================================
 public               WaterProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="_Material"><para>new ifc.Material(...)</para></param>
@@ -10594,8 +10743,8 @@ public               WaterProperties(Material _Material,BOOLEAN IsPotable=null,I
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwindow.htm
-[ifcSql(TypeGroupId:5,TypeId:231071,TableId:3)] public partial class Window:BuildingElement{//==========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwindow.htm
+[ifcSql(TypeGroupId:5,TypeId:231071,TableId:3,LayerId: 5)] public partial class Window:BuildingElement{//==========================================================================
 public               Window():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10615,8 +10764,8 @@ public               Window(OwnerHistory _OwnerHistory,GloballyUniqueId GlobalId
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwindowliningproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:231072,TableId:3)] public partial class WindowLiningProperties:PropertySetDefinition{//====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwindowliningproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:231072,TableId:3,LayerId:11)] public partial class WindowLiningProperties:PropertySetDefinition{//====================================================
 public               WindowLiningProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10646,8 +10795,8 @@ public               WindowLiningProperties(OwnerHistory _OwnerHistory,GloballyU
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwindowpanelproperties.htm
-[ifcSql(TypeGroupId:5,TypeId:231073,TableId:3)] public partial class WindowPanelProperties:PropertySetDefinition{//=====================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwindowpanelproperties.htm
+[ifcSql(TypeGroupId:5,TypeId:231073,TableId:3,LayerId:11)] public partial class WindowPanelProperties:PropertySetDefinition{//=====================================================
 public               WindowPanelProperties():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10669,8 +10818,8 @@ public               WindowPanelProperties(OwnerHistory _OwnerHistory,WindowPane
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcwindowstyle.htm
-[ifcSql(TypeGroupId:5,TypeId:231074,TableId:3)] public partial class WindowStyle:TypeProduct{//=========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcwindowstyle.htm
+[ifcSql(TypeGroupId:5,TypeId:231074,TableId:3,LayerId:11)] public partial class WindowStyle:TypeProduct{//=========================================================================
 public               WindowStyle():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10694,7 +10843,8 @@ public               WindowStyle(OwnerHistory _OwnerHistory,WindowStyleConstruct
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para><para>new ifc.WorkPlan(...)</para><para>new ifc.WorkSchedule(...)</para></summary>
-[ifcSql(TypeGroupId:5,TypeId:231075,TableId:3)] public partial class WorkControl:Control{//=============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcworkcontrol.htm
+[ifcSql(TypeGroupId:5,TypeId:231075,TableId:3,LayerId: 3)] public partial class WorkControl:Control{//=============================================================================
 public               WorkControl():base(){}// abstract
 [ifc(6)] public Identifier Identifier; //TYPE
 [ifc(7)] public DateTimeSelect CreationDate; //SELECT
@@ -10709,8 +10859,8 @@ public               WorkControl():base(){}// abstract
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcworkplan.htm
-[ifcSql(TypeGroupId:5,TypeId:231076,TableId:3)] public partial class WorkPlan:WorkControl{//============================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcworkplan.htm
+[ifcSql(TypeGroupId:5,TypeId:231076,TableId:3,LayerId: 3)] public partial class WorkPlan:WorkControl{//============================================================================
 public               WorkPlan():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10733,8 +10883,8 @@ public               WorkPlan(OwnerHistory _OwnerHistory,Identifier Identifier,D
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifcworkschedule.htm
-[ifcSql(TypeGroupId:5,TypeId:231077,TableId:3)] public partial class WorkSchedule:WorkControl{//========================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifcworkschedule.htm
+[ifcSql(TypeGroupId:5,TypeId:231077,TableId:3,LayerId: 3)] public partial class WorkSchedule:WorkControl{//========================================================================
 public               WorkSchedule():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>
@@ -10757,8 +10907,8 @@ public               WorkSchedule(OwnerHistory _OwnerHistory,Identifier Identifi
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifczshapeprofiledef.htm
-[ifcSql(TypeGroupId:5,TypeId:231078,TableId:3)] public partial class ZShapeProfileDef:ParameterizedProfileDef{//========================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifczshapeprofiledef.htm
+[ifcSql(TypeGroupId:5,TypeId:231078,TableId:3,LayerId:36)] public partial class ZShapeProfileDef:ParameterizedProfileDef{//========================================================
 public               ZShapeProfileDef():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="ProfileType"><para>ProfileTypeEnum</para></param>
@@ -10781,8 +10931,8 @@ public               ZShapeProfileDef(ProfileTypeEnum ProfileType,Axis2Placement
 }//=====================================================================================================================
 
 /// <summary> <para>Derived Classes:</para></summary>
-// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/schema//lexical/ifczone.htm
-[ifcSql(TypeGroupId:5,TypeId:231079,TableId:3)] public partial class Zone:Group{//======================================================================================
+// https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/link/ifczone.htm
+[ifcSql(TypeGroupId:5,TypeId:231079,TableId:3,LayerId: 4)] public partial class Zone:Group{//======================================================================================
 public               Zone():base(){}
 /// <summary>Possible Entries:</summary>
 /// <param name="GlobalId"><para>cast to (ifc.GloballyUniqueId)...</para></param>

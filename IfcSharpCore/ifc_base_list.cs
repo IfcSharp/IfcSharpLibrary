@@ -12,9 +12,10 @@ Type GetItemsType();
 }
 
 public partial class LIST<T> : List<T>,ifcListInterface,ifcSqlTypeInterface{
-public int    SqlTypeId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeId;}
-public int    SqlTypeGroupId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeGroupId;}
-public int    SqlTableId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTableId;}
+public int      SqlTypeId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeId;}
+public int SqlTypeGroupId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeGroupId;}
+public int     SqlTableId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTableId;}
+public int        LayerId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).LayerId;} //2022-11-30 (bb): layer-suport
 public       LIST(){}
 public       LIST(int MinOccurs,int MaxOccurs){this.MinOccurs=MinOccurs;this.MaxOccurs=MaxOccurs;}
 public Type GetItemsType(){return typeof(T);}

@@ -512,10 +512,10 @@ namespace ifc {
             }
         }
 
-        public static Model FromStepFile(string filePath) {
+        public static Model FromStepFile(string filePath,bool AssignInverseElements=true) { // 2022-12-03 (bb) AssignInverseElements
             Log.Add($"Reading STEP file '{filePath}'", Log.Level.Info);
             Model model = new ifc.Model(filePath.Replace(".ifc", ""));
-            model.Header = ParseHeaderData(filePath);
+            try{model.Header = ParseHeaderData(filePath);}catch(Exception e){Log.Add(e.Message,Log.Level.Exception);} // 2022-10-16 (bb) added try/catch
             if (model.Header == null) {
                 model.Header = new HeaderData(); 
                 model.Header.Init(NetSystem.IO.Path.GetFileNameWithoutExtension(filePath), "N/A", "N/A", "N/A");
@@ -525,10 +525,14 @@ namespace ifc {
             string line = "";
             while ((line = sr.ReadLine()) != null) if (line.Length > 3) {
                     line = line.TrimStart(' ');
-                    if (line.Length > 3) if (line[0] == '#' || (line[0] == '/' && line[1] == '*')) ENTITY.ParseIfcLine(model, line);
+                    // 2022-10-16 (bb) evaluate multiline-header (alpha):
+                    line = line.TrimEnd(' ');
+                    if (line.Length > 3) if (line[line.Length-1]!=';' && !(line[line.Length-2]=='*' && line[line.Length-1]=='/')) line+=sr.ReadLine();
+                    if (line.Length > 3) if (line[0] == '#' || (line[0] == '/' && line[1] == '*')) try {ENTITY.ParseIfcLine(model, line);}catch (Exception e) { Log.Add(e.Message+ " in:" +line, Log.Level.Exception);}
             }
             sr.Close();
             model.AssignEntities();
+            if (AssignInverseElements) foreach (ifc.ENTITY e in  model.EntityList) e.AssignInverseElements();  // 2022-12-03 (bb) AssignInverseElements
             Log.Add($"Finished reading STEP file '{filePath}'.", Log.Level.Info);
             Log.Add($"Created {model.EntityList.Count} IFC Entities.", Log.Level.Info);
             return model;

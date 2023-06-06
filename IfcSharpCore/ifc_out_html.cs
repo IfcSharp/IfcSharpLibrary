@@ -93,10 +93,12 @@ InheritanceList.Reverse();
 bool Display=false;foreach(string sx in InheritanceList) {if (Display) Args+="&#013;&#010;"+sx;if (sx=="ifcENTITY") Display=true;}
 
 
-string s="\r\n<div class=\"line"+(Highlighted?"X":(ifc.EntityComment.HtmlCnt%4).ToString()) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span><span class=\"ifc\">ifc</span><span class=\""
-+EntityClassName+"\" title=\"ifc"+ElementName
+string s="\r\n<div class=\"line"+(Highlighted?"X":(ifc.EntityComment.HtmlCnt%4).ToString()) +"\"><a name=\""+this.LocalId.ToString()+"\"/><span class=\""+IdClassName+"\">"+"<a href=\"#"+this.LocalId.ToString()+"\">#"+ this.LocalId.ToString()+"</a></span><span class=\"equal\">=</span>"
++"<a class=\""+EntityClassName+"\" href=\"javascript:EntityHelp('"+Layer.Name(this.LayerId())+"','"+ElementName+"')\" ><span class=\"ifc\">ifc</span><span class=\""
++EntityClassName+"\" "
++"title=\"ifc"+ElementName
 +Args
-+"\">"+ElementName+"</span>(";
++"\">"+ElementName+"</span></a>(";
 
  sep=0;
      if (this is CartesianPoint) {CartesianPoint cp=(CartesianPoint)this;string coords="";foreach (LengthMeasure lm in cp.Coordinates    ) coords+=((++sep>1)?",":"")+((double)lm).ToString("#0.0000"); s+=HtmlOut(AttribList[0].field,"list",coords);}
@@ -129,12 +131,13 @@ public               EntityComment(bool Highlighting){this.Highlighted=ENTITY.Hi
 
 public partial class Model{//==========================================================================================
 
-private static string FormattedHeaderLine(string line){return "<span class=\"header\">"+line+"</span>"+"<br/>";}
+private static string FormattedHeaderLine(string line,string attribs="",bool a=false){string tag="span";if (a) tag="a"; return "<"+tag+" class=\"header\""+attribs+">"+line+"</"+tag+">"+"<br/>";}
 
-public void ToHtmlFile()
+public void ToHtmlFile(bool JavaScript=true)
 {
 StreamWriter sw=new StreamWriter(Header.Name+".ifc.html");
 //Console.WriteLine("Start ToHtmlFile");
+sw.WriteLine("<!-- "+Header.Name+".ifc.html"+" was created using IfcSharp (see https://github.com/IfcSharp) -->");
 sw.WriteLine("<html>");
 sw.WriteLine("<head>");
 sw.WriteLine("<title>ifc</title>");
@@ -152,7 +155,7 @@ sw.WriteLine("  .commentline {color: black; background-color:white; font-weight:
 sw.WriteLine("  .EndOfLineComment {color: black; background-color:white; font-weight: bold;white-space: pre;}");
 sw.WriteLine("  .ref {color: blue;text-decoration: underline;}");
 sw.WriteLine("  .refX {color: blue;text-decoration: underline;background-color:#FFFF00;}");
-sw.WriteLine("  .entity {color: navy;font-weight:bold;}");
+sw.WriteLine("  .entity {color: navy;font-weight:bold;text-decoration: none;}");
 sw.WriteLine("  .text {color: maroon; font-weight:bold;}");
 sw.WriteLine("  .dollar {color: gray; }");
 sw.WriteLine("  .float {color: purple; font-weight:bold;}");
@@ -160,13 +163,13 @@ sw.WriteLine("  .int {color: teal;}");
 sw.WriteLine("  .list {color: black;}");
 sw.WriteLine("  .guid {color: orange;}");
 sw.WriteLine("  .enum {color: green;font-weight:bold;}");
-sw.WriteLine("  .header {color: darkcyan;}");
+sw.WriteLine("  .header {color: darkcyan;text-decoration: none;}");
 sw.WriteLine("  .equal {color: darkgray;}");
 sw.WriteLine("  .semik {color: olive;}");
-sw.WriteLine("  .keyw0 {background-color:#A0FFFF;}");
-sw.WriteLine("  .keyw1 {background-color:#FFA0FF;}");
-sw.WriteLine("  .keyw2 {background-color:#FFFFA0;}");
-sw.WriteLine("  .keyw3 {background-color:#A0FFA0;}");
+sw.WriteLine("  .keyw0 {background-color:#A0FFFF;text-decoration: none;}");
+sw.WriteLine("  .keyw1 {background-color:#FFA0FF;text-decoration: none;}");
+sw.WriteLine("  .keyw2 {background-color:#FFFFA0;text-decoration: none;}");
+sw.WriteLine("  .keyw3 {background-color:#A0FFA0;text-decoration: none;}");
 sw.WriteLine("  .line0 {background-color:#F0FFFF;}");
 sw.WriteLine("  .line1 {background-color:#FAFAFA;}");
 sw.WriteLine("  .line2 {background-color:#FFFFF8;}");
@@ -177,16 +180,20 @@ sw.WriteLine("</style>");
 
 sw.WriteLine("</head>");
 sw.WriteLine("<body>");
+//sw.WriteLine("<script src=\"help.js\"></script>");
+if (JavaScript)
+   {sw.WriteLine("<script>");
+    sw.WriteLine("function ShowHelp() {window.open(document.getElementById(\"SpecificationBaseUrl\").getAttribute(\"href\"));}");
+    sw.WriteLine("function EntityHelp(layer, entity) {window.open(document.getElementById(\"SpecificationBaseUrl\").getAttribute(\"href\") + '/schema/ifc' + layer.toLowerCase() + '/lexical/ifc' + entity.toLowerCase() + '.htm');}");
+    sw.WriteLine("</script>");
+   }
+
 sw.WriteLine("<div class=\"global\">");
-
-
-//foreach (string s in Header) sw.WriteLine("<span class=\"header\">"+s+"</span>"+"<br/>");
-
 sw.WriteLine(FormattedHeaderLine("ISO-10303-21;"));
-sw.WriteLine(FormattedHeaderLine("HEADER;"));
+sw.WriteLine(FormattedHeaderLine("HEADER;","  id=\"SpecificationBaseUrl\" href=\""+ifc.Specification.SpecificationBaseUrl+"/HTML\""));
 sw.WriteLine(FormattedHeaderLine("FILE_DESCRIPTION (('"+Header.ViewDefinition+"'), '2;1');"));
 sw.WriteLine(FormattedHeaderLine("FILE_NAME ('"+Header.Name+"', '"+NetSystem.String.Format("{0:s}",NetSystem.DateTime.Now)+"', ('"+Header.Author+"'), ('"+Header.Organization+"'), '"+ Header.PreprocessorVersion+"', '"+Header.OriginatingSystem+"', '"+Header.Authorization+"');"));
-sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"));
+sw.WriteLine(FormattedHeaderLine("FILE_SCHEMA (('"+ifc.Specification.SchemaName+"'));"," title=\"Click to show schema documentation\" href=\"javascript:ShowHelp()\"));",true));
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("DATA;"));
 
@@ -195,7 +202,7 @@ foreach (ENTITY e in EntityList) sw.Write(e.ToHtml());
 sw.WriteLine(FormattedHeaderLine("ENDSEC;"));
 sw.WriteLine(FormattedHeaderLine("END-ISO-10303-21;"));
 
-sw.WriteLine("</div>"); // pre
+sw.WriteLine("</div>"); // class globl (pre)
 sw.WriteLine("</body>");
 sw.WriteLine("</html>");
 sw.Close();

@@ -18,7 +18,8 @@ namespace db{//=================================================================
 
 public class DbField : System.Attribute { public bool PrimaryKey=false;public string PkName=null; public bool SortAscending=false; public bool SortDescending=false;}
 [System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string FkName=null;public string RefPkName=null;public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;}
-public class UserType : System.Attribute {public string schema=null;public string name=null;}
+public class UserType : System.Attribute {public string schema=null;public string name=null;public static db.UserType Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.UserType))) return (db.UserType)a;return null;}} // Value (bb) 29.12.2022 
+public class Comment  : System.Attribute {public string text=null;                          public static db.Comment  Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.Comment ))) return (db.Comment)a ;return null;}} // (bb) 29.12.2022 
 
 
 
@@ -52,6 +53,7 @@ public partial class TableBase : List<Object>{//--------------------------------
 public string TableName="-";
 public TableSet tableSet=null;
 public virtual void SelectAll(string where=""){}
+public virtual void Load(){}
 public virtual string InsertString(){return "-";} // better using Interface
 public virtual void BulkInsert(){} 
 public string order;
@@ -59,18 +61,21 @@ public string order;
 
 public partial class RowList<T> : TableBase where T : new(){//---------------------------------------------
 public               RowList(string order=""){this.order=order;}
-public override void SelectAll(string where=""){SqlCommand cmd = new SqlCommand("select * from "+TableName+" "+where+" "+order,tableSet.conn);
-                                 using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}
-                                ((RowBase)(object)new T()).Load(this);
-                                }
+public override void SelectAll(string where=""){string sql="select * from "+TableName+" "+where+" "+order; // (bb) 20.05.2023 exception handling
+                                                SqlCommand cmd = new SqlCommand(sql,tableSet.conn);
+                                                try {using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}}
+                                                catch(Exception e) {ifc.Log.Add(e.Message+"\n"+sql,ifc.Log.Level.Exception);}
+                                                //((RowBase)(object)new T()).Load(this);
+                                               }
+public override void Load   (){((RowBase)(object)new T()).Load(this);} // (bb) 30.10.2022 seperated load for serialsation
+
 public override string InsertString(){Object o = new T();RowBase rb=((RowBase)o);string s=rb.InsertStringOpen(TableName);int pos=0;foreach (RowBase row in this) s+=((++pos>1)?",":"")+row.InsertStringValuesRow();s+=rb.InsertStringClose();return s; }
 
 public override void BulkInsert(){using (SqlBulkCopy bulkCopy = new SqlBulkCopy(tableSet.conn))// ..........................
                                         {            bulkCopy.DestinationTableName = TableName; //Console.WriteLine("TableName="+TableName+": "+InsertString());
                                                      bulkCopy.WriteToServer(FilledDataTable()); // if (TableName=="[cp].[EntityAttributeOfString]") {bulkCopy.BatchSize=100000;bulkCopy.BulkCopyTimeout=3;} sometimes timeout, don't no why
                                         }
-}//.........................................................................................................................
-
+                                 }//.........................................................................................................................
 public DataTable FilledDataTable() {//............................................................
                                      DataTable table = new DataTable();
                                      Object rb = new T();((RowBase)rb).AddDataTableColumns(table); 
@@ -80,14 +85,23 @@ public DataTable FilledDataTable() {//..........................................
 
 }//------------------------------------------------------------------------------------------------
 
+
 public partial class SchemaBase{}//----------------------------------------------------------------
 
 public partial class TableSet{//---------------------------------------------------------------------------
 public  TableSet(){AssignTableNames();}
 public  TableSet(string ServerName,string DatabaseName,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
                                                                               conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
-                                                                              if (DirectLoad) LoadAllTables();
+                                                                              if (DirectLoad) {LoadAllTables();LoadAllMaps();}
                                                                              }
+public  TableSet(string ServerName,string DatabaseName,string UserName,string Password,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
+                                                                              conn=new SqlConnection("Data Source="+ServerName+";Network Library=DBMSSOCN;Initial Catalog="+DatabaseName+";User ID="+UserName+";Password='"+Password+"'");
+                                                                              if (DirectLoad) {LoadAllTables();LoadAllMaps();}
+                                                                             }
+
+
+
+
 public void AssignTableNames(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
                                    foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
                                            { ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).TableName="["+this.DatabaseName+"].["+SchemaField.Name+"].["+TableField.Name+"]";
@@ -100,10 +114,14 @@ public void LoadAllTables(){conn.Open();
                                        ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).SelectAll();
                             conn.Close();
                            }
+public void LoadAllMaps(){foreach (FieldInfo SchemaField in this.GetType().GetFields()) if (SchemaField.GetValue(this) is SchemaBase)
+                                   foreach (FieldInfo TableField in SchemaField.GetValue(this).GetType().GetFields()) if (TableField.GetValue(SchemaField.GetValue(this)) is TableBase) 
+                                       ((TableBase)TableField.GetValue(SchemaField.GetValue(this))).Load();
+                         }
 
 public string DatabaseName="-";
 public string ServerName="-";
-public  SqlConnection conn=null;
+[XmlIgnore] public  SqlConnection conn=null; // (bb) 30.10.2022 [XmlIgnore] for serialisation
 
 public DbCommand Command(string cmd) {return new SqlCommand  (cmd,conn);}
 public void ExecuteNonQuery(string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();Command(sql).ExecuteNonQuery();if (DoOpenAndClose) conn.Close();}

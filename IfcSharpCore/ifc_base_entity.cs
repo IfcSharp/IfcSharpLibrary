@@ -42,7 +42,7 @@ protected void AddNextCommentLine(){LocalId=NextGlobalCommentId--;Repository.Cur
 }//=====================================================================================================================
 
 
-[ifcSql(TypeGroupId:5,TypeId:-1)] public partial class EntityComment:ENTITY{//==========================================================================================
+[ifcSql(TypeGroupId:5,TypeId:-1,TableId:3,LayerId: 0)] public partial class EntityComment:ENTITY{//==========================================================================================
 public               EntityComment(){} 
 public               EntityComment(string CommentLine){this.Highlighted=ENTITY.Highlighting; 
                                                        AddNextCommentLine();
@@ -61,14 +61,16 @@ public override string ToString(){return CommentLine;}
 public static int HtmlCnt=0;
 }//=====================================================================================================================
 
-[ifcSql(TypeGroupId:5,TypeId:-3)] public partial class ImageComment:EntityComment{//==========================================================================================
+[ifcSql(TypeGroupId:5,TypeId:-3,TableId:3,LayerId: 0)] public partial class ImageComment:EntityComment{//==========================================================================================
 public               ImageComment(){} 
 public               ImageComment(string ImgFileName,int height=0,int width=0){AddNextCommentLine(); 
                                                                                string TargetFileName="copyof_"+NetSystem.IO.Path.GetFileName(ImgFileName);
-                                                                               this.CommentLine="<a href=\""+TargetFileName+"\">"+TargetFileName+"</a><BR/>"; 
+                                                                               //this.CommentLine="<a href=\""+TargetFileName+"\">"+TargetFileName+"</a><BR/>"; // 2022-10-16 (bb) removed simple link, added www-refs
+                                                                               this.CommentLine="<a href=\""+TargetFileName+"\" target=\"popup\" onclick=\"window.open('"+TargetFileName+"','popup','width=400,height=400,toolbar=0'); return false;\">"+ImgFileName+"</a>"; // (bb) added popup window for image-comments
                                                                                if (!NetSystem.IO.File.Exists(TargetFileName)) // insert and copy only first time if file not exist
-                                                                                  {NetSystem.IO.File.Copy(ImgFileName,TargetFileName);
-                                                                                   this.CommentLine+="<img src=\""+TargetFileName+"\"";
+                                                                                  {if (ImgFileName.Contains("http")) try{new NetSystem.Net.WebClient().DownloadFile(ImgFileName,TargetFileName);}catch(NetSystem.Exception e){Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
+                                                                                   else {if (NetSystem.IO.File.Exists(ImgFileName)) NetSystem.IO.File.Copy(ImgFileName,TargetFileName); else Log.Add($"ImageComment:{ImgFileName} not found", Log.Level.Exception);}
+                                                                                   this.CommentLine+="<BR/><img src=\""+TargetFileName+"\"";
                                                                                    if (height>0) this.CommentLine+=" height=\""+height+"\"";
                                                                                    if (width >0) this.CommentLine+=" width=\""+width+"\"";
                                                                                    this.CommentLine+="/>";
