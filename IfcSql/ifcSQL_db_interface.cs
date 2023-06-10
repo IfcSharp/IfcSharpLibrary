@@ -16,10 +16,13 @@ using System.Text;
 namespace db{//====================================================================================
 
 
-public class DbField : System.Attribute { public bool PrimaryKey=false;public string PkName=null; public bool SortAscending=false; public bool SortDescending=false;}
-[System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string FkName=null;public string RefPkName=null;public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;}
-public class UserType : System.Attribute {public string schema=null;public string name=null;public static db.UserType Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.UserType))) return (db.UserType)a;return null;}} // Value (bb) 29.12.2022 
-public class Comment  : System.Attribute {public string text=null;                          public static db.Comment  Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.Comment ))) return (db.Comment)a ;return null;}} // (bb) 29.12.2022 
+public class DbField : System.Attribute { public bool PrimaryKey=false;public string PkName=null; public bool SortAscending=false; public bool SortDescending=false;
+                                                                                            public static db.DbField    Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.DbField   ))) return (db.DbField   )a;return null;}} // Value (bb) 10.06.2023 
+[System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string FkName=null;public string RefPkName=null;public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;
+                                                                                            public static db.References Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.References))) return (db.References)a;return null;}} // Value (bb) 10.06.2023 
+public class UserType : System.Attribute {public string schema=null;public string name=null;public static db.UserType   Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.UserType  ))) return (db.UserType  )a;return null;}} // Value (bb) 29.12.2022 
+public class Comment  : System.Attribute {public string text=null;                          public static db.Comment    Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.Comment   ))) return (db.Comment   )a;return null;}} // (bb) 29.12.2022 
+public class SqlType  : System.Attribute {public string name=null;public int size=0;        public static db.SqlType    Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.SqlType   ))) return (db.SqlType   )a;return null;}} // Value (bb) 10.06.2023 
 
 
 
@@ -47,6 +50,7 @@ else if (field.FieldType==typeof(System.Byte))      return field.GetValue(this).
 else return "unknown Type "+field.FieldType.ToString();
 }//................................................................................................
 public virtual void Load(TableBase rows){}
+public RowBase Clone(){return (RowBase)this.MemberwiseClone();} // (bb) 10.06.2023 
 }//------------------------------------------------------------------------------------------------
 
 public partial class TableBase : List<Object>{//-----------------------------------------------------------
