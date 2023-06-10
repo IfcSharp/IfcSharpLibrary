@@ -24,7 +24,14 @@ public override string ToString(){
             //((double)(object)TypeValue).ToString("0.0000000000", CultureInfo.InvariantCulture).TrimEnd('0'); 
             else if (typeof(T).Equals(typeof(double))) return string.Format("{0:0.0###########}", (double)(object)TypeValue);
             else if (typeof(T).Equals(typeof(bool))) return ((bool)(object)TypeValue) ? ".T." : ".F.";
-            else if (typeof(T).Equals(typeof(string))) { if (HasStringChar) return StringChar + ((string)(object)TypeValue).ToString() + StringChar; else return ((string)(object)TypeValue).ToString(); }
+            else if (typeof(T).Equals(typeof(string))) {
+                //EF-2023-06-06: added string encoding to output
+                string strValue = ((string)(object)TypeValue).ToString();
+                if (HasStringChar) 
+                    return StringChar + ifc.IfcString.Encode(strValue) + StringChar; 
+                else 
+                    return ifc.IfcString.Encode(strValue);
+            }
             else return TypeValue.ToString();
         }
 }//-----------------------------------------------------

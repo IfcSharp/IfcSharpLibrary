@@ -13,6 +13,9 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using System.Diagnostics;
 
 namespace ifc {
 
@@ -461,23 +464,30 @@ namespace ifc {
             string fileSchema = string.Empty;
             try {
                 HeaderData headerData = new HeaderData();
+
+                //first get the entire header string from start to ENDSEC;
+                string headerString = "";
                 using (StreamReader sr = new StreamReader(filePath)) {
                     string line;
-                    string currentSection = string.Empty;
                     while ((line = sr.ReadLine()) != null) {
-                        if (line.StartsWith("ENDSEC")) break;
-                        if (line.StartsWith("FILE_DESCRIPTION")) currentSection = "FILE_DESCRIPTION";
-                        else if (line.StartsWith("FILE_NAME")) currentSection = "FILE_NAME";
-                        else if (line.StartsWith("FILE_SCHEMA")) currentSection = "FILE_SCHEMA";
-                        if (currentSection == "FILE_DESCRIPTION") fileDescription += line;
-                        if (currentSection == "FILE_NAME") fileName += line;
-                        if (currentSection == "FILE_SCHEMA") fileSchema += line;
+                        headerString += line;
+                        if (line.Contains("ENDSEC")) break;
                     }
                 }
 
-                fileDescription = fileDescription.Replace(" ", "");
-                fileName = fileName.Replace(" ", "");
-                fileSchema = fileSchema.Replace(" ", "");
+                string[] keywords = new string[] {"FILE_DESCRIPTION", "FILE_NAME", "FILE_SCHEMA", "ENDSEC" };
+                Dictionary<string, string> headerInfo = new Dictionary<string, string>();
+                for (int i = 0;  i < keywords.Length - 1; i++) {
+                    string keyword = keywords[i];
+                    string nextKeyword = keywords[i+1];
+                    int pos = headerString.IndexOf(keyword);
+                    int nextPos = headerString.IndexOf(nextKeyword);
+                    headerInfo.Add(keyword, headerString.Substring(pos, nextPos - pos));
+                }
+
+                fileDescription = headerInfo["FILE_DESCRIPTION"].Replace(" ", "");
+                fileName = headerInfo["FILE_NAME"].Replace(" ", "");
+                fileSchema = headerInfo["FILE_SCHEMA"].Replace(" ", "");
 
                 // now, that the data is cleaned up, we can parse the data
                 headerData.ViewDefinition = fileDescription.Contains('$') ? "ViewDefinition[undefinded]" : fileDescription.Split('\'')[1 * 2 - 1];
