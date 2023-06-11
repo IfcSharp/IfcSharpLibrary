@@ -51,6 +51,7 @@ else return "unknown Type "+field.FieldType.ToString();
 }//................................................................................................
 public virtual void Load(TableBase rows){}
 public RowBase Clone(){return (RowBase)this.MemberwiseClone();} // (bb) 10.06.2023 
+public object  ValueOf(string ColName){foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField) if (field.Name==ColName) return field.GetValue(this);return null;} // (bb) 10.06.2023 
 }//------------------------------------------------------------------------------------------------
 
 public partial class TableBase : List<Object>{//-----------------------------------------------------------
