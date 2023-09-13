@@ -36,7 +36,7 @@ object[] TypeCtorArgs=new object[1];
 int OrdinalPosition=0;
 ENTITY.AttribListType AttribList=ENTITY.TypeDictionary.GetComponents(CurrentEntity.GetType()).AttribList;
 foreach (ENTITY.AttribInfo attrib in AttribList)
-        {++OrdinalPosition;  
+        {++OrdinalPosition;
          if (e.AttributeValueDict.ContainsKey(OrdinalPosition))//----------------------------------------------------------------------------------------------------------
             {RowBase rb=e.AttributeValueDict[OrdinalPosition];
          if (rb is ifcSQL.ifcInstance.EntityAttributeOfVector_Row)  {ifcSQL.ifcInstance.EntityAttributeOfVector_Row a=(ifcSQL.ifcInstance.EntityAttributeOfVector_Row)rb;
@@ -55,9 +55,10 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
 #endif   
 
                                                                     }
-         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfString_Row)  {ifcSQL.ifcInstance.EntityAttributeOfString_Row a=(ifcSQL.ifcInstance.EntityAttributeOfString_Row)rb;
-                                                                          TypeCtorArgs[0]=ifc.IfcString.Decode(a.Value);
-                                                                          attrib.field.SetValue(CurrentEntity,Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs));
+         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfString_Row)  {ifcSQL.ifcInstance.EntityAttributeOfString_Row a=(ifcSQL.ifcInstance.EntityAttributeOfString_Row)rb; 
+                                                                          object o=Activator.CreateInstance(ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],a.Value);
+                                                                          if (attrib.field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs);} 
+                                                                          attrib.field.SetValue(CurrentEntity,o);
                                                                          }
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)  {ifcSQL.ifcInstance.EntityAttributeOfEnum_Row a=(ifcSQL.ifcInstance.EntityAttributeOfEnum_Row)rb;
                                                                         Type UnderlyingType = Nullable.GetUnderlyingType(   attrib.field.FieldType);
@@ -112,7 +113,7 @@ EntityList.Add(CurrentEntity);
 
 
 
-public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instance",int ProjectId=0)
+public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instance",int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
 {
 
 ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
@@ -121,16 +122,14 @@ if (ProjectId>0)                    ifcSQLin.ExecuteNonQuery("app.SelectProject 
                                     ifcSQLin.conn.Close(); 
                                     ifcSQLin.LoadAllTables();  
 
+// fill Entity_RowDict with instancing an empty AttributeValueDict
 Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();
-foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) 
-        {e.AttributeValueDict=new Dictionary<int,RowBase>();
-         Entity_RowDict.Add(e.GlobalEntityInstanceId,e);
-        }
-
+foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) e.AttributeValueDict=new Dictionary<int,RowBase>();
+foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) Entity_RowDict.Add(e.GlobalEntityInstanceId,e);
 
 ifc.ENTITY.TypeDictionary.FillEntityTypeComponentsDict(); // fill Type Dict
 
-
+// assign (nested) Attribute rows to entities
 foreach (ifcSQL.ifcInstance.EntityAttributeOfString_Row a in ifcSQLin.cp.EntityAttributeOfString) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeOfVector_Row a in ifcSQLin.cp.EntityAttributeOfVector) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeOfBinary_Row a in ifcSQLin.cp.EntityAttributeOfBinary) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
@@ -140,34 +139,42 @@ foreach (ifcSQL.ifcInstance.EntityAttributeOfEnum_Row a in ifcSQLin.cp.EntityAtt
 foreach (ifcSQL.ifcInstance.EntityAttributeOfFloat_Row a in ifcSQLin.cp.EntityAttributeOfFloat) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeOfInteger_Row a in ifcSQLin.cp.EntityAttributeOfInteger) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
 
-foreach (ifcSQL.ifcInstance.EntityAttributeOfList_Row a in ifcSQLin.cp.EntityAttributeOfList) 
-        {Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
-         a.AttributeValueDict=new Dictionary<int,RowBase>();
-        }
+foreach (ifcSQL.ifcInstance.EntityAttributeOfList_Row a in ifcSQLin.cp.EntityAttributeOfList) a.AttributeValueDict=new Dictionary<int,RowBase>();
+foreach (ifcSQL.ifcInstance.EntityAttributeOfList_Row a in ifcSQLin.cp.EntityAttributeOfList) Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict.Add(a.OrdinalPosition,a);
+
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row a in ifcSQLin.cp.EntityAttributeListElementOfEntityRef) ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfBinary_Row    a in ifcSQLin.cp.EntityAttributeListElementOfBinary)    ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row     a in ifcSQLin.cp.EntityAttributeListElementOfFloat)     ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row   a in ifcSQLin.cp.EntityAttributeListElementOfInteger)   ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row    a in ifcSQLin.cp.EntityAttributeListElementOfString)    ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
 
-
-foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row a in ifcSQLin.cp.EntityAttributeListElementOfList) 
-        {ifcSQL.ifcInstance.EntityAttributeOfList_Row lr=((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]);
-         lr.AttributeValueDict.Add(a.ListDim1Position,a);
-         a.AttributeValueDict=new Dictionary<int,RowBase>();
-        }
+foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row a in ifcSQLin.cp.EntityAttributeListElementOfList) ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict.Add(a.ListDim1Position,a);
+foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row a in ifcSQLin.cp.EntityAttributeListElementOfList) a.AttributeValueDict=new Dictionary<int,RowBase>();
 
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfEntityRef_Row a in ifcSQLin.cp.EntityAttributeListElementOfListElementOfEntityRef) ((ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row) ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict[a.ListDim1Position]).AttributeValueDict.Add(a.ListDim2Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfFloat_Row     a in ifcSQLin.cp.EntityAttributeListElementOfListElementOfFloat    ) ((ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row) ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict[a.ListDim1Position]).AttributeValueDict.Add(a.ListDim2Position,a);
 foreach (ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfInteger_Row   a in ifcSQLin.cp.EntityAttributeListElementOfListElementOfInteger  ) ((ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row) ((ifcSQL.ifcInstance.EntityAttributeOfList_Row)Entity_RowDict[a.GlobalEntityInstanceId].AttributeValueDict[a.OrdinalPosition]).AttributeValueDict[a.ListDim1Position]).AttributeValueDict.Add(a.ListDim2Position,a);
 
+// assign current Project from the first project row
 ifcSQL.ifcProject.Project_Row CurrentProJect=(ifcSQL.ifcProject.Project_Row)ifcSQLin.cp.Project[0];
 
+// create a new model
 Model NewModel=new Model();
+
+// assign local id's
 foreach (ifcSQL.ifcProject.EntityInstanceIdAssignment_Row eia in ifcSQLin.cp.EntityInstanceIdAssignment) NewModel.LocalIdFromGlobalIdDict[eia.GlobalEntityInstanceId]=(int)eia.ProjectEntityInstanceId; // create and fill LocalGlobal Dict
-NewModel.Header.Init(Name:CurrentProJect.ProjectName, ViewDefinition:CurrentProJect.ProjectDescription,Author:"Bernhard Simon Bock, Friedrich Eder",PreprocessorVersion:"IfcSharp");
+
+// fill the header
+NewModel.Header.Init(Name:CurrentProJect.ProjectName, ViewDefinition:CurrentProJect.ProjectDescription,Author:"Bernhard Simon Bock, Friedrich Eder",PreprocessorVersion:"from ifcSQL via IfcSharp");
+
+if (updater!=null){updater.Assign(ifcSQLin,NewModel);updater.Update();}
+
+// cretae ifc-entities from linked database rows
 foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) NewModel.EvalIfcRow(e);
+
+// assign reverse-elements
 NewModel.AssignEntities();
+
 return NewModel;
 
 }// of FromSql
@@ -182,6 +189,14 @@ return NewModel;
 
 
 namespace ifcSQL{//########################################################################
+
+public class AttributeUpdater{
+public ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQLin=null;
+public ifc.Model Model=null;
+public void Assign(ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQLin,ifc.Model Model){this.ifcSQLin=ifcSQLin;this.Model=Model;}
+public virtual void Update(){}
+}
+
 
 namespace ifcInstance{//=====================================================================
 public partial class Entity_Row                           : RowBase{public Dictionary<int,RowBase> AttributeValueDict=null;}
