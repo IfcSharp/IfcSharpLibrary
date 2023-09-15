@@ -6,7 +6,7 @@ The folder IfcSchema contains the schema-definition of different IFC-releases as
 ## Background
 The datamodel of the Industry Foundation Classes (IFC) is defined in various releases as EXPRESS-files here: https://technical.buildingsmart.org/standards/ifc/ifc-schema-specifications/
 
-The underlaying meta-concept is shown is this picture:
+The underlying meta-concept is shown is this picture:
 
 ![](doc/img/ifc_uml_Bock.png)
 
