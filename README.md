@@ -78,7 +78,7 @@ Simply run `git clone https://github.com/IfcSharp/IfcSharpLibrary.git`.
 
 To start off you can directly add a reference to the included `IfcSharpLibrary.csproj` file, which is configured to use the IFC4 bindings.
 
-> **_NOTE:_** This library only has some optional (*SQLite*) dependencies, so ou are free to use whichever framework and platform you like.
+> **_NOTE:_** The default `IfcSharoLibrary.csproj` project does not include the optional *SQLite* support. In order to use it you have to install the additional dependencies and include the files from `IfcIO/IfcSqlite` in your project.
 
 After you included/created the project the `ifc` namespace should be available and you can start developing with *IfcSharpLibrary*.
 
