@@ -24,10 +24,10 @@
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="IfcSchema\ifc_IFC4X2_generated_entity.cs" />
-    <Compile Include="IfcSchema\ifc_IFC4X2_generated_enum.cs" />
-    <Compile Include="IfcSchema\ifc_IFC4X2_generated_select.cs" />
-    <Compile Include="IfcSchema\ifc_IFC4X2_generated_type.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_entity.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_enum.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_select.cs" />
+    <Compile Include="IfcSchema\ifc_IFC4_generated_type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <!--CORE-->
@@ -46,46 +46,23 @@
     <Compile Include="IfcSharpCore\Ifc_guid.cs" />
     <Compile Include="IfcSharpCore\ifc_base_units.cs" />
     <Compile Include="IfcSharpCore\ifc_base_geometry.cs" />
+    <Compile Include="IfcSharpCore\ifc_logging.cs" />
   </ItemGroup>
   <!--SQL-->
   <ItemGroup>
-    <Compile Include="IfcSql\ifcSQL_for_ifcSQL_Instance.cs" />
-    <Compile Include="IfcSql\ifcSQL_db_interface.cs" />
-    <Compile Include="IfcSql\ifc_out_sql.cs" />
-    <Compile Include="IfcSql\ifc_in_sql.cs" />
+    <Compile Include="IfcIO\IfcSql\ifcSQL_for_ifcSQL_Instance.cs" />
+    <Compile Include="IfcIO\IfcSql\ifcSQL_db_interface.cs" />
+    <Compile Include="IfcIO\IfcSql\ifc_out_sql.cs" />
+    <Compile Include="IfcIO\IfcSql\ifc_in_sql.cs" />
   </ItemGroup>
   <!-- SQLITE -->
   <!-- <PropertyGroup> -->
   <!-- <ReferencePath>.\thirdparty\</ReferencePath> -->
   <!-- </PropertyGroup> -->
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>IfcSqlite\thirdparty\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>IfcSqlite\thirdparty\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite">
-      <HintPath>IfcSqlite\thirdparty\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6">
-      <HintPath>System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.EF6">
-      <HintPath>IfcSqlite\thirdparty\System.Data.SQLite.EF6.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>IfcSqlite\thirdparty\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -93,22 +70,16 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="IfcSqlite\ifc_sqlite_database.cs" />
-    <Compile Include="IfcSqlite\ifc_sqlite_data.cs" />
-    <Compile Include="IfcSqlite\ifc_in_sqlite.cs" />
-    <Compile Include="IfcSqlite\ifc_out_sqlite.cs" />
-  </ItemGroup>
   <!--STEP -->
   <ItemGroup>
-    <Compile Include="IfcStep\ifc_in_step.cs" />
-    <Compile Include="IfcStep\ifc_out_step.cs" />
+    <Compile Include="IfcIO\IfcStep\ifc_in_step.cs" />
+    <Compile Include="IfcIO\IfcStep\ifc_out_step.cs" />
     <Compile Include="IfcSharpCore\ifc_out_html.cs" />
     <Compile Include="IfcSharpCore\ifc_out_cs.cs" />
   </ItemGroup>
   <!--XML -->
   <ItemGroup>
-    <Compile Include="IfcXml\ifc_out_Xml.cs" />
-    <Compile Include="IfcXml\ifc_in_xml.cs" />
+    <Compile Include="IfcIO\IfcXml\ifc_out_Xml.cs" />
+    <Compile Include="IfcIO\IfcXml\ifc_in_xml.cs" />
   </ItemGroup>
 </Project>
