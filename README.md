@@ -78,7 +78,7 @@ Simply run `git clone https://github.com/IfcSharp/IfcSharpLibrary.git`.
 
 To start off you can directly add a reference to the included `IfcSharpLibrary.csproj` file, which is configured to use the IFC4 bindings.
 
-> **_NOTE:_** The default `IfcSharpLibrary.csproj` project does not include the optional *[SQLite](https://www.sqlite.org/index.html)* support. In order to use it you have to install the additional dependencies and include the files from `IfcIO/IfcSqlite` in your project (see also [IfcSqlite README](/IfcIO/IfcSqlite/README.md).
+> **_NOTE:_** The default `IfcSharpLibrary.csproj` project does not include the optional *[SQLite](https://www.sqlite.org/index.html)* support. In order to use it you have to install the additional dependencies and include the files from `IfcIO/IfcSqlite` in your project (see also [IfcSqlite README](/IfcIO/IfcSqlite/README.md)).
 
 After you included/created the project the `ifc` namespace should be available and you can start developing with *IfcSharpLibrary*.
 
