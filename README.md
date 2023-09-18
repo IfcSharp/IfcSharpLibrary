@@ -6,7 +6,9 @@ The C#-Library of IfcSharp contains interfaces to the IFC-model of buildingSMART
 
 ### Create a simple IFC file
 
-*IfcSharpLibrary* leverages [Reflection](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) to keep track of all `ifc.ENTITY` instances in memory and write them to a file or database. This means that once you assigned a `ifc.Repository.CurrentModel` at runtime you can just instantiate objects from anywhere in your project. This makes *IfcSharpLibrary* a very sleek solution as it is reduces the overhead of assigning every single `ifc.ENTITY` to its parent. A simple example is shown below:<br>
+The creation of an IFC file requires only a few lines of code. 
+The underlying class model has the same structure as the IFC data model and therby enforcing the definitions of the corresponding IFC Schema (2X3, 4.0 etc.)
+The advantage of this early-binding approach is that errors in an IFC model can be handled at compile time rather than at runtime (late-binding).<br>
 
 ```csharp
 // create a new ifc.Model which stores all ifc.ENTITY data inside the ifc.Repository.CurrentModel
@@ -19,7 +21,7 @@ ifc.Project project = new ifc.Project(Name: new ifc.Label("my first ifc-project"
 // IfcSharpLibrary also takes care of creating the GlobalId if you simple pass 'null'
 ifc.Building building = new ifc.Building(GlobalId: null, Name: new ifc.Label("my first ifc-building"));
 
-// due to reflection ifc.ENTITY objects which have no parent you dont need to assign it to a variable
+// due to reflection ifc.ENTITY objects which have no parent dont need to be assigned it to a variable
 new ifc.RelAggregates(RelatingObject: project, RelatedObjects: new ifc.Set1toUnbounded_ObjectDefinition(building));
 
 // write the current state of the ifc.Repository.CurrentModel to a STEP file
@@ -28,6 +30,12 @@ ifc.Repository.CurrentModel.ToStepFile();
 
 ```
 
+Several IFC versions are supported (see [Supported IFC Schemas](#Supported-IFC-Schemas)).
+All IFC versions use the same read and write routines.
+The read and write routines use the [Reflection](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) mechanism.
+This avoids that for each class a separate read or write routine must be kept.
+The [IfcStep](IfcIO/IfcStep/README.md) export therefore comprises only a few lines of code, since it evaluates the IFC schema mapped in the C# class library in a general valid manner via [Reflection](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/).<br>
+This mechanism is also used to keep track of all `ifc.ENTITY` instances in memory and write them to a file or database. This means that once you assigned a `ifc.Repository.CurrentModel` at runtime you can just instantiate objects from anywhere in your project. This makes *IfcSharpLibrary* a very sleek solution as it is reduces the overhead of assigning every single `ifc.ENTITY` to its parent.
 ### Export capabilities
 
 With the IfcSharp Library you can write IFC-models by C#-code or read and write to different formats, like this:
@@ -45,7 +53,7 @@ ifc.Repository.CurrentModel.ToSql(ServerName: System.Environment.GetEnvironmentV
                                   WriteMode: ifc.Model.eWriteMode.OnlyIfEmpty); // SQL server connection required
 ```
 
-One of these Formats is ifcSQL, that ist not intended to transport Models form A to B. It is instead intended to store and query models as a collection of digital twins (see [IfcSql documentation](IfcSql/README.md)).
+One of these Formats is ifcSQL, that ist not intended to transport Models form A to B. It is instead intended to store and query models as a collection of digital twins (see [IfcSql documentation](IfcIO/IfcSql/README.md)).
 
 ### Further examples
 
@@ -63,6 +71,8 @@ IfcSharpLibrary can be broken down into three different components:
 
 This makes this library highly customizable and enables you to choose specifically which implementations you need.
 
+### Supported IFC Schemas
+
 We currently support these IFC schemas:
  - [IFC2X3](https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/)
  - [IFC4](https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/)
@@ -72,19 +82,22 @@ We currently support these IFC schemas:
 
 > **_NOTE:_** Due to the class model you can only include the `IfcSchema` for **one** IFC version. This means for multiple IFC versions you need to create multiple build-projects.
 
+### Reflection
+*IfcSharpLibrary* leverages [Reflection](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) to keep track of all `ifc.ENTITY` instances in memory and write them to a file or database. This means that once you assigned a `ifc.Repository.CurrentModel` at runtime you can just instantiate objects from anywhere in your project. This makes *IfcSharpLibrary* a very sleek solution as it is reduces the overhead of assigning every single `ifc.ENTITY` to its parent. A simple example is shown below:<br>
+
 ## How to Install and Run the Project
 
 Simply run `git clone https://github.com/IfcSharp/IfcSharpLibrary.git`.
 
 To start off you can directly add a reference to the included `IfcSharpLibrary.csproj` file, which is configured to use the IFC4 bindings.
 
-> **_NOTE:_** The default `IfcSharpLibrary.csproj` project does not include the optional *[SQLite](https://www.sqlite.org/index.html)* support. In order to use it you have to install the additional dependencies and include the files from `IfcIO/IfcSqlite` in your project (see also [IfcSqlite README](/IfcIO/IfcSqlite/README.md)).
+> **_NOTE:_** The default `IfcSharpLibrary.csproj` project does not include the optional *[SQLite](https://www.sqlite.org/index.html)* support. In order to use it you have to install the additional dependencies and include the files from `IfcIO/IfcSqlite` in your project (see also [IfcSqlite README](IfcIO/IfcSqlite/README.md)).
 
 After you included/created the project the `ifc` namespace should be available and you can start developing with *IfcSharpLibrary*.
 
 ### *Optional: IfcSqlite*
 
-See [IfcSqlite documentation](/IfcSqlite/README.md)
+See [IfcSqlite documentation](IfcIO/IfcSqlite/README.md)
 
 ## Credits
 
