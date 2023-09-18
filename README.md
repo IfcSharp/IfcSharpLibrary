@@ -82,9 +82,6 @@ We currently support these IFC schemas:
 
 > **_NOTE:_** Due to the class model you can only include the `IfcSchema` for **one** IFC version. This means for multiple IFC versions you need to create multiple build-projects.
 
-### Reflection
-*IfcSharpLibrary* leverages [Reflection](https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/reflection-and-attributes/) to keep track of all `ifc.ENTITY` instances in memory and write them to a file or database. This means that once you assigned a `ifc.Repository.CurrentModel` at runtime you can just instantiate objects from anywhere in your project. This makes *IfcSharpLibrary* a very sleek solution as it is reduces the overhead of assigning every single `ifc.ENTITY` to its parent. A simple example is shown below:<br>
-
 ## How to Install and Run the Project
 
 Simply run `git clone https://github.com/IfcSharp/IfcSharpLibrary.git`.
