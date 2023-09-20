@@ -74,8 +74,8 @@
   <ItemGroup>
     <Compile Include="IfcIO\IfcStep\ifc_in_step.cs" />
     <Compile Include="IfcIO\IfcStep\ifc_out_step.cs" />
-    <Compile Include="IfcSharpCore\ifc_out_html.cs" />
-    <Compile Include="IfcSharpCore\ifc_out_cs.cs" />
+    <Compile Include="IfcIO\ifc_out_html.cs" />
+    <Compile Include="IfcIO\ifc_out_cs.cs" />
   </ItemGroup>
   <!--XML -->
   <ItemGroup>
