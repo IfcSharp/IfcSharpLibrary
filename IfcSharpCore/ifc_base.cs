@@ -24,6 +24,7 @@ IfcSharp does not require the use of nullable base types, as it only affects cla
 
 
 using NetSystem=System;
+using System.Linq;
 
 namespace ifc{//==============================
 
@@ -53,15 +54,15 @@ public class ifcType{ // place-holder
 public virtual void Initialise(){}
 }
 
-public class ifcSqlType:ifcType,ifcSqlTypeInterface{
-public        int SqlTypeId     (){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeId;}
-public        int SqlTypeGroupId(){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTypeGroupId;}
-public        int SqlTableId    (){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).SqlTableId;}
-public        int LayerId       (){return ((ifcSqlAttribute)this.GetType().GetCustomAttributes(true)[0]).LayerId;}
-public static int SqlTypeId     (NetSystem.Type t){return ((ifcSqlAttribute)t.GetCustomAttributes(true)[0]).SqlTypeId;}
-public static int SqlTypeGroupId(NetSystem.Type t){return ((ifcSqlAttribute)t.GetCustomAttributes(true)[0]).SqlTypeGroupId;}
-public static int SqlTableId    (NetSystem.Type t){return ((ifcSqlAttribute)t.GetCustomAttributes(true)[0]).SqlTableId;}
-public static int LayerId       (NetSystem.Type t){return ((ifcSqlAttribute)t.GetCustomAttributes(true)[0]).LayerId;}
+public class ifcSqlType:ifcType,ifcSqlTypeInterface{ // 20231013 ef/bok: replaced GetCustomAttributes(true)[0] to linq for compatibility
+public        int SqlTypeId     ()                {return this.GetType().GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTypeId;     }
+public        int SqlTypeGroupId()                {return this.GetType().GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTypeGroupId;}
+public        int SqlTableId    ()                {return this.GetType().GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTableId;    }
+public        int LayerId       ()                {return this.GetType().GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().LayerId;       }
+public static int SqlTypeId     (NetSystem.Type t){return t.GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTypeId;     }
+public static int SqlTypeGroupId(NetSystem.Type t){return t.GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTypeGroupId;}
+public static int SqlTableId    (NetSystem.Type t){return t.GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().SqlTableId;    }
+public static int LayerId       (NetSystem.Type t){return t.GetCustomAttributes(true).Where(a=>a is ifcSqlAttribute).Select(a=>(ifcSqlAttribute)a).FirstOrDefault().LayerId;       }
 
 private bool _IsNull=true;
 public bool IsNull{get{return _IsNull;}set{_IsNull = value;}}
