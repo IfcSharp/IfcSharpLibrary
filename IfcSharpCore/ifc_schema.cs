@@ -53,6 +53,10 @@ public static Dictionary<NetSystem.Type,ComponentsType> EntityTypeComponentsDict
 public static List<ComponentsType> EntityTypeComponentsList=new List<ComponentsType>();
 
 public static void FillEntityTypeComponentsDict(){//.............................................................
+EntityTypeComponentsList.Clear();
+EntityTypeComponentsDict.Clear();
+TypeIdNameDict.Clear();
+TypeIdTypeDict.Clear();
 foreach (NetSystem.Type t in NetSystem.Reflection.Assembly.GetAssembly(typeof(ifc.ENTITY)).GetTypes()) 
   if (t.IsClass) if (!t.IsAbstract) if (t.IsSubclassOf(typeof(ifc.ENTITY))) EntityTypeComponentsList.Add(new ComponentsType(t));
 foreach (ComponentsType ct in EntityTypeComponentsList) EntityTypeComponentsDict.Add(ct.EntityType,ct);
