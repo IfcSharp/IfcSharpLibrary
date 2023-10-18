@@ -132,6 +132,7 @@ public DbCommand Command(string cmd) {return new SqlCommand  (cmd,conn);}
 public void ExecuteNonQuery(string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();Command(sql).ExecuteNonQuery();if (DoOpenAndClose) conn.Close();}
 public int  ExecuteIntegerScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();int i=(int)result;if (DoOpenAndClose) conn.Close();return i;}
 public long ExecuteLongScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();long i=(long)result;if (DoOpenAndClose) conn.Close();return i;}
+public string ExecuteStringScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();string s=(string)result;if (DoOpenAndClose) conn.Close();return s;}
 
 }//------------------------------------------------------------------------------------------------
 
