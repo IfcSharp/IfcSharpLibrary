@@ -27,6 +27,7 @@ Type t=Type.GetType("ifc."+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityType
 ENTITY CurrentEntity=(ENTITY)Activator.CreateInstance(t);
 CurrentEntity.LocalId=LocalIdFromGlobalIdDict[e.GlobalEntityInstanceId];// e.LocalId;
 CurrentEntity.ifcSqlGlobalId=e.GlobalEntityInstanceId;
+if (CurrentEntity.LocalId>=NextGlobalId) NextGlobalId=CurrentEntity.LocalId+1; // bb 22.09.2023
 
 // commment-handling:
 if (CurrentEntity is EntityComment) ((EntityComment)CurrentEntity).CommentLine=((ifcSQL.ifcInstance.EntityAttributeOfString_Row)e.AttributeValueDict[-1]).Value;
@@ -112,20 +113,22 @@ EntityList.Add(CurrentEntity);
 
 
 
+public static Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();
+public static ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=null;
 
 public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instance",int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
 {
 
-ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+                                    ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
                                     ifcSQLin.conn.Open(); 
 if (ProjectId>0)                    ifcSQLin.ExecuteNonQuery("app.SelectProject "+ProjectId);
                                     ifcSQLin.conn.Close(); 
                                     ifcSQLin.LoadAllTables();  
 
 // fill Entity_RowDict with instancing an empty AttributeValueDict
-Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();
-foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) e.AttributeValueDict=new Dictionary<int,RowBase>();
 foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) Entity_RowDict.Add(e.GlobalEntityInstanceId,e);
+foreach (ifcSQL.ifcInstance.Entity_Row e in ifcSQLin.cp.Entity) e.AttributeValueDict=new Dictionary<int,RowBase>();
+
 
 ifc.ENTITY.TypeDictionary.FillEntityTypeComponentsDict(); // fill Type Dict
 
