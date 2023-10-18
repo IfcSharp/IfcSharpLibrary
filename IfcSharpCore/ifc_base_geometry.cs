@@ -44,13 +44,12 @@ public static Direction operator * (Direction d, double Scale) {return new Direc
 }//=====================================================================================================================
 #endif
 
-
+ /*
 public partial class Axis2Placement3D:Placement{//======================================================================
 public               Axis2Placement3D(Axis2Placement3D template,string EndOfLineComment=null):base(){AddNext();this.Location=template.Location;this.Axis=template.Axis;this.RefDirection=template.RefDirection;this.EndOfLineComment=EndOfLineComment;}
 public               Axis2Placement3D Clone(CartesianPoint p,string EndOfLineComment=null) {return new Axis2Placement3D(Location:p,Axis:this.Axis,RefDirection:this.RefDirection,EndOfLineComment:EndOfLineComment);}
-
 }//=====================================================================================================================
-
+*/
 
 
 /*
