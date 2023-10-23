@@ -13,6 +13,7 @@ using NetSystem=System;
 namespace ifc{//==============================
 
 public partial class ENTITY{//==========================================================================================
+public static bool HtmlDisplayGlobalId=false;
 
 public override void Initialise(){Highlighted=Highlighting;}
 public bool Highlighted=false;
@@ -49,11 +50,13 @@ return expr;
 public static string HtmlRefOut(FieldInfo field,string IfcId,ENTITY e){string RefClassName="ref";if (e.Highlighted) RefClassName="refX"; if (NameKeywDict.ContainsKey(e.ShortTypeName())) RefClassName+=" keyw"+NameKeywDict[e.ShortTypeName()];return "<a href=\""+IfcId+"\" class=\""+RefClassName+"\" title=\""+field.FieldType.Name+" "+field.Name+"="+IfcId+"\">"+IfcId+"</a>";}
 public static string HtmlOut(FieldInfo field,string ClassName, string value){return "<span class=\""+ClassName+"\" title=\""+field.FieldType.Name+" "+field.Name /*+"="+value*/ +"\" >"+value+"</span>";}
 public static string HtmlNullOut(FieldInfo field,bool IsDerived){return "<span class=\"dollar\" title=\""+field.FieldType.Name+" "+field.Name+"="+((IsDerived)?"* (is derived) ":"$ (null)")+"\" >"+((IsDerived)?"*":"$")+"</span>";}
-public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" >."+value+".</span>";}
+public static string HtmlEnumOut(FieldInfo field,string value){return "<span class=\"enum\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" > ."+value+".</span>";}
 public static string HtmlTextOut(FieldInfo field,string value){return "<span class=\"text\" title=\""+field.FieldType.Name+" "+field.Name+"="+value+"\" >"+value+"</span>";}
 
 public static string HtmlOut(FieldInfo field,object o,bool IsDerived){
-string s=""; // Console.WriteLine(field.FieldType+"="+field.Name);  // here field-tooltip (title)
+string s=""; 
+if (!HtmlDisplayGlobalId) if (field.Name=="GlobalId") return HtmlNullOut(field:field,IsDerived:false);
+
           if (o==null)       { s=HtmlNullOut(field,IsDerived);}
      else if (o is Enum)     {/*if (o.ToString()=="_NULL") s=HtmlNullOut(field,IsDerived); else */ s=HtmlEnumOut(field,o.ToString());}
      else if (o is SELECT)   {if ( ((SELECT)o).IsNull) s=HtmlNullOut(field,IsDerived);
@@ -123,13 +126,14 @@ return s;
 public partial class EntityComment:ENTITY{//==========================================================================================
 public override string ToHtml(){HtmlCnt++;string HtmlClass="Commentline";if (Highlighted) HtmlClass="lineXC";if (CommentLine.TrimStart(' ').Length==0) return ""; else return "\r\n<span class=\""+HtmlClass+"\">/* "+CommentLine+" */</span><br/>";}
 
-public               EntityComment(string CommentLine,bool Highlighting){this.Highlighted=ENTITY.Highlighting=Highlighting; AddNextCommentLine();this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);}
+public               EntityComment(string CommentLine,bool Highlighting){this.Highlighted=ENTITY.Highlighting=Highlighting; AddNextCommentLine();this.CommentLine=CommentLine;if (this.CommentLine.Length<CommentWidth) this.CommentLine+=new string(' ',CommentWidth-this.CommentLine.Length);}
 public               EntityComment(bool Highlighting){this.Highlighted=ENTITY.Highlighting=Highlighting; AddNextCommentLine();this.CommentLine="";}
 
 }//=====================================================================================================================
 
 
 public partial class Model{//==========================================================================================
+public static bool BackgroundDisplay=false;
 
 private static string FormattedHeaderLine(string line,string attribs="",bool a=false){string tag="span";if (a) tag="a"; return "<"+tag+" class=\"header\""+attribs+">"+line+"</"+tag+">"+"<br/>";}
 
@@ -144,7 +148,7 @@ sw.WriteLine("<title>ifc</title>");
 //sw.WriteLine("<link rel=\"stylesheet\" type=\"text/css\" href=\"ifc.css\"/>");
 sw.WriteLine("<style>");
 sw.WriteLine(".global{");
-sw.WriteLine("  background-color: #FFFFEE;");
+if (BackgroundDisplay) sw.WriteLine("  background-color: #FFFFEE;"); else sw.WriteLine("  background-color: #FFFFFF;");
 sw.WriteLine("  font-size: 10pt;");
 sw.WriteLine("  font-family: Courier New;");
 sw.WriteLine("  margin: 1em; padding: 0.5em;");
@@ -170,12 +174,12 @@ sw.WriteLine("  .keyw0 {background-color:#A0FFFF;text-decoration: none;}");
 sw.WriteLine("  .keyw1 {background-color:#FFA0FF;text-decoration: none;}");
 sw.WriteLine("  .keyw2 {background-color:#FFFFA0;text-decoration: none;}");
 sw.WriteLine("  .keyw3 {background-color:#A0FFA0;text-decoration: none;}");
-sw.WriteLine("  .line0 {background-color:#F0FFFF;}");
-sw.WriteLine("  .line1 {background-color:#FAFAFA;}");
-sw.WriteLine("  .line2 {background-color:#FFFFF8;}");
-sw.WriteLine("  .line3 {background-color:#F0FFF0;}");
-sw.WriteLine("  .lineX {background-color:#FFFF00;}");
-sw.WriteLine("  .lineXC{background-color:#FFFF00;font-weight:bold;}");
+if (BackgroundDisplay) sw.WriteLine("  .line0 {background-color:#F0FFFF;}"); else sw.WriteLine("  .line0 {background-color:#FFFFFF;}");
+if (BackgroundDisplay) sw.WriteLine("  .line1 {background-color:#FAFAFA;}"); else sw.WriteLine("  .line0 {background-color:#FFFFFF;}");
+if (BackgroundDisplay) sw.WriteLine("  .line2 {background-color:#FFFFF8;}"); else sw.WriteLine("  .line0 {background-color:#FFFFFF;}");
+if (BackgroundDisplay) sw.WriteLine("  .line3 {background-color:#F0FFF0;}"); else sw.WriteLine("  .line0 {background-color:#FFFFFF;}");
+if (BackgroundDisplay) sw.WriteLine("  .lineX {background-color:#FFFF00;}"); else sw.WriteLine("  .line0 {background-color:#FFFFFF;}");
+if (BackgroundDisplay) sw.WriteLine("  .lineXC{background-color:#FFFF00;font-weight:bold;}"); sw.WriteLine("  .lineXC{background-color:#FFFFFF;font-weight:bold;}");
 sw.WriteLine("</style>");
 
 sw.WriteLine("</head>");

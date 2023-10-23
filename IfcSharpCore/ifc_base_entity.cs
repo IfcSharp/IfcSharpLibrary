@@ -47,18 +47,19 @@ public               EntityComment(){}
 public               EntityComment(string CommentLine){this.Highlighted=ENTITY.Highlighting; 
                                                        AddNextCommentLine();
                                                        this.CommentLine=CommentLine;
-                                                       if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);}
+                                                       if (this.CommentLine.Length<CommentWidth) this.CommentLine+=new string(' ',CommentWidth-this.CommentLine.Length);}
 public               EntityComment(string CommentLine,char FrameChar){this.Highlighted=ENTITY.Highlighting; 
-                                                                      this.CommentLine=CommentLine;if (this.CommentLine.Length<74) this.CommentLine+=new string(' ',74-this.CommentLine.Length);
-                                                                      new EntityComment(new string(' ',74));
-                                                                      new EntityComment(new string(FrameChar,74));
+                                                                      this.CommentLine=CommentLine;if (this.CommentLine.Length<CommentWidth) this.CommentLine+=new string(' ',CommentWidth-this.CommentLine.Length);
+                                                                      new EntityComment(new string(' ',CommentWidth));
+                                                                      new EntityComment(new string(FrameChar,CommentWidth));
                                                                       AddNextCommentLine();
-                                                                      new EntityComment(new string(FrameChar,74));
-                                                                      new EntityComment(new string(' ',74));
+                                                                      new EntityComment(new string(FrameChar,CommentWidth));
+                                                                      new EntityComment(new string(' ',CommentWidth));
                                                                      }
 public string CommentLine="no comment";
 public override string ToString(){return CommentLine;}
 public static int HtmlCnt=0;
+public static int CommentWidth=74;
 }//=====================================================================================================================
 
 [ifcSql(TypeGroupId:5,TypeId:-3,TableId:3,LayerId: 0)] public partial class ImageComment:EntityComment{//==========================================================================================
