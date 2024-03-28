@@ -108,7 +108,7 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
         }//----------------------------------------------------------------------------------------------------------
     }//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EntityList.Add(CurrentEntity);
-}catch(Exception ex){Console.WriteLine ("ERROR on EvalIfcRow:"+ex.Message);}//Console.ReadLine();}
+}catch(Exception ex){Console.WriteLine ("ERROR on EvalIfcRow: Instance ID: "+e.GlobalEntityInstanceId+" Type: Ifc"+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityTypeId]+"("+e.EntityTypeId+") -> "+ex.Message);}
 }
 
 
@@ -116,10 +116,21 @@ EntityList.Add(CurrentEntity);
 public static Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();
 public static ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=null;
 
-public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instance",int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
+public static Model FromSql(string ServerName, string DatabaseName = "ifcSQL_Instance", int ProjectId = 0,
+ ifcSQL.AttributeUpdater updater = null)
 {
-
-                                    ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+ ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+ return FromSql(ifcSQLin, ProjectId, updater);
+}
+public static Model FromSql(string ServerName, string DatabaseName, string UserName, string Password, int ProjectId = 0,
+ ifcSQL.AttributeUpdater updater = null)
+{
+ ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName,DatabaseName,UserName,Password);
+ return FromSql(ifcSQLin, ProjectId, updater);
+}
+public static Model FromSql(ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQLin,int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
+{
+ 
                                     ifcSQLin.conn.Open(); 
 if (ProjectId>0)                    ifcSQLin.ExecuteNonQuery("app.SelectProject "+ProjectId);
                                     ifcSQLin.conn.Close(); 

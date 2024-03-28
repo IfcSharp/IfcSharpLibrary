@@ -304,6 +304,7 @@ public TableBase Project=new RowList<ifcProject.Project_Row>();
  /// <summary>DataSource with the name "ifcSQL" for Software "ifc_in_out_sql"</summary>
 public partial class _ifcSQL_for_ifcSQL_instance:TableSet{ //assign Tables to the TableSet
 public _ifcSQL_for_ifcSQL_instance(string ServerName, string DatabaseName="ifcSQL_Instance"):base(ServerName,DatabaseName){}
+public _ifcSQL_for_ifcSQL_instance(string ServerName,string DatabaseName,string UserName,string Password,bool DirectLoad=false):base(ServerName,DatabaseName,UserName,Password,DirectLoad){}
 public _ifcSQL_for_ifcSQL_instance():base(){}
 public cp_Schema cp =new cp_Schema();
 }

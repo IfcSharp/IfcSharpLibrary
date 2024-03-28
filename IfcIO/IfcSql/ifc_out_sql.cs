@@ -125,12 +125,22 @@ sw.Close();
 public enum eWriteMode{CreateNewProject, OnlyIfEmpty,DeleteBeforeWrite }
 
 //.................................................................................................
-public void ToSql(string ServerName,string DatabaseName="ifcSQL",eWriteMode WriteMode=eWriteMode.CreateNewProject,int ProjectId=0,int ProjectGroupId=0)
-{
-                      ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance(ServerName: ServerName,DatabaseName:DatabaseName);
-ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
-long LastGlobalId=0;
+ public void ToSql(string ServerName, string DatabaseName = "ifcSQL", eWriteMode WriteMode = eWriteMode.CreateNewProject, int ProjectId = 0, int ProjectGroupId = 0)
+ {
+  ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance(ServerName: ServerName,DatabaseName:DatabaseName);
+  ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
+  ToSql(ifcSQL, WriteMode, ProjectId, ProjectGroupId);
+ }
+ public void ToSql(string ServerName, string DatabaseName, string UserName, string Password, eWriteMode WriteMode = eWriteMode.CreateNewProject, int ProjectId = 0, int ProjectGroupId = 0)
+ {
+  ENTITY.ifcSqlInstance=new ifcSQL._ifcSQL_for_ifcSQL_instance(ServerName, DatabaseName, UserName, Password);
+  ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL=ENTITY.ifcSqlInstance;
+  ToSql(ifcSQL, WriteMode, ProjectId, ProjectGroupId);
+ }
 
+ public void ToSql(ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL, eWriteMode WriteMode = eWriteMode.CreateNewProject, int ProjectId=0,int ProjectGroupId=0)
+{
+long LastGlobalId=0;
 ifcSQL.conn.Open(); 
 if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.Name+"',@ProjectDescription='"+Header.ViewDefinition+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.Author+"',@Organization='"+Header.Organization+"',@OriginatingSystem='"+Header.OriginatingSystem+"',@Documentation='"+Header.Documentation+"';select @r");                                            
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
@@ -140,8 +150,6 @@ if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteP
                LastGlobalId=ifcSQL.ExecuteLongScalar("SELECT ifcProject.LastGlobalId("+ProjectId+")");
 
 ifcSQL.conn.Close();
-
-
 
 long CurrentGlobalId=LastGlobalId-ifc.Repository.CurrentModel.EntityList.Count;
 
