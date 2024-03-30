@@ -30,7 +30,7 @@ public void SqlOut1(long GlobalId,int OrdinalPosition,int ListDim1Position, obje
                                       {switch (tb.SqlTableId())
                                               {case (int)ifc.SqlTable.EntityAttributeOfFloat  : ifcSqlInstance.cp.EntityAttributeListElementOfFloat  .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row  (GlobalId,OrdinalPosition,ListDim1Position,(double)((TYPE<double>)o).TypeValue)); break;
                                                case (int)ifc.SqlTable.EntityAttributeOfInteger: ifcSqlInstance.cp.EntityAttributeListElementOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row(GlobalId,OrdinalPosition,ListDim1Position,(int)((TYPE<int>)o).TypeValue )); break;
-                                               case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeListElementOfString .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row (GlobalId,OrdinalPosition,ListDim1Position,o.ToString())); break;
+                                               case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeListElementOfString .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row (GlobalId,OrdinalPosition,ListDim1Position,((TYPE<string>)o).TypeValue)); break; // 2024-03-30 (bb) removes o.ToString()
                                                case (int)ifc.SqlTable.EntityAttributeOfBinary : ifcSqlInstance.cp.EntityAttributeListElementOfBinary .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfBinary_Row (GlobalId,OrdinalPosition,ListDim1Position,o.ToString())); break;
                                               }
                                       } 
@@ -146,7 +146,7 @@ if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScala
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
-                            ifcSQL.ExecuteNonQuery("ifcProject.NewLastGlobalId "+ProjectId+", "+ifc.Repository.CurrentModel.EntityList.Count);
+                            ifcSQL.ExecuteNonQuery("ifcProject.NewLastGlobalId "+ProjectId+", "+(ifc.Repository.CurrentModel.EntityList.Count+1)); // 2024-03-24 (bb) add 1
                LastGlobalId=ifcSQL.ExecuteLongScalar("SELECT ifcProject.LastGlobalId("+ProjectId+")");
 
 ifcSQL.conn.Close();
@@ -156,7 +156,7 @@ long CurrentGlobalId=LastGlobalId-ifc.Repository.CurrentModel.EntityList.Count;
 FillTables(ProjectId:ProjectId,StartGlobalId: LastGlobalId-ifc.Repository.CurrentModel.EntityList.Count+1);
 
 ifcSQL.conn.Open(); 
-foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) tb.BulkInsert();
+foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) tb.BulkInsert(); //  Console.WriteLine(tb.InsertString());
 ifcSQL.conn.Close();
 
 }//................................................................................................

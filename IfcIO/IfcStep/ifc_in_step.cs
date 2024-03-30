@@ -147,10 +147,10 @@ namespace ifc {
 
             if (values[0] == "") try { instance = Activator.CreateInstance(listType); } catch { Console.WriteLine("ERROR on Parse2LIST.1:" + CurrentLine); }
             else {
-                try {
-                    object[] ctorArgs = new object[values.Length];
-                    if (isListOfList && parentType != null) instance = Activator.CreateInstance(parentType, GetListCtorArgs(listType, values));
-                    else instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values)); 
+                try {for (int i=0;i<values.Length;i++) values[i]=values[i].Replace("'",""); // 2024-03-30 (bb) remove string-characters
+                     object[] ctorArgs = new object[values.Length];
+                     if (isListOfList && parentType != null) instance = Activator.CreateInstance(parentType, GetListCtorArgs(listType, values));
+                     else instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values)); 
                 }
                 catch (Exception e) {
                     Log.Add($"ERROR on Parse2LIST.2:{CurrentLine}\n{e}", Log.Level.Exception);

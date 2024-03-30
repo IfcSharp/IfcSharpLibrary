@@ -137,9 +137,11 @@ public static bool BackgroundDisplay=false;
 
 private static string FormattedHeaderLine(string line,string attribs="",bool a=false){string tag="span";if (a) tag="a"; return "<"+tag+" class=\"header\""+attribs+">"+line+"</"+tag+">"+"<br/>";}
 
-public void ToHtmlFile(bool JavaScript=true)
+public void ToHtmlFile(string filePath="",bool JavaScript=true)
 {
-StreamWriter sw=new StreamWriter(Header.Name+".ifc.html");
+if (string.IsNullOrEmpty(filePath)) filePath = Header.Name + ".ifc.html";
+
+StreamWriter sw=new StreamWriter(filePath);
 //Console.WriteLine("Start ToHtmlFile");
 sw.WriteLine("<!-- "+Header.Name+".ifc.html"+" was created using IfcSharp (see https://github.com/IfcSharp) -->");
 sw.WriteLine("<html>");
