@@ -129,7 +129,7 @@ public void LoadAllMaps(){foreach (FieldInfo SchemaField in this.GetType().GetFi
 [XmlIgnore] public  SqlConnection conn=null; // (bb) 30.10.2022 [XmlIgnore] for serialisation
 
 public DbCommand Command(string cmd) {return new SqlCommand  (cmd,conn);}
-public void ExecuteNonQuery(string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();Console.WriteLine(sql);/*Console.ReadLine();*/ Command(sql).ExecuteNonQuery();if (DoOpenAndClose) conn.Close();}
+public void ExecuteNonQuery(string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();Command(sql).ExecuteNonQuery();if (DoOpenAndClose) conn.Close();}
 public int  ExecuteIntegerScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();int i=(int)result;if (DoOpenAndClose) conn.Close();return i;}
 public long ExecuteLongScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();long i=(long)result;if (DoOpenAndClose) conn.Close();return i;}
 public string ExecuteStringScalar  (string sql, bool DoOpenAndClose=false){if (DoOpenAndClose) conn.Open();var result=Command(sql).ExecuteScalar();string s=(string)result;if (DoOpenAndClose) conn.Close();return s;}
