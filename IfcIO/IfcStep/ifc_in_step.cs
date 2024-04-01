@@ -52,7 +52,7 @@ namespace ifc {
             else {
                 if (valueBaseType == typeof(string)) {
                     if (value == "$") ctorArgs[0] = "";
-                    else ctorArgs[0] = ifc.IfcString.Decode(value);
+                    else ctorArgs[0] = ifc.IfcString.Decode(value.Replace("'","")); // 2024-04-01 (bb) remove string-characters
                     instance = Activator.CreateInstance(valueType, ctorArgs);
                 }
                 else if (valueBaseType == typeof(int)) {
@@ -276,6 +276,7 @@ namespace ifc {
                 int posRpar = ifcLine.LastIndexOf(')');
                 CurrentTypeName = ifcLine.Substring(posA + 1, posLpar - posA - 1).TrimStart(' ').TrimEnd(' ').Substring(3);
                 string body = ifcLine.Substring(posLpar + 1, posRpar - posLpar - 1); // Argumentkoerper extrahieren
+                       //body=body.Replace("'",""); // 2024-04-01 (bb) remove string-characters -> don't work
                 bool txtOpen = false;
                 int parOpen = 0;
                 for (int i = 0; i < body.Length; i++) {

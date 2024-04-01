@@ -66,6 +66,11 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                         if  (UnderlyingType!=null && UnderlyingType.IsEnum) attrib.field.SetValue(CurrentEntity,Enum.ToObject(UnderlyingType, a.Value));
                                                                         else                                                attrib.field.SetValue(CurrentEntity,a.Value); 
                                                                        }
+         else if (rb is ifcSQL.ifcInstance.EntityAttributeOfBoolean_Row)   {ifcSQL.ifcInstance.EntityAttributeOfBoolean_Row a=(ifcSQL.ifcInstance.EntityAttributeOfBoolean_Row)rb; //BB-2024-04-01: added bool evaluation
+                                                                             object o=Activator.CreateInstance(type:ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],(object)a.Value); 
+                                                                             if (attrib.field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs);}
+                                                                             attrib.field.SetValue(CurrentEntity,o);
+                                                                           }
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)   {ifcSQL.ifcInstance.EntityAttributeOfInteger_Row a=(ifcSQL.ifcInstance.EntityAttributeOfInteger_Row)rb;
                                                                              object o=Activator.CreateInstance(ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId],a.Value);
                                                                              if (attrib.field.FieldType.IsSubclassOf(typeof(SELECT))) {TypeCtorArgs[0]=o;o=Activator.CreateInstance(attrib.field.FieldType,TypeCtorArgs);}

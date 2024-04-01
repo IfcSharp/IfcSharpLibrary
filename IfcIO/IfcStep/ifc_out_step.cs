@@ -43,9 +43,9 @@ return s;
 }//------------------------------------------------------------------------------------------------
 
 
-
+public static string IfcLineConstText="=IFC"; //BB-2024-04-01: possibiblity for whitespace between = and IFC
 public virtual string ToStepLine(){//--------------------------------------------------------------
-string s=this.IfcId()+"=IFC"+this.GetType().Name.ToUpper()+"(";
+string s=this.IfcId()+IfcLineConstText+this.GetType().Name.ToUpper()+"(";
 AttribListType AttribList=TypeDictionary.GetComponents(this.GetType()).AttribList;
 int sep=0;foreach (AttribInfo attrib in AttribList) s+=((++sep>1)?",":"")+StepAttributeOut(attrib.field.GetValue(this),attrib);
 s+=");";

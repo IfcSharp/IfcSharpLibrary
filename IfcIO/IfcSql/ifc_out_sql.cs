@@ -146,18 +146,17 @@ if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScala
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);
-                            ifcSQL.ExecuteNonQuery("ifcProject.NewLastGlobalId "+ProjectId+", "+(ifc.Repository.CurrentModel.EntityList.Count+1)); // 2024-03-24 (bb) add 1
+                            ifcSQL.ExecuteNonQuery("ifcProject.NewLastGlobalId "+ProjectId+", "+this.EntityList.Count); //BB-2024-04-01: from ifc.Repository.CurrentModel to this Model
                LastGlobalId=ifcSQL.ExecuteLongScalar("SELECT ifcProject.LastGlobalId("+ProjectId+")");
-
 ifcSQL.conn.Close();
 
-long CurrentGlobalId=LastGlobalId-ifc.Repository.CurrentModel.EntityList.Count;
+long CurrentGlobalId=LastGlobalId-this.EntityList.Count; //BB-2024-04-01: from ifc.Repository.CurrentModel to this Model
 
-FillTables(ProjectId:ProjectId,StartGlobalId: LastGlobalId-ifc.Repository.CurrentModel.EntityList.Count+1);
+FillTables(ProjectId:ProjectId,StartGlobalId: LastGlobalId-this.EntityList.Count+1); //BB-2024-04-01: from ifc.Repository.CurrentModel to this Model
 
-ifcSQL.conn.Open(); 
-foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) tb.BulkInsert(); //  Console.WriteLine(tb.InsertString());
-ifcSQL.conn.Close();
+ifcSQL.conn.Open();
+foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) tb.BulkInsert();
+ifcSQL.conn.Close();                                       
 
 }//................................................................................................
 
