@@ -87,12 +87,22 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                             }
 
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfList_Row)    {ifcSQL.ifcInstance.EntityAttributeOfList_Row a=(ifcSQL.ifcInstance.EntityAttributeOfList_Row)rb;  
-                                                                          Type GenericType=null;
+                                                                          Type GenericType=null; 
                                                                           if (attrib.field.FieldType.BaseType.GetGenericArguments().Length>0) GenericType=attrib.field.FieldType.BaseType.GetGenericArguments()[0]; //LengthMeasure or CartesianPoint
                                                                           else                                                   GenericType=attrib.field.FieldType.BaseType.BaseType.GetGenericArguments()[0]; //CompoundPlaneAngleMeasure
                                                                           Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
+                                                                          
                                                                           int ListDim1Count=a.AttributeValueDict.Count; 
                                                                           object[] FieldCtorArgs=new object[ListDim1Count];
+
+                                                                          if (ListDim1Count>0)   
+                                                                          if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)
+                                                                                 for (int ListDim1Position=0;ListDim1Position<ListDim1Count;ListDim1Position++) 
+                                                                                    {string txt=((ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)a.AttributeValueDict[ListDim1Position]).Value; 
+                                                                                     object[] GenericCtorArgs=new object[1]; 
+                                                                                     FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,txt); 
+                                                                                     } 
+
                                                                           if (ListDim1Count>0)   
                                                                           if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row)
                                                                                  for (int ListDim1Position=0;ListDim1Position<ListDim1Count;ListDim1Position++) 
@@ -108,7 +118,7 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
         }//----------------------------------------------------------------------------------------------------------
     }//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EntityList.Add(CurrentEntity);
-}catch(Exception ex){Console.WriteLine ("ERROR on EvalIfcRow:"+ex.Message);}//Console.ReadLine();}
+}catch(Exception ex){Console.WriteLine ("ERROR on EvalIfcRow: Instance ID: "+e.GlobalEntityInstanceId+" Type: Ifc"+ifc.ENTITY.TypeDictionary.TypeIdNameDict[e.EntityTypeId]+"("+e.EntityTypeId+") -> "+ex.Message);}
 }
 
 
@@ -116,10 +126,21 @@ EntityList.Add(CurrentEntity);
 public static Dictionary<long,ifcSQL.ifcInstance.Entity_Row> Entity_RowDict=new Dictionary<long, ifcSQL.ifcInstance.Entity_Row>();
 public static ifcSQL._ifcSQL_for_ifcSQL_instance  ifcSQLin=null;
 
-public static Model FromSql(string ServerName,string DatabaseName="ifcSQL_Instance",int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
+public static Model FromSql(string ServerName, string DatabaseName = "ifcSQL_Instance", int ProjectId = 0,
+ ifcSQL.AttributeUpdater updater = null)
 {
-
-                                    ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+ ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName: ServerName,DatabaseName:DatabaseName);
+ return FromSql(ifcSQLin, ProjectId, updater);
+}
+public static Model FromSql(string ServerName, string DatabaseName, string UserName, string Password, int ProjectId = 0,
+ ifcSQL.AttributeUpdater updater = null)
+{
+ ifcSQLin=new ifcSQL._ifcSQL_for_ifcSQL_instance (ServerName,DatabaseName,UserName,Password);
+ return FromSql(ifcSQLin, ProjectId, updater);
+}
+public static Model FromSql(ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQLin,int ProjectId=0,ifcSQL.AttributeUpdater updater=null)
+{
+ 
                                     ifcSQLin.conn.Open(); 
 if (ProjectId>0)                    ifcSQLin.ExecuteNonQuery("app.SelectProject "+ProjectId);
                                     ifcSQLin.conn.Close(); 

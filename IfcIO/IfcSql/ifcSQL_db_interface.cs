@@ -68,8 +68,7 @@ public partial class RowList<T> : TableBase where T : new(){//------------------
 public               RowList(string order=""){this.order=order;}
 public override void SelectAll(string where=""){string sql="select * from "+TableName+" "+where+" "+order; // (bb) 20.05.2023 exception handling
                                                 SqlCommand cmd = new SqlCommand(sql,tableSet.conn);
-                                                try {using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}}
-                                                catch(Exception e) {ifc.Log.Add(e.Message+"\n"+sql,ifc.Log.Level.Exception);}
+                                                try {using (SqlDataReader reader = cmd.ExecuteReader()) while (reader.Read()) {Object rb = new T();this.Add(((RowBase)rb).FromReader(reader));}}catch(Exception e) {ifc.Log.Add(e.Message+"\n"+sql,ifc.Log.Level.Exception);}
                                                 //((RowBase)(object)new T()).Load(this);
                                                }
 public override void Load   (){((RowBase)(object)new T()).Load(this);} // (bb) 30.10.2022 seperated load for serialsation
@@ -99,8 +98,9 @@ public  TableSet(string ServerName,string DatabaseName,bool DirectLoad=false){th
                                                                               conn=new SqlConnection("Persist Security Info=False;Integrated Security=true;Initial Catalog="+DatabaseName+";server="+ServerName);
                                                                               if (DirectLoad) {LoadAllTables();LoadAllMaps();}
                                                                              }
+//2023-12-23 ef: ommited 'Network Library=DBMSSOCN;' and added 'tcp:' prefix to Data Source as a more general protocol specifier, this solves linux compatibility issues
 public  TableSet(string ServerName,string DatabaseName,string UserName,string Password,bool DirectLoad=false){this.ServerName=ServerName;this.DatabaseName=DatabaseName;AssignTableNames();
-                                                                              conn=new SqlConnection("Data Source="+ServerName+";Network Library=DBMSSOCN;Initial Catalog="+DatabaseName+";User ID="+UserName+";Password='"+Password+"'");
+                                                                              conn=new SqlConnection("Data Source=tcp:"+ServerName+";Initial Catalog="+DatabaseName+";User ID="+UserName+";Password='"+Password+"'");
                                                                               if (DirectLoad) {LoadAllTables();LoadAllMaps();}
                                                                              }
 
