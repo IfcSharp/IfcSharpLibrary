@@ -28,6 +28,7 @@ return false;
          result=result.Replace("\\X2\\00E4\\X0\\","δ");
          result=result.Replace("\\X2\\00C4\\X0\\","Δ");
          result=result.Replace("\\X2\\00F6\\X0\\","φ");
+         result=result.Replace("\\X2\\00F600DF\\X0\\","φί"); // 2024-04-02 (bb): added
          result=result.Replace("\\X2\\00D6\\X0\\","Φ");
          result=result.Replace("\\X2\\00FC\\X0\\","ό");
          result=result.Replace("\\X2\\00DC\\X0\\","ά");

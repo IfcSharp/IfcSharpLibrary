@@ -54,6 +54,7 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){//object als üb
                              bool Display=true;
                              if (tb.GetBaseType()==typeof(String)) if (o.ToString()=="") Display=false;
                              if (o.ToString()=="null") Display=false;
+                             if (tb.IsNull) Display=false; // 2024-04-02 (bb): added
                              if (Display) 
                                 {switch (tb.SqlTableId())
                                         {case (int)ifc.SqlTable.EntityAttributeOfBinary : ifcSqlInstance.cp.EntityAttributeOfBinary .Add(new ifcSQL.ifcInstance.EntityAttributeOfBinary_Row (GlobalId,OrdinalPosition,tb.SqlTypeId(),o.ToString())); break;
