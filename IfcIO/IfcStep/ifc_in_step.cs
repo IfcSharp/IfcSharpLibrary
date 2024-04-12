@@ -145,7 +145,7 @@ namespace ifc {
             }
             if (values.Length == 0) Console.WriteLine("ListElements.Length=0");
 
-            if (values[0] == "") try { instance = Activator.CreateInstance(listType); } catch { Console.WriteLine("ERROR on Parse2LIST.1:" + CurrentLine); }
+            if (values[0] == "" || values[0] == "$") try { instance = Activator.CreateInstance(listType); } catch { Console.WriteLine("ERROR on Parse2LIST.1:" + CurrentLine); }
             else {
                 try {for (int i=0;i<values.Length;i++) values[i]=values[i].Replace("'",""); // 2024-03-30 (bb) remove string-characters
                      object[] ctorArgs = new object[values.Length];
