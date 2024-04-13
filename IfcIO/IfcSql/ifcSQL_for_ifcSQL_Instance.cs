@@ -52,85 +52,94 @@ public partial class Entity_Row : RowBase{
 }
  
 public partial class EntityAttributeListElementOfBinary_Row : RowBase{
- public EntityAttributeListElementOfBinary_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, string Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.Value=Value;}
+ public EntityAttributeListElementOfBinary_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId, string Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfBinary_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcBINARY")] public string Value="";
 }
  
 public partial class EntityAttributeListElementOfEntityRef_Row : RowBase{
- public EntityAttributeListElementOfEntityRef_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, long Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.Value=Value;}
+ public EntityAttributeListElementOfEntityRef_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId, long Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfEntityRef_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long Value=0;
 }
  
 public partial class EntityAttributeListElementOfFloat_Row : RowBase{
- public EntityAttributeListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.Value=Value;}
+ public EntityAttributeListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int EntityTypeId, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.EntityTypeId=EntityTypeId;this.Value=Value;}
  public EntityAttributeListElementOfFloat_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int EntityTypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcREAL")] public double Value=0;
 }
  
 public partial class EntityAttributeListElementOfInteger_Row : RowBase{
- public EntityAttributeListElementOfInteger_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.Value=Value;}
+ public EntityAttributeListElementOfInteger_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId, int Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfInteger_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcINTEGER")] public int Value=0;
 }
  
 public partial class EntityAttributeListElementOfList_Row : RowBase{
- public EntityAttributeListElementOfList_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;}
+ public EntityAttributeListElementOfList_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;}
  public EntityAttributeListElementOfList_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
 }
  
 public partial class EntityAttributeListElementOfListElementOfEntityRef_Row : RowBase{
- public EntityAttributeListElementOfListElementOfEntityRef_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, long Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.Value=Value;}
+ public EntityAttributeListElementOfListElementOfEntityRef_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, int TypeId, long Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfListElementOfEntityRef_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim2Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long Value=0;
 }
  
 public partial class EntityAttributeListElementOfListElementOfFloat_Row : RowBase{
- public EntityAttributeListElementOfListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.Value=Value;}
+ public EntityAttributeListElementOfListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, int TypeId, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfListElementOfFloat_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim2Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcREAL")] public double Value=0;
 }
  
 public partial class EntityAttributeListElementOfListElementOfInteger_Row : RowBase{
- public EntityAttributeListElementOfListElementOfInteger_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, int Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.Value=Value;}
+ public EntityAttributeListElementOfListElementOfInteger_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int ListDim2Position, int TypeId, int Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.ListDim2Position=ListDim2Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfListElementOfInteger_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim2Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcINTEGER")] public int Value=0;
 }
  
 public partial class EntityAttributeListElementOfString_Row : RowBase{
- public EntityAttributeListElementOfString_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, string Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.Value=Value;}
+ public EntityAttributeListElementOfString_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId, string Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfString_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcSTRING")] public string Value="";
 }
  

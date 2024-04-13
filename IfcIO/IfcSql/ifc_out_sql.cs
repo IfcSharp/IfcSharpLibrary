@@ -20,24 +20,24 @@ private string typestr="";
 
 public void SqlOut1(long GlobalId,int OrdinalPosition,int ListDim1Position, object o){
        if (o is SELECT)           {SqlOut1(GlobalId,OrdinalPosition,ListDim1Position,((SELECT)o).SelectValue());}
-  else if (o is ENTITY)           {ifcSqlInstance.cp.EntityAttributeListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,((ENTITY)o).ifcSqlGlobalId));}
+  else if (o is ENTITY)           {ifcSqlInstance.cp.EntityAttributeListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),((ENTITY)o).ifcSqlGlobalId));}
   else if (o is ifcListInterface) {Console.WriteLine("LIST OF LIST CURRENTLY NOT  SUPPORTED.");}
-  else if (o is TypeBase)         {TypeBase tb=(TypeBase)o;// Console.WriteLine(o.ToString());// funktioniert noch nicht 8PropertySingleValue)
+  else if (o is TypeBase)         {TypeBase tb=(TypeBase)o;
                                    bool Display=true;
                                    if (tb.GetBaseType()==typeof(String)) if (o.ToString()=="") Display=false;
                                    if (o.ToString()=="null") Display=false;
                                    if (Display) 
                                       {switch (tb.SqlTableId())
-                                              {case (int)ifc.SqlTable.EntityAttributeOfFloat  : ifcSqlInstance.cp.EntityAttributeListElementOfFloat  .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row  (GlobalId,OrdinalPosition,ListDim1Position,(double)((TYPE<double>)o).TypeValue)); break;
-                                               case (int)ifc.SqlTable.EntityAttributeOfInteger: ifcSqlInstance.cp.EntityAttributeListElementOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row(GlobalId,OrdinalPosition,ListDim1Position,(int)((TYPE<int>)o).TypeValue )); break;
-                                               case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeListElementOfString .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row (GlobalId,OrdinalPosition,ListDim1Position,((TYPE<string>)o).TypeValue)); break; // 2024-03-30 (bb) removes o.ToString()
-                                               case (int)ifc.SqlTable.EntityAttributeOfBinary : ifcSqlInstance.cp.EntityAttributeListElementOfBinary .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfBinary_Row (GlobalId,OrdinalPosition,ListDim1Position,o.ToString())); break;
+                                              {case (int)ifc.SqlTable.EntityAttributeOfFloat  : ifcSqlInstance.cp.EntityAttributeListElementOfFloat  .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row  (GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),(double)((TYPE<double>)o).TypeValue)); break;
+                                               case (int)ifc.SqlTable.EntityAttributeOfInteger: ifcSqlInstance.cp.EntityAttributeListElementOfInteger.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row(GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),(int)((TYPE<int>)o).TypeValue )); break;
+                                               case (int)ifc.SqlTable.EntityAttributeOfString : ifcSqlInstance.cp.EntityAttributeListElementOfString .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row (GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),((TYPE<string>)o).TypeValue)); break; // 2024-03-30 (bb) removes o.ToString()
+                                               case (int)ifc.SqlTable.EntityAttributeOfBinary : ifcSqlInstance.cp.EntityAttributeListElementOfBinary .Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfBinary_Row (GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),o.ToString())); break;
                                               }
                                       } 
                                   }
 }
 
-public void SqlOut0(long GlobalId,int OrdinalPosition, object o){//object als übergabetyp erf-, da sonst LIST und enum nicht erfasst wird
+public void SqlOut0(long GlobalId,int OrdinalPosition, object o){
   
          if (o==null)               {}
     else if (o is Enum)             {ifcSqlInstance.cp.EntityAttributeOfEnum.Add(new ifcSQL.ifcInstance.EntityAttributeOfEnum_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()),((int)o))); } 
@@ -156,7 +156,7 @@ long CurrentGlobalId=LastGlobalId-this.EntityList.Count; //BB-2024-04-01: from i
 FillTables(ProjectId:ProjectId,StartGlobalId: LastGlobalId-this.EntityList.Count+1); //BB-2024-04-01: from ifc.Repository.CurrentModel to this Model
 
 ifcSQL.conn.Open();
-foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) tb.BulkInsert();
+foreach(TableBase tb in OrderedInsertList) if (tb.Count>0) {Console.WriteLine(tb.TableName); tb.BulkInsert();}
 ifcSQL.conn.Close();                                       
 
 }//................................................................................................

@@ -92,10 +92,10 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                             }
 
          else if (rb is ifcSQL.ifcInstance.EntityAttributeOfList_Row)    {ifcSQL.ifcInstance.EntityAttributeOfList_Row a=(ifcSQL.ifcInstance.EntityAttributeOfList_Row)rb;  
+
                                                                           Type GenericType=null; 
                                                                           if (attrib.field.FieldType.BaseType.GetGenericArguments().Length>0) GenericType=attrib.field.FieldType.BaseType.GetGenericArguments()[0]; //LengthMeasure or CartesianPoint
-                                                                          else                                                   GenericType=attrib.field.FieldType.BaseType.BaseType.GetGenericArguments()[0]; //CompoundPlaneAngleMeasure
-                                                                          Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[a.TypeId];
+                                                                          else                                                                GenericType=attrib.field.FieldType.BaseType.BaseType.GetGenericArguments()[0]; //CompoundPlaneAngleMeasure
                                                                           
                                                                           int ListDim1Count=a.AttributeValueDict.Count; 
                                                                           object[] FieldCtorArgs=new object[ListDim1Count];
@@ -103,17 +103,20 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                           if (ListDim1Count>0)   
                                                                           if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)
                                                                                  for (int ListDim1Position=0;ListDim1Position<ListDim1Count;ListDim1Position++) 
-                                                                                    {string txt=((ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)a.AttributeValueDict[ListDim1Position]).Value; 
+                                                                                    {Type AttributeInstanceType=ifc.ENTITY.TypeDictionary.TypeIdTypeDict[((ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)a.AttributeValueDict[ListDim1Position]).TypeId];
+                                                                                     string txt=((ifcSQL.ifcInstance.EntityAttributeListElementOfString_Row)a.AttributeValueDict[ListDim1Position]).Value; 
                                                                                      object[] GenericCtorArgs=new object[1]; 
-                                                                                     FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,txt); 
+                                                                                     // bb 13.04.2024 double step ctor for select types:
+                                                                                     if (GenericType.IsSubclassOf(typeof(SELECT))) FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,Activator.CreateInstance(AttributeInstanceType,txt)); 
+                                                                                     else                                          FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,txt); 
                                                                                      } 
 
-                                                                          if (ListDim1Count>0)   
+                                                                          if (ListDim1Count>0)
                                                                           if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row)
                                                                                  for (int ListDim1Position=0;ListDim1Position<ListDim1Count;ListDim1Position++) 
                                                                                     {int Id=LocalIdFromGlobalIdDict[((ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row)a.AttributeValueDict[ListDim1Position]).Value]; 
                                                                                      object[] GenericCtorArgs=new object[1]; 
-                                                                                     FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType);  // Console.WriteLine("GenericType= "+GenericType.ToString());
+                                                                                     FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType); 
                                                                                           if (GenericType.IsSubclassOf(typeof(SELECT))) ((SELECT)FieldCtorArgs[ListDim1Position]).Id=Id;
                                                                                      else if (GenericType.IsSubclassOf(typeof(ENTITY))) ((ENTITY)FieldCtorArgs[ListDim1Position]).LocalId=Id;
                                                                                      else Console.WriteLine("unkown type"); 
