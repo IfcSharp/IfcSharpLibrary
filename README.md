@@ -77,8 +77,8 @@ We currently support these IFC schemas:
  - [IFC2X3](https://standards.buildingsmart.org/IFC/RELEASE/IFC2x3/TC1/HTML/)
  - [IFC4](https://standards.buildingsmart.org/IFC/RELEASE/IFC4/ADD2_TC1/HTML/)
  - [IFC4.1](https://standards.buildingsmart.org/IFC/RELEASE/IFC4_1/FINAL/HTML/)
- - [IFC4.3](https://github.com/buildingSMART/IFC4.3-html/releases/tag/sep-13-release)
- - [IFC4.3.2.0 - Coming soon](https://ifc43-docs.standards.buildingsmart.org/)
+ - [IFC4.2](https://standards.buildingsmart.org/IFC/DEV/IFC4_2/FINAL/HTML/)
+ - [IFC4.3.2.0](https://standards.buildingsmart.org/IFC/RELEASE/IFC4_3/)
 
 > **_NOTE:_** Due to the class model you can only include the `IfcSchema` for **one** IFC version. This means for multiple IFC versions you need to create multiple build-projects.
 
