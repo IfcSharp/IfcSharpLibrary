@@ -18,10 +18,19 @@ public partial class ENTITY{//==================================================
 private string value="";
 private string typestr="";
 
+
+public void SqlOut2(long GlobalId,int OrdinalPosition,int ListDim1Position,int ListDim2Position, object o){
+ifcSqlInstance.cp.EntityAttributeListElementOfListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,ListDim2Position,ifcSqlType.SqlTypeId(o.GetType()),((ENTITY)o).ifcSqlGlobalId));
+}
+
 public void SqlOut1(long GlobalId,int OrdinalPosition,int ListDim1Position, object o){
        if (o is SELECT)           {SqlOut1(GlobalId,OrdinalPosition,ListDim1Position,((SELECT)o).SelectValue());}
   else if (o is ENTITY)           {ifcSqlInstance.cp.EntityAttributeListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType()),((ENTITY)o).ifcSqlGlobalId));}
-  else if (o is ifcListInterface) {Console.WriteLine("LIST OF LIST CURRENTLY NOT  SUPPORTED.");}
+  else if (o is ifcListInterface) {if (((ifcSqlTypeInterface)o).SqlTypeGroupId()==(int)ifc.TypeGroup.LISTTYPE1DOF2D) 
+                                      {ifcSqlInstance.cp.EntityAttributeListElementOfList.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfList_Row(GlobalId,OrdinalPosition,ListDim1Position,ifcSqlType.SqlTypeId(o.GetType())));
+                                       int ListDim2Position=0;foreach (object item in (IEnumerable)o) SqlOut2(GlobalId,OrdinalPosition,ListDim1Position,ListDim2Position++,item); 
+                                      }
+                                  }  
   else if (o is TypeBase)         {TypeBase tb=(TypeBase)o;
                                    bool Display=true;
                                    if (tb.GetBaseType()==typeof(String)) if (o.ToString()=="") Display=false;
@@ -47,10 +56,16 @@ public void SqlOut0(long GlobalId,int OrdinalPosition, object o){
                                         {ifcSqlInstance.cp.EntityAttributeOfList.Add(new ifcSQL.ifcInstance.EntityAttributeOfList_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()) ));
                                          int ListDim1Position=0;foreach (object item in (IEnumerable)o) SqlOut1(GlobalId,OrdinalPosition,ListDim1Position++,item);
                                         } 
-                                     else throw new  ifc.IfcSharpException("SqlOut0: LISTTYPE2D CURRENTLY NOT  SUPPORTED.");
+                                     else if (((ifcSqlTypeInterface)o).SqlTypeGroupId()==(int)ifc.TypeGroup.LISTTYPE2D)
+                                        {
+                                         ifcSqlInstance.cp.EntityAttributeOfList.Add(new ifcSQL.ifcInstance.EntityAttributeOfList_Row(GlobalId,OrdinalPosition,ifcSqlType.SqlTypeId(o.GetType()) ));
+                                         int ListDim1Position=0;foreach (object item in (IEnumerable)o) SqlOut1(GlobalId,OrdinalPosition,ListDim1Position++,item);
+                                        } 
+                                     else throw new  ifc.IfcSharpException("SqlOut0: LISTTYPE "+((ifcSqlTypeInterface)o).SqlTypeGroupId()+" CURRENTLY NOT  SUPPORTED.");
+
                                     }
 
-    else if (o is TypeBase) {TypeBase tb=(TypeBase)o;// Console.WriteLine(o.ToString());// funktioniert noch nicht 8PropertySingleValue)
+    else if (o is TypeBase) {TypeBase tb=(TypeBase)o;// Console.WriteLine(o.ToString());// don't work with PropertySingleValue ?
                              bool Display=true;
                              if (tb.GetBaseType()==typeof(String)) if (o.ToString()=="") Display=false;
                              if (o.ToString()=="null") Display=false;
