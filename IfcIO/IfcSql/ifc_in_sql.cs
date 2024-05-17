@@ -251,7 +251,7 @@ Model NewModel=new Model();
 foreach (ifcSQL.ifcProject.EntityInstanceIdAssignment_Row eia in ifcSQLin.cp.EntityInstanceIdAssignment) NewModel.LocalIdFromGlobalIdDict[eia.GlobalEntityInstanceId]=(int)eia.ProjectEntityInstanceId; // create and fill LocalGlobal Dict
 
 // fill the header
-NewModel.Header.Init(Name:CurrentProJect.ProjectName, ViewDefinition:CurrentProJect.ProjectDescription,Author:"Bernhard Simon Bock, Friedrich Eder",PreprocessorVersion:"from ifcSQL via IfcSharp");
+NewModel.Header.Init(Name:CurrentProJect.ProjectName, ViewDefinition:CurrentProJect.ProjectDescription,Author:"",PreprocessorVersion:"from ifcSQL via IfcSharp");
 
 if (updater!=null){updater.Assign(ifcSQLin,NewModel);updater.Update();}
 
