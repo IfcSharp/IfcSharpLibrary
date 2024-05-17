@@ -39,7 +39,7 @@ public static ifc.Model CurrentModel=new ifc.Model();
         // 2022-04-04 (ef): formatting
         public void AssignEntities() {
             EntityDict.Clear();
-            foreach (ENTITY e in EntityList) /* if (e.LocalId>0) */ if (!EntityDict.ContainsKey(e.LocalId)) { EntityDict.Add(e.LocalId, e); } else Console.WriteLine("#" + e.LocalId + " already exist! (double Entry)");
+            foreach (ENTITY e in EntityList) /* if (e.LocalId>0) */ if (!EntityDict.ContainsKey(e.LocalId)) { EntityDict.Add(e.LocalId, e); } else Log.Add("AssignEntities: #="+e.LocalId+" already exist! (double Entry)", Log.Level.Exception);
             foreach (ENTITY e in EntityList) /* if (e.LocalId>0) */
                     {//####################################################################################################
                 Dictionary<int, FieldInfo> VarDict = new Dictionary<int, FieldInfo>();
@@ -66,17 +66,51 @@ public static ifc.Model CurrentModel=new ifc.Model();
 
                     }
                     else if (typeof(IEnumerable).IsAssignableFrom(field.FieldType)) if (field.GetValue(e) != null) {//==================================================================
-                                                                                                                    //Console.WriteLine("start list "+i+":"+field.FieldType.Name);
+
                             Dictionary<int, object> VarDict1 = new Dictionary<int, object>();
                             int VarCount1 = 0; foreach (object item in (IEnumerable)field.GetValue(e)) if (item != null) VarDict1.Add(VarCount1++, item);
                             object[] FieldCtorArgs = new object[VarCount1];
                             Type GenericType = null;
                             if (field.FieldType.BaseType.GetGenericArguments().Length > 0) GenericType = field.FieldType.BaseType.GetGenericArguments()[0]; //LengthMeasure or CartesianPoint
                             else GenericType = field.FieldType.BaseType.BaseType.GetGenericArguments()[0]; //CompoundPlaneAngleMeasure
-                            if ((GenericType != null) && ((GenericType.IsSubclassOf(typeof(ENTITY))) || GenericType.IsSubclassOf(typeof(SELECT)))) {//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                for (int i1 = 0; i1 < VarCount1; i1++) {//------------------------------------------------------
-                                    object item = VarDict1[i1]; //Console.Write(field.Name+", "+i+" "+i1);
-                                    if (item is SELECT) {//Console.WriteLine("SELECT item "+((SELECT)item).Id +" "+((SELECT)item).SelectType().Name); 
+
+
+                            if ((GenericType != null) && (   GenericType.IsSubclassOf(typeof(ENTITY))
+                                                          || GenericType.IsSubclassOf(typeof(SELECT))
+                                                          || typeof(IEnumerable).IsAssignableFrom(GenericType) // 2024-05-01 (bb) added list of lists
+                                                         )
+                               ) {//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               for (int i1 = 0; i1 < VarCount1; i1++) {//------------------------------------------------------
+                                    object item = VarDict1[i1];
+                                    if (typeof(IEnumerable).IsAssignableFrom(item.GetType())) { // 2024-05-01 (bb) added list of lists
+                                        Dictionary<int, object> VarDict2 = new Dictionary<int, object>();
+                                        int VarCount2 = 0; foreach (object item2 in (IEnumerable)item) if (item2 != null) VarDict2.Add(VarCount2++, item2);
+                                        object[] FieldCtorArgs2 = new object[VarCount2];
+                                        if (VarCount2>0) if (VarDict2[0] is ENTITY)  // 2024-05-05 (bb) checking entity-type
+                                          {for (int i2 = 0; i2 < VarCount2; i2++)
+                                                   {object item2 = VarDict2[i2];
+                                                    ENTITY E = (ENTITY)item2; 
+                                                    if (E != null) if (E.LocalId > 0) {//........................
+                                                    if (EntityDict.ContainsKey(E.LocalId)) E = EntityDict[E.LocalId]; else Log.Add("List Level 2: E.Id="+e.LocalId+" not found", Log.Level.Error);
+                                                                                      }
+                                                    FieldCtorArgs2[i2] = E;
+                                                   }
+                                          FieldCtorArgs[i1] = Activator.CreateInstance(item.GetType(), FieldCtorArgs2);
+                                         }
+
+                                        if (VarCount2>0) if (VarDict2[0] is TYPE<double>)  // 2024-05-05 (bb) checking base-type
+                                          {for (int i2 = 0; i2 < VarCount2; i2++) FieldCtorArgs2[i2] = VarDict2[i2];
+                                          FieldCtorArgs[i1] = Activator.CreateInstance(item.GetType(), FieldCtorArgs2);
+                                          }
+
+                                        if (VarCount2>0) if (VarDict2[0] is TYPE<int>)  // 2024-05-17 (bb) checking base-type
+                                          {for (int i2 = 0; i2 < VarCount2; i2++) FieldCtorArgs2[i2] = VarDict2[i2];
+                                          FieldCtorArgs[i1] = Activator.CreateInstance(item.GetType(), FieldCtorArgs2);
+                                          }
+
+
+                                       }
+                                    else if (item is SELECT) {//Console.WriteLine("SELECT item "+((SELECT)item).Id +" "+((SELECT)item).SelectType().Name);
                                         SELECT s = item as SELECT;
                                         if (s.Id == 0) {
                                             if (s.SelectType().IsSubclassOf(typeof(ENTITY))) {
@@ -98,7 +132,7 @@ public static ifc.Model CurrentModel=new ifc.Model();
                                         if (((ENTITY)item).LocalId > 0) {
                                             ENTITY E = (ENTITY)item; // Console.WriteLine("((ENTITY)item).Id="+((ENTITY)item).Id );
                                             if (E != null) if (E.LocalId > 0) {//........................
-                                                    if (EntityDict.ContainsKey(E.LocalId)) E = EntityDict[E.LocalId]; else Console.WriteLine("E.Id=" + E.LocalId + " nicht gefunden");
+                                                    if (EntityDict.ContainsKey(E.LocalId)) E = EntityDict[E.LocalId]; else Log.Add("List Level 1: E.Id="+e.LocalId+" not found", Log.Level.Error);
                                                 }
                                             FieldCtorArgs[i1] = E;
                                         }//........................

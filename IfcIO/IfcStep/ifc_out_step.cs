@@ -18,11 +18,12 @@ string s;//="";
             if (o == null) { if (attrib == null) s = "$"; else s = ((attrib.IsDerived) ? "*" : "$"); }
             else if (o is Enum) { s = "." + o.ToString() + "."; }
             else if (o is SELECT) {
+/* 2024-05-05 (bb): comment out
                 if (o is ifc.LayeredItem li)
                 {
                     bool stop = true;
                 }
-                
+*/
                 if (((SELECT)o).IsNull) {
                     if (attrib.IsDerived == false) s = "$";
                     else s = "*";//2022-06-10 (ef): derived attributes which are NULL are written as '*'

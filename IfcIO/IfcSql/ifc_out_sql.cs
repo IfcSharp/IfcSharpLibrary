@@ -20,7 +20,8 @@ private string typestr="";
 
 
 public void SqlOut2(long GlobalId,int OrdinalPosition,int ListDim1Position,int ListDim2Position, object o){
-ifcSqlInstance.cp.EntityAttributeListElementOfListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,ListDim2Position,ifcSqlType.SqlTypeId(o.GetType()),((ENTITY)o).ifcSqlGlobalId));
+if (o is TYPE<double>) ifcSqlInstance.cp.EntityAttributeListElementOfListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfFloat_Row(GlobalId,OrdinalPosition,ListDim1Position,ListDim2Position,ifcSqlType.SqlTypeId(o.GetType()),((TYPE<double>)o).TypeValue));
+if (o is ENTITY      ) ifcSqlInstance.cp.EntityAttributeListElementOfListElementOfEntityRef.Add(new ifcSQL.ifcInstance.EntityAttributeListElementOfListElementOfEntityRef_Row(GlobalId,OrdinalPosition,ListDim1Position,ListDim2Position,ifcSqlType.SqlTypeId(o.GetType()),((ENTITY)o).ifcSqlGlobalId));
 }
 
 public void SqlOut1(long GlobalId,int OrdinalPosition,int ListDim1Position, object o){
@@ -157,8 +158,11 @@ public enum eWriteMode{CreateNewProject, OnlyIfEmpty,DeleteBeforeWrite }
  public void ToSql(ifcSQL._ifcSQL_for_ifcSQL_instance ifcSQL, eWriteMode WriteMode = eWriteMode.CreateNewProject, int ProjectId=0,int ProjectGroupId=0)
 {
 long LastGlobalId=0;
+
 ifcSQL.conn.Open(); 
-if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectId] @ProjectName='"+Header.Name+"',@ProjectDescription='"+Header.ViewDefinition+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.Author+"',@Organization='"+Header.Organization+"',@OriginatingSystem='"+Header.OriginatingSystem+"',@Documentation='"+Header.Documentation+"';select @r");                                            
+
+if (ProjectGroupId==0) ProjectGroupId=ifcSQL.ExecuteIntegerScalar("SELECT ProjectGroupId from cp.ProjectGroup");  //BB-2024-05-05: use current ProjectGroupId, rename [app].[NewProjectId] to [app].[NewProjectExtended]
+if (WriteMode==eWriteMode.CreateNewProject) ProjectId=ifcSQL.ExecuteIntegerScalar("declare @r as int;exec @r=[ifcSQL].[app].[NewProjectExtended] @ProjectName='"+Header.Name+"',@ProjectDescription='"+Header.ViewDefinition+"',@ProjectGroupId="+ProjectGroupId+",@SpecificationId="+Specification.SpecificationId+",@Author='"+Header.Author+"',@Organization='"+Header.Organization+"',@OriginatingSystem='"+Header.OriginatingSystem+"',@Documentation='"+Header.Documentation+"';select @r");                                            
 if (ProjectId==0) ProjectId=ifcSQL.ExecuteIntegerScalar("SELECT cp.ProjectId()"); else ifcSQL.ExecuteNonQuery("app.SelectProject "+ProjectId);
             int EntityCount=ifcSQL.ExecuteIntegerScalar("SELECT count(*) from cp.Entity"); if (WriteMode==eWriteMode.OnlyIfEmpty) if (EntityCount>0) {ifcSQL.conn.Close();throw new NetSystem.Exception("Project with ProjectId="+ProjectId+" is not empty while using eWriteMode.OnlyIfEmpty");}
 if (WriteMode==eWriteMode.DeleteBeforeWrite) ifcSQL.ExecuteNonQuery("app.DeleteProjectEntities "+ProjectId);

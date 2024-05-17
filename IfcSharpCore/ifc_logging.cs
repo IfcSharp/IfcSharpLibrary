@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace ifc
 {
+
+class IfcSharpException:NetSystem.Exception {public IfcSharpException (NetSystem.String reason) : base ("ifcSharp:"+reason){}}
+
     public static class Log
     {
         public enum Level
@@ -12,7 +15,8 @@ namespace ifc
             Debug,
             Warning,
             Error,
-            Exception
+            Exception,
+            ThrowException
         };
 
         private static Level[] Filter = new[] {Level.Info};
@@ -33,6 +37,7 @@ namespace ifc
                     NetSystem.Console.WriteLine(e);
                 }
             }
+         if (level==Level.ThrowException) throw(new IfcSharpException(msg));  
         }
 
         public static void SetLogfilePath(string path) {

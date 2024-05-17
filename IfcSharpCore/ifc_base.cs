@@ -68,7 +68,6 @@ private bool _IsNull=true;
 public bool IsNull{get{return _IsNull;}set{_IsNull = value;}}
 }
 
-class IfcSharpException:NetSystem.Exception {public IfcSharpException (NetSystem.String reason) : base ("ifcSharp:"+reason){}}
 
 public partial class GloballyUniqueId          :TYPE<string>    {public  static string CreateNewId(){ return IfcGuid.ToIfcGuid(NetSystem.Guid.NewGuid()); }
                                                                  public  static GloballyUniqueId NewId(){ return new GloballyUniqueId(CreateNewId()); }

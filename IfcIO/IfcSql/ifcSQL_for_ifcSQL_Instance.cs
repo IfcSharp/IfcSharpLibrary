@@ -72,12 +72,12 @@ public partial class EntityAttributeListElementOfEntityRef_Row : RowBase{
 }
  
 public partial class EntityAttributeListElementOfFloat_Row : RowBase{
- public EntityAttributeListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int EntityTypeId, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.EntityTypeId=EntityTypeId;this.Value=Value;}
+ public EntityAttributeListElementOfFloat_Row(long GlobalEntityInstanceId, int OrdinalPosition, int ListDim1Position, int TypeId, double Value){this.GlobalEntityInstanceId=GlobalEntityInstanceId;this.OrdinalPosition=OrdinalPosition;this.ListDim1Position=ListDim1Position;this.TypeId=TypeId;this.Value=Value;}
  public EntityAttributeListElementOfFloat_Row(){}
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcInstance",name="Id")] [References(RefTableSchema="ifcInstance",RefTableName="Entity",RefTableColName="GlobalEntityInstanceId")] public long GlobalEntityInstanceId=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int OrdinalPosition=0;
  [DbField(PrimaryKey=true, SortAscending=true)] [UserType(schema="ifcOrder",name="Position")] public int ListDim1Position=0;
- [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int EntityTypeId=0;
+ [DbField] [UserType(schema="ifcSchema",name="Id")] [References(RefTableSchema="ifcSchema",RefTableName="Type",RefTableColName="TypeId")] public int TypeId=0;
  [DbField] [UserType(schema="ifcType",name="ifcREAL")] public double Value=0;
 }
  

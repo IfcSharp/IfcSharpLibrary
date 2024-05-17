@@ -29,6 +29,9 @@ public static Direction operator * (Direction d, double Scale) {return new Direc
 
 }//=====================================================================================================================
 #else
+
+public partial class List2to3_double           :List2to3<double>{public List2to3_double           (params double[] items):base(){foreach (REAL e in items)  this.Add(e);}  }
+
 public partial class Direction:GeometricRepresentationItem{//===========================================================
 public               Direction(double x, double y, double z,string EndOfLineComment=null):base(){AddNext();this.DirectionRatios=new List2to3_double((REAL)  x,(REAL)  y,(REAL)  z);this.EndOfLineComment=  EndOfLineComment;}
 public               Direction(double x, double y          ,string EndOfLineComment=null):base(){AddNext();this.DirectionRatios=new List2to3_double((REAL)  x,(REAL)  y);            this.EndOfLineComment=  EndOfLineComment;}
