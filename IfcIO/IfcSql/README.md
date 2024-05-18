@@ -1,7 +1,7 @@
 ﻿<!-- IfcSharp-documentation, Copyright (c) 2020, Bernhard Simon Bock, Friedrich Eder, MIT License (see https://github.com/IfcSharp/IfcSharpLibrary/tree/master/Licence) --->
 
 # ifcSQL
-ifcSQL ist stored here [here](https://github.com/IfcSharp/IfcSQL)
+The documentation of ifcSQL you can find [here](https://github.com/IfcSharp/IfcSQL)
 
 <details>
 <summary>
