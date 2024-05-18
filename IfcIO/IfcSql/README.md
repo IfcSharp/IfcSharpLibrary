@@ -11,4 +11,4 @@ The BCF-implementation in ifcSQL (see ifcSQL_BCF_part_create.sql.txt) look like 
 ![](doc/img/ifcSQL_BCF_part.png)
 </details>
 
-<
+
