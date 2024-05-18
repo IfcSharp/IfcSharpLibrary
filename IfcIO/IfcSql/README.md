@@ -3,9 +3,12 @@
 # ifcSQL
 ifcSQL ist stored here [here](https://github.com/IfcSharp/IfcSQL)
 
-The BCF-implementation in ifcSQL look like this (see ifcSQL_BCF_part_create.sql.txt):
-
+<details>
+<summary>
+The BCF-implementation in ifcSQL (see ifcSQL_BCF_part_create.sql.txt) look like this: (click on this line)
+  <BR/><BR/>
+</summary>
 ![](doc/img/ifcSQL_BCF_part.png)
+</details>
 
-
-
+<
