@@ -37,6 +37,7 @@ namespace ifc {
         /// <returns>null on error; instance of <param>valueType</param> on success</returns>
 
         public static object Parse2TYPE(string value, Type valueType) { //TODO: catch more specific exceptions and throw custom IfcSharpExceptions  i.e.: infer argument mismatches and the like
+
             if (value == "$") return null;
             if (value == "*") return Activator.CreateInstance(valueType);
 
@@ -58,7 +59,8 @@ namespace ifc {
                                                  }
        else if (valueBaseType.IsSubclassOf(typeof(TypeBase))) instance = Activator.CreateInstance(valueType, Parse2TYPE(value, valueBaseType)); // 2022-06-10 (ef): for lists which are defined inline (i.e.: (49,6,1,566000)) we need to also check if the baseclass of the given 'FieldType' can be represented as a subclass of LIST. If so, the given args are parsed to the type of LIST and the the FieldType instance is created.
        else if (typeof(ifcListInterface).IsAssignableFrom(valueBaseType)) 
-                                                 {try {ctorArgs[0] = Parse2LIST(valueBaseType, value);} catch (Exception e) {Log.Add($"Parse2TYPE (parsing list): {value}\nException: {e.Message}", Log.Level.Exception);}
+                                                 {value=value.Trim('(').Trim(')');
+                                                  try {ctorArgs[0] = Parse2LIST(valueBaseType, value);} catch (Exception e) {Log.Add($"Parse2TYPE (parsing list): {value}\nException: {e.Message}", Log.Level.Exception);}
                                                   instance = Activator.CreateInstance(valueType, ctorArgs[0]);
                                                  }
        else    {Log.Add($"UNKNOWN TYPE for expected Type {valueType.Name}: Base={valueBaseType.Name} value={value}\r\n{CurrentLine}", Log.Level.Error);}
@@ -95,13 +97,16 @@ namespace ifc {
             object instance = null; 
             string[] values;
 
-            if (body.StartsWith("IFC")) values = new string[] { body };
-            else                        values = body.Split(',');
+            body=ExtractInnerCommas(body);
+            values = body.Split(',');
+            for (int i = 0; i < values.Length; i++) values[i] = values[i].Replace((char)9, ',');
 
             if (values.Length == 0) Log.Add($"ERROR on Parse2LIST ListElements.Length=0:{CurrentLine}", Log.Level.Error);
 
             if (values[0] == "" || values[0] == "$") try { instance = Activator.CreateInstance(listType); } catch(Exception e) { Log.Add($"ERROR on Parse2LIST.3:{CurrentLine}\n{e}", Log.Level.Exception);}
-            else {try {for (int i=0;i<values.Length;i++) values[i]=values[i].Replace("'","").Replace("(","").Replace(")",""); // 2024-03-30 (bb) remove string-characters, 2024-05-10 (bb) remove ) and (
+            else {try {
+                       for (int i=0;i<values.Length;i++) values[i]=values[i].Trim(' ').Replace("'",""); // 2024-03-30 (bb) remove string-characters, 
+                       for (int i=0;i<values.Length;i++) if (!values[i].StartsWith("IFC")) values[i]=values[i].Replace("(","").Replace(")",""); //2024-05-10 (bb) remove ) and (, 2024-05-20 (bb) only if not SELECT
                        instance = Activator.CreateInstance(listType, GetListCtorArgs(valueType, values));
                       }
                   catch (Exception e) {Log.Add($"ERROR on Parse2LIST.2:{CurrentLine}\nlistType={listType}\nvalueType={valueType}\n{e}", Log.Level.Exception);}
@@ -115,7 +120,7 @@ namespace ifc {
         private static object[] GetListCtorArgs(Type valueType, string[] values) {
             object[] valueInstances = new object[values.Length];
             for (int i = 0; i < values.Length; i++) {
-                string value = values[i];                      //   Console.WriteLine("GetListCtorArgs: valueType="+valueType+" value="+value);
+                string value = values[i];
                 if (valueType ==           typeof(int))       { valueInstances[i] = int.Parse(value);}
            else if (valueType ==           typeof(double))    { valueInstances[i] = double.Parse(value, CultureInfo.InvariantCulture); }
            else if (valueType.IsSubclassOf(typeof(TypeBase))) { valueInstances[i] = Parse2TYPE(value, valueType); }
@@ -128,7 +133,7 @@ namespace ifc {
                                                                else {o = ParseSELECT(value, valueType); } // otherwise we parse the entire SELECT
                                                                valueInstances[i] = o;
                                                               }
-           else if (typeof(ifcListInterface).IsAssignableFrom(valueType)) {Console.WriteLine("GetListCtorArgs.LIST");  valueInstances[i] = Parse2LIST(valueType, value);}
+           else if (typeof(ifcListInterface).IsAssignableFrom(valueType)) {valueInstances[i] = Parse2LIST(valueType, value);}
            else    {Log.Add("Base=" + valueType.Name + " not supported. in \r\n" + CurrentLine, Log.Level.Error);}
             }
             return valueInstances;
@@ -192,7 +197,10 @@ private static void RefillInnerCommasOfListElements() {for (int i = 0; i < ListE
         public static void ParseIfcLine(Model targetModel, string ifcLine) {
             CurrentLine = ifcLine;
             int commentOpenPos = ifcLine.IndexOf("/*"); 
-            if (commentOpenPos >= 0) {CurrentEntityComment = ifcLine.Substring(commentOpenPos + 3).Replace(" */", ""); ifcLine = ifcLine.Substring(0, commentOpenPos);}
+            int commentClosePos = ifcLine.IndexOf("*/"); 
+            bool InnerComment= (commentClosePos >= 0) && (commentClosePos+2 < ifcLine.Length);// 2024-05-20 (bb) 
+            if (InnerComment) ifcLine=ifcLine.Substring(0, commentOpenPos)+ifcLine.Substring(commentClosePos+2); // 2024-05-20 (bb) remove inner comment, ToDo extract muliple inner comments and outer comments in addition
+            else if (commentOpenPos >= 0) { CurrentEntityComment = ifcLine.Substring(commentOpenPos + 3).Replace(" */", ""); ifcLine = ifcLine.Substring(0, commentOpenPos);}
 
             if (commentOpenPos != 0) { // no comment (-1) or comment after ifc line
                 int posA = ifcLine.IndexOf('=');
@@ -213,7 +221,6 @@ private static void RefillInnerCommasOfListElements() {for (int i = 0; i < ListE
                         FieldInfo field = attributes[i];// we access a dictionary via key (which starts at 1), not an array
                         string value = "$";
                         if (i <= CurrentArgs.GetLength(0)) value = CurrentArgs[i - 1].Trim(' ').Trim('\'');
-
                         if (field.FieldType == typeof(string)) {if (value == "$") field.SetValue(CurrentInstance, "" /*null*/);else field.SetValue(CurrentInstance, IfcString.Decode(value));}
                    else if (field.FieldType == typeof(int   )) {if (value == "$") field.SetValue(CurrentInstance, 0);          else field.SetValue(CurrentInstance, int.Parse(value));}
                    else if (field.FieldType.IsSubclassOf(typeof(TypeBase))) {try {field.SetValue(CurrentInstance, Parse2TYPE(value, field.FieldType));}
@@ -273,10 +280,12 @@ private static void RefillInnerCommasOfListElements() {for (int i = 0; i < ListE
                                                                                                              valueInstances[i2]=Activator.CreateInstance(GetValueType(field.FieldType), GetListCtorArgs(GetValueType(GetValueType(field.FieldType)),ListElement));
                                                                                                             }
                                                                                                          field.SetValue(CurrentInstance,Activator.CreateInstance(field.FieldType,valueInstances));
+                                                                                                       } 
+                                                                                                   else{field.SetValue(CurrentInstance, Parse2LIST(field.FieldType, value));
                                                                                                        }
-                                                                                                    else field.SetValue(CurrentInstance, Parse2LIST(field.FieldType, value));
+                                                                                           
                                                                                                    }
-                                                                                             } catch (Exception e) {Log.Add($"Parse.LIST: Field {i}: {field.FieldType}: {e.Message}\n{CurrentLine}\n", Log.Level.ThrowException);}
+                                                                                             } catch (Exception e) {Log.Add($"Parse.LIST: Field {i}: {field.FieldType}: {e.Message}\n{value}\n{CurrentLine}\n", Log.Level.ThrowException);}
                                                                                         }
                    else     Log.Add($"Field {i}: unknown type {field.FieldType.Name} at {field.FieldType.Name}\n{ifcLine}" , Log.Level.Error);
                     }
