@@ -5,7 +5,7 @@
 IfcIO contains the input and output classes of IfcSharp.
 Each format has an own directory.
 
-In addition there are 2 output-interfaces:
+In addition there are 2 output-interfaces:<br/>
 **ifc_out_cs.cs** to create  C#-code from existing models and<br/>
 **ifc_out_html.cs** to create good readable step-files with syntax-highlighting.
 
