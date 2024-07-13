@@ -15,7 +15,7 @@ using System.Text;
 
 namespace db{//====================================================================================
 
-
+public class IsNullable: System.Attribute {}
 public class DbField : System.Attribute { public bool PrimaryKey=false;public string PkName=null; public bool SortAscending=false; public bool SortDescending=false;
                                                                                             public static db.DbField    Value(object o, string FieldName){foreach (object a in o.GetType().GetField(FieldName).GetCustomAttributes(typeof(db.DbField   ))) return (db.DbField   )a;return null;}} // Value (bb) 10.06.2023 
 [System.AttributeUsage(System.AttributeTargets.All,AllowMultiple = true)] public class References : System.Attribute {public string FkName=null;public string RefPkName=null;public string RefTableSchema=null;public string RefTableName=null;public string RefTableColName=null;
