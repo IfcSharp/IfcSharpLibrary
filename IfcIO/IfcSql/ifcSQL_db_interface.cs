@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Globalization;
 using System.Text;
+#if SqlServerTypes
+using Microsoft.SqlServer.Types; // (bb) 11.08.2024 adding geometry type, nuget Microsoft.SqlServer.Types required
+#endif
 
 namespace db{//====================================================================================
 
@@ -29,7 +32,19 @@ public class SqlType  : System.Attribute {public string name=null;public int siz
 public partial class RowBase{//--------------------------------------------------------------------
 public       RowBase(){}
 public       RowBase(SqlDataReader reader){FromReader(reader);}
-public RowBase FromReader(SqlDataReader reader){foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField) if (!reader.IsDBNull(reader.GetOrdinal(field.Name)) ) field.SetValue(this,reader[field.Name]);return this;}
+public RowBase FromReader(SqlDataReader reader){foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField) if (!reader.IsDBNull(reader.GetOrdinal(field.Name)) ) 
+                                                        {// (bb) 11.08.2024 adding geometry type, nuget Microsoft.SqlServer.Types required 
+#if SqlServerTypes
+                                                         if  (field.FieldType==typeof(SqlGeometry)) {SqlGeometry         geometry = new SqlGeometry();
+                                                                                                                         geometry.Read(new BinaryReader(reader.GetSqlBytes(reader.GetOrdinal(field.Name)).Stream));
+                                                                                                     field.SetValue(this,geometry);
+                                                                                                    }
+                                                         else
+#endif
+                                                         field.SetValue(this,reader[field.Name]);
+                                                        }
+                                                return this;
+                                               }
 public void AddDataTableColumns(DataTable table){foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField) table.Columns.Add(new DataColumn(columnName:field.Name,dataType:Nullable.GetUnderlyingType(field.FieldType) ?? field.FieldType));}
 public DataRow DataTableRow(DataTable table){DataRow row=table.NewRow();foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField)  row[field.Name]=(Nullable.GetUnderlyingType(field.FieldType)!= null)?(field.GetValue(this)??DBNull.Value):field.GetValue(this);return row;}
 public string InsertStringOpen(string TableName){string s="INSERT INTO "+TableName+"(";int col=0;foreach (FieldInfo field in this.GetType().GetFields()) foreach (Attribute attr in field.GetCustomAttributes(inherit:false)) if (attr is DbField) s+=((++col>1)?",":"")+field.Name;s+=") VALUES\r\n";return s;} 

@@ -13,6 +13,11 @@ using db;
 
 namespace ifc{//==============================
 
+public partial class TrimmingSelect:SELECT{// explicit Ctor for double. TrimmingSelect is a select fpor ENTITY-Ref (CartesionPoint) and TYPE (ParameterValue) // bb 10.11.2024
+public               TrimmingSelect        (double            _ParameterValue           ){IsNull=false;_SelectValue=new ParameterValue(_ParameterValue)           ;_Type=new ParameterValue(_ParameterValue)           .GetType();} 
+}//---------------------------------------------------------------------------------------------------------------------
+
+
 public partial class ENTITY{//==========================================================================================
 
 }// of ENTITY =========================================================================================================
@@ -22,7 +27,9 @@ public partial class Model{//===================================================
 public Dictionary<long,int> LocalIdFromGlobalIdDict=new Dictionary<long,int>();
 
 public void EvalIfcRow(ifcSQL.ifcInstance.Entity_Row e)
-{try{
+{
+string AttributeRowType="-";
+try{
 Type t=null;
 RowBase rb=null;
 object o=null;
@@ -45,7 +52,7 @@ ENTITY.AttribListType AttribList=ENTITY.TypeDictionary.GetComponents(CurrentEnti
 foreach (ENTITY.AttribInfo attrib in AttribList)
         {++OrdinalPosition;
          if (e.AttributeValueDict.ContainsKey(OrdinalPosition))//----------------------------------------------------------------------------------------------------------
-            {try  {rb=e.AttributeValueDict[OrdinalPosition];} catch(Exception ex) { Log.Add($"ERROR on EvalIfcRow.3:{ex}", Log.Level.Exception);}
+            {try  {rb=e.AttributeValueDict[OrdinalPosition]; AttributeRowType=rb.GetType().Name;} catch(Exception ex) { Log.Add($"ERROR on EvalIfcRow.3:{ex}", Log.Level.Exception);}
          if (rb is ifcSQL.ifcInstance.EntityAttributeOfVector_Row)  {ifcSQL.ifcInstance.EntityAttributeOfVector_Row a=(ifcSQL.ifcInstance.EntityAttributeOfVector_Row)rb;
                                                                      if (a.TypeId==25) {if (a.Z!=null)  ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y,(LengthMeasure)(double)a.Z);
                                                                                         else            ((ifc.CartesianPoint)CurrentEntity).Coordinates=new List1to3_LengthMeasure((LengthMeasure)a.X,(LengthMeasure)a.Y); 
@@ -133,8 +140,9 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
                                                                           if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row)
                                                                                  for (int ListDim1Position=0;ListDim1Position<ListDim1Count;ListDim1Position++) 
                                                                                     {double d=((ifcSQL.ifcInstance.EntityAttributeListElementOfFloat_Row)a.AttributeValueDict[ListDim1Position]).Value; 
-                                                                                     FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,d); 
-                                                                                     } 
+                                                                                     try{FieldCtorArgs[ListDim1Position]=Activator.CreateInstance(GenericType,d); 
+                                                                                        }catch(Exception ex) {Log.Add($"ERROR on EvalIfcRow.6 (ref),ListDim1Position={ListDim1Position}:{ex}", Log.Level.Exception);} // // bb 10.11.2024
+                                                                                    } 
 
                                                                           if (ListDim1Count>0)   
                                                                           if (a.AttributeValueDict[0] is ifcSQL.ifcInstance.EntityAttributeListElementOfInteger_Row)
@@ -180,7 +188,7 @@ foreach (ENTITY.AttribInfo attrib in AttribList)
         }//----------------------------------------------------------------------------------------------------------
     }//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 EntityList.Add(CurrentEntity);
-}catch(Exception){Log.Add($"ERROR on EvalIfcRow.6, e.GlobalEntityInstanceId={e.GlobalEntityInstanceId}, e.EntityTypeId={e.EntityTypeId} at IFcSchema {ifc.Specification.SchemaName}", Log.Level.Exception);}
+}catch(Exception){Log.Add($"ERROR on EvalIfcRow(6), e.GlobalEntityInstanceId={e.GlobalEntityInstanceId}, e.EntityTypeId={e.EntityTypeId} at IFcSchema {ifc.Specification.SchemaName} AttributeRowType={AttributeRowType}", Log.Level.Exception);}
 }
 
 
