@@ -78,9 +78,13 @@ foreach (NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.Ge
     //if (NetSystem.Diagnostics.Process.GetCurrentProcess().ProcessName != a.GetName().Name) continue;
     //2023-10-23: ef : check any other loaded assembly located in the same folder as the currently running assembly
     //                 this way it is also possible to have the IfcSharpLibrary contained in a separate project/assembly
-    if (NetSystem.IO.Path.GetDirectoryName(currentAssembly.Location) !=
-        NetSystem.IO.Path.GetDirectoryName(a.Location)) continue;
+//bb  2024-11-24
+if (NetSystem.IO.Path.GetDirectoryName(currentAssembly.Location) !=
+    NetSystem.IO.Path.GetDirectoryName(a.Location)) continue;
     
+
+//if (NetSystem.IO.Path.GetDirectoryName(currentAssembly.Location) == NetSystem.IO.Path.GetDirectoryName(a.Location))
+try{ 
     foreach (NetSystem.Type t in a.GetTypes())
     {
         if ((t.IsEnum)
@@ -101,6 +105,7 @@ foreach (NetSystem.Reflection.Assembly a in NetSystem.AppDomain.CurrentDomain.Ge
                         TypeIdTypeDict.Add(((ifcSqlAttribute)attr).SqlTypeId, t);
                     }
     }
+   }catch(NetSystem.Exception ex){NetSystem.Console.WriteLine(ex.Message); }
 }
 }//................................................................................................
 
